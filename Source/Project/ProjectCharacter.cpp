@@ -9,6 +9,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "WeaponKnife.h" // 不要になったら消す
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -49,6 +50,15 @@ AProjectCharacter::AProjectCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	// そのうち消す
+	{
+		//Initialize projectile class
+		ProjectileClass = AWeaponKnife::StaticClass();
+		//Initialize fire rate
+		FireRate = 0.25f;
+		bIsFiringWeapon = false;
+	}
 }
 
 void AProjectCharacter::BeginPlay()
@@ -84,6 +94,9 @@ void AProjectCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 		//Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AProjectCharacter::Look);
 
+		// Handle firing projectiles
+		// 不要になったら消す
+		PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AProjectCharacter::StartFire);
 	}
 
 }
@@ -124,6 +137,34 @@ void AProjectCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
+void AProjectCharacter::StartFire()
+{
+	if (!bIsFiringWeapon)
+	{
+		bIsFiringWeapon = true;
+		UWorld* World = GetWorld();
+		World->GetTimerManager().SetTimer(FiringTimer, this, &AProjectCharacter::StopFire, FireRate, false);
+		HandleFire();
+	}
+}
+
+void AProjectCharacter::StopFire()
+{
+	//ProjectCharacterと定義かぶりしているのでいったん消す
+	bIsFiringWeapon = false;
+}
+
+void AProjectCharacter::HandleFire_Implementation()
+{
+	FVector spawnLocation = GetActorLocation() + (GetActorRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+	FRotator spawnRotation = GetActorRotation();
+
+	FActorSpawnParameters spawnParameters;
+	spawnParameters.Instigator = GetInstigator();
+	spawnParameters.Owner = this;
+
+	AWeaponKnife* spawnedProjectile = GetWorld()->SpawnActor<AWeaponKnife>(spawnLocation, spawnRotation, spawnParameters);
+}
 
 
 
