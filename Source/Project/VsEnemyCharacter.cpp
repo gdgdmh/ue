@@ -16,10 +16,23 @@ void AVsEnemyCharacter::BeginPlay()
 	Super::BeginPlay();
 }
 
+float AVsEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	//UE_LOG(LogTemp, Log, TEXT("%f"), DamageAmount);
+	SubHealthFloat(DamageAmount);
+	return Health;
+}
+
 void AVsEnemyCharacter::SubHealth(int32 sub)
 {
 	Health -= sub;
 	NormalizationHealth();
+}
+
+void AVsEnemyCharacter::SubHealthFloat(float sub)
+{
+	int32 damage = static_cast<float>(sub);
+	SubHealth(damage);
 }
 
 void AVsEnemyCharacter::AddHealth(int32 add)
@@ -45,5 +58,15 @@ void AVsEnemyCharacter::NormalizationHealth()
 	{
 		Health = 0;
 		bIsAlive = false;
+		CheckDestroy();
 	}
+}
+
+void AVsEnemyCharacter::CheckDestroy()
+{
+	if (bIsAlive)
+	{
+		return;
+	}
+	Destroy();
 }
