@@ -25,7 +25,7 @@ public:
 	// 発射タイマーの有効化、無効化
 	virtual void SetShootTimerEnable(bool bIsEnable);
 	// 発射間隔の設定
-	virtual void SetShootTimer(float interval);
+	virtual void SetShootTimer(float Interval);
 	// 発射タイマー経過時処理
 	virtual void OnShootTimerElapsed();
 };

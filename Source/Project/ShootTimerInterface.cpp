@@ -14,9 +14,9 @@ void IShootTimerInterface::SetShootTimerEnable(bool bIsEnable)
 	(void)bIsEnable;
 }
 
-void IShootTimerInterface::SetShootTimer(float interval)
+void IShootTimerInterface::SetShootTimer(float Interval)
 {
-	(void)interval;
+	(void)Interval;
 }
 
 void IShootTimerInterface::OnShootTimerElapsed()
