@@ -9,6 +9,14 @@ UShootTimer::UShootTimer()
 {
 }
 
+UShootTimer::UShootTimer(const class FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+	, bIsShootTimerEnable(true)
+	, Timer(1.0f)
+{
+	ShootParameter = ObjectInitializer.CreateDefaultSubobject<AVsShootParameter>(this, TEXT("AVsShootParameter"));
+}
+
 UShootTimer::~UShootTimer()
 {
 }
@@ -26,15 +34,20 @@ void UShootTimer::SetShootTimer(float interval)
 	Timer = interval;
 }
 
+// パラメーター設定
+void UShootTimer::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
+{
+	//ShootParameter->Copy(Parameter);
+}
+
 // 発射タイマーの開始
-bool UShootTimer::StartShootTimer()
+bool UShootTimer::StartShootTimer(FTimerManager& TimerManager)
 {
 	if (!bIsShootTimerEnable)
 	{
 		return false;
 	}
-	UWorld* World = GetWorld();
-	World->GetTimerManager().SetTimer(TimerHandle, this, &UShootTimer::OnShootTimerElapsed, Timer, false);
+	TimerManager.SetTimer(TimerHandle, this, &UShootTimer::OnShootTimerElapsed, Timer, false);
 	return true;
 }
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
+#include "VsShootParameter.h"
 #include "ShootTimerInterface.generated.h"
 
 // This class does not need to be modified.
@@ -26,8 +27,10 @@ public:
 	virtual void SetShootTimerEnable(bool bIsEnable);
 	// 発射間隔の設定
 	virtual void SetShootTimer(float Interval);
+	// パラメーター設定
+	virtual void SetShootParameter(TObjectPtr<AVsShootParameter> Parameter);
 	// 発射タイマーの開始
-	virtual bool StartShootTimer();
+	virtual bool StartShootTimer(FTimerManager& TimerManager);
 	// 発射処理
 	virtual void ProcessShoot();
 	// 発射タイマー経過時処理

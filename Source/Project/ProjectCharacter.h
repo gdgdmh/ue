@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "LoopShootKnife.h"
 #include "ProjectCharacter.generated.h"
 
 
@@ -91,5 +92,9 @@ protected:
 
 	/** A timer handle used for providing the fire rate delay in-between spawns.*/
 	FTimerHandle FiringTimer;
+
+protected:
+	UPROPERTY()
+	TObjectPtr<ALoopShootKnifer> ShootKnifer;
 };
 

@@ -19,8 +19,15 @@ void IShootTimerInterface::SetShootTimer(float Interval)
 	(void)Interval;
 }
 
-bool IShootTimerInterface::StartShootTimer()
+// パラメーター
+void IShootTimerInterface::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
 {
+	(void)Parameter;
+}
+
+bool IShootTimerInterface::StartShootTimer(FTimerManager& TimerManager)
+{
+	(void)TimerManager;
 	return true;
 }
 

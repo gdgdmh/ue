@@ -3,53 +3,73 @@
 
 #include "LoopShootTimer.h"
 
-ULoopShootTimer::ULoopShootTimer()
+ALoopShootTimer::ALoopShootTimer()
 	: bIsShootTimerEnable(true)
 	, Timer(1.0f)
 {
+	//ShootParameter = NewObject<AVsShootParameter>();
 }
 
-ULoopShootTimer::~ULoopShootTimer()
+ALoopShootTimer::ALoopShootTimer(const class FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+	, bIsShootTimerEnable(true)
+	, Timer(1.0f)
+{
+	ShootParameter = ObjectInitializer.CreateDefaultSubobject<AVsShootParameter>(this, TEXT("AVsShootParameter"));
+}
+
+ALoopShootTimer::~ALoopShootTimer()
 {
 }
 
 // 発射タイマーの有効化、無効化
-void ULoopShootTimer::SetShootTimerEnable(bool bIsEnable)
+void ALoopShootTimer::SetShootTimerEnable(bool bIsEnable)
 {
 	bIsShootTimerEnable = bIsEnable;
 }
 
 // 発射間隔の設定
-void ULoopShootTimer::SetShootTimer(float interval)
+void ALoopShootTimer::SetShootTimer(float interval)
 {
 	check(interval >= 0.0f);
 	Timer = interval;
 }
 
+// パラメーター設定
+void ALoopShootTimer::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
+{
+	//ShootParameter->Copy(Parameter);
+}
+
 // 発射タイマーの開始
-bool ULoopShootTimer::StartShootTimer()
+bool ALoopShootTimer::StartShootTimer(FTimerManager& TimerManager)
 {
 	if (!bIsShootTimerEnable)
 	{
 		return false;
 	}
-	UWorld* World = GetWorld();
-	World->GetTimerManager().SetTimer(TimerHandle, this, &ULoopShootTimer::OnShootTimerElapsed, Timer, false);
+	TimerManager.SetTimer(TimerHandle, this, &ALoopShootTimer::OnShootTimerElapsed, Timer, false);
 	return true;
 }
 
 // 発射処理
-void ULoopShootTimer::ProcessShoot()
+void ALoopShootTimer::ProcessShoot()
 {
 }
 
 // 発射タイマー経過時処理
-void ULoopShootTimer::OnShootTimerElapsed()
+void ALoopShootTimer::OnShootTimerElapsed()
 {
 	if (!bIsShootTimerEnable)
 	{
 		return;
 	}
 	ProcessShoot();
-	StartShootTimer();
+	UWorld* World = /*GEngine->*/ GetWorld();
+	if (!World)
+	{
+		UE_LOG(LogTemp, Log, TEXT("StartShootTimer Failure World nullptr"));
+		return;
+	}
+	StartShootTimer(World->GetTimerManager());
 }

@@ -10,13 +10,15 @@
  * 
  */
 UCLASS()
-class PROJECT_API ULoopShootTimer : public UObject, public IShootTimerInterface
+class PROJECT_API ALoopShootTimer : public AActor, public IShootTimerInterface
 {
 	GENERATED_BODY()
 
 public:
-	ULoopShootTimer();
-	~ULoopShootTimer();
+	ALoopShootTimer();
+	ALoopShootTimer(const class FObjectInitializer& ObjectInitializer);
+
+	~ALoopShootTimer();
 
 	// override IShootTimerInterface
 public:
@@ -24,15 +26,18 @@ public:
 	virtual void SetShootTimerEnable(bool bIsEnable) override;
 	// 発射間隔の設定
 	virtual void SetShootTimer(float interval) override;
+	// パラメーター設定
+	virtual void SetShootParameter(TObjectPtr<AVsShootParameter> Parameter) override;
 	// 発射タイマーの開始
-	virtual bool StartShootTimer() override;
+	virtual bool StartShootTimer(FTimerManager& TimerManager) override;
 	// 発射処理
-	virtual void ProcessShoot();
+	virtual void ProcessShoot() override;
 	// 発射タイマー経過時処理
 	virtual void OnShootTimerElapsed()  override;
 
-private:
+protected:
 	FTimerHandle TimerHandle;
+	TObjectPtr<AVsShootParameter> ShootParameter;
 	bool bIsShootTimerEnable;
 	float Timer;
 

@@ -31,6 +31,10 @@ protected:
     // APawn interface
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+protected:
+    //UPROPERTY()
+   
+
 #if 0
 protected:
     /** Camera boom positioning the camera behind the character */
