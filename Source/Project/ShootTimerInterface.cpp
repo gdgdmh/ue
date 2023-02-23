@@ -19,6 +19,15 @@ void IShootTimerInterface::SetShootTimer(float Interval)
 	(void)Interval;
 }
 
+bool IShootTimerInterface::StartShootTimer()
+{
+	return true;
+}
+
+void IShootTimerInterface::ProcessShoot()
+{
+}
+
 void IShootTimerInterface::OnShootTimerElapsed()
 {
 }
