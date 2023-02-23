@@ -19,7 +19,7 @@ public:
 	~AVsShootParameter();
 
 public:
-	void Copy(AVsShootParameter Parameter);
+	void Copy(AVsShootParameter* Parameter);
 	void SetLocation(FVector LocationValue);
 	void SetRotation(FRotator RotationValue);
 	void SetSpawnParameters(FActorSpawnParameters SpawnParametersValue);

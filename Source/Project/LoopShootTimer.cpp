@@ -38,7 +38,7 @@ void ALoopShootTimer::SetShootTimer(float interval)
 // パラメーター設定
 void ALoopShootTimer::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
 {
-	//ShootParameter->Copy(Parameter);
+	ShootParameter->Copy(Parameter.Get());
 }
 
 // 発射タイマーの開始

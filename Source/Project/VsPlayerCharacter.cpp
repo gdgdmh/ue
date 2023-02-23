@@ -53,13 +53,10 @@ AVsPlayerCharacter::AVsPlayerCharacter()
 	// Input Mapping ContextÇì«çû
 	DefaultMappingContext = LoadObject<UInputMappingContext>(NULL, TEXT("/Game/ThirdPerson/Input/IMC_Default"), NULL, LOAD_None, NULL);
 
-//ProjectCharacterÇ∆íËã`Ç©Ç‘ÇËÇµÇƒÇ¢ÇÈÇÃÇ≈Ç¢Ç¡ÇΩÇÒè¡Ç∑
-#if 0
 	ProjectileClass = AWeaponKnife::StaticClass();
 	//Initialize fire rate
 	FireRate = 0.25f;
 	bIsFiringWeapon = false;
-#endif
 }
 
 // To add mapping context
@@ -75,6 +72,27 @@ void AVsPlayerCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+	}
+
+	// î≠éÀ
+	{
+		UWorld* World = GetWorld();
+		ShootKnifer = World->SpawnActor<ALoopShootKnifer>();
+		TObjectPtr<AVsShootParameter> ShootParameter = NewObject<AVsShootParameter>();
+		FVector spawnLocation = GetActorLocation() + (GetActorRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+		FRotator spawnRotation = GetActorRotation();
+		FActorSpawnParameters spawnParameters;
+		spawnParameters.Instigator = GetInstigator();
+		spawnParameters.Owner = this;
+
+		ShootParameter->SetLocation(spawnLocation);
+		ShootParameter->SetRotation(spawnRotation);
+		ShootParameter->SetSpawnParameters(spawnParameters);
+		ShootKnifer->SetShootParameter(ShootParameter);
+		ShootKnifer->SetShootTimerEnable(true);
+		ShootKnifer->SetShootTimer(5.0f);
+
+		ShootKnifer->StartShootTimer(World->GetTimerManager());
 	}
 }
 
@@ -137,9 +155,6 @@ void AVsPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 
 }
 
-//ProjectCharacterÇ∆íËã`Ç©Ç‘ÇËÇµÇƒÇ¢ÇÈÇÃÇ≈Ç¢Ç¡ÇΩÇÒè¡Ç∑
-#if 0
-
 void AVsPlayerCharacter::StartFire()
 {
     if (!bIsFiringWeapon)
@@ -168,4 +183,3 @@ void AVsPlayerCharacter::HandleFire_Implementation()
 
     AWeaponKnife* spawnedProjectile = GetWorld()->SpawnActor<AWeaponKnife>(spawnLocation, spawnRotation, spawnParameters);
 }
-#endif

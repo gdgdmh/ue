@@ -11,11 +11,12 @@ AVsShootParameter::~AVsShootParameter()
 {
 }
 
-void AVsShootParameter::Copy(AVsShootParameter Parameter)
+void AVsShootParameter::Copy(AVsShootParameter* Parameter)
 {
-	Location = Parameter.Location;
-	Rotation = Parameter.Rotation;
-	SpawnParameters = Parameter.SpawnParameters;
+	check(Parameter != nullptr);
+	Location = Parameter->Location;
+	Rotation = Parameter->Rotation;
+	SpawnParameters = Parameter->SpawnParameters;
 }
 void AVsShootParameter::SetLocation(FVector LocationValue)
 {
