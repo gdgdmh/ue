@@ -64,8 +64,9 @@ void ALoopShootTimer::OnShootTimerElapsed()
 	{
 		return;
 	}
+	ProcessShootBefore();
 	ProcessShoot();
-	UWorld* World = /*GEngine->*/ GetWorld();
+	UWorld* World = GetWorld();
 	if (!World)
 	{
 		UE_LOG(LogTemp, Log, TEXT("StartShootTimer Failure World nullptr"));

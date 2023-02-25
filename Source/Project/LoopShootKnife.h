@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "LoopShootTimer.h"
+#include "LoopShootWeaponBase.h"
 #include "LoopShootKnife.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API ALoopShootKnifer : public ALoopShootTimer
+class PROJECT_API ALoopShootKnifer : public ALoopShootWeaponBase
 {
 	GENERATED_BODY()
 
@@ -24,6 +24,9 @@ public:
 public:
 	// î≠éÀèàóù
 	virtual void ProcessShoot() override;
+
+	UFUNCTION()
+	void test() {}
 
 private:
 

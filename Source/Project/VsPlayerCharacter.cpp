@@ -90,8 +90,9 @@ void AVsPlayerCharacter::BeginPlay()
 		ShootParameter->SetSpawnParameters(spawnParameters);
 		ShootKnifer->SetShootParameter(ShootParameter);
 		ShootKnifer->SetShootTimerEnable(true);
-		ShootKnifer->SetShootTimer(5.0f);
+		ShootKnifer->SetShootTimer(1.0f);
 
+		ShootKnifer->GetShootBeforeDispacher().AddDynamic(this, &AVsPlayerCharacter::ShootBeforeEvent);
 		ShootKnifer->StartShootTimer(World->GetTimerManager());
 	}
 }
@@ -182,4 +183,19 @@ void AVsPlayerCharacter::HandleFire_Implementation()
     spawnParameters.Owner = this;
 
     AWeaponKnife* spawnedProjectile = GetWorld()->SpawnActor<AWeaponKnife>(spawnLocation, spawnRotation, spawnParameters);
+}
+
+void AVsPlayerCharacter::ShootBeforeEvent()
+{
+	UE_LOG(LogTemp, Log, TEXT("AVsPlayerCharacter::ShootBeforeEvent()"));
+	TObjectPtr<AVsShootParameter> ShootParameter = NewObject<AVsShootParameter>();
+	FVector spawnLocation = GetActorLocation() + (GetActorRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+	FRotator spawnRotation = GetActorRotation();
+	FActorSpawnParameters spawnParameters;
+	spawnParameters.Instigator = GetInstigator();
+	spawnParameters.Owner = this;
+	ShootParameter->SetLocation(spawnLocation);
+	ShootParameter->SetRotation(spawnRotation);
+	ShootParameter->SetSpawnParameters(spawnParameters);
+	ShootKnifer->SetShootParameter(ShootParameter);
 }

@@ -31,6 +31,11 @@ bool IShootTimerInterface::StartShootTimer(FTimerManager& TimerManager)
 	return true;
 }
 
+// ”­Ë‘Oˆ—
+void IShootTimerInterface::ProcessShootBefore()
+{
+}
+
 void IShootTimerInterface::ProcessShoot()
 {
 }

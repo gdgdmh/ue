@@ -31,6 +31,8 @@ public:
 	virtual void SetShootParameter(TObjectPtr<AVsShootParameter> Parameter);
 	// 発射タイマーの開始
 	virtual bool StartShootTimer(FTimerManager& TimerManager);
+	// 発射前処理
+	virtual void ProcessShootBefore();
 	// 発射処理
 	virtual void ProcessShoot();
 	// 発射タイマー経過時処理

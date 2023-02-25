@@ -6,6 +6,8 @@
 #include "ShootTimerInterface.h"
 #include "LoopShootTimer.generated.h"
 
+
+
 /**
  * 
  */
@@ -30,6 +32,7 @@ public:
 	virtual void SetShootParameter(TObjectPtr<AVsShootParameter> Parameter) override;
 	// 発射タイマーの開始
 	virtual bool StartShootTimer(FTimerManager& TimerManager) override;
+
 	// 発射処理
 	virtual void ProcessShoot() override;
 	// 発射タイマー経過時処理

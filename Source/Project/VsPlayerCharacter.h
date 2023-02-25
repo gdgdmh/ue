@@ -59,6 +59,10 @@ protected:
     FTimerHandle FiringTimer;
 
 protected:
+    UFUNCTION()
+    void ShootBeforeEvent();
+
+protected:
     UPROPERTY()
         TObjectPtr<ALoopShootKnifer> ShootKnifer;
 
