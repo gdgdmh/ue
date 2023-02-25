@@ -51,15 +51,6 @@ AProjectCharacter::AProjectCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
-
-	// ÇªÇÃÇ§Çøè¡Ç∑
-	{
-		//Initialize projectile class
-		ProjectileClass = AWeaponKnife::StaticClass();
-		//Initialize fire rate
-		FireRate = 0.25f;
-		bIsFiringWeapon = false;
-	}
 }
 
 void AProjectCharacter::BeginPlay()
@@ -67,16 +58,37 @@ void AProjectCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
+	// î≠éÀ
 #if 0
-	//Add Input Mapping Context
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(DefaultMappingContext, 0);
-		}
+		UWorld* World = GetWorld();
+		ShootKnifer = World->SpawnActor<ALoopShootKnifer>();
+		TObjectPtr<AVsShootParameter> ShootParameter = NewObject<AVsShootParameter>();
+		FVector spawnLocation = GetActorLocation() + (GetActorRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+		FRotator spawnRotation = GetActorRotation();
+		FActorSpawnParameters spawnParameters;
+		spawnParameters.Instigator = GetInstigator();
+		spawnParameters.Owner = this;
+
+		ShootParameter->SetLocation(spawnLocation);
+		ShootParameter->SetRotation(spawnRotation);
+		ShootParameter->SetSpawnParameters(spawnParameters);
+		ShootKnifer->SetShootParameter(ShootParameter);
+		ShootKnifer->SetShootTimerEnable(true);
+		ShootKnifer->SetShootTimer(5.0f);
+
+		ShootKnifer->StartShootTimer(World->GetTimerManager());
 	}
 #endif
+	/*
+	FVector spawnLocation = GetActorLocation() + (GetActorRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
+	FRotator spawnRotation = GetActorRotation();
+
+	FActorSpawnParameters spawnParameters;
+	spawnParameters.Instigator = GetInstigator();
+	spawnParameters.Owner = this;
+
+	*/
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -140,35 +152,3 @@ void AProjectCharacter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
-
-void AProjectCharacter::StartFire()
-{
-	if (!bIsFiringWeapon)
-	{
-		bIsFiringWeapon = true;
-		UWorld* World = GetWorld();
-		World->GetTimerManager().SetTimer(FiringTimer, this, &AProjectCharacter::StopFire, FireRate, false);
-		HandleFire();
-	}
-}
-
-void AProjectCharacter::StopFire()
-{
-	//ProjectCharacterÇ∆íËã`Ç©Ç‘ÇËÇµÇƒÇ¢ÇÈÇÃÇ≈Ç¢Ç¡ÇΩÇÒè¡Ç∑
-	bIsFiringWeapon = false;
-}
-
-void AProjectCharacter::HandleFire_Implementation()
-{
-	FVector spawnLocation = GetActorLocation() + (GetActorRotation().Vector() * 100.0f) + (GetActorUpVector() * 50.0f);
-	FRotator spawnRotation = GetActorRotation();
-
-	FActorSpawnParameters spawnParameters;
-	spawnParameters.Instigator = GetInstigator();
-	spawnParameters.Owner = this;
-
-	AWeaponKnife* spawnedProjectile = GetWorld()->SpawnActor<AWeaponKnife>(spawnLocation, spawnRotation, spawnParameters);
-}
-
-
-

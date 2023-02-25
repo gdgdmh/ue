@@ -31,36 +31,8 @@ protected:
     // APawn interface
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-#if 0
-protected:
-    /** Camera boom positioning the camera behind the character */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-        class USpringArmComponent* CameraBoom;
-
-    /** Follow camera */
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-        class UCameraComponent* FollowCamera;
-
-    /** MappingContext */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-        class UInputMappingContext* DefaultMappingContext;
-
-    /** Jump Input Action */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-        class UInputAction* JumpAction;
-
-    /** Move Input Action */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-        class UInputAction* MoveAction;
-
-    /** Look Input Action */
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-        class UInputAction* LookAction;
-#endif
 protected:
 
-    //ProjectCharacterÇ∆íËã`Ç©Ç‘ÇËÇµÇƒÇ¢ÇÈÇÃÇ≈Ç¢Ç¡ÇΩÇÒè¡Ç∑
-#if 0
     UPROPERTY(EditDefaultsOnly, Category = "Gameplay|Weapon")
         TSubclassOf<class AWeaponKnife> ProjectileClass;
 
@@ -85,6 +57,13 @@ protected:
 
     /** A timer handle used for providing the fire rate delay in-between spawns.*/
     FTimerHandle FiringTimer;
-#endif
+
+protected:
+    UFUNCTION()
+    void ShootBeforeEvent();
+
+protected:
+    UPROPERTY()
+        TObjectPtr<ALoopShootKnifer> ShootKnifer;
 
 };
