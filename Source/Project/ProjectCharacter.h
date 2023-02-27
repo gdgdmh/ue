@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "LoopShootKnife.h"
 #include "ProjectCharacter.generated.h"
 
 
@@ -13,6 +14,7 @@ class AProjectCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+protected:
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
@@ -44,10 +46,10 @@ public:
 protected:
 
 	/** Called for movement input */
-	void Move(const FInputActionValue& Value);
+	virtual void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
-	void Look(const FInputActionValue& Value);
+	virtual void Look(const FInputActionValue& Value);
 			
 
 protected:
@@ -63,32 +65,5 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	// ÇªÇÃÇ§Çøè¡Ç∑
-protected:
-
-	UPROPERTY(EditDefaultsOnly, Category = "Gameplay|Projectile")
-		TSubclassOf<class AWeaponKnife> ProjectileClass;
-
-	/** Delay between shots in seconds. Used to control fire rate for your test projectile, but also to prevent an overflow of server functions from binding SpawnProjectile directly to input.*/
-	UPROPERTY(EditDefaultsOnly, Category = "Gameplay")
-		float FireRate;
-
-	/** If true, you are in the process of firing projectiles. */
-	bool bIsFiringWeapon;
-
-	/** Function for beginning weapon fire.*/
-	UFUNCTION(BlueprintCallable, Category = "Gameplay")
-		void StartFire();
-
-	/** Function for ending weapon fire. Once this is called, the player can use StartFire again.*/
-	UFUNCTION(BlueprintCallable, Category = "Gameplay")
-		void StopFire();
-
-	/** Server function for spawning projectiles.*/
-	UFUNCTION(Server, Reliable)
-		void HandleFire();
-
-	/** A timer handle used for providing the fire rate delay in-between spawns.*/
-	FTimerHandle FiringTimer;
 };
 

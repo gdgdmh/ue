@@ -10,10 +10,14 @@
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
+// 定数宣言
+const float AWeaponKnife::LIFE_TIME = 10.0f;
+
 // Sets default values
 AWeaponKnife::AWeaponKnife()
 {
 	Power = 0;
+	bIsLifeTimeEnd = false;
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -65,13 +69,25 @@ void AWeaponKnife::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	SetDestroyTimer();
 }
 
-void AWeaponKnife::Destroyed()
+void AWeaponKnife::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	if (EndPlayReason != EEndPlayReason::Type::Destroyed)
+	{
+		return;
+	}
+
+	if (bIsLifeTimeEnd)
+	{
+		// 自動消滅時はパーティクルを出さない
+		return;
+	}
 	// パーティクル
 	FVector spawnLocation = GetActorLocation();
 	UGameplayStatics::SpawnEmitterAtLocation(this, ExplosionEffect, spawnLocation, FRotator::ZeroRotator, true, EPSCPoolMethod::AutoRelease);
+
 }
 
 void AWeaponKnife::OnProjectileImpact(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -80,6 +96,7 @@ void AWeaponKnife::OnProjectileImpact(UPrimitiveComponent* HitComponent, AActor*
 	{
 		UGameplayStatics::ApplyPointDamage(OtherActor, Damage, NormalImpulse, Hit, GetInstigator()->Controller, this, DamageType);
 	}
+	bIsLifeTimeEnd = false;
 	Destroy();
 }
 
@@ -87,6 +104,24 @@ void AWeaponKnife::OnProjectileImpact(UPrimitiveComponent* HitComponent, AActor*
 void AWeaponKnife::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
 
+/// <summary>
+/// 自動的に消滅するタイマーをセット
+/// </summary>
+void AWeaponKnife::SetDestroyTimer()
+{
+	FTimerHandle handle;
+	GetWorldTimerManager().SetTimer(handle, this, &AWeaponKnife::OnLifeTimeEnd, LIFE_TIME, false);
+}
+
+/// <summary>
+/// ライフタイム終了時
+/// </summary>
+void AWeaponKnife::OnLifeTimeEnd()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnLifeTimeEnd"));
+	bIsLifeTimeEnd = true;
+	Destroy();
 }
 

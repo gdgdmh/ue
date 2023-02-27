@@ -19,8 +19,20 @@ public:
 
 protected:
 
-    //ProjectCharacterÇ∆íËã`Ç©Ç‘ÇËÇµÇƒÇ¢ÇÈÇÃÇ≈Ç¢Ç¡ÇΩÇÒè¡Ç∑
-#if 0
+    // To add mapping context
+    virtual void BeginPlay() override;
+
+    /** Called for movement input */
+    virtual void Move(const FInputActionValue& Value) override;
+
+    /** Called for looking input */
+    virtual void Look(const FInputActionValue& Value) override;
+
+    // APawn interface
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+protected:
+
     UPROPERTY(EditDefaultsOnly, Category = "Gameplay|Weapon")
         TSubclassOf<class AWeaponKnife> ProjectileClass;
 
@@ -45,6 +57,13 @@ protected:
 
     /** A timer handle used for providing the fire rate delay in-between spawns.*/
     FTimerHandle FiringTimer;
-#endif
+
+protected:
+    UFUNCTION()
+    void ShootBeforeEvent();
+
+protected:
+    UPROPERTY()
+        TObjectPtr<ALoopShootKnifer> ShootKnifer;
 
 };

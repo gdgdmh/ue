@@ -15,11 +15,14 @@ public:
 	// Sets default values for this actor's properties
 	AWeaponKnife();
 
+private:
+    static const float LIFE_TIME;   // î≠éÀÇµÇƒÇ©ÇÁé©ìÆÇ≈è¡Ç¶ÇÈéûä‘
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-    virtual void Destroyed() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 protected:
 
@@ -29,6 +32,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+
+    void SetDestroyTimer();
+    void OnLifeTimeEnd();
 
 public:
     // Sphere component used to test collision.
@@ -56,4 +64,5 @@ public:
         float Damage;
 private:
 	int Power;
+    bool bIsLifeTimeEnd;
 };
