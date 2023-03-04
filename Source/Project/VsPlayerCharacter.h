@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "ProjectCharacter.h"
+#include "SpawnVsEnemy.h"
 #include "VsPlayerCharacter.generated.h"
 
 /**
@@ -65,5 +66,7 @@ protected:
 protected:
     UPROPERTY()
         TObjectPtr<ALoopShootKnifer> ShootKnifer;
+    UPROPERTY()
+        TObjectPtr<ASpawnVsEnemy> SpawnVsEnemy;
 
 };
