@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
+#include "SpawnVsEnemy.h"
 #include "VsEnemySpawnManagementSubsytem.generated.h"
 
 /**
@@ -22,4 +23,16 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
 
+public:
+	void Start(FTimerManager& TimerManager);
+
+private:
+	void StartTimer(FTimerManager& TimerManager);
+	void OnTimerElapsed();
+
+private:
+	FTimerHandle TimerHandle;
+	UPROPERTY()
+		TObjectPtr<ASpawnVsEnemy> SpawnVsEnemy;
+	bool bIsActive;
 };
