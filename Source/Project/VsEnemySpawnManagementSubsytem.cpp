@@ -3,6 +3,7 @@
 
 #include "VsEnemySpawnManagementSubsytem.h"
 #include "Kismet/GameplayStatics.h"
+#include "GetRandomAngle.h"
 
 UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 {
@@ -64,8 +65,11 @@ void UVsEnemySpawnManagementSubsytem::OnTimerElapsed()
 		}
 	}
 
+	GetRandomAngle RandomAngle;
+	uint16 Angle = RandomAngle.Get();
+	//UE_LOG(LogTemp, Log, TEXT("Angle=%d"), Angle);
 	float Distance = 200.0f;
-	float DigreeAngle = 220.0f;
+	float DigreeAngle = Angle;
 	
 	Location.X += (Distance * FMath::Cos(FMath::DegreesToRadians(DigreeAngle)));
 	Location.Y += (Distance * FMath::Sin(FMath::DegreesToRadians(DigreeAngle)));
