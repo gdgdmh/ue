@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class PROJECT_API UVsEnemySpawnManagementSubsytem : public UWorldSubsystem
+class PROJECT_API UVsEnemySpawnManagementSubsytem : public UGameInstanceSubsystem /*UWorldSubsystem*/
 {
 	GENERATED_BODY()
 
