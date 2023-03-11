@@ -2,6 +2,7 @@
 
 
 #include "VsEnemySpawnManagementSubsytem.h"
+#include "Kismet/GameplayStatics.h"
 
 UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 {
@@ -45,10 +46,31 @@ void UVsEnemySpawnManagementSubsytem::StartTimer(FTimerManager& TimerManager)
 void UVsEnemySpawnManagementSubsytem::OnTimerElapsed()
 {
 	UE_LOG(LogTemp, Log, TEXT("UVsEnemySpawnManagementSubsytem::OnTimerElapsed"));
-	
-	// spawn
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
+
+	// プレイヤーの位置情報を取得
+	{
+		TArray<AActor*> FoundActors;
+		TSubclassOf<AActor> PlayerActor = TSoftClassPtr<AActor>(FSoftObjectPath(TEXT("/Game/Project/Player/BP_VsPlayerCharacter.BP_VsPlayerCharacter_C"))).LoadSynchronous();
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(), PlayerActor, FoundActors);
+		for (auto Actor : FoundActors)
+		{
+			AActor* AnyActor = Cast<AActor>(Actor);
+			if (AnyActor)
+			{
+				Location = AnyActor->GetActorLocation();
+			}
+		}
+	}
+
+	float Distance = 200.0f;
+	float DigreeAngle = 220.0f;
+	
+	Location.X += (Distance * FMath::Cos(FMath::DegreesToRadians(DigreeAngle)));
+	Location.Y += (Distance * FMath::Sin(FMath::DegreesToRadians(DigreeAngle)));
+
+	// spawn
 	SpawnVsEnemy->Spawn(EEnemyType::Bat, Location, Rotation);
 
 	StartTimer(GetWorld()->GetTimerManager());
