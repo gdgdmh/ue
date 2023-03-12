@@ -39,9 +39,9 @@ void UVsEnemySpawnManagementSubsytem::Start(FTimerManager& TimerManager)
 
 void UVsEnemySpawnManagementSubsytem::StartTimer(FTimerManager& TimerManager)
 {
-	const float Timer = 10.0f;
+	const float SpawnSecond = 5.0f;
 	UE_LOG(LogTemp, Log, TEXT("UVsEnemySpawnManagementSubsytem::StartTimer"));
-	TimerManager.SetTimer(TimerHandle, this, &UVsEnemySpawnManagementSubsytem::OnTimerElapsed, Timer, false);
+	TimerManager.SetTimer(TimerHandle, this, &UVsEnemySpawnManagementSubsytem::OnTimerElapsed, SpawnSecond, false);
 }
 
 void UVsEnemySpawnManagementSubsytem::OnTimerElapsed()
