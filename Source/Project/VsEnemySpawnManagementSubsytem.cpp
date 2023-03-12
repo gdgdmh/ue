@@ -65,17 +65,26 @@ void UVsEnemySpawnManagementSubsytem::OnTimerElapsed()
 		}
 	}
 
-	GetRandomAngle RandomAngle;
-	uint16 Angle = RandomAngle.Get();
-	//UE_LOG(LogTemp, Log, TEXT("Angle=%d"), Angle);
 	float Distance = 200.0f;
-	float DigreeAngle = Angle;
-	
-	Location.X += (Distance * FMath::Cos(FMath::DegreesToRadians(DigreeAngle)));
-	Location.Y += (Distance * FMath::Sin(FMath::DegreesToRadians(DigreeAngle)));
+	GetSpawnLocation(Location, Distance);
 
 	// spawn
 	SpawnVsEnemy->Spawn(EEnemyType::Bat, Location, Rotation);
 
 	StartTimer(GetWorld()->GetTimerManager());
+}
+
+void UVsEnemySpawnManagementSubsytem::GetSpawnLocation(FVector& TargetLocation, float Distance)
+{
+	uint16 Angle = GetRandomAngle();
+	float DigreeAngle = Angle;
+
+	TargetLocation.X += (Distance * FMath::Cos(FMath::DegreesToRadians(DigreeAngle)));
+	TargetLocation.Y += (Distance * FMath::Sin(FMath::DegreesToRadians(DigreeAngle)));
+}
+
+float UVsEnemySpawnManagementSubsytem::GetRandomAngle()
+{
+	::GetRandomAngle RandomAngle;
+	return RandomAngle.Get();
 }

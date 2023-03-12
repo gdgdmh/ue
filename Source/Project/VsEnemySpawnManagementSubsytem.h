@@ -30,6 +30,10 @@ private:
 	void StartTimer(FTimerManager& TimerManager);
 	void OnTimerElapsed();
 
+	void GetSpawnLocation(FVector& TargetLocation, float Distance);
+
+	float GetRandomAngle();
+
 private:
 	FTimerHandle TimerHandle;
 	UPROPERTY()
