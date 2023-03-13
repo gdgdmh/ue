@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
 #include "SpawnVsEnemy.h"
+#include "SpawnEnemyManager.h"
 #include "VsEnemySpawnManagementSubsytem.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API UVsEnemySpawnManagementSubsytem : public UGameInstanceSubsystem /*UWorldSubsystem*/
+class PROJECT_API UVsEnemySpawnManagementSubsytem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
@@ -30,13 +31,13 @@ private:
 	void StartTimer(FTimerManager& TimerManager);
 	void OnTimerElapsed();
 
-	void GetSpawnLocation(FVector& TargetLocation, float Distance, uint16 Angle);
-
-	float GetRandomAngle();
-
 private:
 	FTimerHandle TimerHandle;
 	UPROPERTY()
 		TObjectPtr<ASpawnVsEnemy> SpawnVsEnemy;
+
+	UPROPERTY()
+		TObjectPtr<ASpawnEnemyManager> SpawnEnemyManager;
+
 	bool bIsActive;
 };
