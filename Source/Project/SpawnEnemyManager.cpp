@@ -19,26 +19,34 @@ void ASpawnEnemyManager::BeginPlay()
 	Super::BeginPlay();
 	SpawnVsEnemy = GetWorld()->SpawnActor<ASpawnVsEnemy>();
 	ElapsedTime = 0.0f;
+	NextTimer = 0.0f;
+}
+
+void ASpawnEnemyManager::SetFirstTimer(float Timer)
+{
+	ElapsedTime = Timer;
+	NextTimer = Timer;
 }
 
 float ASpawnEnemyManager::ProcessSpawn()
 {
 	// Œo‰ßŽžŠÔ‚É‚æ‚Á‚Ä•Ï‚í‚é
+	ElapsedTime += NextTimer;
+	float Time = 0.0f;
 	if (ElapsedTime < 30.0f)
 	{
-		SpawnPhase1();
+		Time = SpawnPhase1();
 	}
 	else if (ElapsedTime < 60.0f)
 	{
-		SpawnPhase2();
+		Time = SpawnPhase2();
 	}
 	else
 	{
-		SpawnPhase3();
+		Time = SpawnPhase3();
 	}
-
-	ElapsedTime += 5.0f;
-	return 5.0f;
+	NextTimer = Time;
+	return Time;
 }
 
 void ASpawnEnemyManager::OnSpawnAfter()
@@ -46,7 +54,7 @@ void ASpawnEnemyManager::OnSpawnAfter()
 }
 
 // 1‘Ì‚¾‚¯oŒ»
-void ASpawnEnemyManager::SpawnPhase1()
+float ASpawnEnemyManager::SpawnPhase1()
 {
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
@@ -63,10 +71,12 @@ void ASpawnEnemyManager::SpawnPhase1()
 		// spawn
 		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationCenter, Rotation);
 	}
+
+	return 5.0f;
 }
 
 // 3‘ÌoŒ»
-void ASpawnEnemyManager::SpawnPhase2()
+float ASpawnEnemyManager::SpawnPhase2()
 {
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
@@ -95,9 +105,10 @@ void ASpawnEnemyManager::SpawnPhase2()
 		// spawn
 		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationRight, Rotation);
 	}
+	return 5.0f;
 }
 
-void ASpawnEnemyManager::SpawnPhase3()
+float ASpawnEnemyManager::SpawnPhase3()
 {
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
@@ -126,7 +137,7 @@ void ASpawnEnemyManager::SpawnPhase3()
 		// spawn
 		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationRight, Rotation);
 	}
-
+	return 5.0f;
 }
 
 void ASpawnEnemyManager::GetPlayerLocation(FVector& Location)

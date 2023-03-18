@@ -21,6 +21,7 @@ void UVsEnemySpawnManagementSubsytem::Initialize(FSubsystemCollectionBase& Colle
 	bIsActive = false;
 	SpawnVsEnemy = GetWorld()->SpawnActor<ASpawnVsEnemy>();
 	SpawnEnemyManager = GetWorld()->SpawnActor<ASpawnEnemyManager>();
+	SpawnEnemyManager->SetFirstTimer(0.1f);
 	Start(GetWorld()->GetTimerManager());
 }
 
@@ -38,9 +39,8 @@ void UVsEnemySpawnManagementSubsytem::Start(FTimerManager& TimerManager)
 
 void UVsEnemySpawnManagementSubsytem::StartTimer(FTimerManager& TimerManager)
 {
-	const float SpawnSecond = 5.0f;
 	UE_LOG(LogTemp, Log, TEXT("UVsEnemySpawnManagementSubsytem::StartTimer"));
-	TimerManager.SetTimer(TimerHandle, this, &UVsEnemySpawnManagementSubsytem::OnTimerElapsed, SpawnSecond, false);
+	TimerManager.SetTimer(TimerHandle, this, &UVsEnemySpawnManagementSubsytem::OnTimerElapsed, SpawnEnemyManager->GetNextTimer(), false);
 }
 
 void UVsEnemySpawnManagementSubsytem::OnTimerElapsed()

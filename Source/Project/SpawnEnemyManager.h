@@ -21,13 +21,16 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	void SetFirstTimer(float Timer);
+	float GetNextTimer() const { return NextTimer; }
+
 	float ProcessSpawn();
 	void OnSpawnAfter();
 
 private:
-	void SpawnPhase1();
-	void SpawnPhase2();
-	void SpawnPhase3();
+	float SpawnPhase1();
+	float SpawnPhase2();
+	float SpawnPhase3();
 
 
 private:
@@ -43,5 +46,6 @@ public:
 	UPROPERTY()
 		TObjectPtr<ASpawnVsEnemy> SpawnVsEnemy;
 	float ElapsedTime;	// 経過時間
+	float NextTimer;	// 次のタイマーに設定する時間
 
 };
