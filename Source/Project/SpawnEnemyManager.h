@@ -25,6 +25,12 @@ public:
 	void OnSpawnAfter();
 
 private:
+	void SpawnPhase1();
+	void SpawnPhase2();
+	void SpawnPhase3();
+
+
+private:
 	// プレイヤーの位置を取得
 	void GetPlayerLocation(FVector& Location);
 	// ターゲットの位置とDistance、Angleを渡すことでSpawnする位置を取得する

@@ -24,7 +24,81 @@ void ASpawnEnemyManager::BeginPlay()
 float ASpawnEnemyManager::ProcessSpawn()
 {
 	// 経過時間によって変わる
+	if (ElapsedTime < 30.0f)
+	{
+		SpawnPhase1();
+	}
+	else if (ElapsedTime < 60.0f)
+	{
+		SpawnPhase2();
+	}
+	else
+	{
+		SpawnPhase3();
+	}
 
+	ElapsedTime += 5.0f;
+	return 5.0f;
+}
+
+void ASpawnEnemyManager::OnSpawnAfter()
+{
+}
+
+// 1体だけ出現
+void ASpawnEnemyManager::SpawnPhase1()
+{
+	FVector Location(950, 300, 90);
+	FRotator Rotation(0, 0, 0);
+
+	// プレイヤーの位置情報を取得
+	GetPlayerLocation(Location);
+
+	float Distance = 200.0f;
+	uint16 Angle = GetRandomAngle();
+	FVector BaseLocation = Location;
+	{
+		FVector LocationCenter = BaseLocation;
+		GetSpawnLocation(LocationCenter, Distance, Angle);
+		// spawn
+		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationCenter, Rotation);
+	}
+}
+
+// 3体出現
+void ASpawnEnemyManager::SpawnPhase2()
+{
+	FVector Location(950, 300, 90);
+	FRotator Rotation(0, 0, 0);
+
+	// プレイヤーの位置情報を取得
+	GetPlayerLocation(Location);
+
+	float Distance = 200.0f;
+	uint16 Angle = GetRandomAngle();
+	FVector BaseLocation = Location;
+	{
+		FVector LocationCenter = BaseLocation;
+		GetSpawnLocation(LocationCenter, Distance, Angle);
+		// spawn
+		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationCenter, Rotation);
+	}
+	{
+		FVector LocationLeft = BaseLocation;
+		GetSpawnLocation(LocationLeft, Distance, Angle - 20);
+		// spawn
+		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationLeft, Rotation);
+	}
+	{
+		FVector LocationRight = BaseLocation;
+		GetSpawnLocation(LocationRight, Distance, Angle + 20);
+		// spawn
+		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationRight, Rotation);
+	}
+}
+
+void ASpawnEnemyManager::SpawnPhase3()
+{
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
 
@@ -53,11 +127,6 @@ float ASpawnEnemyManager::ProcessSpawn()
 		SpawnVsEnemy->Spawn(EEnemyType::Bat, LocationRight, Rotation);
 	}
 
-	return 5.0f;
-}
-
-void ASpawnEnemyManager::OnSpawnAfter()
-{
 }
 
 void ASpawnEnemyManager::GetPlayerLocation(FVector& Location)
