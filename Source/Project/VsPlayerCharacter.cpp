@@ -96,17 +96,6 @@ void AVsPlayerCharacter::BeginPlay()
 		ShootKnifer->GetShootBeforeDispacher().AddDynamic(this, &AVsPlayerCharacter::ShootBeforeEvent);
 		ShootKnifer->StartShootTimer(World->GetTimerManager());
 	}
-
-	{
-		SpawnVsEnemy = World->SpawnActor<ASpawnVsEnemy>();
-
-		FVector Loc;
-		Loc.X = 1000;
-		Loc.Y = 300;
-		Loc.Z = 90;
-		FRotator Rot;
-		SpawnVsEnemy->Spawn(EEnemyType::Bat, Loc, Rot);
-	}
 }
 
 /** Called for movement input */

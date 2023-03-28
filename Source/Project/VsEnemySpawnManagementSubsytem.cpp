@@ -2,6 +2,7 @@
 
 
 #include "VsEnemySpawnManagementSubsytem.h"
+#include "VsWorldSettings.h"
 
 UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 {
@@ -9,9 +10,20 @@ UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 
 bool UVsEnemySpawnManagementSubsytem::ShouldCreateSubsystem(UObject* Outer) const
 {
-	// いったんtrueにする
-	// ただ将来的には条件に応じてtrueにしないと全部のレベルで生成されるため、注意
-	return true;
+	if (!Super::ShouldCreateSubsystem(Outer))
+	{
+		return false;
+	}
+
+	// WorldSetting上で使用フラグが立っていたら生成する
+	if (UGameInstance* GameInstance = Cast<UGameInstance>(Outer))
+	{
+		if (AVsWorldSettings* VsWorldSettings = Cast<AVsWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
+		{
+			return VsWorldSettings->bUseEnemySpawnSubsystem;
+		}
+	}
+	return false;
 }
 
 void UVsEnemySpawnManagementSubsytem::Initialize(FSubsystemCollectionBase& Collection)
