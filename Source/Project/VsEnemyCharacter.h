@@ -43,6 +43,9 @@ protected:
 	void NormalizationHealth();
 	void CheckDestroy();
 
+	// ƒ_ƒ[ƒWWBPˆ—
+	void ShowDamage(float DamageAmount);
+
 protected:
 
 	UPROPERTY(EditAnywhere)
