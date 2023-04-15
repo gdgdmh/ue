@@ -5,7 +5,7 @@
 #include "Blueprint/UserWidget.h"
 #include "DamageText.h"
 #include "Engine/DamageEvents.h"
-
+#include "Kismet/GameplayStatics.h"
 
 AVsEnemyCharacter::AVsEnemyCharacter()
 {
@@ -26,12 +26,21 @@ float AVsEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent cons
 	// ヒットの詳細を取得
 	FVector Position;
 	{
+		// ヒット位置取得
 		FHitResult HitResult;
 		FVector OutImpulseDir;
 		DamageEvent.GetBestHitInfo(this, DamageCauser, HitResult, OutImpulseDir);
 		Position.X = HitResult.ImpactPoint.X;
 		Position.Y = HitResult.ImpactPoint.Y;
 		Position.Z = HitResult.ImpactPoint.Z;
+
+		// 3次元座標からスクリーン座標に変換
+		FVector2D ScreenPosition;
+		APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
+		UGameplayStatics::ProjectWorldToScreen(PlayerController, Position, ScreenPosition);
+
+		Position.X = ScreenPosition.X;
+		Position.Y = ScreenPosition.Y;
 	}
 
 	SubHealthFloat(DamageAmount);
@@ -124,11 +133,9 @@ void AVsEnemyCharacter::ShowDamage(float DamageAmount, FVector Position)
 	{
 		int32 Damage = static_cast<int32>(DamageAmount);
 		UserWidget->SetText(FString::FromInt(Damage));
-		UserWidget->SetPosition(100, 100);
+		UserWidget->SetPosition(Position.X, Position.Y);
 		UserWidget->PlayTransparentAnimation();
 		UserWidget->AddToViewport();
-
-
 
 		// 削除する際は
 		//RemoveFromViewport
