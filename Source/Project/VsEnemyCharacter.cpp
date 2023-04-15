@@ -3,6 +3,9 @@
 
 #include "VsEnemyCharacter.h"
 #include "Blueprint/UserWidget.h"
+#include "DamageText.h"
+#include "Engine/DamageEvents.h"
+
 
 AVsEnemyCharacter::AVsEnemyCharacter()
 {
@@ -19,8 +22,22 @@ void AVsEnemyCharacter::BeginPlay()
 float AVsEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
 	//UE_LOG(LogTemp, Log, TEXT("%f"), DamageAmount);
+
+	// ÉqÉbÉgÇÃè⁄ç◊ÇéÊìæ
+	FVector Position;
+	{
+		FHitResult HitResult;
+		FVector OutImpulseDir;
+		DamageEvent.GetBestHitInfo(this, DamageCauser, HitResult, OutImpulseDir);
+		Position.X = HitResult.ImpactPoint.X;
+		Position.Y = HitResult.ImpactPoint.Y;
+		Position.Z = HitResult.ImpactPoint.Z;
+	}
+
 	SubHealthFloat(DamageAmount);
-	ShowDamage(DamageAmount);
+	ShowDamage(DamageAmount, Position);
+
+
 	return Health;
 }
 
@@ -72,11 +89,28 @@ void AVsEnemyCharacter::CheckDestroy()
 	Destroy();
 }
 
-void AVsEnemyCharacter::ShowDamage(float DamageAmount)
+void AVsEnemyCharacter::ShowDamage(float DamageAmount, FVector Position)
 {
 	UE_LOG(LogTemp, Log, TEXT("%f"), DamageAmount);
-	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_Damage.WBP_Damage_C");
 
+
+
+	//FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_DamageText.WBP_DamageText_C");
+	//TSubclassOf<class DamageText> WidgetClass;
+	//WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
+
+	//FString path = "/Game/Title/TitleWidgetBlueprint.TitleWidgetBlueprint_C";
+
+#if 0
+	UDamageText* DmgText = CreateWidget<UDamageText>(GetWorld(), UDamageText::StaticClass());
+	if (DmgText)
+	{
+		DmgText->AddToViewport();
+	}
+#endif
+
+#if 1
+	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_DamageText.WBP_DamageText_C");
 	TSubclassOf<class UUserWidget> WidgetClass;
 	WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
 	if (!WidgetClass)
@@ -85,10 +119,20 @@ void AVsEnemyCharacter::ShowDamage(float DamageAmount)
 		return;
 	}
 
-	UUserWidget* UserWidget = CreateWidget<UUserWidget>(GetWorld(), WidgetClass);
+	UDamageText* UserWidget = CreateWidget<UDamageText>(GetWorld(), WidgetClass);
 	if (UserWidget)
 	{
+		int32 Damage = static_cast<int32>(DamageAmount);
+		UserWidget->SetText(FString::FromInt(Damage));
+		UserWidget->SetPosition(100, 100);
+		UserWidget->PlayTransparentAnimation();
 		UserWidget->AddToViewport();
+
+
+
+		// çÌèúÇ∑ÇÈç€ÇÕ
+		//RemoveFromViewport
+
 		// Ç§Ç‹Ç≠Ç¢Ç©Ç»Ç¢
 		/*
 		FVector2D Trans(100, 100);
@@ -103,4 +147,5 @@ void AVsEnemyCharacter::ShowDamage(float DamageAmount)
 	{
 		UE_LOG(LogTemp, Log, TEXT("ShowDamage failure"));
 	}
+#endif
 }
