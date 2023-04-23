@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "DamageText.generated.h"
 
+DECLARE_DELEGATE(FDamageTextAnimationFinishDelegate)
+
 /**
  * 
  */
@@ -30,10 +32,22 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void PlayTransparentAnimation();
 
+	void Test();
+
+
+	UFUNCTION(BlueprintCallable)
+		void EventAnimationFinish();
+	/*
+UFUNCTION(BlueprintCallable, Category = "Test")
+		void TestEvent() { UE_LOG(LogTemp, Log, TEXT("TestEvent!")); }
+	*/
+
 public:
 	UPROPERTY(BlueprintReadWrite)
 		FString DamageText;
 
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
 		TObjectPtr<UWidgetAnimation> TransparentAnimation;
+
+	FWidgetAnimationDynamicEvent AnimationFinishDelegate;
 };
