@@ -137,6 +137,7 @@ void AVsEnemyCharacter::ShowDamage(float DamageAmount, FVector Position)
 		UserWidget->PlayTransparentAnimation();
 		UserWidget->AddToViewport();
 
+
 		// íœ‚·‚éÛ‚Í
 		//RemoveFromViewport
 
