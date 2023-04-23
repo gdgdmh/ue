@@ -4,18 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "VsUserWidget.h"
 #include "DamageText.generated.h"
 
 DECLARE_DELEGATE(FDamageTextAnimationFinishDelegate)
+
+//class PROJECT_API UDamageText : public UUserWidget
+
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API UDamageText : public UUserWidget
+class PROJECT_API UDamageText : public UVsUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+	UDamageText(const FObjectInitializer& ObjectInitializer);
+
 public:
 	//virtual void NativeConstruct() override;
 

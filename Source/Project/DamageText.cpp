@@ -3,6 +3,12 @@
 
 #include "DamageText.h"
 
+UDamageText::UDamageText(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+	SetWidgetType(EVsUserWidgetType::DamageText);
+}
+
 
 void UDamageText::SetText(const FString& Text)
 {
@@ -27,33 +33,7 @@ void UDamageText::PlayTransparentAnimation()
 	PlayAnimation(TransparentAnimation);
 }
 
-void UDamageText::Test()
-{
-	//FWidgetAnimationDynamicEvent Delegate;
-	//Delegate.BindUFunction();
-	//Delegate.
-	//BindToAnimationEvent(TransparentAnimation, AnimationFinishDelegate, EWidgetAnimationEvent::Finished);
-
-
-/*
-FWidgetAnimationDynamicEvent Delegate;
-EWidgetAnimationEvent Event;
-UserWidget->BindToAnimationEvent(UserWidget->TransparentAnimation, Delegate, );
-
-*/
-	
-}
-
 void UDamageText::EventAnimationFinish()
 {
 	UE_LOG(LogTemp, Log, TEXT("EventAnimationFinish"));
 }
-
-#if 0
-FWidgetAnimationDynamicEvent Delegate;
-EWidgetAnimationEvent Event;
-UserWidget->BindToAnimationEvent(UserWidget->TransparentAnimation, Delegate, );
-
-#endif
-
-
