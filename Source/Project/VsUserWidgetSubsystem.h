@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "VsUserWidget.h"
 #include "VsUserWidgetSubsystem.generated.h"
 
 /**
@@ -23,4 +24,11 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
 
+public:
+	void Add(TObjectPtr<UVsUserWidget> VsUserWidget);
+	void Remove(TObjectPtr<UVsUserWidget> VsUserWidget);
+	void Clear();
+
+private:
+	TArray< TObjectPtr<UVsUserWidget> > VsUserWidgets;
 };
