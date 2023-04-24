@@ -19,6 +19,10 @@ public:
 	UVsUserWidget(const FObjectInitializer& ObjectInitializer);
 
 public:
+
+	void AddUserWidgetSubsytem();
+	void RemoveUserWidgetSubsystem();
+
 	void SetWidgetType(EVsUserWidgetType Type) { VsUserWidgetType = Type; }
 	EVsUserWidgetType GetWidgetType() const { return VsUserWidgetType; }
 
