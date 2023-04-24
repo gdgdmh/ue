@@ -21,4 +21,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		bool bUseEnemySpawnSubsystem;
 
+	UPROPERTY(EditAnyWhere)
+		bool bUseVsUserWidgetSubsystem;
+
 };
