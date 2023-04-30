@@ -6,4 +6,5 @@
 AVsWorldSettings::AVsWorldSettings()
 {
 	bUseEnemySpawnSubsystem = false;
+	bUseVsUserWidgetSubsystem = true;
 }
