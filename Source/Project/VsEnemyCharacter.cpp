@@ -128,14 +128,15 @@ void AVsEnemyCharacter::ShowDamage(float DamageAmount, FVector Position)
 		return;
 	}
 
-	UDamageText* UserWidget = CreateWidget<UDamageText>(GetWorld(), WidgetClass);
-	if (UserWidget)
+	TObjectPtr<UDamageText> DamageText = CreateWidget<UDamageText>(GetWorld(), WidgetClass);
+	if (DamageText)
 	{
 		int32 Damage = static_cast<int32>(DamageAmount);
-		UserWidget->SetText(FString::FromInt(Damage));
-		UserWidget->SetPosition(Position.X, Position.Y);
-		UserWidget->PlayTransparentAnimation();
-		UserWidget->AddToViewport();
+		DamageText->SetText(FString::FromInt(Damage));
+		DamageText->SetPosition(Position.X, Position.Y);
+		DamageText->PlayTransparentAnimation();
+		DamageText->AddToViewport();
+		DamageText->AddUserWidgetSubsytem();
 
 
 		// íœ‚·‚éÛ‚Í

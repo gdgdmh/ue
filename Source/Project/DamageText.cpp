@@ -36,4 +36,5 @@ void UDamageText::PlayTransparentAnimation()
 void UDamageText::EventAnimationFinish()
 {
 	UE_LOG(LogTemp, Log, TEXT("EventAnimationFinish"));
+	RemoveUserWidgetSubsystem();
 }
