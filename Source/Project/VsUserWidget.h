@@ -19,8 +19,10 @@ public:
 	UVsUserWidget(const FObjectInitializer& ObjectInitializer);
 
 public:
-
+	UFUNCTION(BlueprintCallable)
 	void AddUserWidgetSubsytem();
+
+	UFUNCTION(BlueprintCallable)
 	void RemoveUserWidgetSubsystem();
 
 	void SetWidgetType(EVsUserWidgetType Type) { VsUserWidgetType = Type; }
