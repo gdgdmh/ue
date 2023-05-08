@@ -3,3 +3,8 @@
 
 #include "TitleUserWidget.h"
 
+
+void UTitleUserWidget::OnClickedEvent()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnClickedEvent"));
+}
