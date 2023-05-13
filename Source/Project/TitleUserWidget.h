@@ -16,8 +16,12 @@ class PROJECT_API UTitleUserWidget : public UVsUserWidget
 	GENERATED_BODY()
 	
 public:
+
 	UFUNCTION(BlueprintCallable)
-		void OnClickedEvent();
+		void OnClickedEventButtonPattern1();
+
+	UFUNCTION(BlueprintCallable)
+		void OnClickedEventButtonPattern2();
 
 public:
 	UPROPERTY(Transient, meta = (BindWidget))
