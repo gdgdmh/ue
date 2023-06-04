@@ -3,6 +3,7 @@
 
 #include "ScrollTestUserWidget.h"
 
-void UScrollTestUserWidget::OnEvent()
+void UScrollTestUserWidget::OnEventUserScrolled()
 {
+	UE_LOG(LogTemp, Log, TEXT("UScrollTestUserWidget::OnEventUserScrolled"));
 }
