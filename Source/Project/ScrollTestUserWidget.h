@@ -15,6 +15,10 @@ class PROJECT_API UScrollTestUserWidget : public UVsUserWidget
 {
 	GENERATED_BODY()
 	
+protected:
+
+	virtual void NativeConstruct() override;
+
 public:
 
 	UFUNCTION(BlueprintCallable)
@@ -25,4 +29,6 @@ private:
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<UScrollBox> ScrollBoxTest;
 
+	UPROPERTY(Transient, meta = (BindWidget))
+		TObjectPtr<UScrollBox> DynamicScrollBox;
 };
