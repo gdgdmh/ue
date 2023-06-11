@@ -29,28 +29,6 @@ void UScrollTestUserWidget::NativeConstruct()
 	}
 #endif
 
-
-/*
-	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_ScrollTest.WBP_ScrollTest_C");
-	TSubclassOf<class UUserWidget> WidgetClass;
-	WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
-	if (!WidgetClass)
-	{
-		UE_LOG(LogTemp, Log, TEXT("ShowDamage widget load failure"));
-		return;
-	}
-
-	TObjectPtr<UScrollTestUserWidget> ScrollTest = CreateWidget<UScrollTestUserWidget>(GetWorld(), WidgetClass);
-	if (ScrollTest)
-	{
-		ScrollTest->AddToViewport(20);
-		ScrollTest->AddUserWidgetSubsytem();
-	}
-
-*/
-
-	//DynamicScrollBox->AddChild();
-
 }
 
 void UScrollTestUserWidget::OnEventUserScrolled()
