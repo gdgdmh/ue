@@ -20,7 +20,12 @@ protected:
 public:
 	void OnClicked();
 
+public:
+	UPROPERTY(BlueprintReadWrite)
+		FString Text;
+
 private:
 	bool bIsSelected;
+
 
 };
