@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ProjectCharacter.h"
 #include "Camera/CameraComponent.h"
@@ -9,7 +9,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "WeaponKnife.h" // •s—v‚É‚È‚Á‚½‚çÁ‚·
+#include "WeaponKnife.h" // ä¸è¦ã«ãªã£ãŸã‚‰æ¶ˆã™
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ void AProjectCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 
-	// ”­ŽË
+	// ç™ºå°„
 #if 0
 	{
 		UWorld* World = GetWorld();
@@ -111,7 +111,7 @@ void AProjectCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AProjectCharacter::Look);
 
 		// Handle firing projectiles
-		// •s—v‚É‚È‚Á‚½‚çÁ‚·
+		// ä¸è¦ã«ãªã£ãŸã‚‰æ¶ˆã™
 		PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AProjectCharacter::StartFire);
 	}
 #endif

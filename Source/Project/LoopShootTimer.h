@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -24,18 +24,18 @@ public:
 
 	// override IShootTimerInterface
 public:
-	// ”­Ëƒ^ƒCƒ}[‚Ì—LŒø‰»A–³Œø‰»
+	// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®æœ‰åŠ¹åŒ–ã€ç„¡åŠ¹åŒ–
 	virtual void SetShootTimerEnable(bool bIsEnable) override;
-	// ”­ËŠÔŠu‚Ìİ’è
+	// ç™ºå°„é–“éš”ã®è¨­å®š
 	virtual void SetShootTimer(float interval) override;
-	// ƒpƒ‰ƒ[ƒ^[İ’è
+	// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼è¨­å®š
 	virtual void SetShootParameter(TObjectPtr<AVsShootParameter> Parameter) override;
-	// ”­Ëƒ^ƒCƒ}[‚ÌŠJn
+	// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®é–‹å§‹
 	virtual bool StartShootTimer(FTimerManager& TimerManager) override;
 
-	// ”­Ëˆ—
+	// ç™ºå°„å‡¦ç†
 	virtual void ProcessShoot() override;
-	// ”­Ëƒ^ƒCƒ}[Œo‰ßˆ—
+	// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼çµŒéæ™‚å‡¦ç†
 	virtual void OnShootTimerElapsed()  override;
 
 protected:

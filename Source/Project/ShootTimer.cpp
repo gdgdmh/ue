@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "ShootTimer.h"
@@ -21,26 +21,26 @@ UShootTimer::~UShootTimer()
 {
 }
 
-// ”­Ëƒ^ƒCƒ}[‚Ì—LŒø‰»A–³Œø‰»
+// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®æœ‰åŠ¹åŒ–ã€ç„¡åŠ¹åŒ–
 void UShootTimer::SetShootTimerEnable(bool bIsEnable)
 {
 	bIsShootTimerEnable = bIsEnable;
 }
 
-// ”­ËŠÔŠu‚Ìİ’è
+// ç™ºå°„é–“éš”ã®è¨­å®š
 void UShootTimer::SetShootTimer(float interval)
 {
 	check(interval >= 0.0f);
 	Timer = interval;
 }
 
-// ƒpƒ‰ƒ[ƒ^[İ’è
+// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼è¨­å®š
 void UShootTimer::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
 {
 	//ShootParameter->Copy(Parameter);
 }
 
-// ”­Ëƒ^ƒCƒ}[‚ÌŠJn
+// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®é–‹å§‹
 bool UShootTimer::StartShootTimer(FTimerManager& TimerManager)
 {
 	if (!bIsShootTimerEnable)
@@ -51,12 +51,12 @@ bool UShootTimer::StartShootTimer(FTimerManager& TimerManager)
 	return true;
 }
 
-// ”­Ëˆ—
+// ç™ºå°„å‡¦ç†
 void UShootTimer::ProcessShoot()
 {
 }
 
-// ”­Ëƒ^ƒCƒ}[Œo‰ßˆ—
+// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼çµŒéæ™‚å‡¦ç†
 void UShootTimer::OnShootTimerElapsed()
 {
 	if (!bIsShootTimerEnable)

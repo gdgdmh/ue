@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "LoopShootKnife.h"
 #include "WeaponKnife.h"
@@ -16,7 +16,7 @@ ALoopShootKnifer::~ALoopShootKnifer()
 {
 }
 
-// ”­Ëˆ—
+// ç™ºå°„å‡¦ç†
 void ALoopShootKnifer::ProcessShoot()
 {
 	UWorld* World = GetWorld();

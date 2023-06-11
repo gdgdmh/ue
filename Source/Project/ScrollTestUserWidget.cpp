@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "ScrollTestUserWidget.h"
@@ -8,7 +8,7 @@ void UScrollTestUserWidget::NativeConstruct()
 {
 	UE_LOG(LogTemp, Log, TEXT("UScrollTestUserWidget::NativeConstruct"));
 
-	// “®“I‚Éƒ{ƒ^ƒ“‚ğ’Ç‰Á
+	// å‹•çš„ã«ãƒœã‚¿ãƒ³ã‚’è¿½åŠ 
 #if 1
 	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_Balloon.WBP_Balloon_C");
 	TSubclassOf<class UUserWidget> WidgetClass;

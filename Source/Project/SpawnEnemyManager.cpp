@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SpawnEnemyManager.h"
@@ -30,7 +30,7 @@ void ASpawnEnemyManager::SetFirstTimer(float Timer)
 
 float ASpawnEnemyManager::ProcessSpawn()
 {
-	// Œo‰ßŠÔ‚É‚æ‚Á‚Ä•Ï‚í‚é
+	// çµŒéæ™‚é–“ã«ã‚ˆã£ã¦å¤‰ã‚ã‚‹
 	ElapsedTime += NextTimer;
 	float Time = 0.0f;
 	if (ElapsedTime < 30.0f)
@@ -53,13 +53,13 @@ void ASpawnEnemyManager::OnSpawnAfter()
 {
 }
 
-// 1‘Ì‚¾‚¯oŒ»
+// 1ä½“ã ã‘å‡ºç¾
 float ASpawnEnemyManager::SpawnPhase1()
 {
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
 
-	// ƒvƒŒƒCƒ„[‚ÌˆÊ’uî•ñ‚ğæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®æƒ…å ±ã‚’å–å¾—
 	GetPlayerLocation(Location);
 
 	float Distance = 200.0f;
@@ -75,13 +75,13 @@ float ASpawnEnemyManager::SpawnPhase1()
 	return 5.0f;
 }
 
-// 3‘ÌoŒ»
+// 3ä½“å‡ºç¾
 float ASpawnEnemyManager::SpawnPhase2()
 {
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
 
-	// ƒvƒŒƒCƒ„[‚ÌˆÊ’uî•ñ‚ğæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®æƒ…å ±ã‚’å–å¾—
 	GetPlayerLocation(Location);
 
 	float Distance = 200.0f;
@@ -113,7 +113,7 @@ float ASpawnEnemyManager::SpawnPhase3()
 	FVector Location(950, 300, 90);
 	FRotator Rotation(0, 0, 0);
 
-	// ƒvƒŒƒCƒ„[‚ÌˆÊ’uî•ñ‚ğæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®æƒ…å ±ã‚’å–å¾—
 	GetPlayerLocation(Location);
 
 	float Distance = 200.0f;
@@ -142,7 +142,7 @@ float ASpawnEnemyManager::SpawnPhase3()
 
 void ASpawnEnemyManager::GetPlayerLocation(FVector& Location)
 {
-	// ƒvƒŒƒCƒ„[‚ÌˆÊ’uî•ñ‚ğæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®æƒ…å ±ã‚’å–å¾—
 	TArray<AActor*> FoundActors;
 	TSubclassOf<AActor> PlayerActor = TSoftClassPtr<AActor>(FSoftObjectPath(TEXT("/Game/Project/Player/BP_VsPlayerCharacter.BP_VsPlayerCharacter_C"))).LoadSynchronous();
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), PlayerActor, FoundActors);

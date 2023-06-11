@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -57,10 +57,10 @@ if (DamageText)
 	DamageText->AddUserWidgetSubsytem();
 
 
-	// íœ‚·‚éÛ‚Í
+	// å‰Šé™¤ã™ã‚‹éš›ã¯
 	//RemoveFromViewport
 
-	// ‚¤‚Ü‚­‚¢‚©‚È‚¢
+	// ã†ã¾ãã„ã‹ãªã„
 	/*
 	FVector2D Trans(100, 100);
 	FVector2D Scale;

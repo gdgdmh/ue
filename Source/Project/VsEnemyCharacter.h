@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -43,18 +43,18 @@ protected:
 	void NormalizationHealth();
 	void CheckDestroy();
 
-	// ƒ_ƒ[ƒWWBPˆ—
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸WBPå‡¦ç†
 	void ShowDamage(float DamageAmount, FVector Position);
 
 protected:
 
 	UPROPERTY(EditAnywhere)
-		int32 MaxHealth;	// Å‘åHP
+		int32 MaxHealth;	// æœ€å¤§HP
 
 	UPROPERTY(EditAnywhere)
 		int32 Health;	// HP
 
 	UPROPERTY()
-		bool bIsAlive;	// ¶‘¶‚µ‚Ä‚¢‚é‚©
+		bool bIsAlive;	// ç”Ÿå­˜ã—ã¦ã„ã‚‹ã‹
 
 };

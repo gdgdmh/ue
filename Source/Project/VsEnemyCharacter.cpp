@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "VsEnemyCharacter.h"
@@ -23,10 +23,10 @@ float AVsEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent cons
 {
 	//UE_LOG(LogTemp, Log, TEXT("%f"), DamageAmount);
 
-	// ƒqƒbƒg‚ÌÚ×‚ğæ“¾
+	// ãƒ’ãƒƒãƒˆã®è©³ç´°ã‚’å–å¾—
 	FVector Position;
 	{
-		// ƒqƒbƒgˆÊ’uæ“¾
+		// ãƒ’ãƒƒãƒˆä½ç½®å–å¾—
 		FHitResult HitResult;
 		FVector OutImpulseDir;
 		DamageEvent.GetBestHitInfo(this, DamageCauser, HitResult, OutImpulseDir);
@@ -34,7 +34,7 @@ float AVsEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent cons
 		Position.Y = HitResult.ImpactPoint.Y;
 		Position.Z = HitResult.ImpactPoint.Z;
 
-		// 3ŸŒ³À•W‚©‚çƒXƒNƒŠ[ƒ“À•W‚É•ÏŠ·
+		// 3æ¬¡å…ƒåº§æ¨™ã‹ã‚‰ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã«å¤‰æ›
 		FVector2D ScreenPosition;
 		APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 		UGameplayStatics::ProjectWorldToScreen(PlayerController, Position, ScreenPosition);
@@ -139,10 +139,10 @@ void AVsEnemyCharacter::ShowDamage(float DamageAmount, FVector Position)
 		DamageText->AddUserWidgetSubsytem();
 
 
-		// íœ‚·‚éÛ‚Í
+		// å‰Šé™¤ã™ã‚‹éš›ã¯
 		//RemoveFromViewport
 
-		// ‚¤‚Ü‚­‚¢‚©‚È‚¢
+		// ã†ã¾ãã„ã‹ãªã„
 		/*
 		FVector2D Trans(100, 100);
 		FVector2D Scale;

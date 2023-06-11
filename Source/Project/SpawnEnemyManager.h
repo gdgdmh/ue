@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -34,18 +34,18 @@ private:
 
 
 private:
-	// ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’å–å¾—
 	void GetPlayerLocation(FVector& Location);
-	// ƒ^[ƒQƒbƒg‚ÌˆÊ’u‚ÆDistanceAAngle‚ğ“n‚·‚±‚Æ‚ÅSpawn‚·‚éˆÊ’u‚ğæ“¾‚·‚é
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä½ç½®ã¨Distanceã€Angleã‚’æ¸¡ã™ã“ã¨ã§Spawnã™ã‚‹ä½ç½®ã‚’å–å¾—ã™ã‚‹
 	void GetSpawnLocation(FVector& TargetLocation, float Distance, uint16 Angle);
-	// ƒ‰ƒ“ƒ_ƒ€‚ÈAngle‚ğæ“¾
+	// ãƒ©ãƒ³ãƒ€ãƒ ãªAngleã‚’å–å¾—
 	float GetRandomAngle();
 
 
 public:
 	UPROPERTY()
 		TObjectPtr<ASpawnVsEnemy> SpawnVsEnemy;
-	float ElapsedTime;	// Œo‰ßŠÔ
-	float NextTimer;	// Ÿ‚Ìƒ^ƒCƒ}[‚Éİ’è‚·‚éŠÔ
+	float ElapsedTime;	// çµŒéæ™‚é–“
+	float NextTimer;	// æ¬¡ã®ã‚¿ã‚¤ãƒãƒ¼ã«è¨­å®šã™ã‚‹æ™‚é–“
 
 };

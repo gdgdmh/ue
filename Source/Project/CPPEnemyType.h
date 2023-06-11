@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -20,8 +20,8 @@ public:
 UENUM(BlueprintType)
 enum class EEnemyType : uint8
 {
-	Bat				UMETA(DisplayName = "ƒoƒbƒg",		ToolTip = "00:‚±‚¤‚à‚è"),
-	Skeleton		UMETA(DisplayName = "ƒXƒPƒ‹ƒgƒ“",	ToolTip = "01:ƒXƒPƒ‹ƒgƒ“"),
+	Bat				UMETA(DisplayName = "ãƒãƒƒãƒˆ",		ToolTip = "00:ã“ã†ã‚‚ã‚Š"),
+	Skeleton		UMETA(DisplayName = "ã‚¹ã‚±ãƒ«ãƒˆãƒ³",	ToolTip = "01:ã‚¹ã‚±ãƒ«ãƒˆãƒ³"),
 
 	Num				UMETA(Hidden)
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "LoopShootTimer.h"
@@ -22,26 +22,26 @@ ALoopShootTimer::~ALoopShootTimer()
 {
 }
 
-// ”­Ëƒ^ƒCƒ}[‚Ì—LŒø‰»A–³Œø‰»
+// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®æœ‰åŠ¹åŒ–ã€ç„¡åŠ¹åŒ–
 void ALoopShootTimer::SetShootTimerEnable(bool bIsEnable)
 {
 	bIsShootTimerEnable = bIsEnable;
 }
 
-// ”­ËŠÔŠu‚Ìİ’è
+// ç™ºå°„é–“éš”ã®è¨­å®š
 void ALoopShootTimer::SetShootTimer(float interval)
 {
 	check(interval >= 0.0f);
 	Timer = interval;
 }
 
-// ƒpƒ‰ƒ[ƒ^[İ’è
+// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼è¨­å®š
 void ALoopShootTimer::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
 {
 	ShootParameter->Copy(Parameter.Get());
 }
 
-// ”­Ëƒ^ƒCƒ}[‚ÌŠJn
+// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®é–‹å§‹
 bool ALoopShootTimer::StartShootTimer(FTimerManager& TimerManager)
 {
 	if (!bIsShootTimerEnable)
@@ -52,12 +52,12 @@ bool ALoopShootTimer::StartShootTimer(FTimerManager& TimerManager)
 	return true;
 }
 
-// ”­Ëˆ—
+// ç™ºå°„å‡¦ç†
 void ALoopShootTimer::ProcessShoot()
 {
 }
 
-// ”­Ëƒ^ƒCƒ}[Œo‰ßˆ—
+// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼çµŒéæ™‚å‡¦ç†
 void ALoopShootTimer::OnShootTimerElapsed()
 {
 	if (!bIsShootTimerEnable)
