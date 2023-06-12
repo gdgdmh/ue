@@ -19,6 +19,8 @@ protected:
 
 	virtual void NativeConstruct() override;
 
+	void Set();
+
 public:
 
 	UFUNCTION(BlueprintCallable)

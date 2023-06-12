@@ -18,11 +18,20 @@ protected:
 	virtual void NativeConstruct() override;
 
 public:
-	void OnClicked();
+	UFUNCTION(BlueprintCallable)
+		void OnClicked();
+
+	UFUNCTION(BlueprintCallable)
+		void SetString(const FString& Txt);
+
+	UFUNCTION(BlueprintCallable)
+		void SetText(const FText& Txt);
+
+	void SetData();
 
 public:
 	UPROPERTY(BlueprintReadWrite)
-		FString Text;
+		FText Text;
 
 private:
 	bool bIsSelected;

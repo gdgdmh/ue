@@ -7,7 +7,12 @@
 void UScrollTestUserWidget::NativeConstruct()
 {
 	UE_LOG(LogTemp, Log, TEXT("UScrollTestUserWidget::NativeConstruct"));
+	Super::NativeConstruct();
+	Set();
+}
 
+void UScrollTestUserWidget::Set()
+{
 	// 動的にボタンを追加
 #if 1
 	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_Balloon.WBP_Balloon_C");
@@ -19,13 +24,15 @@ void UScrollTestUserWidget::NativeConstruct()
 		return;
 	}
 
-	TObjectPtr<UBalloonUserWidget> ScrollTest = CreateWidget<UBalloonUserWidget>(GetWorld(), WidgetClass);
-	if (ScrollTest)
+	TObjectPtr<UBalloonUserWidget> Balloon = CreateWidget<UBalloonUserWidget>(GetWorld(), WidgetClass);
+	if (Balloon)
 	{
-		ScrollTest->AddToViewport(20);
-		ScrollTest->AddUserWidgetSubsytem();
-
-		DynamicScrollBox->AddChild(ScrollTest);
+		
+		Balloon->AddToViewport(20);
+		Balloon->AddUserWidgetSubsytem();
+		DynamicScrollBox->AddChild(Balloon);
+		// このタイミングで初期化しないとNativeConstructが呼ばれてしまうことがあるので適用されない
+		Balloon->SetData();
 	}
 #endif
 
