@@ -5,7 +5,21 @@
 #include "CoreMinimal.h"
 #include "VsUserWidget.h"
 #include "Components/ScrollBox.h"
+#include "Engine/DataTable.h"
 #include "ScrollTestUserWidget.generated.h"
+
+
+USTRUCT(BlueprintType)
+struct FScrollTestDataTable : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 Rank;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FText Name;
+};
 
 /**
  * 
@@ -33,4 +47,7 @@ private:
 
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<UScrollBox> DynamicScrollBox;
+
+	UPROPERTY()
+		TArray<FScrollTestDataTable> TestDataTables;
 };

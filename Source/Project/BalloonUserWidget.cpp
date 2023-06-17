@@ -18,7 +18,7 @@ void UBalloonUserWidget::NativeConstruct()
 void UBalloonUserWidget::OnClicked()
 {
 	UE_LOG(LogTemp, Log, TEXT("UBalloonUserWidget::OnClicked"));
-	SetString(TEXT("くり"));
+	//SetString(TEXT("くり"));
 }
 
 void UBalloonUserWidget::SetString(const FString& Txt)
@@ -34,6 +34,6 @@ void UBalloonUserWidget::SetText(const FText& Txt)
 void UBalloonUserWidget::SetData()
 {
 	UE_LOG(LogTemp, Log, TEXT("UBalloonUserWidget::SetData"));
-	FString Str = TEXT("てす");
-	Text = FText::FromString(Str);
+	//FString Str = TEXT("てす");
+	//Text = FText::FromString(Str);
 }
