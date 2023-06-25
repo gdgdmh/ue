@@ -40,14 +40,14 @@ void UVsUserWidgetSubsystem::Deinitialize()
 	UE_LOG(LogTemp, Log, TEXT("UVsUserWidgetSubsystem::Deinitialize"));
 }
 
-void UVsUserWidgetSubsystem::Add(TObjectPtr<UVsUserWidget> VsUserWidget)
+void UVsUserWidgetSubsystem::Add(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
 {
-	VsUserWidgets.Add(VsUserWidget);
+	VsUserWidgets.Add(ProjectUserWidget);
 }
 
-void UVsUserWidgetSubsystem::Remove(TObjectPtr<UVsUserWidget> VsUserWidget)
+void UVsUserWidgetSubsystem::Remove(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
 {
-	VsUserWidgets.Remove(VsUserWidget);
+	VsUserWidgets.Remove(ProjectUserWidget);
 }
 
 void UVsUserWidgetSubsystem::Clear()

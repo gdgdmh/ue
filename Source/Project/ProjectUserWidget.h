@@ -5,18 +5,18 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "CPPVsUserWidgetType.h"
-#include "VsUserWidget.generated.h"
+#include "ProjectUserWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API UVsUserWidget : public UUserWidget
+class PROJECT_API UProjectUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
 public:
-	UVsUserWidget(const FObjectInitializer& ObjectInitializer);
+	UProjectUserWidget(const FObjectInitializer& ObjectInitializer);
 
 public:
 	UFUNCTION(BlueprintCallable)
