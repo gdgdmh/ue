@@ -11,7 +11,7 @@ void UBalloonUserWidget::NativeConstruct()
 
 
 
-	FString Str = TEXT("あいう");
+	FString Str = TEXT("");
 	Text = FText::FromString(Str);
 }
 
@@ -29,11 +29,4 @@ void UBalloonUserWidget::SetString(const FString& Txt)
 void UBalloonUserWidget::SetText(const FText& Txt)
 {
 	Text = Txt;
-}
-
-void UBalloonUserWidget::SetData()
-{
-	UE_LOG(LogTemp, Log, TEXT("UBalloonUserWidget::SetData"));
-	//FString Str = TEXT("てす");
-	//Text = FText::FromString(Str);
 }

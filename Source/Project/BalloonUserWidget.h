@@ -27,8 +27,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void SetText(const FText& Txt);
 
-	void SetData();
-
 public:
 	UPROPERTY(BlueprintReadWrite)
 		FText Text;

@@ -50,6 +50,33 @@ void UScrollTestUserWidget::Set()
 		return;
 	}
 
+	int32 Size = TestDataTables.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		TObjectPtr<UBalloonUserWidget> Balloon = CreateWidget<UBalloonUserWidget>(GetWorld(), TempWidgetClass);
+		if (Balloon)
+		{
+
+			Balloon->AddToViewport(20);
+			Balloon->AddUserWidgetSubsytem();
+			DynamicScrollBox->AddChild(Balloon);
+			// このタイミングで初期化しないとNativeConstructが呼ばれてしまうことがあるので適用されない
+			Balloon->SetText(TestDataTables[i].Name);
+		}
+	}
+
+
+
+#if 0
+	// 動的にボタンを追加
+	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_Balloon.WBP_Balloon_C");
+	TSubclassOf<class UUserWidget> TempWidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
+	if (!TempWidgetClass)
+	{
+		UE_LOG(LogTemp, Log, TEXT("WBP_Balloon widget load failure"));
+		return;
+	}
+
 	TObjectPtr<UBalloonUserWidget> Balloon = CreateWidget<UBalloonUserWidget>(GetWorld(), TempWidgetClass);
 	if (Balloon)
 	{
@@ -60,6 +87,7 @@ void UScrollTestUserWidget::Set()
 		// このタイミングで初期化しないとNativeConstructが呼ばれてしまうことがあるので適用されない
 		Balloon->SetData();
 	}
+#endif
 }
 
 void UScrollTestUserWidget::OnEventUserScrolled()
