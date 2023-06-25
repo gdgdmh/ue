@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,18 +23,18 @@ class PROJECT_API IShootTimerInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	// ”­Ëƒ^ƒCƒ}[‚Ì—LŒø‰»A–³Œø‰»
+	// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®æœ‰åŠ¹åŒ–ã€ç„¡åŠ¹åŒ–
 	virtual void SetShootTimerEnable(bool bIsEnable);
-	// ”­ËŠÔŠu‚Ìİ’è
+	// ç™ºå°„é–“éš”ã®è¨­å®š
 	virtual void SetShootTimer(float Interval);
-	// ƒpƒ‰ƒ[ƒ^[İ’è
+	// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼è¨­å®š
 	virtual void SetShootParameter(TObjectPtr<AVsShootParameter> Parameter);
-	// ”­Ëƒ^ƒCƒ}[‚ÌŠJn
+	// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼ã®é–‹å§‹
 	virtual bool StartShootTimer(FTimerManager& TimerManager);
-	// ”­Ë‘Oˆ—
+	// ç™ºå°„å‰å‡¦ç†
 	virtual void ProcessShootBefore();
-	// ”­Ëˆ—
+	// ç™ºå°„å‡¦ç†
 	virtual void ProcessShoot();
-	// ”­Ëƒ^ƒCƒ}[Œo‰ßˆ—
+	// ç™ºå°„ã‚¿ã‚¤ãƒãƒ¼çµŒéæ™‚å‡¦ç†
 	virtual void OnShootTimerElapsed();
 };

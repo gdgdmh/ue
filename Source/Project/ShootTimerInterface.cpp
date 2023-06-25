@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "ShootTimerInterface.h"
@@ -19,7 +19,7 @@ void IShootTimerInterface::SetShootTimer(float Interval)
 	(void)Interval;
 }
 
-// ƒpƒ‰ƒ[ƒ^[
+// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
 void IShootTimerInterface::SetShootParameter(TObjectPtr<AVsShootParameter> Parameter)
 {
 	(void)Parameter;
@@ -31,7 +31,7 @@ bool IShootTimerInterface::StartShootTimer(FTimerManager& TimerManager)
 	return true;
 }
 
-// ”­Ë‘Oˆ—
+// ç™ºå°„å‰å‡¦ç†
 void IShootTimerInterface::ProcessShootBefore()
 {
 }

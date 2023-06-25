@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "VsEnemySpawnManagementSubsytem.h"
@@ -15,7 +15,7 @@ bool UVsEnemySpawnManagementSubsytem::ShouldCreateSubsystem(UObject* Outer) cons
 		return false;
 	}
 
-	// WorldSettingã‚Åg—pƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚½‚ç¶¬‚·‚é
+	// WorldSettingä¸Šã§ä½¿ç”¨ãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ã„ãŸã‚‰ç”Ÿæˆã™ã‚‹
 	if (UGameInstance* GameInstance = Cast<UGameInstance>(Outer))
 	{
 		if (AVsWorldSettings* VsWorldSettings = Cast<AVsWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))

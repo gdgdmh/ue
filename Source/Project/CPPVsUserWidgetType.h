@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -11,8 +11,8 @@
 UENUM(BlueprintType)
 enum class EVsUserWidgetType : uint8
 {
-	None			UMETA(DisplayName = "‚È‚µ", ToolTip = "00:‚È‚µ"),
-	DamageText		UMETA(DisplayName = "ƒ_ƒ[ƒWƒeƒLƒXƒg", ToolTip = "01:ƒ_ƒ[ƒWƒeƒLƒXƒg"),
+	None			UMETA(DisplayName = "ãªã—", ToolTip = "00:ãªã—"),
+	DamageText		UMETA(DisplayName = "ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ†ã‚­ã‚¹ãƒˆ", ToolTip = "01:ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ†ã‚­ã‚¹ãƒˆ"),
 
 	Num				UMETA(Hidden)
 };

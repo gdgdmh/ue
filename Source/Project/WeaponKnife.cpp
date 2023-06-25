@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "WeaponKnife.h"
@@ -10,7 +10,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
-// ’è”éŒ¾
+// å®šæ•°å®£è¨€
 const float AWeaponKnife::LIFE_TIME = 10.0f;
 
 // Sets default values
@@ -45,7 +45,7 @@ AWeaponKnife::AWeaponKnife()
 		StaticMesh->SetRelativeScale3D(FVector(0.75f, 0.75f, 0.75f));
 	}
 
-	// StarterContent “à‚Ì P_Explosion‚ÉQÆ‚ğİ’è
+	// StarterContent å†…ã® P_Explosionã«å‚ç…§ã‚’è¨­å®š
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> DefaultExplosionEffect(TEXT("/Game/StarterContent/Particles/P_Explosion.P_Explosion"));
 	if (DefaultExplosionEffect.Succeeded())
 	{
@@ -81,10 +81,10 @@ void AWeaponKnife::EndPlay(const EEndPlayReason::Type EndPlayReason)
 
 	if (bIsLifeTimeEnd)
 	{
-		// ©“®Á–Å‚Íƒp[ƒeƒBƒNƒ‹‚ğo‚³‚È‚¢
+		// è‡ªå‹•æ¶ˆæ»…æ™‚ã¯ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’å‡ºã•ãªã„
 		return;
 	}
-	// ƒp[ƒeƒBƒNƒ‹
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 	FVector spawnLocation = GetActorLocation();
 	UGameplayStatics::SpawnEmitterAtLocation(this, ExplosionEffect, spawnLocation, FRotator::ZeroRotator, true, EPSCPoolMethod::AutoRelease);
 
@@ -107,7 +107,7 @@ void AWeaponKnife::Tick(float DeltaTime)
 }
 
 /// <summary>
-/// ©“®“I‚ÉÁ–Å‚·‚éƒ^ƒCƒ}[‚ğƒZƒbƒg
+/// è‡ªå‹•çš„ã«æ¶ˆæ»…ã™ã‚‹ã‚¿ã‚¤ãƒãƒ¼ã‚’ã‚»ãƒƒãƒˆ
 /// </summary>
 void AWeaponKnife::SetDestroyTimer()
 {
@@ -116,7 +116,7 @@ void AWeaponKnife::SetDestroyTimer()
 }
 
 /// <summary>
-/// ƒ‰ƒCƒtƒ^ƒCƒ€I—¹
+/// ãƒ©ã‚¤ãƒ•ã‚¿ã‚¤ãƒ çµ‚äº†æ™‚
 /// </summary>
 void AWeaponKnife::OnLifeTimeEnd()
 {

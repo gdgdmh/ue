@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "LoopShootWeaponBase.h"
@@ -16,7 +16,7 @@ ALoopShootWeaponBase::~ALoopShootWeaponBase()
 {
 }
 
-// ”­Ë‘Oˆ—
+// ç™ºå°„å‰å‡¦ç†
 void ALoopShootWeaponBase::ProcessShootBefore()
 {
 	ShootBeforeDispacher.Broadcast();

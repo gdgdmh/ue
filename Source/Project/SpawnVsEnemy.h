@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,23 +21,23 @@ protected:
 	virtual void BeginPlay() override { Super::BeginPlay(); }
 
 public:	
-	// ¶¬‚Å‚«‚È‚©‚Á‚½‚Æ‚«‚Ínullptr‚É‚È‚é‚Ì‚Å’ˆÓ
+	// ç”Ÿæˆã§ããªã‹ã£ãŸã¨ãã¯nullptrã«ãªã‚‹ã®ã§æ³¨æ„
 	TObjectPtr<AActor> Spawn(EEnemyType type, const FVector& Location, const FRotator& Rotation)
 	{
 		switch (type)
 		{
 		case EEnemyType::Bat:
 		{
-			// ƒpƒX‚ÍŒã‚Ù‚ÇDataTable‚È‚Ç‚ÅŠÇ—‚·‚é—\’è
+			// ãƒ‘ã‚¹ã¯å¾Œã»ã©DataTableãªã©ã§ç®¡ç†ã™ã‚‹äºˆå®š
 			FString AssetPath = TEXT("/Game/Project/AI/VSEnemy/BP_VSEnemyCharacter.BP_VSEnemyCharacter_C");
-			// ƒAƒZƒbƒg“Ç‚İ‚İ
+			// ã‚¢ã‚»ãƒƒãƒˆèª­ã¿è¾¼ã¿
 			TSubclassOf<AActor> ActorClass = TSoftClassPtr<AActor>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
 			FActorSpawnParameters ActorSpawnParameter;
-			// AIController‚ªSpawn‚µ‚È‚¢‚Æ‚«‚ÍAuto PossessAI‚ªPlaced in World or Spawned‚É‚È‚Á‚Ä‚¢‚é‚©Šm”F‚·‚é‚±‚Æ
-			// Placed in World‚¾‚Æ¶¬‚³‚ê‚È‚¢
+			// AIControllerãŒSpawnã—ãªã„ã¨ãã¯Auto PossessAIãŒPlaced in World or Spawnedã«ãªã£ã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹ã“ã¨
+			// Placed in Worldã ã¨ç”Ÿæˆã•ã‚Œãªã„
 			return GetWorld()->SpawnActor<AActor>(ActorClass, Location, Rotation, ActorSpawnParameter);
 		}
-		// ˆÈ‰º‚Í–¢À‘•
+		// ä»¥ä¸‹ã¯æœªå®Ÿè£…
 		case EEnemyType::Skeleton:
 			return nullptr;
 		case EEnemyType::Num:

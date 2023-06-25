@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "VsPlayerCharacter.h"
@@ -12,7 +12,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
-#include "InputMappingContext.h" // ’Ç‰Á
+#include "InputMappingContext.h" // è¿½åŠ 
 
 #include "WeaponKnife.h"
 
@@ -39,18 +39,18 @@ AVsPlayerCharacter::AVsPlayerCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
 	// Create a camera boom (pulls in towards the player if there is a collision)
-	//CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom")); // ProjectCharacter‚Å‚·‚Å‚É¶¬‚µ‚Ä‚¢‚é‚Ì‚Å•K—v‚È‚µ
+	//CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom")); // ProjectCharacterã§ã™ã§ã«ç”Ÿæˆã—ã¦ã„ã‚‹ã®ã§å¿…è¦ãªã—
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
 	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 
 	// Create a follow camera
-	//FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera")); // ProjectCharacter‚Å‚·‚Å‚É¶¬‚µ‚Ä‚¢‚é‚Ì‚Å•K—v‚È‚µ
+	//FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera")); // ProjectCharacterã§ã™ã§ã«ç”Ÿæˆã—ã¦ã„ã‚‹ã®ã§å¿…è¦ãªã—
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// ƒeƒXƒg
-	// Input Mapping Context‚ğ“Ç
+	// ãƒ†ã‚¹ãƒˆ
+	// Input Mapping Contextã‚’èª­è¾¼
 	DefaultMappingContext = LoadObject<UInputMappingContext>(NULL, TEXT("/Game/ThirdPerson/Input/IMC_Default"), NULL, LOAD_None, NULL);
 
 	ProjectileClass = AWeaponKnife::StaticClass();
@@ -74,7 +74,7 @@ void AVsPlayerCharacter::BeginPlay()
 		}
 	}
 
-	// ”­Ë
+	// ç™ºå°„
 	UWorld* World = GetWorld();
 	check(World);
 	{
@@ -170,7 +170,7 @@ void AVsPlayerCharacter::StartFire()
 
 void AVsPlayerCharacter::StopFire()
 {
-    //ProjectCharacter‚Æ’è‹`‚©‚Ô‚è‚µ‚Ä‚¢‚é‚Ì‚Å‚¢‚Á‚½‚ñÁ‚·
+    //ProjectCharacterã¨å®šç¾©ã‹ã¶ã‚Šã—ã¦ã„ã‚‹ã®ã§ã„ã£ãŸã‚“æ¶ˆã™
     bIsFiringWeapon = false;
 }
 

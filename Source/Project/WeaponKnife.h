@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,7 +16,7 @@ public:
 	AWeaponKnife();
 
 private:
-    static const float LIFE_TIME;   // ”­Ë‚µ‚Ä‚©‚ç©“®‚ÅÁ‚¦‚éŠÔ
+    static const float LIFE_TIME;   // ç™ºå°„ã—ã¦ã‹ã‚‰è‡ªå‹•ã§æ¶ˆãˆã‚‹æ™‚é–“
 
 protected:
 	// Called when the game starts or when spawned

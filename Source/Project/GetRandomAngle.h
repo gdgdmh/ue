@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -6,8 +6,8 @@
 
 enum class EGetRandomAngleNum : uint16
 {
-	Min = 0				UMETA(DisplayName = "Å¬’l", ToolTip = "0:Å¬’l"),
-	Max = 360			UMETA(DisplayName = "Å‘å’l", ToolTip = "1:Å‘å’l"),
+	Min = 0				UMETA(DisplayName = "æœ€å°å€¤", ToolTip = "0:æœ€å°å€¤"),
+	Max = 360			UMETA(DisplayName = "æœ€å¤§å€¤", ToolTip = "1:æœ€å¤§å€¤"),
 };
 
 /**

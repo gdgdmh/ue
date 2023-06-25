@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,7 +23,7 @@ public:
 
 	// override IShootTimerInterface
 public:
-	// ”­Ë‘Oˆ—
+	// ç™ºå°„å‰å‡¦ç†
 	virtual void ProcessShootBefore() override;
 
 public:
