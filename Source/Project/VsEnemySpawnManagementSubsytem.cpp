@@ -2,7 +2,7 @@
 
 
 #include "VsEnemySpawnManagementSubsytem.h"
-#include "VsWorldSettings.h"
+#include "ProjectWorldSettings.h"
 
 UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 {
@@ -18,9 +18,9 @@ bool UVsEnemySpawnManagementSubsytem::ShouldCreateSubsystem(UObject* Outer) cons
 	// WorldSetting上で使用フラグが立っていたら生成する
 	if (UGameInstance* GameInstance = Cast<UGameInstance>(Outer))
 	{
-		if (AVsWorldSettings* VsWorldSettings = Cast<AVsWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
+		if (AProjectWorldSettings* ProjectWorldSettings = Cast<AProjectWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
 		{
-			return VsWorldSettings->bUseEnemySpawnSubsystem;
+			return ProjectWorldSettings->bUseEnemySpawnSubsystem;
 		}
 	}
 	return false;
