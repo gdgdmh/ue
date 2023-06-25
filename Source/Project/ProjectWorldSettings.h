@@ -24,4 +24,7 @@ public:
 	UPROPERTY(EditAnyWhere)
 		bool bUseUserWidgetSubsystem;
 
+
+	UPROPERTY(EditAnyWhere)
+		bool bDummy;
 };

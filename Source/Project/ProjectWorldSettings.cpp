@@ -7,4 +7,5 @@ AProjectWorldSettings::AProjectWorldSettings()
 {
 	bUseEnemySpawnSubsystem = false;
 	bUseUserWidgetSubsystem = true;
+	bDummy = false;
 }
