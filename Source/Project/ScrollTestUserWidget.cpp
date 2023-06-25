@@ -13,6 +13,7 @@ void UScrollTestUserWidget::NativeConstruct()
 
 void UScrollTestUserWidget::Set()
 {
+	Clear();
 	{
 		TestDataTables.Empty();
 		// DataTable読み込み
@@ -56,16 +57,16 @@ void UScrollTestUserWidget::Set()
 		TObjectPtr<UBalloonUserWidget> Balloon = CreateWidget<UBalloonUserWidget>(GetWorld(), TempWidgetClass);
 		if (Balloon)
 		{
-
+			// Viewportの追加、Subsystemへの追加
 			Balloon->AddToViewport(20);
 			Balloon->AddUserWidgetSubsytem();
+			// スクロールBoxにも追加
 			DynamicScrollBox->AddChild(Balloon);
+			BalloonUserWidgets.Add(Balloon);
 			// このタイミングで初期化しないとNativeConstructが呼ばれてしまうことがあるので適用されない
 			Balloon->SetText(TestDataTables[i].Name);
 		}
 	}
-
-
 
 #if 0
 	// 動的にボタンを追加
@@ -88,6 +89,22 @@ void UScrollTestUserWidget::Set()
 		Balloon->SetData();
 	}
 #endif
+}
+
+void UScrollTestUserWidget::Clear()
+{
+	TestDataTables.Empty();
+
+	// ViewportとSubsytemから削除
+	int32 Size = BalloonUserWidgets.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		BalloonUserWidgets[i]->RemoveFromViewport();
+		BalloonUserWidgets[i]->RemoveUserWidgetSubsystem();
+	}
+	BalloonUserWidgets.Empty();
+	
+
 }
 
 void UScrollTestUserWidget::OnEventUserScrolled()

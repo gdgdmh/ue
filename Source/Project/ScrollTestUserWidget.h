@@ -35,6 +35,8 @@ protected:
 
 	void Set();
 
+	void Clear();
+
 public:
 
 	UFUNCTION(BlueprintCallable)
@@ -47,6 +49,9 @@ private:
 
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<UScrollBox> DynamicScrollBox;
+
+	UPROPERTY()
+		TArray< TObjectPtr<UBalloonUserWidget> > BalloonUserWidgets;
 
 	UPROPERTY()
 		TArray<FScrollTestDataTable> TestDataTables;
