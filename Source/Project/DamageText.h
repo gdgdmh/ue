@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "VsUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "DamageText.generated.h"
 
 DECLARE_DELEGATE(FDamageTextAnimationFinishDelegate)
@@ -16,7 +16,7 @@ DECLARE_DELEGATE(FDamageTextAnimationFinishDelegate)
  * 
  */
 UCLASS()
-class PROJECT_API UDamageText : public UVsUserWidget
+class PROJECT_API UDamageText : public UProjectUserWidget
 {
 	GENERATED_BODY()
 	

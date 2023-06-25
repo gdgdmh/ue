@@ -2,7 +2,7 @@
 
 
 #include "VsUserWidgetSubsystem.h"
-#include "VsWorldSettings.h"
+#include "ProjectWorldSettings.h"
 
 UVsUserWidgetSubsystem::UVsUserWidgetSubsystem()
 {
@@ -17,9 +17,9 @@ bool UVsUserWidgetSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 	// WorldSetting上で使用フラグが立っていたら生成する
 	if (UGameInstance* GameInstance = Cast<UGameInstance>(Outer))
 	{
-		if (AVsWorldSettings* VsWorldSettings = Cast<AVsWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
+		if (AProjectWorldSettings* ProjectWorldSettings = Cast<AProjectWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
 		{
-			return VsWorldSettings->bUseVsUserWidgetSubsystem;
+			return ProjectWorldSettings->bUseUserWidgetSubsystem;
 		}
 	}
 	return false;
@@ -40,14 +40,14 @@ void UVsUserWidgetSubsystem::Deinitialize()
 	UE_LOG(LogTemp, Log, TEXT("UVsUserWidgetSubsystem::Deinitialize"));
 }
 
-void UVsUserWidgetSubsystem::Add(TObjectPtr<UVsUserWidget> VsUserWidget)
+void UVsUserWidgetSubsystem::Add(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
 {
-	VsUserWidgets.Add(VsUserWidget);
+	VsUserWidgets.Add(ProjectUserWidget);
 }
 
-void UVsUserWidgetSubsystem::Remove(TObjectPtr<UVsUserWidget> VsUserWidget)
+void UVsUserWidgetSubsystem::Remove(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
 {
-	VsUserWidgets.Remove(VsUserWidget);
+	VsUserWidgets.Remove(ProjectUserWidget);
 }
 
 void UVsUserWidgetSubsystem::Clear()

@@ -1,15 +1,15 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "VsUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "VsUserWidgetSubsystem.h"
 
-UVsUserWidget::UVsUserWidget(const FObjectInitializer& ObjectInitializer)
+UProjectUserWidget::UProjectUserWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 }
 
-void UVsUserWidget::AddUserWidgetSubsytem()
+void UProjectUserWidget::AddUserWidgetSubsytem()
 {
 	if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
 	{
@@ -20,7 +20,7 @@ void UVsUserWidget::AddUserWidgetSubsytem()
 	}
 }
 
-void UVsUserWidget::RemoveUserWidgetSubsystem()
+void UProjectUserWidget::RemoveUserWidgetSubsystem()
 {
 	if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
 	{

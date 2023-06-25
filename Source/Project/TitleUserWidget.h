@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "VsUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "Components/Button.h"
 #include "TitleUserWidget.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class PROJECT_API UTitleUserWidget : public UVsUserWidget
+class PROJECT_API UTitleUserWidget : public UProjectUserWidget
 {
 	GENERATED_BODY()
 	

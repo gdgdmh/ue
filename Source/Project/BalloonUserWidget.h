@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "VsUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "BalloonUserWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API UBalloonUserWidget : public UVsUserWidget
+class PROJECT_API UBalloonUserWidget : public UProjectUserWidget
 {
 	GENERATED_BODY()
 	

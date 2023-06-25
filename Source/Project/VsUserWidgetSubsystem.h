@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
-#include "VsUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "VsUserWidgetSubsystem.generated.h"
 
 /**
@@ -25,10 +25,10 @@ public:
 	virtual void Deinitialize() override;
 
 public:
-	void Add(TObjectPtr<UVsUserWidget> VsUserWidget);
-	void Remove(TObjectPtr<UVsUserWidget> VsUserWidget);
+	void Add(TObjectPtr<UProjectUserWidget> ProjectUserWidget);
+	void Remove(TObjectPtr<UProjectUserWidget> ProjectUserWidget);
 	void Clear();
 
 private:
-	TArray< TObjectPtr<UVsUserWidget> > VsUserWidgets;
+	TArray< TObjectPtr<UProjectUserWidget> > VsUserWidgets;
 };

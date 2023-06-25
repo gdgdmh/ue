@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "VsUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "Components/ScrollBox.h"
 #include "Engine/DataTable.h"
 #include "ScrollTestUserWidget.generated.h"
@@ -25,7 +25,7 @@ public:
  * 
  */
 UCLASS()
-class PROJECT_API UScrollTestUserWidget : public UVsUserWidget
+class PROJECT_API UScrollTestUserWidget : public UProjectUserWidget
 {
 	GENERATED_BODY()
 	
