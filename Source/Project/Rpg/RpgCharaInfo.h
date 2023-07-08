@@ -18,6 +18,7 @@ protected:
 	virtual void NativeConstruct() override;
 
 
+	// bind
 public:
 	
 	UPROPERTY(BlueprintReadWrite)
