@@ -3,7 +3,7 @@
 
 #include "ProjectRpgGameMode.h"
 #include "Rpg/RpgCharaInfo.h"
-#include "ScrollTestUserWidget.h" // Test
+#include "Rpg/RpgTitleUserWidget.h"
 
 AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -49,13 +49,34 @@ void AProjectRpgGameMode::BeginPlay()
 			return;
 		}
 
-		TObjectPtr<UProjectUserWidget> TitleWidget = CreateWidget<UProjectUserWidget>(GetWorld(), WidgetClass);
+		TObjectPtr<URpgTitleUserWidget> TitleWidget = CreateWidget<URpgTitleUserWidget>(GetWorld(), WidgetClass);
 		if (TitleWidget)
 		{
 			TitleWidget->AddToViewport(20);
 			TitleWidget->AddUserWidgetSubsytem();
+
+			TitleWidget->RpgTitleDelegate.BindLambda([this](ERpgTitleUserWidgetSelectType Type)
+			{
+				OnDelegateRpgTitleUserWidgetSelect(Type);
+			});
 		}
 
 	}
 
+}
+
+void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type)
+{
+	if (Type == ERpgTitleUserWidgetSelectType::Start)
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Start"));
+	}
+	else if (Type == ERpgTitleUserWidgetSelectType::Test)
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Test"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Unknown"));
+	}
 }

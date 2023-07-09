@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "ProjectGameModeBase.h"
+
+#include "Rpg/RpgTitleUserWidget.h"
+
 #include "ProjectRpgGameMode.generated.h"
 
 /**
@@ -18,4 +21,7 @@ public:
 	AProjectRpgGameMode(const FObjectInitializer& ObjectInitializer);
 
 	virtual void BeginPlay() override;
+
+public:
+	void OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type);
 };
