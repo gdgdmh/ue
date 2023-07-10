@@ -17,11 +17,40 @@ void AProjectRpgGameMode::BeginPlay()
 {
 	UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::BeginPlay"));
 	Super::BeginPlay();
+	// タイトルUIをセット
+	SetTitleUI();
+}
 
+void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type)
+{
+	// タイトルのDelegate(選択結果)
+	if (Type == ERpgTitleUserWidgetSelectType::Start)
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Start"));
+		// タイトルUIの削除
+		CleanupTitleUI();
+	}
+	else if (Type == ERpgTitleUserWidgetSelectType::Test)
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Test"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Unknown"));
+	}
+}
+
+void AProjectRpgGameMode::SetTitleUI()
+{
+	if (TitleProjectUserWidgets.Num() != 0)
+	{
+		// 初期化前に0以外なのはおかしい
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::BeginPlay TitleProjectUserWidgets != 0"));
+	}
+
+	// RootのWBP
 	{
 		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Title/WBP_RpgTitleRoot.WBP_RpgTitleRoot_C");
-		//FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/WBP_RpgRoot.WBP_RpgRoot_C");
-		//FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_ScrollTest.WBP_ScrollTest_C");
 		TSubclassOf<class UUserWidget> WidgetClass;
 		WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
 		if (!WidgetClass)
@@ -35,10 +64,11 @@ void AProjectRpgGameMode::BeginPlay()
 		{
 			RootWidget->AddToViewport(20);
 			RootWidget->AddUserWidgetSubsytem();
+			TitleProjectUserWidgets.Add(RootWidget);
 		}
 	}
 
-	// 
+	// タイトルメインWBP
 	{
 		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Title/WBP_RpgTitle.WBP_RpgTitle_C");
 		TSubclassOf<class UUserWidget> WidgetClass;
@@ -54,29 +84,28 @@ void AProjectRpgGameMode::BeginPlay()
 		{
 			TitleWidget->AddToViewport(20);
 			TitleWidget->AddUserWidgetSubsytem();
+			TitleProjectUserWidgets.Add(TitleWidget);
 
 			TitleWidget->RpgTitleDelegate.BindLambda([this](ERpgTitleUserWidgetSelectType Type)
-			{
-				OnDelegateRpgTitleUserWidgetSelect(Type);
-			});
+				{
+					OnDelegateRpgTitleUserWidgetSelect(Type);
+				});
 		}
-
 	}
-
 }
 
-void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type)
+void AProjectRpgGameMode::CleanupTitleUI()
 {
-	if (Type == ERpgTitleUserWidgetSelectType::Start)
+	// 登録とは逆順にViewportから開放&サブシステムから削除
+	for (int32 i = TitleProjectUserWidgets.Num() - 1; i >= 0; --i)
 	{
-		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Start"));
+		if ((i < 0) || (i >= TitleProjectUserWidgets.Num()))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("AProjectRpgGameMode::CleanupTitleUI index error"));
+			continue;
+		}
+		TitleProjectUserWidgets[i]->RemoveFromParent();
+		TitleProjectUserWidgets[i]->RemoveUserWidgetSubsystem();
 	}
-	else if (Type == ERpgTitleUserWidgetSelectType::Test)
-	{
-		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Test"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Unknown"));
-	}
+	TitleProjectUserWidgets.Empty();
 }

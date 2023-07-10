@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "ProjectGameModeBase.h"
 
+#include "ProjectUserWidget.h"
 #include "Rpg/RpgTitleUserWidget.h"
 
 #include "ProjectRpgGameMode.generated.h"
@@ -24,4 +25,14 @@ public:
 
 public:
 	void OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type);
+
+private:
+	void SetTitleUI();
+	void CleanupTitleUI();
+
+private:
+	// ƒ^ƒCƒgƒ‹‚ÌUserWidget‚Ü‚Æ‚ß
+	UPROPERTY()
+		TArray< TObjectPtr<UProjectUserWidget> > TitleProjectUserWidgets;
+
 };
