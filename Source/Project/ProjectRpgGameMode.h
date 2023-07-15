@@ -31,8 +31,17 @@ private:
 	void CleanupTitleUI();
 
 private:
+	void SetMainUI();
+	void CleanupMainUI();
+	
+
+private:
 	// ƒ^ƒCƒgƒ‹‚ÌUserWidget‚Ü‚Æ‚ß
 	UPROPERTY()
 		TArray< TObjectPtr<UProjectUserWidget> > TitleProjectUserWidgets;
+
+private:
+	UPROPERTY()
+		TArray< TObjectPtr<UProjectUserWidget> > MainProjectUserWidgets;
 
 };

@@ -4,6 +4,7 @@
 #include "ProjectRpgGameMode.h"
 #include "Rpg/RpgCharaInfo.h"
 #include "Rpg/RpgTitleUserWidget.h"
+#include "Rpg/RpgMainUserWidget.h"
 
 AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -29,6 +30,8 @@ void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidget
 		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Start"));
 		// タイトルUIの削除
 		CleanupTitleUI();
+		// メインUIのセット
+		SetMainUI();
 	}
 	else if (Type == ERpgTitleUserWidgetSelectType::Test)
 	{
@@ -108,4 +111,62 @@ void AProjectRpgGameMode::CleanupTitleUI()
 		TitleProjectUserWidgets[i]->RemoveUserWidgetSubsystem();
 	}
 	TitleProjectUserWidgets.Empty();
+}
+
+void AProjectRpgGameMode::SetMainUI()
+{
+	if (MainProjectUserWidgets.Num() != 0)
+	{
+		// 初期化前に0以外なのはおかしい
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::SetMainUI MainProjectUserWidgets != 0"));
+	}
+
+	///Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMainRoot.WBP_RpgMainRoot'
+
+	///Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMain.WBP_RpgMain'
+
+	// RootのWBP
+	{
+		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMainRoot.WBP_RpgMainRoot_C");
+		TSubclassOf<class UUserWidget> WidgetClass;
+		WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
+		if (!WidgetClass)
+		{
+			UE_LOG(LogTemp, Log, TEXT("widget load failure"));
+			return;
+		}
+
+		TObjectPtr<UProjectUserWidget> RootWidget = CreateWidget<UProjectUserWidget>(GetWorld(), WidgetClass);
+		if (RootWidget)
+		{
+			RootWidget->AddToViewport(20);
+			RootWidget->AddUserWidgetSubsytem();
+			MainProjectUserWidgets.Add(RootWidget);
+		}
+	}
+
+	// Main WBP
+	{
+		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMain.WBP_RpgMain_C");
+		TSubclassOf<class UUserWidget> WidgetClass;
+		WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
+		if (!WidgetClass)
+		{
+			UE_LOG(LogTemp, Log, TEXT("widget load failure"));
+			return;
+		}
+
+		TObjectPtr<URpgMainUserWidget> MainWidget = CreateWidget<URpgMainUserWidget>(GetWorld(), WidgetClass);
+		if (MainWidget)
+		{
+			MainWidget->AddToViewport(20);
+			MainWidget->AddUserWidgetSubsytem();
+			MainProjectUserWidgets.Add(MainWidget);
+		}
+
+	}
+}
+
+void AProjectRpgGameMode::CleanupMainUI()
+{
 }

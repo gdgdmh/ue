@@ -28,7 +28,6 @@ class PROJECT_API URpgTitleUserWidget : public UProjectUserWidget
 
 protected:
 	virtual void NativeConstruct() override;
-
 public:
 	UFUNCTION(BlueprintCallable)
 		void OnClickedEventStartButton();
