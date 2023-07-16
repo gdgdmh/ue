@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "ProjectRpgGameMode.h"
@@ -18,19 +18,19 @@ void AProjectRpgGameMode::BeginPlay()
 {
 	UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::BeginPlay"));
 	Super::BeginPlay();
-	// ƒ^ƒCƒgƒ‹UI‚ğƒZƒbƒg
+	// ã‚¿ã‚¤ãƒˆãƒ«UIã‚’ã‚»ãƒƒãƒˆ
 	SetTitleUI();
 }
 
 void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type)
 {
-	// ƒ^ƒCƒgƒ‹‚ÌDelegate(‘I‘ğŒ‹‰Ê)
+	// ã‚¿ã‚¤ãƒˆãƒ«ã®Delegate(é¸æŠçµæœ)
 	if (Type == ERpgTitleUserWidgetSelectType::Start)
 	{
 		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Start"));
-		// ƒ^ƒCƒgƒ‹UI‚Ìíœ
+		// ã‚¿ã‚¤ãƒˆãƒ«UIã®å‰Šé™¤
 		CleanupTitleUI();
-		// ƒƒCƒ“UI‚ÌƒZƒbƒg
+		// ãƒ¡ã‚¤ãƒ³UIã®ã‚»ãƒƒãƒˆ
 		SetMainUI();
 	}
 	else if (Type == ERpgTitleUserWidgetSelectType::Test)
@@ -47,11 +47,11 @@ void AProjectRpgGameMode::SetTitleUI()
 {
 	if (TitleProjectUserWidgets.Num() != 0)
 	{
-		// ‰Šú‰»‘O‚É0ˆÈŠO‚È‚Ì‚Í‚¨‚©‚µ‚¢
+		// åˆæœŸåŒ–å‰ã«0ä»¥å¤–ãªã®ã¯ãŠã‹ã—ã„
 		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::BeginPlay TitleProjectUserWidgets != 0"));
 	}
 
-	// Root‚ÌWBP
+	// Rootã®WBP
 	{
 		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Title/WBP_RpgTitleRoot.WBP_RpgTitleRoot_C");
 		TSubclassOf<class UUserWidget> WidgetClass;
@@ -71,7 +71,7 @@ void AProjectRpgGameMode::SetTitleUI()
 		}
 	}
 
-	// ƒ^ƒCƒgƒ‹ƒƒCƒ“WBP
+	// ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ã‚¤ãƒ³WBP
 	{
 		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Title/WBP_RpgTitle.WBP_RpgTitle_C");
 		TSubclassOf<class UUserWidget> WidgetClass;
@@ -99,7 +99,7 @@ void AProjectRpgGameMode::SetTitleUI()
 
 void AProjectRpgGameMode::CleanupTitleUI()
 {
-	// “o˜^‚Æ‚Í‹t‡‚ÉViewport‚©‚çŠJ•ú&ƒTƒuƒVƒXƒeƒ€‚©‚çíœ
+	// ç™»éŒ²ã¨ã¯é€†é †ã«Viewportã‹ã‚‰é–‹æ”¾&ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã‹ã‚‰å‰Šé™¤
 	for (int32 i = TitleProjectUserWidgets.Num() - 1; i >= 0; --i)
 	{
 		if ((i < 0) || (i >= TitleProjectUserWidgets.Num()))
@@ -117,7 +117,7 @@ void AProjectRpgGameMode::SetMainUI()
 {
 	if (MainProjectUserWidgets.Num() != 0)
 	{
-		// ‰Šú‰»‘O‚É0ˆÈŠO‚È‚Ì‚Í‚¨‚©‚µ‚¢
+		// åˆæœŸåŒ–å‰ã«0ä»¥å¤–ãªã®ã¯ãŠã‹ã—ã„
 		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::SetMainUI MainProjectUserWidgets != 0"));
 	}
 
@@ -125,7 +125,7 @@ void AProjectRpgGameMode::SetMainUI()
 
 	///Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMain.WBP_RpgMain'
 
-	// Root‚ÌWBP
+	// Rootã®WBP
 	{
 		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMainRoot.WBP_RpgMainRoot_C");
 		TSubclassOf<class UUserWidget> WidgetClass;
