@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -17,12 +17,20 @@ class PROJECT_API URpgBattleCharacterParameter : public UObject
 public:
 	URpgBattleCharacterParameter();
 
+	void NormalizeHp();
+	void NormalizeSp();
+
 public:
 	UPROPERTY(BlueprintReadWrite)
 		int32 Hp;
 
 	UPROPERTY(BlueprintReadWrite)
+		int32 MaxHp;
+
+	UPROPERTY(BlueprintReadWrite)
 		int32 Sp;
 
+	UPROPERTY(BlueprintReadWrite)
+		int32 MaxSp;
 
 };
