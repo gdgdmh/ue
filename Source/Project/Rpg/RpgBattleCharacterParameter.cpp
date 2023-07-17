@@ -3,8 +3,15 @@
 
 #include "RpgBattleCharacterParameter.h"
 
-URpgBattleCharacterParameter::URpgBattleCharacterParameter() : Hp(0), Sp(0)
+URpgBattleCharacterParameter::URpgBattleCharacterParameter(const FObjectInitializer& ObjectInitializer) :
+	Hp(0)
+	, MaxHp(0)
+	, Sp(0)
+	, MaxSp(0)
+	, AttackPower(0)
+	, DefencePower(0)
 {
+	Status = NewObject<URpgBattleStatus>();
 }
 
 void URpgBattleCharacterParameter::NormalizeHp()
