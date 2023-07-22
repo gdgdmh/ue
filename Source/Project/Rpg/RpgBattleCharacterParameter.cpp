@@ -4,7 +4,8 @@
 #include "RpgBattleCharacterParameter.h"
 
 URpgBattleCharacterParameter::URpgBattleCharacterParameter(const FObjectInitializer& ObjectInitializer) :
-	Hp(0)
+	Super(ObjectInitializer)
+	, Hp(0)
 	, MaxHp(0)
 	, Sp(0)
 	, MaxSp(0)

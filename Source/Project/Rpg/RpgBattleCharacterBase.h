@@ -1,0 +1,25 @@
+﻿// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "RpgBattleCharacterParameter.h"
+#include "RpgBattleCharacterBase.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class PROJECT_API URpgBattleCharacterBase : public UObject
+{
+	GENERATED_BODY()
+	
+public:
+	URpgBattleCharacterBase(const FObjectInitializer& ObjectInitializer);
+
+
+public:
+	UPROPERTY(EditAnywhere)
+		TWeakObjectPtr<URpgBattleCharacterParameter> BattleCharactaerParameter;
+};
