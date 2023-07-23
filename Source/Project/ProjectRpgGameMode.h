@@ -8,6 +8,8 @@
 #include "ProjectUserWidget.h"
 #include "Rpg/RpgTitleUserWidget.h"
 
+#include "Rpg/RpgBattleParty.h"
+
 #include "ProjectRpgGameMode.generated.h"
 
 /**
@@ -44,4 +46,6 @@ private:
 	UPROPERTY()
 		TArray< TObjectPtr<UProjectUserWidget> > MainProjectUserWidgets;
 
+	UPROPERTY()
+		TWeakObjectPtr<URpgBattleParty> OwnParty;
 };

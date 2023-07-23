@@ -115,6 +115,12 @@ void AProjectRpgGameMode::CleanupTitleUI()
 
 void AProjectRpgGameMode::SetMainUI()
 {
+	// 初期化
+	{
+		OwnParty = NewObject<URpgBattleParty>();
+
+	}
+
 	if (MainProjectUserWidgets.Num() != 0)
 	{
 		// 初期化前に0以外なのはおかしい
