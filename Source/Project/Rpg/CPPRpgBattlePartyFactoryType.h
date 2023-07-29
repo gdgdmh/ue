@@ -9,10 +9,10 @@
 * パーティ生成タイプ
 */
 UENUM(BlueprintType)
-enum class EBattlePartyFactoryType : uint8
+enum class ERpgBattlePartyFactoryType : uint8
 {
 	Normal			UMETA(DisplayName = "通常",		ToolTip = "通常"),
 	Test			UMETA(DisplayName = "テスト",	ToolTip = "テスト"),
 	Num				UMETA(Hidden)
 };
-ENUM_RANGE_BY_COUNT(EBattlePartyFactoryType, EBattlePartyFactoryType::Num)
+ENUM_RANGE_BY_COUNT(ERpgBattlePartyFactoryType, ERpgBattlePartyFactoryType::Num)

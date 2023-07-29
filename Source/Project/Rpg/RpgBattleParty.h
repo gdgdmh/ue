@@ -16,6 +16,7 @@ class PROJECT_API URpgBattleParty : public UObject
 	GENERATED_BODY()
 	
 public:
+	URpgBattleParty();
 	URpgBattleParty(const FObjectInitializer& ObjectInitializer);
 
 	void Add(const TWeakObjectPtr<URpgBattleCharacter>& Target);

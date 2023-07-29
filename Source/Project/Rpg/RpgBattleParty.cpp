@@ -3,6 +3,10 @@
 
 #include "RpgBattleParty.h"
 
+URpgBattleParty::URpgBattleParty()
+{
+}
+
 URpgBattleParty::URpgBattleParty(const FObjectInitializer& ObjectInitializer) :
 	Super(ObjectInitializer)
 {

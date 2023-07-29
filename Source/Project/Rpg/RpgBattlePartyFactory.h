@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "RpgBattleParty.h"
+#include "CPPRpgBattlePartyFactoryType.h"
 #include "RpgBattlePartyFactory.generated.h"
 
 /**
@@ -18,5 +19,5 @@ class PROJECT_API URpgBattlePartyFactory : public UObject
 public:
 	URpgBattlePartyFactory(const FObjectInitializer& ObjectInitializer);
 
-	URpgBattleParty Create();
+	TWeakObjectPtr<URpgBattleParty> Create(ERpgBattlePartyFactoryType Type);
 };
