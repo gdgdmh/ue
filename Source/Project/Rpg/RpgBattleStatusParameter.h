@@ -14,6 +14,13 @@ struct FRpgBattleStatusParameter
 {
 	GENERATED_BODY()
 public:
+	FRpgBattleStatusParameter()
+	{
+		Type = ERpgBattleStatusType::None;
+		Parameter1 = 0;
+		Parameter2 = 0;
+	}
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ERpgBattleStatusType Type;
 
@@ -22,5 +29,4 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 Parameter2;
-
 };

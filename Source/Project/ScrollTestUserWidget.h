@@ -15,6 +15,12 @@ struct FScrollTestDataTable : public FTableRowBase
 	GENERATED_BODY()
 
 public:
+	FScrollTestDataTable()
+	{
+		Rank = 0;
+		Name = FText::FromString("");
+	}
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 Rank;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
