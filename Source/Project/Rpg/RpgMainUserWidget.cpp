@@ -5,4 +5,5 @@
 
 void URpgMainUserWidget::NativeConstruct()
 {
+	Super::NativeConstruct();
 }

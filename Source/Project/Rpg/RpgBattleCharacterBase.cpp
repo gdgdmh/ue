@@ -7,3 +7,13 @@ URpgBattleCharacterBase::URpgBattleCharacterBase(const FObjectInitializer& Objec
 {
 	BattleCharactaerParameter = NewObject<URpgBattleCharacterParameter>();
 }
+
+void URpgBattleCharacterBase::SetParameter(const URpgBattleCharacterParameter& Parameter)
+{
+	BattleCharactaerParameter.Get()->Copy(Parameter);
+}
+
+void URpgBattleCharacterBase::OutputLog()
+{
+	BattleCharactaerParameter.Get()->OutputLog();
+}

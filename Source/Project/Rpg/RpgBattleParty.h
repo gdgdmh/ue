@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "RpgBattleCharacter.h"
+#include "RpgBattleCharacterBase.h"
 #include "RpgBattleParty.generated.h"
 
 /**
@@ -19,14 +19,16 @@ public:
 	URpgBattleParty();
 	URpgBattleParty(const FObjectInitializer& ObjectInitializer);
 
-	void Add(const TWeakObjectPtr<URpgBattleCharacter>& Target);
+	void Add(const TWeakObjectPtr<URpgBattleCharacterBase>& Target);
 
-	void Remove(const TWeakObjectPtr<URpgBattleCharacter>& Target);
+	void Remove(const TWeakObjectPtr<URpgBattleCharacterBase>& Target);
 
 	void Clear();
+
+	void OutputLog();
 
 public:
 
 	UPROPERTY()
-		TArray<TWeakObjectPtr<URpgBattleCharacter> > Characters; // 複数のキャラクター
+		TArray<TWeakObjectPtr<URpgBattleCharacterBase> > Characters; // 複数のキャラクター
 };

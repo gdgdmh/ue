@@ -18,6 +18,9 @@ class PROJECT_API URpgBattleCharacterBase : public UObject
 public:
 	URpgBattleCharacterBase(const FObjectInitializer& ObjectInitializer);
 
+	void SetParameter(const URpgBattleCharacterParameter& Parameter);
+
+	void OutputLog();
 
 public:
 	UPROPERTY(EditAnywhere)

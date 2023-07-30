@@ -5,6 +5,7 @@
 
 void URpgTitleUserWidget::NativeConstruct()
 {
+	Super::NativeConstruct();
 }
 
 void URpgTitleUserWidget::OnClickedEventStartButton()

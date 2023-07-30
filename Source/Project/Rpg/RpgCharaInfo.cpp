@@ -5,4 +5,5 @@
 
 void URpgCharaInfo::NativeConstruct()
 {
+	Super::NativeConstruct();
 }

@@ -6,6 +6,9 @@
 #include "Rpg/RpgTitleUserWidget.h"
 #include "Rpg/RpgMainUserWidget.h"
 
+#include "Rpg/RpgBattlePartyFactory.h"
+
+
 AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -117,8 +120,9 @@ void AProjectRpgGameMode::SetMainUI()
 {
 	// 初期化
 	{
-		OwnParty = NewObject<URpgBattleParty>();
-
+		TWeakObjectPtr<URpgBattlePartyFactory> Factory = NewObject<URpgBattlePartyFactory>();
+		AllyParty = Factory->Create(ERpgBattlePartyFactoryType::Test);
+		EnemyParty = Factory->Create(ERpgBattlePartyFactoryType::TestEnemy);
 	}
 
 	if (MainProjectUserWidgets.Num() != 0)

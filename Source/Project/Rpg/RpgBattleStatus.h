@@ -20,6 +20,10 @@ public:
 
 	void Reset();
 
+	void Copy(const URpgBattleStatus& Source);
+
+	void OutputLog();
+
 	/**
 	 * ステータスの重複チェック
 	 * true: 重複している
@@ -44,6 +48,8 @@ public:
 	* 重複したステータスは追加されない
 	*/
 	bool AddStatus(ERpgBattleStatusType Type);
+
+	bool AddStatusParameter(const FRpgBattleStatusParameter& Parameter);
 
 public:
 	TArray<FRpgBattleStatusParameter> Statuses; // 複数のステータスパラメーター

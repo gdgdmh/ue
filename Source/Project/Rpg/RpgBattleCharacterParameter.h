@@ -21,6 +21,15 @@ public:
 	void NormalizeHp();
 	void NormalizeSp();
 
+	void Copy(const URpgBattleCharacterParameter& Parameter);
+
+	void SetHp(int32 CurrentHp, int32 Max);
+	void SetSp(int32 CurrentSp, int32 Max);
+	void SetAttackPower(int32 Power);
+	void SetDefencePower(int32 Power);
+
+	void OutputLog();
+
 public:
 	// 現在のHP
 	UPROPERTY(BlueprintReadWrite)

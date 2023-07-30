@@ -30,3 +30,47 @@ void URpgBattleCharacterParameter::NormalizeSp()
 		Sp = MaxSp;
 	}
 }
+
+void URpgBattleCharacterParameter::Copy(const URpgBattleCharacterParameter& Parameter)
+{
+	Hp = Parameter.Hp;
+	MaxHp = Parameter.MaxHp;
+	Sp = Parameter.Sp;
+	MaxSp = Parameter.MaxSp;
+	AttackPower = Parameter.AttackPower;
+	DefencePower = Parameter.DefencePower;
+	Status.Get()->Copy(*Parameter.Status.Get());
+}
+
+void URpgBattleCharacterParameter::SetHp(int32 CurrentHp, int32 Max)
+{
+	this->Hp = CurrentHp;
+	this->MaxHp = Max;
+
+	NormalizeHp();
+}
+
+void URpgBattleCharacterParameter::SetSp(int32 CurrentSp, int32 Max)
+{
+	this->Sp = CurrentSp;
+	this->MaxSp = Max;
+
+	NormalizeSp();
+}
+
+void URpgBattleCharacterParameter::SetAttackPower(int32 Power)
+{
+	this->AttackPower = Power;
+}
+
+void URpgBattleCharacterParameter::SetDefencePower(int32 Power)
+{
+	this->DefencePower = Power;
+}
+
+void URpgBattleCharacterParameter::OutputLog()
+{
+	UE_LOG(LogTemp, Log, TEXT("Hp:%d MaxHp:%d Sp:%d MaxSp:%d "), Hp, MaxHp, Sp, MaxSp);
+	UE_LOG(LogTemp, Log, TEXT("AttackPower:%d DefencePower:%d"), AttackPower, DefencePower);
+	Status.Get()->OutputLog();
+}

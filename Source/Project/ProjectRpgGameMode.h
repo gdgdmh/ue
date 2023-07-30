@@ -47,5 +47,8 @@ private:
 		TArray< TObjectPtr<UProjectUserWidget> > MainProjectUserWidgets;
 
 	UPROPERTY()
-		TWeakObjectPtr<URpgBattleParty> OwnParty;
+		TWeakObjectPtr<URpgBattleParty> AllyParty;
+
+	UPROPERTY()
+		TWeakObjectPtr<URpgBattleParty> EnemyParty;
 };
