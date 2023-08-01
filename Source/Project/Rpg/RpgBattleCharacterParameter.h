@@ -8,7 +8,8 @@
 #include "RpgBattleCharacterParameter.generated.h"
 
 /**
- * 
+ * 戦闘キャラパラメーター
+ * 変更する際にはFBattlePartyDataTableも変更すること
  */
 UCLASS()
 class PROJECT_API URpgBattleCharacterParameter : public UObject
@@ -55,4 +56,6 @@ public:
 	UPROPERTY(EditAnywhere)
 		TWeakObjectPtr<URpgBattleStatus> Status;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		FText Name;
 };

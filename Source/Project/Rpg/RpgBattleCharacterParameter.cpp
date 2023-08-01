@@ -13,6 +13,7 @@ URpgBattleCharacterParameter::URpgBattleCharacterParameter(const FObjectInitiali
 	, DefencePower(0)
 {
 	Status = NewObject<URpgBattleStatus>();
+	Name = FText::FromString("");
 }
 
 void URpgBattleCharacterParameter::NormalizeHp()
@@ -40,6 +41,7 @@ void URpgBattleCharacterParameter::Copy(const URpgBattleCharacterParameter& Para
 	AttackPower = Parameter.AttackPower;
 	DefencePower = Parameter.DefencePower;
 	Status.Get()->Copy(*Parameter.Status.Get());
+	Name = Parameter.Name;
 }
 
 void URpgBattleCharacterParameter::SetHp(int32 CurrentHp, int32 Max)
@@ -73,4 +75,5 @@ void URpgBattleCharacterParameter::OutputLog()
 	UE_LOG(LogTemp, Log, TEXT("Hp:%d MaxHp:%d Sp:%d MaxSp:%d "), Hp, MaxHp, Sp, MaxSp);
 	UE_LOG(LogTemp, Log, TEXT("AttackPower:%d DefencePower:%d"), AttackPower, DefencePower);
 	Status.Get()->OutputLog();
+	UE_LOG(LogTemp, Log, TEXT("Name:%s"), *Name.ToString());
 }
