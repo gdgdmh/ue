@@ -37,6 +37,12 @@ public:
 	bool CheckContains(ERpgBattleStatusType Type);
 
 	/**
+	 * そのステータスかどうか
+	 * true:どれかに一致するとき、通常は何もステータス一致しないときだけ返す
+	 */
+	bool IsState(ERpgBattleStatusType Type);
+
+	/**
 	 * ステータスの取得
 	 * CheckContainsでデータが存在することを確認してから取得すること
 	 * 存在しない場合はassertで止まる

@@ -10,14 +10,8 @@ URpgBattleStatus::URpgBattleStatus()
 
 void URpgBattleStatus::Reset()
 {
-	// 全てクリアしてNoneだけ設定
+	// 全てクリア
 	Statuses.Empty();
-
-	{
-		FRpgBattleStatusParameter Parameter;
-		Parameter.Type = ERpgBattleStatusType::None;
-		Statuses.Add(Parameter);
-	}
 }
 
 void URpgBattleStatus::Copy(const URpgBattleStatus& Source)
@@ -31,26 +25,13 @@ void URpgBattleStatus::Copy(const URpgBattleStatus& Source)
 
 void URpgBattleStatus::OutputLog()
 {
-	// 何もないパターン
-	if (Statuses.Num() == 0)
+	// 通常
+	if (Statuses.IsEmpty())
 	{
-		// 何もない状態は想定してない
-		UE_LOG(LogTemp, Log, TEXT("Status:Unknown"));
-		check(false);
-		return;
+		UE_LOG(LogTemp, Log, TEXT("Status:通常"));
 	}
 
-	// 通常しかないパターン
-	if (Statuses.Num() == 1)
-	{
-		if (CheckContains(ERpgBattleStatusType::None))
-		{
-			UE_LOG(LogTemp, Log, TEXT("Status:通常"));
-			return;
-		}
-	}
-
-	// 死亡しているパターン
+	// 死亡しているパターン(他の状態より優先)
 	if (CheckContains(ERpgBattleStatusType::Dead))
 	{
 		UE_LOG(LogTemp, Log, TEXT("Status:死亡"));
@@ -134,6 +115,19 @@ bool URpgBattleStatus::CheckContains(ERpgBattleStatusType Type)
 	return CheckDuplicate(Type);
 }
 
+bool URpgBattleStatus::IsState(ERpgBattleStatusType Type)
+{
+	if (Type == ERpgBattleStatusType::None)
+	{
+		if (Statuses.IsEmpty())
+		{
+			return true;
+		}
+		return false;
+	}
+	return CheckContains(Type);
+}
+
 FRpgBattleStatusParameter& URpgBattleStatus::GetStatus(ERpgBattleStatusType Type)
 {
 	for (FRpgBattleStatusParameter& Status : Statuses)
@@ -152,6 +146,12 @@ FRpgBattleStatusParameter& URpgBattleStatus::GetStatus(ERpgBattleStatusType Type
 
 bool URpgBattleStatus::AddStatus(ERpgBattleStatusType Type)
 {
+	if (Type == ERpgBattleStatusType::None)
+	{
+		// Noneは追加不可
+		return false;
+	}
+
 	// 重複ステータスなら何もしない
 	if (CheckDuplicate(Type))
 	{
@@ -167,6 +167,12 @@ bool URpgBattleStatus::AddStatus(ERpgBattleStatusType Type)
 
 bool URpgBattleStatus::AddStatusParameter(const FRpgBattleStatusParameter& Parameter)
 {
+	if (Parameter.Type == ERpgBattleStatusType::None)
+	{
+		// Noneは追加不可
+		return false;
+	}
+
 	// 重複ステータスなら何もしない
 	if (CheckDuplicate(Parameter.Type))
 	{
