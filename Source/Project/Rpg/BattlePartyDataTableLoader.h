@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -26,23 +26,23 @@ public:
 		Name = FText::FromString("");
 	}
 
-	// Œ»İ‚ÌHP
+	// ç¾åœ¨ã®HP
 	UPROPERTY(BlueprintReadWrite)
 		int32 Hp;
-	// Å‘åHP
+	// æœ€å¤§HP
 	UPROPERTY(BlueprintReadWrite)
 		int32 MaxHp;
-	// Œ»İ‚ÌSP
+	// ç¾åœ¨ã®SP
 	UPROPERTY(BlueprintReadWrite)
 		int32 Sp;
-	// Å‘åSP
+	// æœ€å¤§SP
 	UPROPERTY(BlueprintReadWrite)
 		int32 MaxSp;
-	// UŒ‚
+	// æ”»æ’ƒ
 	UPROPERTY(BlueprintReadWrite)
 		int32 AttackPower;
 
-	// –hŒä
+	// é˜²å¾¡
 	UPROPERTY(BlueprintReadWrite)
 		int32 DefencePower;
 
