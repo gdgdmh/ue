@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "RpgBattleStatus.h"
+#include "BattlePartyDataTable.h"
 #include "RpgBattleCharacterParameter.generated.h"
 
 /**
@@ -23,6 +24,7 @@ public:
 	void NormalizeSp();
 
 	void Copy(const URpgBattleCharacterParameter& Parameter);
+	void Copy(const FBattlePartyDataTable& PartyDataTable);
 
 	void SetHp(int32 CurrentHp, int32 Max);
 	void SetSp(int32 CurrentSp, int32 Max);

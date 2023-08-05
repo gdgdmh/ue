@@ -44,6 +44,18 @@ void URpgBattleCharacterParameter::Copy(const URpgBattleCharacterParameter& Para
 	Name = Parameter.Name;
 }
 
+void URpgBattleCharacterParameter::Copy(const FBattlePartyDataTable& PartyDataTable)
+{
+	Hp = PartyDataTable.Hp;
+	MaxHp = PartyDataTable.MaxHp;
+	Sp = PartyDataTable.Sp;
+	MaxSp = PartyDataTable.MaxSp;
+	AttackPower = PartyDataTable.AttackPower;
+	DefencePower = PartyDataTable.DefencePower;
+	Status.Get()->Copy(*PartyDataTable.Status.Get());
+	Name = PartyDataTable.Name;
+}
+
 void URpgBattleCharacterParameter::SetHp(int32 CurrentHp, int32 Max)
 {
 	this->Hp = CurrentHp;

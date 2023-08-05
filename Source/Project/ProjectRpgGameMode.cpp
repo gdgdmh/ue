@@ -6,6 +6,9 @@
 #include "Rpg/RpgTitleUserWidget.h"
 #include "Rpg/RpgMainUserWidget.h"
 
+#include "Rpg/BattlePartyDataTableLoader.h"
+#include "Rpg/BattlePartyDataTableConverter.h"
+
 #include "Rpg/RpgBattlePartyFactory.h"
 
 
@@ -118,12 +121,48 @@ void AProjectRpgGameMode::CleanupTitleUI()
 
 void AProjectRpgGameMode::SetMainUI()
 {
-	// 初期化
+	// パーティ作成のテスト
 	{
 		TWeakObjectPtr<URpgBattlePartyFactory> Factory = NewObject<URpgBattlePartyFactory>();
 		AllyParty = Factory->Create(ERpgBattlePartyFactoryType::Test);
 		EnemyParty = Factory->Create(ERpgBattlePartyFactoryType::TestEnemy);
 	}
+
+	// 味方パーティをデータテーブルから読み込み
+	{
+		TWeakObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
+		FString DataTablePath = "/Script/Engine.DataTable'/Game/Project/UI/DataTables/Rpg/DT_BattlePartyAlly.DT_BattlePartyAlly'";
+		TArray<FBattlePartyDataTable> PartyDataTable;
+		if (Loader.Get()->Load(DataTablePath, PartyDataTable))
+		{
+			// 読み込んだテーブルからパーティを作成
+			TWeakObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
+			AllyParty = Converter.Get()->Convert(PartyDataTable, ESideType::Ally);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Log, TEXT("BattlePartyDataTable Load Failure"));
+		}
+	}
+
+	// 敵パーティをデータテーブルから読み込み
+	{
+		TWeakObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
+		FString DataTablePath = "/Script/Engine.DataTable'/Game/Project/UI/DataTables/Rpg/DT_BattlePartyEnemy.DT_BattlePartyEnemy'";
+		TArray<FBattlePartyDataTable> PartyDataTable;
+		if (Loader.Get()->Load(DataTablePath, PartyDataTable))
+		{
+			// 読み込んだテーブルからパーティを作成
+			TWeakObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
+			EnemyParty = Converter.Get()->Convert(PartyDataTable, ESideType::Enemy);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Log, TEXT("BattlePartyDataTable Load Failure"));
+		}
+
+	}
+
 
 	if (MainProjectUserWidgets.Num() != 0)
 	{
