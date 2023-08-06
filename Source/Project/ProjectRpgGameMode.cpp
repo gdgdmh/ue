@@ -210,6 +210,9 @@ void AProjectRpgGameMode::SetMainUI()
 		{
 			MainWidget->AddToViewport(20);
 			MainWidget->AddUserWidgetSubsytem();
+
+			MainWidget->Set();
+
 			MainProjectUserWidgets.Add(MainWidget);
 		}
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "../ProjectUserWidget.h"
+#include "Components/HorizontalBox.h"
 #include "RpgMainUserWidget.generated.h"
 
 /**
@@ -16,4 +17,18 @@ class PROJECT_API URpgMainUserWidget : public UProjectUserWidget
 	
 protected:
 	virtual void NativeConstruct() override;
+
+public:
+	void Set();
+
+protected:
+	void CreateCharaInfoWidget();
+	void SetDummyCharaInfoParam();
+
+public:
+	UPROPERTY(Transient, meta = (BindWidget))
+		TObjectPtr<UHorizontalBox> AllyArea;
+
+	UPROPERTY()
+		TArray<TWeakObjectPtr<URpgCharaInfo> > RpgCharaInfos;
 };

@@ -17,6 +17,11 @@ class PROJECT_API URpgCharaInfo : public UProjectUserWidget
 protected:
 	virtual void NativeConstruct() override;
 
+public:
+	void SetName(const FText& Name);
+	void SetHp(int32 Hp);
+	void SetSp(int32 Sp);
+	void SetSt(const FText& Text);
 
 	// bind
 public:
