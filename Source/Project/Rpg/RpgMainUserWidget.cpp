@@ -9,7 +9,7 @@ void URpgMainUserWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	if (AllyArea.IsNull())
+	if (!AllyArea)
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgMainUserWidget::NativeConstruct null"));
 	}
