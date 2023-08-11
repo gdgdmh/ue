@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "BattlePartyManager.h"
@@ -26,7 +26,7 @@ void UBattlePartyManager::SetParty(TWeakObjectPtr<UBattlePartySide>&& Party)
 	{
 		EnemyParty = Party;
 	}
-	// ƒnƒ“ƒhƒŠƒ“ƒO‚³‚ê‚Ä‚È‚¢ƒ^ƒCƒv(V‹K’Ç‰Á‚ğ‚µ‚½‚¯‚Çˆ—‚ª‘‚©‚ê‚Ä‚È‚¢)
+	// ãƒãƒ³ãƒ‰ãƒªãƒ³ã‚°ã•ã‚Œã¦ãªã„ã‚¿ã‚¤ãƒ—(æ–°è¦è¿½åŠ ã‚’ã—ãŸã‘ã©å‡¦ç†ãŒæ›¸ã‹ã‚Œã¦ãªã„)
 	UE_LOG(LogTemp, Log, TEXT("Type Invalid"));
 	check(false);
 }
@@ -35,12 +35,12 @@ TWeakObjectPtr<UBattlePartySide> UBattlePartyManager::Get(ESideType Type)
 {
 	if (Type == ESideType::Ally)
 	{
-		check(AllyParty.Get()->GetType() == ESideType::Ally); // ”O‚Ì‚½‚ß‚ÉType‚ª‚¨‚©‚µ‚­‚È‚¢‚©ƒ`ƒFƒbƒN
+		check(AllyParty.Get()->GetType() == ESideType::Ally); // å¿µã®ãŸã‚ã«TypeãŒãŠã‹ã—ããªã„ã‹ãƒã‚§ãƒƒã‚¯
 		return AllyParty;
 	}
 	if (Type == ESideType::Enemy)
 	{
-		check(EnemyParty.Get()->GetType() == ESideType::Enemy);  // ”O‚Ì‚½‚ß‚ÉType‚ª‚¨‚©‚µ‚­‚È‚¢‚©ƒ`ƒFƒbƒN
+		check(EnemyParty.Get()->GetType() == ESideType::Enemy);  // å¿µã®ãŸã‚ã«TypeãŒãŠã‹ã—ããªã„ã‹ãƒã‚§ãƒƒã‚¯
 		return EnemyParty;
 	}
 	UE_LOG(LogTemp, Log, TEXT("Type Invalid"));

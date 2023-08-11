@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -9,7 +9,7 @@
 
 
 /**
- * ƒp[ƒeƒBƒf[ƒ^ƒe[ƒuƒ‹
+ * ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«
  */
 USTRUCT(BlueprintType)
 struct FBattlePartyDataTable : public FTableRowBase
@@ -48,23 +48,23 @@ public:
 		return false;
 	}
 
-	// Œ»İ‚ÌHP
+	// ç¾åœ¨ã®HP
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 Hp;
-	// Å‘åHP
+	// æœ€å¤§HP
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 MaxHp;
-	// Œ»İ‚ÌSP
+	// ç¾åœ¨ã®SP
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 Sp;
-	// Å‘åSP
+	// æœ€å¤§SP
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 MaxSp;
-	// UŒ‚
+	// æ”»æ’ƒ
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 AttackPower;
 
-	// –hŒä
+	// é˜²å¾¡
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 DefencePower;
 
