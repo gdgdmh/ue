@@ -9,8 +9,12 @@
 #include "Rpg/RpgTitleUserWidget.h"
 
 #include "Rpg/RpgBattleParty.h"
+#include "Rpg/RpgBattleManager.h"
 
 #include "ProjectRpgGameMode.generated.h"
+
+// 前方宣言
+class URpgMainUserWidget;
 
 /**
  * 
@@ -36,6 +40,10 @@ private:
 	void SetMainUI();
 	void CleanupMainUI();
 	
+	void InitializeBattleManager();
+
+private:
+	void RpgMainOnClickNextButton();
 
 private:
 	// タイトルのUserWidgetまとめ
@@ -43,12 +51,19 @@ private:
 		TArray< TObjectPtr<UProjectUserWidget> > TitleProjectUserWidgets;
 
 private:
+	// RpgMainのまとめ
 	UPROPERTY()
 		TArray< TObjectPtr<UProjectUserWidget> > MainProjectUserWidgets;
 
+	TObjectPtr<URpgMainUserWidget> RpgMainWidget;
+
+	// パーティ
 	UPROPERTY()
 		TWeakObjectPtr<URpgBattleParty> AllyParty;
 
 	UPROPERTY()
 		TWeakObjectPtr<URpgBattleParty> EnemyParty;
+	// バトルマネージャー
+	UPROPERTY()
+		TWeakObjectPtr<URpgBattleManager> BattleManager;
 };

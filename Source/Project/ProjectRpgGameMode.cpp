@@ -36,6 +36,10 @@ void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidget
 		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect Start"));
 		// タイトルUIの削除
 		CleanupTitleUI();
+
+		// 戦闘システム初期化
+		InitializeBattleManager();
+
 		// メインUIのセット
 		SetMainUI();
 	}
@@ -208,17 +212,63 @@ void AProjectRpgGameMode::SetMainUI()
 		TObjectPtr<URpgMainUserWidget> MainWidget = CreateWidget<URpgMainUserWidget>(GetWorld(), WidgetClass);
 		if (MainWidget)
 		{
+			RpgMainWidget = MainWidget;
 			MainWidget->AddToViewport(20);
 			MainWidget->AddUserWidgetSubsytem();
 
 			MainWidget->Set();
+			if (BattleManager.IsValid())
+			{
+				MainWidget->SetState(BattleManager.Get()->GetState());
+			}
+			MainWidget->GetClickNextButtonDelegate().BindLambda([this]
+			{
+				RpgMainOnClickNextButton();
+			});
 
 			MainProjectUserWidgets.Add(MainWidget);
 		}
-
 	}
+
+
+
 }
 
 void AProjectRpgGameMode::CleanupMainUI()
 {
+}
+
+void AProjectRpgGameMode::InitializeBattleManager()
+{
+	BattleManager = NewObject<URpgBattleManager>();
+	check(BattleManager.IsValid());
+}
+
+void AProjectRpgGameMode::RpgMainOnClickNextButton()
+{
+	check(BattleManager.IsValid());
+
+	// ログ表示&次のステータスに進める
+	{
+		FString LogText = TEXT("Next ");
+		LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		LogText += TEXT(" -> ");
+		bool bResult = BattleManager.Get()->NextState();
+		if (bResult)
+		{
+			// 次のステータスをログに設定
+			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		}
+		else
+		{
+			// 失敗したので現在のステータスを表示するように設定
+			LogText = TEXT("NextState Failure ");
+			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		}
+		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
+		// Widget表示も更新
+		RpgMainWidget->SetState(BattleManager.Get()->GetState());
+	}
+	//MainProjectUserWidgets
+	
 }

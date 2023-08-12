@@ -19,6 +19,13 @@ void URpgMainUserWidget::NativeConstruct()
 	}
 }
 
+void URpgMainUserWidget::OnClickedNextButton()
+{
+	UE_LOG(LogTemp, Log, TEXT("URpgMainUserWidget::OnClickedNextButton"));
+	// Delegate呼び出し
+	ClickNextButtonDelegate.ExecuteIfBound();
+}
+
 void URpgMainUserWidget::Set()
 {
 	for (int32 i = 0; i < 2; ++i)
@@ -26,6 +33,13 @@ void URpgMainUserWidget::Set()
 		CreateCharaInfoWidget();
 	}
 	SetDummyCharaInfoParam();
+	SetState(ERpgBattleProcessState::None);
+}
+
+void URpgMainUserWidget::SetState(ERpgBattleProcessState State)
+{
+	// ERpgBattleProcessStateを文字列に変換して設定
+	StateText = ToString(State);
 }
 
 void URpgMainUserWidget::CreateCharaInfoWidget()

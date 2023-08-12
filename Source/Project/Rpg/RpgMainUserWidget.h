@@ -4,8 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "../ProjectUserWidget.h"
+
 #include "Components/HorizontalBox.h"
+#include "CPPRpgBattleProcessState.h"
+
 #include "RpgMainUserWidget.generated.h"
+
+// Delegate
+// NextButtonが押されたときのDelegate
+DECLARE_DELEGATE(FRpgMainClickNextButtonDelegate)
 
 /**
  * 
@@ -19,7 +26,18 @@ protected:
 	virtual void NativeConstruct() override;
 
 public:
+	UFUNCTION(BlueprintCallable)
+		void OnClickedNextButton();
+
+public:
 	void Set();
+
+	void SetState(ERpgBattleProcessState State);
+
+	FRpgMainClickNextButtonDelegate& GetClickNextButtonDelegate()
+	{
+		return ClickNextButtonDelegate;
+	}
 
 protected:
 	void CreateCharaInfoWidget();
@@ -31,4 +49,12 @@ public:
 
 	UPROPERTY()
 		TArray<TWeakObjectPtr<URpgCharaInfo> > RpgCharaInfos;
+
+	// ステータスのテキスト(プロパティはBind)
+	UPROPERTY(Transient, meta = (BindWidget))
+		FText StateText;
+
+protected:
+	FRpgMainClickNextButtonDelegate ClickNextButtonDelegate;
+
 };
