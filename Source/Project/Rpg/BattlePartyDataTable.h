@@ -10,6 +10,7 @@
 
 /**
  * パーティデータテーブル
+ * 追加変更する際にはURpgBattleCharacterParameterも変更すること
  */
 USTRUCT(BlueprintType)
 struct FBattlePartyDataTable : public FTableRowBase
@@ -25,6 +26,7 @@ public:
 		MaxSp = 0;
 		AttackPower = 0;
 		DefencePower = 0;
+		Agility = 0;
 		InitializeStatus();
 		Name = FText::FromString("");
 	}
@@ -67,6 +69,10 @@ public:
 	// 防御
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 DefencePower;
+
+	// 素早さ
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		int32 Agility;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TWeakObjectPtr<URpgBattleStatus> Status;

@@ -30,6 +30,17 @@ public:
 	void SetSp(int32 CurrentSp, int32 Max);
 	void SetAttackPower(int32 Power);
 	void SetDefencePower(int32 Power);
+	void SetAgility(int32 AgilityValue);
+
+	int32 GetHp() const { return Hp; }
+	int32 GetMaxHp() const { return MaxHp; }
+	int32 GetSp() const { return Sp; }
+	int32 GetMaxSp() const { return MaxSp; }
+	int32 GetAttackPower() const { return AttackPower; }
+	int32 GetDefencePower() const { return DefencePower; }
+	int32 GetAgility() const { return Agility; }
+	URpgBattleStatus& GetStatus() const { return *Status; }
+	FText GetName() const { return Name; }
 
 	void OutputLog();
 
@@ -53,6 +64,9 @@ public:
 	// 防御
 	UPROPERTY(BlueprintReadWrite)
 		int32 DefencePower;
+
+	UPROPERTY(BlueprintReadWrite)
+		int32 Agility;
 
 	// ステータス
 	UPROPERTY(EditAnywhere)
