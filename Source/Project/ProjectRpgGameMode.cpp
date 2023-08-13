@@ -11,6 +11,11 @@
 
 #include "Rpg/RpgBattlePartyFactory.h"
 
+// --- test ---
+#include "Rpg/TurnOrderList.h"
+#include "Rpg/TurnOrderCalculator.h"
+// ---
+
 
 AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -170,6 +175,20 @@ void AProjectRpgGameMode::SetMainUI()
 		{
 			UE_LOG(LogTemp, Log, TEXT("BattlePartyDataTable Load Failure"));
 		}
+	}
+
+	// ターンソートのテスト
+	{
+		TWeakObjectPtr<UTurnOrderCalculator> Calc = NewObject<UTurnOrderCalculator>();
+		TWeakObjectPtr<UTurnOrderList> List = Calc.Get()->Calc(AllyParty, EnemyParty);
+
+		UE_LOG(LogTemp, Log, TEXT("--- SortTest Begin ---"));
+		const int32 Num = List.Get()->Size();
+		for (int32 i = 0; i < Num; ++i)
+		{
+			List.Get()->Get(i).Get()->OutputLog();
+		}
+		UE_LOG(LogTemp, Log, TEXT("--- SortTest End ---"));
 
 	}
 

@@ -20,6 +20,11 @@ public:
 
 	void SetParameter(const URpgBattleCharacterParameter& Parameter);
 
+	TWeakObjectPtr<URpgBattleCharacterParameter> GetParameter() const
+	{
+		return BattleCharactaerParameter;
+	}
+
 	void OutputLog();
 
 public:

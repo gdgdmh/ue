@@ -25,6 +25,12 @@ public:
 
 	void Clear();
 
+	const TArray<TWeakObjectPtr<URpgBattleCharacterBase> > GetList() const
+	{
+		return Characters;
+	}
+
+
 	void OutputLog();
 
 public:
