@@ -26,6 +26,7 @@ TWeakObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFa
 			Parameter.Get()->SetSp(0, 0);
 			Parameter.Get()->SetAttackPower(5);
 			Parameter.Get()->SetDefencePower(7);
+			Parameter.Get()->SetAgility(4);
 			Parameter.Get()->OutputLog();
 			TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*Parameter.Get(), ESideType::Ally);
 			Party.Get()->Add(CharacterBase);
@@ -40,6 +41,7 @@ TWeakObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFa
 			Parameter.Get()->SetSp(1, 1);
 			Parameter.Get()->SetAttackPower(3);
 			Parameter.Get()->SetDefencePower(5);
+			Parameter.Get()->SetAgility(1);
 			Parameter.Get()->OutputLog();
 			TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*Parameter.Get(), ESideType::Enemy);
 			CharacterBase->OutputLog();

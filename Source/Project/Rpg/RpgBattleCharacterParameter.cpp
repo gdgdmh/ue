@@ -11,6 +11,7 @@ URpgBattleCharacterParameter::URpgBattleCharacterParameter(const FObjectInitiali
 	, MaxSp(0)
 	, AttackPower(0)
 	, DefencePower(0)
+	, Agility(0)
 {
 	Status = NewObject<URpgBattleStatus>();
 	Name = FText::FromString("");
@@ -40,6 +41,7 @@ void URpgBattleCharacterParameter::Copy(const URpgBattleCharacterParameter& Para
 	MaxSp = Parameter.MaxSp;
 	AttackPower = Parameter.AttackPower;
 	DefencePower = Parameter.DefencePower;
+	Agility = Parameter.Agility;
 	Status.Get()->Copy(*Parameter.Status.Get());
 	Name = Parameter.Name;
 }
@@ -52,6 +54,7 @@ void URpgBattleCharacterParameter::Copy(const FBattlePartyDataTable& PartyDataTa
 	MaxSp = PartyDataTable.MaxSp;
 	AttackPower = PartyDataTable.AttackPower;
 	DefencePower = PartyDataTable.DefencePower;
+	Agility = PartyDataTable.Agility;
 	Status.Get()->Copy(*PartyDataTable.Status.Get());
 	Name = PartyDataTable.Name;
 }
@@ -82,10 +85,15 @@ void URpgBattleCharacterParameter::SetDefencePower(int32 Power)
 	this->DefencePower = Power;
 }
 
+void URpgBattleCharacterParameter::SetAgility(int32 AgilityValue)
+{
+	this->Agility = AgilityValue;
+}
+
 void URpgBattleCharacterParameter::OutputLog()
 {
 	UE_LOG(LogTemp, Log, TEXT("Hp:%d MaxHp:%d Sp:%d MaxSp:%d "), Hp, MaxHp, Sp, MaxSp);
-	UE_LOG(LogTemp, Log, TEXT("AttackPower:%d DefencePower:%d"), AttackPower, DefencePower);
+	UE_LOG(LogTemp, Log, TEXT("AttackPower:%d DefencePower:%d Agility:%d"), AttackPower, DefencePower, Agility);
 	Status.Get()->OutputLog();
 	UE_LOG(LogTemp, Log, TEXT("Name:%s"), *Name.ToString());
 }

@@ -127,12 +127,15 @@ void AProjectRpgGameMode::SetMainUI()
 {
 	// パーティ作成のテスト
 	{
+		UE_LOG(LogTemp, Log, TEXT("--- Party Factory Test Begin ---"));
 		TWeakObjectPtr<URpgBattlePartyFactory> Factory = NewObject<URpgBattlePartyFactory>();
 		AllyParty = Factory->Create(ERpgBattlePartyFactoryType::Test);
 		EnemyParty = Factory->Create(ERpgBattlePartyFactoryType::TestEnemy);
+		UE_LOG(LogTemp, Log, TEXT("--- Party Factory Test End ---"));
 	}
 
 	// 味方パーティをデータテーブルから読み込み
+	UE_LOG(LogTemp, Log, TEXT("--- DataTable Load Ally Party ---"));
 	{
 		TWeakObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
 		FString DataTablePath = "/Script/Engine.DataTable'/Game/Project/UI/DataTables/Rpg/DT_BattlePartyAlly.DT_BattlePartyAlly'";
@@ -142,6 +145,7 @@ void AProjectRpgGameMode::SetMainUI()
 			// 読み込んだテーブルからパーティを作成
 			TWeakObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
 			AllyParty = Converter.Get()->Convert(PartyDataTable, ESideType::Ally);
+			AllyParty->OutputLog();
 		}
 		else
 		{
@@ -150,6 +154,7 @@ void AProjectRpgGameMode::SetMainUI()
 	}
 
 	// 敵パーティをデータテーブルから読み込み
+	UE_LOG(LogTemp, Log, TEXT("--- DataTable Load Enemy Party ---"));
 	{
 		TWeakObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
 		FString DataTablePath = "/Script/Engine.DataTable'/Game/Project/UI/DataTables/Rpg/DT_BattlePartyEnemy.DT_BattlePartyEnemy'";
@@ -159,6 +164,7 @@ void AProjectRpgGameMode::SetMainUI()
 			// 読み込んだテーブルからパーティを作成
 			TWeakObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
 			EnemyParty = Converter.Get()->Convert(PartyDataTable, ESideType::Enemy);
+			EnemyParty->OutputLog();
 		}
 		else
 		{
@@ -167,16 +173,11 @@ void AProjectRpgGameMode::SetMainUI()
 
 	}
 
-
 	if (MainProjectUserWidgets.Num() != 0)
 	{
 		// 初期化前に0以外なのはおかしい
 		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::SetMainUI MainProjectUserWidgets != 0"));
 	}
-
-	///Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMainRoot.WBP_RpgMainRoot'
-
-	///Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMain.WBP_RpgMain'
 
 	// RootのWBP
 	{
