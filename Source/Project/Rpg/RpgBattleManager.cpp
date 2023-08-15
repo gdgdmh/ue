@@ -22,6 +22,48 @@ void URpgBattleManager::OutputTurn() const
 	TurnManager.Get()->OutputLog();
 }
 
+ESideType URpgBattleManager::GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase) const
+{
+	if (!CharacterBase.IsValid())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType CharacterInvalid"));
+		check(false);
+		return ESideType::Ally;
+	}
+
+	for (const auto Character : BattleParty.Get()->Get(ESideType::Ally).Get()->Get()->GetList())
+	{
+		if (!Character.IsValid())
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Party(Ally) CharacterInvalid"));
+			continue;
+		}
+
+		if (Character == CharacterBase)
+		{
+			return ESideType::Ally;
+		}
+	}
+
+	for (const auto Character : BattleParty.Get()->Get(ESideType::Enemy).Get()->Get()->GetList())
+	{
+		if (!Character.IsValid())
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Party(Enemy) CharacterInvalid"));
+			continue;
+		}
+
+		if (Character == CharacterBase)
+		{
+			return ESideType::Enemy;
+		}
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Character Not Found"));
+	check(false);
+	return ESideType::Ally;
+}
+
 // 次のステータスに進める
 bool URpgBattleManager::NextState()
 {

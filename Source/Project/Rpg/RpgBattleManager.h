@@ -33,6 +33,8 @@ public:
 	void SetTurn();
 	void OutputTurn() const;
 
+	ESideType GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
+
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
 	{

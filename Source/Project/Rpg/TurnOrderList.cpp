@@ -70,9 +70,9 @@ void UTurnOrderList::PopFront()
 void UTurnOrderList::OutputLog() const
 {
 	int32 Index = 0;
-	for (const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase : OrderList)
+	for (const TWeakObjectPtr<URpgBattleCharacterBase>& Character : OrderList)
 	{
-		if (!CharacterBase.IsValid())
+		if (!Character.IsValid())
 		{
 			UE_LOG(LogTemp, Log, TEXT("[%d] Invalid"), Index);
 			++Index;
@@ -80,6 +80,6 @@ void UTurnOrderList::OutputLog() const
 		}
 		UE_LOG(LogTemp, Log, TEXT("[%d]"), Index);
 		++Index;
-		CharacterBase.Get()->OutputLog();
+		Character.Get()->OutputLog();
 	}
 }

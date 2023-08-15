@@ -24,6 +24,8 @@ public:
 	void ResetTurnOrderList();
 	bool Set(TWeakObjectPtr<URpgBattleParty> AllyParty, TWeakObjectPtr<URpgBattleParty> EnemyParty);
 
+	
+
 	TWeakObjectPtr<UTurnOrderList> GetTurnOrderList();
 
 	void OutputLog() const;

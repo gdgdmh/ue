@@ -6,6 +6,7 @@
 #include "UObject/NoExportTypes.h"
 
 #include "RpgBattleCharacterBase.h"
+#include "BattlePartySide.h"
 
 #include "TurnOrderList.generated.h"
 
