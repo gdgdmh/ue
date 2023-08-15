@@ -178,18 +178,52 @@ void AProjectRpgGameMode::SetMainUI()
 	}
 
 	// ターンソートのテスト
+	/*
 	{
 		TWeakObjectPtr<UTurnOrderCalculator> Calc = NewObject<UTurnOrderCalculator>();
 		TWeakObjectPtr<UTurnOrderList> List = Calc.Get()->Calc(AllyParty, EnemyParty);
 
 		UE_LOG(LogTemp, Log, TEXT("--- SortTest Begin ---"));
-		const int32 Num = List.Get()->Size();
-		for (int32 i = 0; i < Num; ++i)
 		{
-			List.Get()->Get(i).Get()->OutputLog();
+			const int32 Num = List.Get()->Size();
+			for (int32 i = 0; i < Num; ++i)
+			{
+				List.Get()->Get(i).Get()->OutputLog();
+			}
 		}
 		UE_LOG(LogTemp, Log, TEXT("--- SortTest End ---"));
+		List.Get()->PopFront();
+		{
+			const int32 Num = List.Get()->Size();
+			for (int32 i = 0; i < Num; ++i)
+			{
+				List.Get()->Get(i).Get()->OutputLog();
+			}
+		}
+		UE_LOG(LogTemp, Log, TEXT("--- SortTest End ---"));
+	}
+	*/
 
+	// BattleManager
+	{
+		BattleManager = NewObject<URpgBattleManager>();
+		check(BattleManager.IsValid());
+
+		TWeakObjectPtr<UBattlePartyManager> BattleParty = NewObject<UBattlePartyManager>();
+		BattleParty->Initialize();
+		{
+			TWeakObjectPtr<UBattlePartySide> AllyPartySide = NewObject<UBattlePartySide>();
+			AllyPartySide.Get()->SetParty(AllyParty);
+			AllyPartySide.Get()->SetType(ESideType::Ally);
+			BattleParty->SetParty(AllyPartySide);
+		}
+		{
+			TWeakObjectPtr<UBattlePartySide> EnemyPartySide = NewObject<UBattlePartySide>();
+			EnemyPartySide.Get()->SetParty(EnemyParty);
+			EnemyPartySide.Get()->SetType(ESideType::Enemy);
+			BattleParty->SetParty(EnemyPartySide);
+		}
+		BattleManager.Get()->SetBattleParty(BattleParty);
 	}
 
 	if (MainProjectUserWidgets.Num() != 0)

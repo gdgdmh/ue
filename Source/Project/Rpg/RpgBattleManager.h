@@ -7,6 +7,7 @@
 
 #include "BattlePartyManager.h"
 #include "CPPRpgBattleProcessState.h"
+#include "RpgTurnManager.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -23,10 +24,14 @@ public:
 public:
 	URpgBattleManager(const FObjectInitializer& ObjectInitializer);
 
-	void SetBattleParty(TWeakObjectPtr<UBattlePartyManager>&& Party)
+	void SetBattleParty(TWeakObjectPtr<UBattlePartyManager> Party)
 	{
-		PartyManager = Party;
+		check(Party.IsValid());
+		BattleParty = Party;
 	}
+
+	void SetTurn();
+	void OutputTurn() const;
 
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
@@ -38,6 +43,11 @@ public:
 	bool NextState();
 
 protected:
-	TWeakObjectPtr<UBattlePartyManager> PartyManager;
+	TWeakObjectPtr<UBattlePartyManager> BattleParty;
+
+	TWeakObjectPtr<URpgTurnManager> TurnManager;
+
 	ERpgBattleProcessState ProcessState;
+
+	//URpgTurnManager
 };

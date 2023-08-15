@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "TurnOrderList.h"
@@ -40,7 +40,7 @@ int32 UTurnOrderList::GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character
 	const int32 Num = OrderList.Num();
 	if (Num <= 0)
 	{
-		// ƒf[ƒ^‚ª‘¶İ‚µ‚È‚¢
+		// ãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã—ãªã„
 		return -1;
 	}
 
@@ -52,8 +52,34 @@ int32 UTurnOrderList::GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character
 			return Index;
 		}
 	}
-	// Œ©‚Â‚©‚ç‚È‚©‚Á‚½
+	// è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
 	return -1;
 }
 
+void UTurnOrderList::PopFront()
+{
+	if (OrderList.IsEmpty())
+	{
+		// ç©ºã®å ´åˆã¯æ„å‘³ãªã—
+		return;
+	}
+	// å…ˆé ­ã®ãƒ‡ãƒ¼ã‚¿ã ã‘å‰Šé™¤
+	OrderList.RemoveAt(0);
+}
 
+void UTurnOrderList::OutputLog() const
+{
+	int32 Index = 0;
+	for (const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase : OrderList)
+	{
+		if (!CharacterBase.IsValid())
+		{
+			UE_LOG(LogTemp, Log, TEXT("[%d] Invalid"), Index);
+			++Index;
+			continue;
+		}
+		UE_LOG(LogTemp, Log, TEXT("[%d]"), Index);
+		++Index;
+		CharacterBase.Get()->OutputLog();
+	}
+}

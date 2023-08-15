@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -10,7 +10,7 @@
 #include "TurnOrderList.generated.h"
 
 /**
- * ƒ^[ƒ“‡˜ƒŠƒXƒg
+ * ã‚¿ãƒ¼ãƒ³é †åºãƒªã‚¹ãƒˆ
  */
 UCLASS()
 class PROJECT_API UTurnOrderList : public UObject
@@ -26,6 +26,10 @@ public:
 	int32 Size() const;
 	const TWeakObjectPtr<URpgBattleCharacterBase> Get(int32 Index) const;
 	int32 GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character) const;
+
+	void PopFront();
+
+	void OutputLog() const;
 
 protected:
 	TArray<TWeakObjectPtr<URpgBattleCharacterBase> > OrderList;

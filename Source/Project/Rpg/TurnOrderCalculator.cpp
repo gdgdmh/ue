@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "TurnOrderCalculator.h"
@@ -13,7 +13,7 @@ TWeakObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TWeakObjectPtr<URpgBat
 
 	TArray< TWeakObjectPtr<URpgBattleCharacterBase> > SortTargetAll;
 
-	// ƒ\[ƒg‘ÎÛ”z—ñ‚É–¡•û‚Æ“G‚ÌƒŠƒXƒg‚ğ’Ç‰Á
+	// ã‚½ãƒ¼ãƒˆå¯¾è±¡é…åˆ—ã«å‘³æ–¹ã¨æ•µã®ãƒªã‚¹ãƒˆã‚’è¿½åŠ 
 	{
 		const TArray<TWeakObjectPtr<URpgBattleCharacterBase> > TargetList = AllyParty.Get()->GetList();
 		for (const TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
@@ -29,7 +29,7 @@ TWeakObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TWeakObjectPtr<URpgBat
 		}
 	}
 
-	// Agility‚Ì‘å‚«‚³‚Åƒ\[ƒg
+	// Agilityã®å¤§ãã•ã§ã‚½ãƒ¼ãƒˆ
 	SortTargetAll.Sort([](const TWeakObjectPtr<URpgBattleCharacterBase>& A, const TWeakObjectPtr<URpgBattleCharacterBase>& B) {
 		return A.Get()->GetParameter().Get()->GetAgility() > B.Get()->GetParameter().Get()->GetAgility();
 	});

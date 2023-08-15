@@ -20,7 +20,7 @@ class PROJECT_API UBattlePartyManager : public UObject
 public:
 	void Initialize();
 
-	void SetParty(TWeakObjectPtr<UBattlePartySide>&& Party);
+	void SetParty(TWeakObjectPtr<UBattlePartySide> Party);
 
 	TWeakObjectPtr<UBattlePartySide> Get(ESideType Type);
 

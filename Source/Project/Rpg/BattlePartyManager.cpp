@@ -9,7 +9,7 @@ void UBattlePartyManager::Initialize()
 	EnemyParty.Reset();
 }
 
-void UBattlePartyManager::SetParty(TWeakObjectPtr<UBattlePartySide>&& Party)
+void UBattlePartyManager::SetParty(TWeakObjectPtr<UBattlePartySide> Party)
 {
 	if (!Party.IsValid())
 	{
@@ -21,10 +21,12 @@ void UBattlePartyManager::SetParty(TWeakObjectPtr<UBattlePartySide>&& Party)
 	if (Type == ESideType::Ally)
 	{
 		AllyParty = Party;
+		return;
 	}
 	else if (Type == ESideType::Enemy)
 	{
 		EnemyParty = Party;
+		return;
 	}
 	// ハンドリングされてないタイプ(新規追加をしたけど処理が書かれてない)
 	UE_LOG(LogTemp, Log, TEXT("Type Invalid"));

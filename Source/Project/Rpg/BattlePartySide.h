@@ -20,17 +20,17 @@ class PROJECT_API UBattlePartySide : public UObject
 public:
 	UBattlePartySide(const FObjectInitializer& ObjectInitializer);
 
-	void Set(TWeakObjectPtr<URpgBattleParty>&& Source)
+	void SetParty(TWeakObjectPtr<URpgBattleParty> Source)
 	{
 		Party = Source;
 	}
 
-	void Set(ESideType Source)
+	void SetType(ESideType Source)
 	{
 		Type = Source;
 	}
 
-	TWeakObjectPtr<URpgBattleParty>& Get()
+	TWeakObjectPtr<URpgBattleParty> Get()
 	{
 		return Party;
 	}

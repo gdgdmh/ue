@@ -6,7 +6,20 @@
 URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	PartyManager = NewObject<UBattlePartyManager>();
+	BattleParty = NewObject<UBattlePartyManager>();
+	TurnManager = NewObject<URpgTurnManager>();
+}
+
+void URpgBattleManager::SetTurn()
+{
+	check(TurnManager.IsValid());
+	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Ally).Get()->Get(), BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
+}
+
+void URpgBattleManager::OutputTurn() const
+{
+	check(TurnManager.IsValid());
+	TurnManager.Get()->OutputLog();
 }
 
 // 次のステータスに進める
@@ -24,6 +37,8 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PreStart)
 	{
+		SetTurn();
+		OutputTurn();
 		ProcessState = ERpgBattleProcessState::Start;
 		return true;
 	}
