@@ -25,10 +25,11 @@ public:
 	void Remove(TWeakObjectPtr<URpgBattleCharacterBase> Character);
 	void Clear();
 	int32 Size() const;
-	const TWeakObjectPtr<URpgBattleCharacterBase> Get(int32 Index) const;
+	TWeakObjectPtr<URpgBattleCharacterBase> Get(int32 Index) const;
 	int32 GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character) const;
 
 	void PopFront();
+	TWeakObjectPtr<URpgBattleCharacterBase> GetTopCharacter() const;
 
 	void OutputLog() const;
 

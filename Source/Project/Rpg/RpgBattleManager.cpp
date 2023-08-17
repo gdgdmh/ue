@@ -8,6 +8,10 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 {
 	BattleParty = NewObject<UBattlePartyManager>();
 	TurnManager = NewObject<URpgTurnManager>();
+
+	SelectCommand = ERpgBattleCommandType::None;
+	AttackCharacter = nullptr;
+	AttackTargetCharacter = nullptr;
 }
 
 void URpgBattleManager::SetTurn()
@@ -79,8 +83,6 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PreStart)
 	{
-		SetTurn();
-		OutputTurn();
 		ProcessState = ERpgBattleProcessState::Start;
 		return true;
 	}
@@ -91,6 +93,8 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnPreCalc)
 	{
+		SetTurn();
+		OutputTurn();
 		ProcessState = ERpgBattleProcessState::TurnCalc;
 		return true;
 	}
@@ -106,6 +110,8 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnPreStart)
 	{
+		// ターン開始時の処理
+
 		ProcessState = ERpgBattleProcessState::TurnStart;
 		return true;
 	}
@@ -116,11 +122,26 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::ActionSelectWait)
 	{
+		// 本当は自分で選ばせる
+		// 今は固定
+		SelectCommand = ERpgBattleCommandType::Attack;
+		AttackCharacter = TurnManager.Get()->GetCurrentTurnCharacter();
+		{
+			ESideType Type = GetSideType(AttackCharacter);
+			ESideType EnemyType = GetEnemySide(Type);
+			AttackTargetCharacter = BattleParty.Get()->GetAttackTarget(EnemyType);
+		}
+
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::NextState ActionProcess"));
+		OutputSelectCommandLog();
+
 		ProcessState = ERpgBattleProcessState::ActionProcess;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::ActionProcess)
 	{
+
+
 		ProcessState = ERpgBattleProcessState::DamageProcess;
 		return true;
 	}
@@ -156,4 +177,25 @@ bool URpgBattleManager::NextState()
 	return true;
 }
 
+// 行動選択のログ出力
+void URpgBattleManager::OutputSelectCommandLog()
+{
+	// コマンドの出力(EnumからFStringに変換)
+	{
+		FString EnumName = TEXT("ERpgBattleCommandType");
+		UEnum* const Enum = FindObject<UEnum>(ANY_PACKAGE, *EnumName);
+		FString CommandEnumName = Enum->GetNameStringByIndex(static_cast<int32>(SelectCommand));
+		UE_LOG(LogTemp, Log, TEXT("Command:%s"), *CommandEnumName);
+	}
+	// 攻撃者
+	if (AttackCharacter.IsValid())
+	{
+		UE_LOG(LogTemp, Log, TEXT("AttackCharacter:%s"), *AttackCharacter.Get()->GetParameter().Get()->GetName().ToString());
+	}
+	// 攻撃対象者
+	if (AttackTargetCharacter.IsValid())
+	{
+		UE_LOG(LogTemp, Log, TEXT("AttackTargetCharacter:%s"), *AttackTargetCharacter.Get()->GetParameter().Get()->GetName().ToString());
+	}
+}
 

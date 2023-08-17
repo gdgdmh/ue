@@ -42,6 +42,8 @@ public:
 	URpgBattleStatus& GetStatus() const { return *Status; }
 	FText GetName() const { return Name; }
 
+	bool IsDead() const;
+
 	void OutputLog();
 
 public:

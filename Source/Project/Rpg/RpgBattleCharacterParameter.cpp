@@ -90,6 +90,21 @@ void URpgBattleCharacterParameter::SetAgility(int32 AgilityValue)
 	this->Agility = AgilityValue;
 }
 
+bool URpgBattleCharacterParameter::IsDead() const
+{
+	// HPが0以下か死亡ステータスなら死亡とみなす
+	if (Hp <= 0)
+	{
+		return true;
+	}
+	check(Status.IsValid());
+	if (Status.Get()->IsState(ERpgBattleStatusType::Dead))
+	{
+		return true;
+	}
+	return false;
+}
+
 void URpgBattleCharacterParameter::OutputLog()
 {
 	UE_LOG(LogTemp, Log, TEXT("Hp:%d MaxHp:%d Sp:%d MaxSp:%d "), Hp, MaxHp, Sp, MaxSp);

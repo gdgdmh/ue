@@ -8,6 +8,8 @@
 #include "BattlePartyManager.h"
 #include "CPPRpgBattleProcessState.h"
 #include "RpgTurnManager.h"
+#include "RpgBattleDamageCalculator.h"
+#include "CPPRpgBattleCommandType.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -44,12 +46,19 @@ public:
 	// 次のステータスに進める
 	bool NextState();
 
+	// 行動選択のログ出力
+	void OutputSelectCommandLog();
+
 protected:
 	TWeakObjectPtr<UBattlePartyManager> BattleParty;
-
 	TWeakObjectPtr<URpgTurnManager> TurnManager;
-
+	TWeakObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
 
-	//URpgTurnManager
+	// 行動選択
+	// 構造体にまとめるかも
+	ERpgBattleCommandType SelectCommand;
+	TWeakObjectPtr<URpgBattleCharacterBase> AttackCharacter;
+	TWeakObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
+
 };

@@ -24,6 +24,10 @@ public:
 
 	TWeakObjectPtr<UBattlePartySide> Get(ESideType Type);
 
+	// ノンターゲットで攻撃する際に攻撃対象とするキャラクターを取得
+	TWeakObjectPtr<URpgBattleCharacterBase> GetAttackTarget(ESideType Type);
+
+	ESideType GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase) const;
 public:
 	TWeakObjectPtr<UBattlePartySide> AllyParty;
 	TWeakObjectPtr<UBattlePartySide> EnemyParty;

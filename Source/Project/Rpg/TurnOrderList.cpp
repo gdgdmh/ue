@@ -29,7 +29,7 @@ int32 UTurnOrderList::Size() const
 	return OrderList.Num();
 }
 
-const TWeakObjectPtr<URpgBattleCharacterBase> UTurnOrderList::Get(int32 Index) const
+TWeakObjectPtr<URpgBattleCharacterBase> UTurnOrderList::Get(int32 Index) const
 {
 	check((0 <= Index) && (Index < OrderList.Num())); // check index range
 	return OrderList[Index];
@@ -65,6 +65,15 @@ void UTurnOrderList::PopFront()
 	}
 	// 先頭のデータだけ削除
 	OrderList.RemoveAt(0);
+}
+
+TWeakObjectPtr<URpgBattleCharacterBase> UTurnOrderList::GetTopCharacter() const
+{
+	if (Size() <= 0)
+	{
+		return nullptr;
+	}
+	return Get(0);
 }
 
 void UTurnOrderList::OutputLog() const

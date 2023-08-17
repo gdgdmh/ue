@@ -36,6 +36,12 @@ TWeakObjectPtr<UTurnOrderList> URpgTurnManager::GetTurnOrderList()
 	return List;
 }
 
+TWeakObjectPtr<URpgBattleCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
+{
+	check(List.IsValid());
+	return List.Get()->GetTopCharacter();
+}
+
 void URpgTurnManager::OutputLog() const
 {
 	if (!List.IsValid())
