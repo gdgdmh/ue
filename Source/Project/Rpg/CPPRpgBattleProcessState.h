@@ -12,29 +12,27 @@
 UENUM(BlueprintType)
 enum class ERpgBattleProcessState : uint8
 {
-	None				UMETA(DisplayName = "なし", ToolTip = "なし"),
-	Initialize			UMETA(DisplayName = "初期化", ToolTip = "初期化"),
-	PreStart			UMETA(DisplayName = "開始前", ToolTip = "開始前"),
-	Start				UMETA(DisplayName = "開始", ToolTip = "開始"),
+	None				UMETA(DisplayName = "なし",					ToolTip = "なし"),
+	Initialize			UMETA(DisplayName = "初期化",				ToolTip = "初期化"),
+	PreStart			UMETA(DisplayName = "開始前",				ToolTip = "開始前"),
+	Start				UMETA(DisplayName = "開始",					ToolTip = "開始"),
 
-	TurnPreCalc			UMETA(DisplayName = "ターン計算前", ToolTip = "ターン計算前"),
-	TurnCalc			UMETA(DisplayName = "ターン計算", ToolTip = "ターン計算"),
-	TurnCalcFinish		UMETA(DisplayName = "ターン計算終了時", ToolTip = "ターン計算終了時"),
+	TurnPreCalc			UMETA(DisplayName = "ターン計算前",			ToolTip = "ターン計算前"),
+	TurnCalc			UMETA(DisplayName = "ターン計算",			ToolTip = "ターン計算"),
+	TurnCalcFinish		UMETA(DisplayName = "ターン計算終了時",		ToolTip = "ターン計算終了時"),
 
-	TurnPreStart		UMETA(DisplayName = "ターン開始前", ToolTip = "ターン開始前"),
-	TurnStart			UMETA(DisplayName = "ターン開始", ToolTip = "ターン開始"),
+	TurnPreStart		UMETA(DisplayName = "ターン開始前",			ToolTip = "ターン開始前"),
+	TurnStart			UMETA(DisplayName = "ターン開始",			ToolTip = "ターン開始"),
 
-	ActionSelectWait	UMETA(DisplayName = "アクション選択待ち", ToolTip = "アクション選択待ち"),
-	ActionProcess		UMETA(DisplayName = "アクション処理", ToolTip = "アクション処理"),
+	ActionSelectWait	UMETA(DisplayName = "アクション選択待ち",	ToolTip = "アクション選択待ち"),
+	ActionProcess		UMETA(DisplayName = "アクション処理",		ToolTip = "アクション処理"),
+	ActionProcessFinish	UMETA(DisplayName = "アクション処理終了時",	ToolTip = "アクション処理終了時"),
 
-	DamageProcess		UMETA(DisplayName = "ダメージ処理", ToolTip = "ダメージ処理"),
-	DamageProcessFinish	UMETA(DisplayName = "ダメージ処理終了時", ToolTip = "ダメージ処理終了時"),
+	TurnPreFinish		UMETA(DisplayName = "ターン終了前",			ToolTip = "ターン終了前"),
+	TurnFinish			UMETA(DisplayName = "ターン終了",			ToolTip = "ターン終了"),
 
-	TurnPreFinish		UMETA(DisplayName = "ターン終了前", ToolTip = "ターン終了前"),
-	TurnFinish			UMETA(DisplayName = "ターン終了", ToolTip = "ターン終了"),
-
-	PreFinish			UMETA(DisplayName = "終了前", ToolTip = "終了前"),
-	Finish				UMETA(DisplayName = "終了", ToolTip = "終了"),
+	PreFinish			UMETA(DisplayName = "終了前",				ToolTip = "終了前"),
+	Finish				UMETA(DisplayName = "終了",					ToolTip = "終了"),
 
 	Num					UMETA(Hidden)
 };
@@ -43,6 +41,17 @@ ENUM_RANGE_BY_COUNT(ERpgBattleProcessState, ERpgBattleProcessState::Num)
 
 FText ToString(ERpgBattleProcessState State)
 {
+	// ただ出力するだけならこっちの方式のほうがいいかも
+#if 0
+	{
+		FString EnumName = TEXT("ERpgBattleCommandType");
+		UEnum* const Enum = FindObject<UEnum>(ANY_PACKAGE, *EnumName);
+		FString CommandEnumName = Enum->GetNameStringByIndex(static_cast<int32>(SelectCommand));
+		UE_LOG(LogTemp, Log, TEXT("Command:%s"), *CommandEnumName);
+}
+
+#endif
+
 	if (State == ERpgBattleProcessState::None)
 	{
 		return FText::FromString(TEXT("None"));
@@ -87,13 +96,9 @@ FText ToString(ERpgBattleProcessState State)
 	{
 		return FText::FromString(TEXT("ActionProcess"));
 	}
-	if (State == ERpgBattleProcessState::DamageProcess)
+	if (State == ERpgBattleProcessState::ActionProcessFinish)
 	{
-		return FText::FromString(TEXT("DamageProcess"));
-	}
-	if (State == ERpgBattleProcessState::DamageProcessFinish)
-	{
-		return FText::FromString(TEXT("DamageProcessFinish"));
+		return FText::FromString(TEXT("ActionProcessFinish"));
 	}
 	if (State == ERpgBattleProcessState::TurnPreFinish)
 	{

@@ -10,10 +10,18 @@ URpgBattleCharacterBase::URpgBattleCharacterBase(const FObjectInitializer& Objec
 
 void URpgBattleCharacterBase::SetParameter(const URpgBattleCharacterParameter& Parameter)
 {
+	check(BattleCharactaerParameter.IsValid());
 	BattleCharactaerParameter.Get()->Copy(Parameter);
+}
+
+void URpgBattleCharacterBase::Damage(int32 AttackDamage)
+{
+	check(BattleCharactaerParameter.IsValid());
+	BattleCharactaerParameter.Get()->Damage(AttackDamage);
 }
 
 void URpgBattleCharacterBase::OutputLog()
 {
+	check(BattleCharactaerParameter.IsValid());
 	BattleCharactaerParameter.Get()->OutputLog();
 }

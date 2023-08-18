@@ -26,6 +26,49 @@ void URpgBattleManager::OutputTurn() const
 	TurnManager.Get()->OutputLog();
 }
 
+bool URpgBattleManager::CheckSideAnnihilation()
+{
+	check(BattleParty.IsValid());
+	TWeakObjectPtr<UBattlePartySide> AllyParty = BattleParty.Get()->Get(ESideType::Ally);
+	TWeakObjectPtr<UBattlePartySide> EnemyParty = BattleParty.Get()->Get(ESideType::Enemy);
+	check(AllyParty.IsValid());
+	check(EnemyParty.IsValid());
+
+	{
+		bool bAllDead = true;
+		for (const auto Character : AllyParty.Get()->Get()->GetList())
+		{
+			check(Character.IsValid());
+			if (!Character.Get()->GetParameter()->IsDead())
+			{
+				bAllDead = false;
+				break;
+			}
+		}
+		if (bAllDead)
+		{
+			return true;
+		}
+	}
+	{
+		bool bAllDead = true;
+		for (const auto Character : EnemyParty.Get()->Get()->GetList())
+		{
+			check(Character.IsValid());
+			if (!Character.Get()->GetParameter()->IsDead())
+			{
+				bAllDead = false;
+				break;
+			}
+		}
+		if (bAllDead)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 ESideType URpgBattleManager::GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase) const
 {
 	if (!CharacterBase.IsValid())
@@ -140,17 +183,20 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::ActionProcess)
 	{
+		// アクション処理
+		ActionProc();
 
+		// 全滅していたら終了
+		if (CheckSideAnnihilation())
+		{
+			ProcessState = ERpgBattleProcessState::PreFinish;
+			return true;
+		}
 
-		ProcessState = ERpgBattleProcessState::DamageProcess;
+		ProcessState = ERpgBattleProcessState::ActionProcessFinish;
 		return true;
 	}
-	if (ProcessState == ERpgBattleProcessState::DamageProcess)
-	{
-		ProcessState = ERpgBattleProcessState::DamageProcessFinish;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::DamageProcessFinish)
+	if (ProcessState == ERpgBattleProcessState::ActionProcessFinish)
 	{
 		ProcessState = ERpgBattleProcessState::TurnPreFinish;
 		return true;
@@ -162,6 +208,8 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnFinish)
 	{
+		// 特定の陣営が全滅している
+		
 		ProcessState = ERpgBattleProcessState::TurnPreCalc;
 		return true;
 	}
@@ -175,6 +223,27 @@ bool URpgBattleManager::NextState()
 		return true;
 	}
 	return true;
+}
+
+void URpgBattleManager::ActionProc()
+{
+	// 攻撃系のアクションか
+	if (SelectCommand == ERpgBattleCommandType::Attack)
+	{
+		
+		int32 Damage = 0;
+		int32 BeforeHp = 0;
+		int32 AfterHp = 0;
+		DamageCalc.Get()->Calc(Damage, AttackCharacter, AttackTargetCharacter, SelectCommand);
+		BeforeHp = AttackTargetCharacter.Get()->GetParameter().Get()->GetHp();
+		AttackTargetCharacter.Get()->Damage(Damage);
+		AfterHp = AttackTargetCharacter.Get()->GetParameter().Get()->GetHp();
+		UE_LOG(LogTemp, Log, TEXT("%s:%d Damage %d -> %d"),
+			*AttackTargetCharacter.Get()->GetParameter().Get()->GetName().ToString(),
+			Damage, BeforeHp, AfterHp);
+		return;
+	}
+
 }
 
 // 行動選択のログ出力

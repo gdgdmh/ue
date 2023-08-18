@@ -35,6 +35,8 @@ public:
 	void SetTurn();
 	void OutputTurn() const;
 
+	bool CheckSideAnnihilation();
+
 	ESideType GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
 
 	// 現在のステータスを返す
@@ -45,6 +47,9 @@ public:
 
 	// 次のステータスに進める
 	bool NextState();
+
+	// 選択したアクションを処理する
+	void ActionProc();
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();

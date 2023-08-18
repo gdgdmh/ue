@@ -25,6 +25,8 @@ public:
 		return BattleCharactaerParameter;
 	}
 
+	void Damage(int32 AttackDamage);
+
 	void OutputLog();
 
 public:

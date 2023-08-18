@@ -90,6 +90,23 @@ void URpgBattleCharacterParameter::SetAgility(int32 AgilityValue)
 	this->Agility = AgilityValue;
 }
 
+void URpgBattleCharacterParameter::Damage(int32 AttackDamage)
+{
+	check(AttackDamage >= 0); // 回復はここではやらない
+	if (IsDead())
+	{
+		return;
+	}
+
+	Hp = Hp - AttackDamage;
+
+	if (IsDead())
+	{
+		// 攻撃で死亡した
+		Status.Get()->AddStatus(ERpgBattleStatusType::Dead);
+	}
+}
+
 bool URpgBattleCharacterParameter::IsDead() const
 {
 	// HPが0以下か死亡ステータスなら死亡とみなす

@@ -32,6 +32,8 @@ public:
 	void SetDefencePower(int32 Power);
 	void SetAgility(int32 AgilityValue);
 
+	void Damage(int32 AttackDamage);
+
 	int32 GetHp() const { return Hp; }
 	int32 GetMaxHp() const { return MaxHp; }
 	int32 GetSp() const { return Sp; }

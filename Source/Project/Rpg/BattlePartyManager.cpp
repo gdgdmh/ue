@@ -82,21 +82,6 @@ TWeakObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESi
 
 	// 先頭から対象を選出
 	TArray<TWeakObjectPtr<URpgBattleCharacterBase> > List = Party.Get()->Get().Get()->GetList();
-	/*
-	for (int32 i = 0; i < List.Num(); ++i)
-	{
-		if (!List[i].IsValid())
-		{
-			continue;
-		}
-		// 死亡でなければ確定
-		if (List[i].Get()->GetParameter().Get()->IsDead())
-		{
-			continue;
-		}
-		return List[i];
-	}
-	*/
 	for (TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : List)
 	{
 		if (!CharacterBase.IsValid())
