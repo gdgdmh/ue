@@ -55,15 +55,20 @@ public:
 	void OutputSelectCommandLog();
 
 protected:
-	TObjectPtr<UBattlePartyManager> BattleParty;
-	TObjectPtr<URpgTurnManager> TurnManager;
-	TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
+	UPROPERTY()
+		TObjectPtr<UBattlePartyManager> BattleParty;
+	UPROPERTY()
+		TObjectPtr<URpgTurnManager> TurnManager;
+	UPROPERTY()
+		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
 
 	// 行動選択
 	// 構造体にまとめるかも
 	ERpgBattleCommandType SelectCommand;
-	TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
-	TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
+	UPROPERTY()
+		TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
+	UPROPERTY()
+		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
 
 };

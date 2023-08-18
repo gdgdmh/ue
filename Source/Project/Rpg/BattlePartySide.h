@@ -41,7 +41,8 @@ public:
 	}
 
 protected:
-	TObjectPtr<URpgBattleParty> Party;
+	UPROPERTY()
+		TObjectPtr<URpgBattleParty> Party;
 	ESideType Type;
 
 };

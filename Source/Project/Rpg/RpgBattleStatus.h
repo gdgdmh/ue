@@ -58,5 +58,6 @@ public:
 	bool AddStatusParameter(const FRpgBattleStatusParameter& Parameter);
 
 public:
-	TArray<FRpgBattleStatusParameter> Statuses; // 複数のステータスパラメーター
+	UPROPERTY()
+		TArray<FRpgBattleStatusParameter> Statuses; // 複数のステータスパラメーター
 };

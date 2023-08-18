@@ -34,5 +34,6 @@ public:
 	void OutputLog() const;
 
 protected:
-	TArray<TObjectPtr<URpgBattleCharacterBase> > OrderList;
+	UPROPERTY()
+		TArray<TObjectPtr<URpgBattleCharacterBase> > OrderList;
 };

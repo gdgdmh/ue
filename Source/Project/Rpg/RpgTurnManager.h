@@ -31,6 +31,8 @@ public:
 	void OutputLog() const;
 
 private:
-	TObjectPtr<UTurnOrderList> List;
-	TObjectPtr<UTurnOrderCalculator> Calculator;
+	UPROPERTY()
+		TObjectPtr<UTurnOrderList> List;
+	UPROPERTY()
+		TObjectPtr<UTurnOrderCalculator> Calculator;
 };

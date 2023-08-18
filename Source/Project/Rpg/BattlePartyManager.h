@@ -31,6 +31,8 @@ public:
 
 	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase> CharacterBase) const;
 protected:
-	TObjectPtr<UBattlePartySide> AllyParty;
-	TObjectPtr<UBattlePartySide> EnemyParty;
+	UPROPERTY()
+		TObjectPtr<UBattlePartySide> AllyParty;
+	UPROPERTY()
+		TObjectPtr<UBattlePartySide> EnemyParty;
 };

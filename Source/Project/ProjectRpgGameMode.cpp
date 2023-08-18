@@ -301,7 +301,7 @@ void AProjectRpgGameMode::InitializeBattleManager()
 	check(BattleManager);
 
 	// 強制GC
-	//GEngine->ForceGarbageCollection(true);
+	GEngine->ForceGarbageCollection(true);
 }
 
 void AProjectRpgGameMode::RpgMainOnClickNextButton()
