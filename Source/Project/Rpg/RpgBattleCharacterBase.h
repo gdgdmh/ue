@@ -20,7 +20,7 @@ public:
 
 	void SetParameter(const URpgBattleCharacterParameter& Parameter);
 
-	TWeakObjectPtr<URpgBattleCharacterParameter> GetParameter() const
+	TObjectPtr<URpgBattleCharacterParameter> GetParameter() const
 	{
 		return BattleCharactaerParameter;
 	}
@@ -31,5 +31,5 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere)
-		TWeakObjectPtr<URpgBattleCharacterParameter> BattleCharactaerParameter;
+		TObjectPtr<URpgBattleCharacterParameter> BattleCharactaerParameter;
 };

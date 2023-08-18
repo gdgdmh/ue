@@ -48,7 +48,7 @@ public:
 		TObjectPtr<UHorizontalBox> AllyArea;
 
 	UPROPERTY()
-		TArray<TWeakObjectPtr<URpgCharaInfo> > RpgCharaInfos;
+		TArray<TObjectPtr<URpgCharaInfo> > RpgCharaInfos;
 
 	// ステータスのテキスト(プロパティはBind)
 	UPROPERTY(Transient, meta = (BindWidget))

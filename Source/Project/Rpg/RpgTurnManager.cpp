@@ -15,11 +15,11 @@ void URpgTurnManager::ResetTurnOrderList()
 	List = NewObject<UTurnOrderList>();
 }
 
-bool URpgTurnManager::Set(TWeakObjectPtr<URpgBattleParty> AllyParty, TWeakObjectPtr<URpgBattleParty> EnemyParty)
+bool URpgTurnManager::Set(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty)
 {
-	check(Calculator.IsValid());
+	check(Calculator);
 	List = Calculator.Get()->Calc(AllyParty, EnemyParty);
-	if (!List.IsValid())
+	if (!List)
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgTurnManager::Set Failure"));
 		// 何かしらのエラーが出てしまった
@@ -30,21 +30,21 @@ bool URpgTurnManager::Set(TWeakObjectPtr<URpgBattleParty> AllyParty, TWeakObject
 	return true;
 }
 
-TWeakObjectPtr<UTurnOrderList> URpgTurnManager::GetTurnOrderList()
+TObjectPtr<UTurnOrderList> URpgTurnManager::GetTurnOrderList()
 {
-	check(List.IsValid());
+	check(List);
 	return List;
 }
 
-TWeakObjectPtr<URpgBattleCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
+TObjectPtr<URpgBattleCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
 {
-	check(List.IsValid());
+	check(List);
 	return List.Get()->GetTopCharacter();
 }
 
 void URpgTurnManager::OutputLog() const
 {
-	if (!List.IsValid())
+	if (!List)
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgTurnManager::OutputLog List Invalid"));
 		return;

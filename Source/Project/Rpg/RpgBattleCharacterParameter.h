@@ -74,7 +74,7 @@ public:
 
 	// ステータス
 	UPROPERTY(EditAnywhere)
-		TWeakObjectPtr<URpgBattleStatus> Status;
+	TObjectPtr<URpgBattleStatus> Status;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		FText Name;

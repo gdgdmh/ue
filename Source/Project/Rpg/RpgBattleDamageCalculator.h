@@ -20,7 +20,7 @@ class PROJECT_API URpgBattleDamageCalculator : public UObject
 	
 public:
 
-	void Calc(int32& Damage, TWeakObjectPtr<URpgBattleCharacterBase> Attacker, TWeakObjectPtr<URpgBattleCharacterBase> Target, ERpgBattleCommandType CommandType);
+	void Calc(int32& Damage, TObjectPtr<URpgBattleCharacterBase> Attacker, TObjectPtr<URpgBattleCharacterBase> Target, ERpgBattleCommandType CommandType);
 
 	int32 CalcBaseDamage(int32 AttackPower, int32 DefencePower);
 };

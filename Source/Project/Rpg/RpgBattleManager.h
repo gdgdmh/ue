@@ -26,9 +26,9 @@ public:
 public:
 	URpgBattleManager(const FObjectInitializer& ObjectInitializer);
 
-	void SetBattleParty(TWeakObjectPtr<UBattlePartyManager> Party)
+	void SetBattleParty(TObjectPtr<UBattlePartyManager> Party)
 	{
-		check(Party.IsValid());
+		check(Party);
 		BattleParty = Party;
 	}
 
@@ -37,7 +37,7 @@ public:
 
 	bool CheckSideAnnihilation();
 
-	ESideType GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
+	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
 
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
@@ -55,15 +55,15 @@ public:
 	void OutputSelectCommandLog();
 
 protected:
-	TWeakObjectPtr<UBattlePartyManager> BattleParty;
-	TWeakObjectPtr<URpgTurnManager> TurnManager;
-	TWeakObjectPtr<URpgBattleDamageCalculator> DamageCalc;
+	TObjectPtr<UBattlePartyManager> BattleParty;
+	TObjectPtr<URpgTurnManager> TurnManager;
+	TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
 
 	// 行動選択
 	// 構造体にまとめるかも
 	ERpgBattleCommandType SelectCommand;
-	TWeakObjectPtr<URpgBattleCharacterBase> AttackCharacter;
-	TWeakObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
+	TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
+	TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
 
 };

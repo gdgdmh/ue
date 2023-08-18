@@ -19,13 +19,13 @@ public:
 	URpgBattleParty();
 	URpgBattleParty(const FObjectInitializer& ObjectInitializer);
 
-	void Add(const TWeakObjectPtr<URpgBattleCharacterBase>& Target);
+	void Add(const TObjectPtr<URpgBattleCharacterBase>& Target);
 
-	void Remove(const TWeakObjectPtr<URpgBattleCharacterBase>& Target);
+	void Remove(const TObjectPtr<URpgBattleCharacterBase>& Target);
 
 	void Clear();
 
-	const TArray<TWeakObjectPtr<URpgBattleCharacterBase> > GetList() const
+	const TArray<TObjectPtr<URpgBattleCharacterBase> > GetList() const
 	{
 		return Characters;
 	}
@@ -36,5 +36,5 @@ public:
 public:
 
 	UPROPERTY()
-		TArray<TWeakObjectPtr<URpgBattleCharacterBase> > Characters; // 複数のキャラクター
+		TArray<TObjectPtr<URpgBattleCharacterBase> > Characters; // 複数のキャラクター
 };

@@ -3,38 +3,43 @@
 
 #include "TurnOrderCalculator.h"
 
-TWeakObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TWeakObjectPtr<URpgBattleParty> AllyParty, TWeakObjectPtr<URpgBattleParty> EnemyParty)
+TObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty)
 {
-	TWeakObjectPtr<UTurnOrderList> List = NewObject<UTurnOrderList>();
-	if (!List.IsValid())
+	TObjectPtr<UTurnOrderList> List = NewObject<UTurnOrderList>();
+	if (!List)
 	{
 		return nullptr;
 	}
 
-	TArray< TWeakObjectPtr<URpgBattleCharacterBase> > SortTargetAll;
+	TArray< TObjectPtr<URpgBattleCharacterBase> > SortTargetAll;
 
 	// ソート対象配列に味方と敵のリストを追加
 	{
-		const TArray<TWeakObjectPtr<URpgBattleCharacterBase> > TargetList = AllyParty.Get()->GetList();
-		for (const TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
+		const TArray<TObjectPtr<URpgBattleCharacterBase> > TargetList = AllyParty.Get()->GetList();
+		for (const TObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
 		{
 			SortTargetAll.Add(CharacterBase);
 		}
 	}
 	{
-		const TArray<TWeakObjectPtr<URpgBattleCharacterBase> > TargetList = EnemyParty.Get()->GetList();
-		for (const TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
+		const TArray<TObjectPtr<URpgBattleCharacterBase> > TargetList = EnemyParty.Get()->GetList();
+		for (const TObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
 		{
 			SortTargetAll.Add(CharacterBase);
 		}
 	}
 
 	// Agilityの大きさでソート
-	SortTargetAll.Sort([](const TWeakObjectPtr<URpgBattleCharacterBase>& A, const TWeakObjectPtr<URpgBattleCharacterBase>& B) {
+	SortTargetAll.Sort([](const URpgBattleCharacterBase& A, const URpgBattleCharacterBase& B) {
+		return A.GetParameter().Get()->GetAgility() > B.GetParameter().Get()->GetAgility();
+	});
+	/*
+	SortTargetAll.Sort([](const TObjectPtr<URpgBattleCharacterBase>& A, const TObjectPtr<URpgBattleCharacterBase>& B) {
 		return A.Get()->GetParameter().Get()->GetAgility() > B.Get()->GetParameter().Get()->GetAgility();
 	});
+	*/
 
-	for (TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : SortTargetAll)
+	for (TObjectPtr<URpgBattleCharacterBase> CharacterBase : SortTargetAll)
 	{
 		List.Get()->Add(CharacterBase);
 	}

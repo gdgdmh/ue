@@ -33,7 +33,7 @@ public:
 
 	void InitializeStatus()
 	{
-		if (Status.IsValid())
+		if (Status)
 		{
 			Status.Get()->Reset();
 			return;
@@ -43,7 +43,7 @@ public:
 
 	bool IsStatusValid()
 	{
-		if (Status.IsValid())
+		if (Status)
 		{
 			return true;
 		}
@@ -75,7 +75,7 @@ public:
 		int32 Agility;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		TWeakObjectPtr<URpgBattleStatus> Status;
+		TObjectPtr<URpgBattleStatus> Status;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		FText Name;

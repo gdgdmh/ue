@@ -9,12 +9,12 @@ UTurnOrderList::UTurnOrderList(const FObjectInitializer& ObjectInitializer)
 {
 }
 
-void UTurnOrderList::Add(TWeakObjectPtr<URpgBattleCharacterBase> Character)
+void UTurnOrderList::Add(TObjectPtr<URpgBattleCharacterBase> Character)
 {
 	OrderList.Add(Character);
 }
 
-void UTurnOrderList::Remove(TWeakObjectPtr<URpgBattleCharacterBase> Character)
+void UTurnOrderList::Remove(TObjectPtr<URpgBattleCharacterBase> Character)
 {
 	OrderList.Remove(Character);
 }
@@ -29,13 +29,13 @@ int32 UTurnOrderList::Size() const
 	return OrderList.Num();
 }
 
-TWeakObjectPtr<URpgBattleCharacterBase> UTurnOrderList::Get(int32 Index) const
+TObjectPtr<URpgBattleCharacterBase> UTurnOrderList::Get(int32 Index) const
 {
 	check((0 <= Index) && (Index < OrderList.Num())); // check index range
 	return OrderList[Index];
 }
 
-int32 UTurnOrderList::GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character) const
+int32 UTurnOrderList::GetIndex(TObjectPtr<URpgBattleCharacterBase> Character) const
 {
 	const int32 Num = OrderList.Num();
 	if (Num <= 0)
@@ -45,7 +45,7 @@ int32 UTurnOrderList::GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character
 	}
 
 	int32 Index = 0;
-	for (const TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : OrderList)
+	for (const TObjectPtr<URpgBattleCharacterBase> CharacterBase : OrderList)
 	{
 		if (CharacterBase == Character)
 		{
@@ -67,7 +67,7 @@ void UTurnOrderList::PopFront()
 	OrderList.RemoveAt(0);
 }
 
-TWeakObjectPtr<URpgBattleCharacterBase> UTurnOrderList::GetTopCharacter() const
+TObjectPtr<URpgBattleCharacterBase> UTurnOrderList::GetTopCharacter() const
 {
 	if (Size() <= 0)
 	{
@@ -79,9 +79,9 @@ TWeakObjectPtr<URpgBattleCharacterBase> UTurnOrderList::GetTopCharacter() const
 void UTurnOrderList::OutputLog() const
 {
 	int32 Index = 0;
-	for (const TWeakObjectPtr<URpgBattleCharacterBase>& Character : OrderList)
+	for (const TObjectPtr<URpgBattleCharacterBase>& Character : OrderList)
 	{
-		if (!Character.IsValid())
+		if (!Character)
 		{
 			UE_LOG(LogTemp, Log, TEXT("[%d] Invalid"), Index);
 			++Index;

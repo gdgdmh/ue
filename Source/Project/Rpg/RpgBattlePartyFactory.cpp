@@ -10,10 +10,10 @@ URpgBattlePartyFactory::URpgBattlePartyFactory(const FObjectInitializer& ObjectI
 {
 }
 
-TWeakObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFactoryType Type)
+TObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFactoryType Type)
 {
-	TWeakObjectPtr<URpgBattleParty> Party = NewObject<URpgBattleParty>();
-	TWeakObjectPtr<UCharacterParameterConverter> Converter = NewObject<UCharacterParameterConverter>();
+	TObjectPtr<URpgBattleParty> Party = NewObject<URpgBattleParty>();
+	TObjectPtr<UCharacterParameterConverter> Converter = NewObject<UCharacterParameterConverter>();
 	if (Type == ERpgBattlePartyFactoryType::Normal)
 	{
 		// 現在は未定義
@@ -21,14 +21,14 @@ TWeakObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFa
 	else if (Type == ERpgBattlePartyFactoryType::Test)
 	{
 		{
-			TWeakObjectPtr<URpgBattleCharacterParameter> Parameter = NewObject<URpgBattleCharacterParameter>();
+			TObjectPtr<URpgBattleCharacterParameter> Parameter = NewObject<URpgBattleCharacterParameter>();
 			Parameter.Get()->SetHp(10, 10);
 			Parameter.Get()->SetSp(0, 0);
 			Parameter.Get()->SetAttackPower(5);
 			Parameter.Get()->SetDefencePower(7);
 			Parameter.Get()->SetAgility(4);
 			Parameter.Get()->OutputLog();
-			TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*Parameter.Get(), ESideType::Ally);
+			TObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*Parameter.Get(), ESideType::Ally);
 			Party.Get()->Add(CharacterBase);
 			Party.Get()->OutputLog();
 		}
@@ -36,14 +36,14 @@ TWeakObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFa
 	else if (Type == ERpgBattlePartyFactoryType::TestEnemy)
 	{
 		{
-			TWeakObjectPtr<URpgBattleCharacterParameter> Parameter = NewObject<URpgBattleCharacterParameter>();
+			TObjectPtr<URpgBattleCharacterParameter> Parameter = NewObject<URpgBattleCharacterParameter>();
 			Parameter.Get()->SetHp(9, 9);
 			Parameter.Get()->SetSp(1, 1);
 			Parameter.Get()->SetAttackPower(3);
 			Parameter.Get()->SetDefencePower(5);
 			Parameter.Get()->SetAgility(1);
 			Parameter.Get()->OutputLog();
-			TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*Parameter.Get(), ESideType::Enemy);
+			TObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*Parameter.Get(), ESideType::Enemy);
 			CharacterBase->OutputLog();
 			Party.Get()->Add(CharacterBase);
 			Party.Get()->OutputLog();

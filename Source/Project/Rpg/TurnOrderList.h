@@ -21,18 +21,18 @@ class PROJECT_API UTurnOrderList : public UObject
 public:
 	UTurnOrderList(const FObjectInitializer& ObjectInitializer);
 
-	void Add(TWeakObjectPtr<URpgBattleCharacterBase> Character);
-	void Remove(TWeakObjectPtr<URpgBattleCharacterBase> Character);
+	void Add(TObjectPtr<URpgBattleCharacterBase> Character);
+	void Remove(TObjectPtr<URpgBattleCharacterBase> Character);
 	void Clear();
 	int32 Size() const;
-	TWeakObjectPtr<URpgBattleCharacterBase> Get(int32 Index) const;
-	int32 GetIndex(TWeakObjectPtr<URpgBattleCharacterBase> Character) const;
+	TObjectPtr<URpgBattleCharacterBase> Get(int32 Index) const;
+	int32 GetIndex(TObjectPtr<URpgBattleCharacterBase> Character) const;
 
 	void PopFront();
-	TWeakObjectPtr<URpgBattleCharacterBase> GetTopCharacter() const;
+	TObjectPtr<URpgBattleCharacterBase> GetTopCharacter() const;
 
 	void OutputLog() const;
 
 protected:
-	TArray<TWeakObjectPtr<URpgBattleCharacterBase> > OrderList;
+	TArray<TObjectPtr<URpgBattleCharacterBase> > OrderList;
 };

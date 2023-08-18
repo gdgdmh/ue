@@ -19,5 +19,5 @@ class PROJECT_API URpgBattlePartyFactory : public UObject
 public:
 	URpgBattlePartyFactory(const FObjectInitializer& ObjectInitializer);
 
-	TWeakObjectPtr<URpgBattleParty> Create(ERpgBattlePartyFactoryType Type);
+	TObjectPtr<URpgBattleParty> Create(ERpgBattlePartyFactoryType Type);
 };

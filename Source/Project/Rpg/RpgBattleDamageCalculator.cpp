@@ -3,15 +3,15 @@
 
 #include "RpgBattleDamageCalculator.h"
 
-void URpgBattleDamageCalculator::Calc(int32& Damage, TWeakObjectPtr<URpgBattleCharacterBase> Attacker, TWeakObjectPtr<URpgBattleCharacterBase> Target,
+void URpgBattleDamageCalculator::Calc(int32& Damage, TObjectPtr<URpgBattleCharacterBase> Attacker, TObjectPtr<URpgBattleCharacterBase> Target,
 	ERpgBattleCommandType CommandType)
 {
 	Damage = 0;
-	if (!Attacker.IsValid())
+	if (!Attacker)
 	{
 		return;
 	}
-	if (!Target.IsValid())
+	if (!Target)
 	{
 		return;
 	}

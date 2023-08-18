@@ -22,15 +22,15 @@ public:
 	URpgTurnManager(const FObjectInitializer& ObjectInitializer);
 	
 	void ResetTurnOrderList();
-	bool Set(TWeakObjectPtr<URpgBattleParty> AllyParty, TWeakObjectPtr<URpgBattleParty> EnemyParty);
+	bool Set(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty);
 
-	TWeakObjectPtr<UTurnOrderList> GetTurnOrderList();
-	TWeakObjectPtr<URpgBattleCharacterBase> GetCurrentTurnCharacter() const;
+	TObjectPtr<UTurnOrderList> GetTurnOrderList();
+	TObjectPtr<URpgBattleCharacterBase> GetCurrentTurnCharacter() const;
 
 
 	void OutputLog() const;
 
 private:
-	TWeakObjectPtr<UTurnOrderList> List;
-	TWeakObjectPtr<UTurnOrderCalculator> Calculator;
+	TObjectPtr<UTurnOrderList> List;
+	TObjectPtr<UTurnOrderCalculator> Calculator;
 };

@@ -3,15 +3,22 @@
 
 #include "BattlePartyManager.h"
 
-void UBattlePartyManager::Initialize()
+UBattlePartyManager::UBattlePartyManager(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+	, AllyParty(nullptr)
+	, EnemyParty(nullptr)
 {
-	AllyParty.Reset();
-	EnemyParty.Reset();
 }
 
-void UBattlePartyManager::SetParty(TWeakObjectPtr<UBattlePartySide> Party)
+void UBattlePartyManager::Initialize()
 {
-	if (!Party.IsValid())
+	AllyParty = nullptr;
+	EnemyParty = nullptr;
+}
+
+void UBattlePartyManager::SetParty(TObjectPtr<UBattlePartySide> Party)
+{
+	if (!Party)
 	{
 		UE_LOG(LogTemp, Log, TEXT("Party Data Invalid"));
 		return;
@@ -33,8 +40,10 @@ void UBattlePartyManager::SetParty(TWeakObjectPtr<UBattlePartySide> Party)
 	check(false);
 }
 
-TWeakObjectPtr<UBattlePartySide> UBattlePartyManager::Get(ESideType Type)
+TObjectPtr<UBattlePartySide> UBattlePartyManager::Get(ESideType Type)
 {
+	check(AllyParty);
+	check(EnemyParty);
 	if (Type == ESideType::Ally)
 	{
 		check(AllyParty.Get()->GetType() == ESideType::Ally); // 念のためにTypeがおかしくないかチェック
@@ -51,10 +60,10 @@ TWeakObjectPtr<UBattlePartySide> UBattlePartyManager::Get(ESideType Type)
 }
 
 // ノンターゲットで攻撃する際に攻撃対象とするキャラクターを取得
-TWeakObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESideType Type)
+TObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESideType Type)
 {
 	// 対象のパーティ
-	TWeakObjectPtr<UBattlePartySide> Party = nullptr;
+	TObjectPtr<UBattlePartySide> Party = nullptr;
 	if (Type == ESideType::Ally)
 	{
 		Party = AllyParty;
@@ -71,7 +80,7 @@ TWeakObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESi
 		return nullptr;
 	}
 
-	if (!Party.IsValid())
+	if (!Party)
 	{
 		return nullptr;
 	}
@@ -81,10 +90,10 @@ TWeakObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESi
 	}
 
 	// 先頭から対象を選出
-	TArray<TWeakObjectPtr<URpgBattleCharacterBase> > List = Party.Get()->Get().Get()->GetList();
-	for (TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase : List)
+	TArray<TObjectPtr<URpgBattleCharacterBase> > List = Party.Get()->Get().Get()->GetList();
+	for (TObjectPtr<URpgBattleCharacterBase> CharacterBase : List)
 	{
-		if (!CharacterBase.IsValid())
+		if (!CharacterBase)
 		{
 			continue;
 		}
@@ -100,18 +109,18 @@ TWeakObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESi
 	return nullptr;
 }
 
-ESideType UBattlePartyManager::GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase) const
+ESideType UBattlePartyManager::GetSideType(const TObjectPtr<URpgBattleCharacterBase> CharacterBase) const
 {
-	check(CharacterBase.IsValid());
+	check(CharacterBase);
 
-	for (const TWeakObjectPtr<URpgBattleCharacterBase> Character : AllyParty.Get()->Get().Get()->GetList())
+	for (const TObjectPtr<URpgBattleCharacterBase> Character : AllyParty.Get()->Get().Get()->GetList())
 	{
 		if (CharacterBase == Character)
 		{
 			return ESideType::Ally;
 		}
 	}
-	for (const TWeakObjectPtr<URpgBattleCharacterBase> Character : EnemyParty.Get()->Get().Get()->GetList())
+	for (const TObjectPtr<URpgBattleCharacterBase> Character : EnemyParty.Get()->Get().Get()->GetList())
 	{
 		if (CharacterBase == Character)
 		{

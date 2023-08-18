@@ -52,8 +52,8 @@ void URpgMainUserWidget::CreateCharaInfoWidget()
 		UE_LOG(LogTemp, Log, TEXT("widget load failure"));
 		return;
 	}
-	TWeakObjectPtr<URpgCharaInfo> Info = CreateWidget<URpgCharaInfo>(GetWorld(), WidgetClass);
-	if ((Info.IsValid()) && (AllyArea))
+	TObjectPtr<URpgCharaInfo> Info = CreateWidget<URpgCharaInfo>(GetWorld(), WidgetClass);
+	if ((Info) && (AllyArea))
 	{
 		AllyArea->AddChild(Info.Get());
 		Info->AddUserWidgetSubsytem();
@@ -69,9 +69,9 @@ void URpgMainUserWidget::SetDummyCharaInfoParam()
 		return;
 	}
 
-	if (RpgCharaInfos[0].IsValid())
+	if (RpgCharaInfos[0])
 	{
-		TWeakObjectPtr<URpgCharaInfo>& Info = RpgCharaInfos[0];
+		TObjectPtr<URpgCharaInfo>& Info = RpgCharaInfos[0];
 		FText Name = FText::FromString(TEXT("キャラ1"));
 		Info.Get()->SetName(Name);
 		Info.Get()->SetHp(30);
@@ -81,9 +81,9 @@ void URpgMainUserWidget::SetDummyCharaInfoParam()
 			Info.Get()->SetSt(Status);
 		}
 	}
-	if (RpgCharaInfos[1].IsValid())
+	if (RpgCharaInfos[1])
 	{
-		TWeakObjectPtr<URpgCharaInfo>& Info = RpgCharaInfos[1];
+		TObjectPtr<URpgCharaInfo>& Info = RpgCharaInfos[1];
 		FText Name = FText::FromString(TEXT("キャラ2"));
 		Info.Get()->SetName(Name);
 		Info.Get()->SetHp(31);

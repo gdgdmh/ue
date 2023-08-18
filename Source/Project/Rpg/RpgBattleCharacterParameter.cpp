@@ -114,7 +114,7 @@ bool URpgBattleCharacterParameter::IsDead() const
 	{
 		return true;
 	}
-	check(Status.IsValid());
+	check(Status);
 	if (Status.Get()->IsState(ERpgBattleStatusType::Dead))
 	{
 		return true;

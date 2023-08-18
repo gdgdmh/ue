@@ -16,29 +16,29 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 
 void URpgBattleManager::SetTurn()
 {
-	check(TurnManager.IsValid());
+	check(TurnManager);
 	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Ally).Get()->Get(), BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
 }
 
 void URpgBattleManager::OutputTurn() const
 {
-	check(TurnManager.IsValid());
+	check(TurnManager);
 	TurnManager.Get()->OutputLog();
 }
 
 bool URpgBattleManager::CheckSideAnnihilation()
 {
-	check(BattleParty.IsValid());
-	TWeakObjectPtr<UBattlePartySide> AllyParty = BattleParty.Get()->Get(ESideType::Ally);
-	TWeakObjectPtr<UBattlePartySide> EnemyParty = BattleParty.Get()->Get(ESideType::Enemy);
-	check(AllyParty.IsValid());
-	check(EnemyParty.IsValid());
+	check(BattleParty);
+	TObjectPtr<UBattlePartySide> AllyParty = BattleParty.Get()->Get(ESideType::Ally);
+	TObjectPtr<UBattlePartySide> EnemyParty = BattleParty.Get()->Get(ESideType::Enemy);
+	check(AllyParty);
+	check(EnemyParty);
 
 	{
 		bool bAllDead = true;
 		for (const auto Character : AllyParty.Get()->Get()->GetList())
 		{
-			check(Character.IsValid());
+			check(Character);
 			if (!Character.Get()->GetParameter()->IsDead())
 			{
 				bAllDead = false;
@@ -54,7 +54,7 @@ bool URpgBattleManager::CheckSideAnnihilation()
 		bool bAllDead = true;
 		for (const auto Character : EnemyParty.Get()->Get()->GetList())
 		{
-			check(Character.IsValid());
+			check(Character);
 			if (!Character.Get()->GetParameter()->IsDead())
 			{
 				bAllDead = false;
@@ -69,9 +69,9 @@ bool URpgBattleManager::CheckSideAnnihilation()
 	return false;
 }
 
-ESideType URpgBattleManager::GetSideType(const TWeakObjectPtr<URpgBattleCharacterBase>& CharacterBase) const
+ESideType URpgBattleManager::GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const
 {
-	if (!CharacterBase.IsValid())
+	if (!CharacterBase)
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType CharacterInvalid"));
 		check(false);
@@ -80,7 +80,7 @@ ESideType URpgBattleManager::GetSideType(const TWeakObjectPtr<URpgBattleCharacte
 
 	for (const auto Character : BattleParty.Get()->Get(ESideType::Ally).Get()->Get()->GetList())
 	{
-		if (!Character.IsValid())
+		if (!Character)
 		{
 			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Party(Ally) CharacterInvalid"));
 			continue;
@@ -94,7 +94,7 @@ ESideType URpgBattleManager::GetSideType(const TWeakObjectPtr<URpgBattleCharacte
 
 	for (const auto Character : BattleParty.Get()->Get(ESideType::Enemy).Get()->Get()->GetList())
 	{
-		if (!Character.IsValid())
+		if (!Character)
 		{
 			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Party(Enemy) CharacterInvalid"));
 			continue;
@@ -251,18 +251,20 @@ void URpgBattleManager::OutputSelectCommandLog()
 {
 	// コマンドの出力(EnumからFStringに変換)
 	{
-		FString EnumName = TEXT("ERpgBattleCommandType");
-		UEnum* const Enum = FindObject<UEnum>(ANY_PACKAGE, *EnumName);
+		FString EnumName = TEXT("/Script/Project.ERpgBattleCommandType");
+		//FString EnumName = TEXT("ERpgBattleCommandType");
+		UEnum* const Enum = FindObject<UEnum>(nullptr, *EnumName);
+		//UEnum* const Enum = FindObject<UEnum>(ANY_PACKAGE, *EnumName);
 		FString CommandEnumName = Enum->GetNameStringByIndex(static_cast<int32>(SelectCommand));
 		UE_LOG(LogTemp, Log, TEXT("Command:%s"), *CommandEnumName);
 	}
 	// 攻撃者
-	if (AttackCharacter.IsValid())
+	if (AttackCharacter)
 	{
 		UE_LOG(LogTemp, Log, TEXT("AttackCharacter:%s"), *AttackCharacter.Get()->GetParameter().Get()->GetName().ToString());
 	}
 	// 攻撃対象者
-	if (AttackTargetCharacter.IsValid())
+	if (AttackTargetCharacter)
 	{
 		UE_LOG(LogTemp, Log, TEXT("AttackTargetCharacter:%s"), *AttackTargetCharacter.Get()->GetParameter().Get()->GetName().ToString());
 	}
