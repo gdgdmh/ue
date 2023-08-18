@@ -65,5 +65,6 @@ private:
 		TWeakObjectPtr<URpgBattleParty> EnemyParty;
 	// バトルマネージャー
 	UPROPERTY()
-		TWeakObjectPtr<URpgBattleManager> BattleManager;
+		TObjectPtr<URpgBattleManager> BattleManager;
+		//TWeakObjectPtr<URpgBattleManager> BattleManager;
 };

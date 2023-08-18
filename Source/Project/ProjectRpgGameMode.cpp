@@ -207,7 +207,7 @@ void AProjectRpgGameMode::SetMainUI()
 	// BattleManager
 	{
 		BattleManager = NewObject<URpgBattleManager>();
-		check(BattleManager.IsValid());
+		check(BattleManager);
 
 		TWeakObjectPtr<UBattlePartyManager> BattleParty = NewObject<UBattlePartyManager>();
 		BattleParty->Initialize();
@@ -271,7 +271,7 @@ void AProjectRpgGameMode::SetMainUI()
 			MainWidget->AddUserWidgetSubsytem();
 
 			MainWidget->Set();
-			if (BattleManager.IsValid())
+			if (BattleManager)
 			{
 				MainWidget->SetState(BattleManager.Get()->GetState());
 			}
@@ -295,12 +295,14 @@ void AProjectRpgGameMode::CleanupMainUI()
 void AProjectRpgGameMode::InitializeBattleManager()
 {
 	BattleManager = NewObject<URpgBattleManager>();
-	check(BattleManager.IsValid());
+	check(BattleManager);
+
+	GEngine->ForceGarbageCollection(true);
 }
 
 void AProjectRpgGameMode::RpgMainOnClickNextButton()
 {
-	check(BattleManager.IsValid());
+	check(BattleManager);
 
 	// ログ表示&次のステータスに進める
 	{
