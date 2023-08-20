@@ -67,6 +67,40 @@ void UTurnOrderList::PopFront()
 	OrderList.RemoveAt(0);
 }
 
+void UTurnOrderList::Normalize()
+{
+	bool bLoop = true;
+	while (bLoop)
+	{
+		// 正規化
+		// キャラクターが不正な状態
+		// キャラクターが死亡
+		// などしていたらリストから削除
+		// いちいちbreakしてチェックし直すのは削除後のループの扱いがわからないため念のため
+		bool bIsTask = false;
+		for (const auto Character : OrderList)
+		{
+			if (!Character)
+			{
+				OrderList.Remove(Character);
+				bIsTask = true;
+				break;
+			}
+			if (Character.Get()->GetParameter().Get()->IsDead())
+			{
+				OrderList.Remove(Character);
+				bIsTask = true;
+				break;
+			}
+		}
+		if (!bIsTask)
+		{
+			// 一通り何もなかったら終了
+			bLoop = false;
+		}
+	}
+}
+
 TObjectPtr<URpgBattleCharacterBase> UTurnOrderList::GetTopCharacter() const
 {
 	if (Size() <= 0)

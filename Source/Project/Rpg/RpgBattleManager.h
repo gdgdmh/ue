@@ -32,8 +32,11 @@ public:
 		BattleParty = Party;
 	}
 
+	void NormalizeTurnList();
 	void SetTurn();
 	void OutputTurn() const;
+	bool IsTurnListEmpty() const;
+	void ChangeTurn();
 
 	bool CheckSideAnnihilation();
 

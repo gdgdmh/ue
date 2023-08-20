@@ -29,6 +29,7 @@ public:
 	int32 GetIndex(TObjectPtr<URpgBattleCharacterBase> Character) const;
 
 	void PopFront();
+	void Normalize();
 	TObjectPtr<URpgBattleCharacterBase> GetTopCharacter() const;
 
 	void OutputLog() const;

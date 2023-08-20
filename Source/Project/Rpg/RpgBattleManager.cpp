@@ -14,6 +14,12 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	AttackTargetCharacter = nullptr;
 }
 
+void URpgBattleManager::NormalizeTurnList()
+{
+	check(TurnManager);
+	TurnManager.Get()->Normalize();
+}
+
 void URpgBattleManager::SetTurn()
 {
 	check(TurnManager);
@@ -24,6 +30,21 @@ void URpgBattleManager::OutputTurn() const
 {
 	check(TurnManager);
 	TurnManager.Get()->OutputLog();
+}
+
+bool URpgBattleManager::IsTurnListEmpty() const
+{
+	check(TurnManager);
+	return TurnManager.Get()->IsTurnListEmpty();
+}
+
+void URpgBattleManager::ChangeTurn()
+{
+	check(TurnManager);
+	if (!TurnManager.Get()->IsTurnListEmpty())
+	{
+		TurnManager.Get()->PopFront();
+	}
 }
 
 bool URpgBattleManager::CheckSideAnnihilation()
@@ -136,8 +157,25 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnPreCalc)
 	{
-		SetTurn();
+		if (IsTurnListEmpty())
+		{
+			// ターンリスト初回設定 or 1順した
+			// 設定し直し
+			SetTurn();
+		}
+		else
+		{
+			// 次のメンバーにターンを切り替え
+			ChangeTurn();
+			if (IsTurnListEmpty())
+			{
+				SetTurn();
+			}
+		}
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
 		OutputTurn();
+
 		ProcessState = ERpgBattleProcessState::TurnCalc;
 		return true;
 	}
@@ -207,9 +245,7 @@ bool URpgBattleManager::NextState()
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnFinish)
-	{
-		// 特定の陣営が全滅している
-		
+	{	
 		ProcessState = ERpgBattleProcessState::TurnPreCalc;
 		return true;
 	}

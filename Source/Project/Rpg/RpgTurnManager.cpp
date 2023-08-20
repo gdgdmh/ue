@@ -8,6 +8,7 @@ URpgTurnManager::URpgTurnManager(const FObjectInitializer& ObjectInitializer)
 {
 	ResetTurnOrderList();
 	Calculator = NewObject<UTurnOrderCalculator>();
+	TurnCount = DEFAULT_TURN;
 }
 
 void URpgTurnManager::ResetTurnOrderList()
@@ -17,6 +18,7 @@ void URpgTurnManager::ResetTurnOrderList()
 
 bool URpgTurnManager::Set(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty)
 {
+	check(List);
 	check(Calculator);
 	List = Calculator.Get()->Calc(AllyParty, EnemyParty);
 	if (!List)
@@ -30,6 +32,18 @@ bool URpgTurnManager::Set(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpg
 	return true;
 }
 
+void URpgTurnManager::PopFront()
+{
+	check(List);
+	List.Get()->PopFront();
+}
+
+void URpgTurnManager::Normalize()
+{
+	check(List);
+	List.Get()->Normalize();
+}
+
 TObjectPtr<UTurnOrderList> URpgTurnManager::GetTurnOrderList()
 {
 	check(List);
@@ -40,6 +54,16 @@ TObjectPtr<URpgBattleCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() c
 {
 	check(List);
 	return List.Get()->GetTopCharacter();
+}
+
+bool URpgTurnManager::IsTurnListEmpty() const
+{
+	check(List);
+	if (List.Get()->Size() > 0)
+	{
+		return false;
+	}
+	return true;
 }
 
 void URpgTurnManager::OutputLog() const

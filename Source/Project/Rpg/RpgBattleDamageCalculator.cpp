@@ -19,6 +19,11 @@ void URpgBattleDamageCalculator::Calc(int32& Damage, TObjectPtr<URpgBattleCharac
 	if (CommandType == ERpgBattleCommandType::Attack)
 	{
 		Damage = CalcBaseDamage(Attacker.Get()->GetParameter().Get()->GetAttackPower(), Target.Get()->GetParameter().Get()->GetDefencePower());
+		// 計算次第ではマイナスになることがあるので最低1だけはダメージ保証する
+		if (Damage <= 0)
+		{
+			Damage = 1;
+		}
 		return;
 	}
 	// 今の所、他にはまだ対応してない
