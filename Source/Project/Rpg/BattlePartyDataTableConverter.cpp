@@ -5,26 +5,26 @@
 
 #include "CharacterParameterConverter.h"
 
-TWeakObjectPtr<URpgBattleParty> UBattlePartyDataTableConverter::Convert(const TArray<FBattlePartyDataTable>& BattlePartyDataTable, ESideType Type)
+TObjectPtr<URpgBattleParty> UBattlePartyDataTableConverter::Convert(const TArray<FBattlePartyDataTable>& BattlePartyDataTable, ESideType Type)
 {
-	TWeakObjectPtr<UCharacterParameterConverter> Converter = NewObject<UCharacterParameterConverter>();
+	TObjectPtr<UCharacterParameterConverter> Converter = NewObject<UCharacterParameterConverter>();
 	check(Converter != nullptr);
 
-	TWeakObjectPtr<URpgBattleParty> Party = NewObject<URpgBattleParty>();
+	TObjectPtr<URpgBattleParty> Party = NewObject<URpgBattleParty>();
 
 	for (const FBattlePartyDataTable& PartyData : BattlePartyDataTable)
 	{
-		TWeakObjectPtr<URpgBattleCharacterParameter> CharacterParameter = NewObject<URpgBattleCharacterParameter>();
+		TObjectPtr<URpgBattleCharacterParameter> CharacterParameter = NewObject<URpgBattleCharacterParameter>();
 		CharacterParameter.Get()->Copy(PartyData);
-		TWeakObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*CharacterParameter.Get(), Type);
-		if (CharacterBase.IsValid())
+		TObjectPtr<URpgBattleCharacterBase> CharacterBase = Converter.Get()->Convert(*CharacterParameter.Get(), Type);
+		if (CharacterBase)
 		{
 			Party.Get()->Add(CharacterBase);
 		}
 		else
 		{
 			UE_LOG(LogTemp, Log, TEXT("CharacterBase Convert Failure"));
-			check(CharacterBase.IsValid());
+			check(CharacterBase);
 		}
 	}
 

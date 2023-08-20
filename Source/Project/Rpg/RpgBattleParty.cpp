@@ -12,12 +12,12 @@ URpgBattleParty::URpgBattleParty(const FObjectInitializer& ObjectInitializer) :
 {
 }
 
-void URpgBattleParty::Add(const TWeakObjectPtr<URpgBattleCharacterBase>& Target)
+void URpgBattleParty::Add(const TObjectPtr<URpgBattleCharacterBase>& Target)
 {
 	Characters.Add(Target);
 }
 
-void URpgBattleParty::Remove(const TWeakObjectPtr<URpgBattleCharacterBase>& Target)
+void URpgBattleParty::Remove(const TObjectPtr<URpgBattleCharacterBase>& Target)
 {
 	Characters.Remove(Target);
 }

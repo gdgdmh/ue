@@ -18,6 +18,6 @@ class PROJECT_API UBattlePartyDataTableConverter : public UObject
 	GENERATED_BODY()
 
 public:
-	TWeakObjectPtr<URpgBattleParty> Convert(const TArray<FBattlePartyDataTable>& BattlePartyDataTable, ESideType Type);
+	TObjectPtr<URpgBattleParty> Convert(const TArray<FBattlePartyDataTable>& BattlePartyDataTable, ESideType Type);
 	
 };

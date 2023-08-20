@@ -20,9 +20,16 @@ public:
 
 	void SetParameter(const URpgBattleCharacterParameter& Parameter);
 
+	TObjectPtr<URpgBattleCharacterParameter> GetParameter() const
+	{
+		return BattleCharactaerParameter;
+	}
+
+	void Damage(int32 AttackDamage);
+
 	void OutputLog();
 
 public:
 	UPROPERTY(EditAnywhere)
-		TWeakObjectPtr<URpgBattleCharacterParameter> BattleCharactaerParameter;
+		TObjectPtr<URpgBattleCharacterParameter> BattleCharactaerParameter;
 };

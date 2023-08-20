@@ -5,19 +5,19 @@
 #include "RpgBattleCharacterEnemy.h"
 
 
-TWeakObjectPtr<URpgBattleCharacterBase> UCharacterParameterConverter::Convert(const URpgBattleCharacterParameter& Parameter, ESideType SideType)
+TObjectPtr<URpgBattleCharacterBase> UCharacterParameterConverter::Convert(const URpgBattleCharacterParameter& Parameter, ESideType SideType)
 {
 	// 味方の場合はURpgBattleCharacterとして作成
 	if (SideType == ESideType::Ally)
 	{
-		TWeakObjectPtr<URpgBattleCharacter> CharacterBase = NewObject<URpgBattleCharacter>();
+		TObjectPtr<URpgBattleCharacter> CharacterBase = NewObject<URpgBattleCharacter>();
 		CharacterBase.Get()->SetParameter(Parameter);
 		return CharacterBase;
 	}
 	// 敵の場合はURpgBattleCharacterEnemyとして作成
 	else if (SideType == ESideType::Enemy)
 	{
-		TWeakObjectPtr<URpgBattleCharacterEnemy> CharacterEnemy = NewObject<URpgBattleCharacterEnemy>();
+		TObjectPtr<URpgBattleCharacterEnemy> CharacterEnemy = NewObject<URpgBattleCharacterEnemy>();
 		CharacterEnemy.Get()->SetParameter(Parameter);
 		return CharacterEnemy;
 	}

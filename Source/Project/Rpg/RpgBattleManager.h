@@ -7,6 +7,9 @@
 
 #include "BattlePartyManager.h"
 #include "CPPRpgBattleProcessState.h"
+#include "RpgTurnManager.h"
+#include "RpgBattleDamageCalculator.h"
+#include "CPPRpgBattleCommandType.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -23,10 +26,21 @@ public:
 public:
 	URpgBattleManager(const FObjectInitializer& ObjectInitializer);
 
-	void SetBattleParty(TWeakObjectPtr<UBattlePartyManager>&& Party)
+	void SetBattleParty(TObjectPtr<UBattlePartyManager> Party)
 	{
-		PartyManager = Party;
+		check(Party);
+		BattleParty = Party;
 	}
+
+	void NormalizeTurnList();
+	void SetTurn();
+	void OutputTurn() const;
+	bool IsTurnListEmpty() const;
+	void ChangeTurn();
+
+	bool CheckSideAnnihilation();
+
+	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
 
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
@@ -37,7 +51,27 @@ public:
 	// 次のステータスに進める
 	bool NextState();
 
+	// 選択したアクションを処理する
+	void ActionProc();
+
+	// 行動選択のログ出力
+	void OutputSelectCommandLog();
+
 protected:
-	TWeakObjectPtr<UBattlePartyManager> PartyManager;
+	UPROPERTY()
+		TObjectPtr<UBattlePartyManager> BattleParty;
+	UPROPERTY()
+		TObjectPtr<URpgTurnManager> TurnManager;
+	UPROPERTY()
+		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
+
+	// 行動選択
+	// 構造体にまとめるかも
+	ERpgBattleCommandType SelectCommand;
+	UPROPERTY()
+		TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
+	UPROPERTY()
+		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
+
 };

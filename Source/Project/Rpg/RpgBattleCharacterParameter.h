@@ -32,6 +32,8 @@ public:
 	void SetDefencePower(int32 Power);
 	void SetAgility(int32 AgilityValue);
 
+	void Damage(int32 AttackDamage);
+
 	int32 GetHp() const { return Hp; }
 	int32 GetMaxHp() const { return MaxHp; }
 	int32 GetSp() const { return Sp; }
@@ -41,6 +43,8 @@ public:
 	int32 GetAgility() const { return Agility; }
 	URpgBattleStatus& GetStatus() const { return *Status; }
 	FText GetName() const { return Name; }
+
+	bool IsDead() const;
 
 	void OutputLog();
 
@@ -70,7 +74,7 @@ public:
 
 	// ステータス
 	UPROPERTY(EditAnywhere)
-		TWeakObjectPtr<URpgBattleStatus> Status;
+	TObjectPtr<URpgBattleStatus> Status;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		FText Name;

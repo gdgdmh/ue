@@ -11,6 +11,11 @@
 
 #include "Rpg/RpgBattlePartyFactory.h"
 
+// --- test ---
+#include "Rpg/TurnOrderList.h"
+#include "Rpg/TurnOrderCalculator.h"
+// ---
+
 
 AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -18,6 +23,7 @@ AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitial
 	PrimaryActorTick.bCanEverTick = true;
 	DefaultPawnClass = APawn::StaticClass();
 	//PlayerControllerClass = AMatch3PlayerController::StaticClass();
+	bTasking = false;
 }
 
 void AProjectRpgGameMode::BeginPlay()
@@ -128,7 +134,7 @@ void AProjectRpgGameMode::SetMainUI()
 	// パーティ作成のテスト
 	{
 		UE_LOG(LogTemp, Log, TEXT("--- Party Factory Test Begin ---"));
-		TWeakObjectPtr<URpgBattlePartyFactory> Factory = NewObject<URpgBattlePartyFactory>();
+		TObjectPtr<URpgBattlePartyFactory> Factory = NewObject<URpgBattlePartyFactory>();
 		AllyParty = Factory->Create(ERpgBattlePartyFactoryType::Test);
 		EnemyParty = Factory->Create(ERpgBattlePartyFactoryType::TestEnemy);
 		UE_LOG(LogTemp, Log, TEXT("--- Party Factory Test End ---"));
@@ -137,13 +143,13 @@ void AProjectRpgGameMode::SetMainUI()
 	// 味方パーティをデータテーブルから読み込み
 	UE_LOG(LogTemp, Log, TEXT("--- DataTable Load Ally Party ---"));
 	{
-		TWeakObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
+		TObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
 		FString DataTablePath = "/Script/Engine.DataTable'/Game/Project/UI/DataTables/Rpg/DT_BattlePartyAlly.DT_BattlePartyAlly'";
 		TArray<FBattlePartyDataTable> PartyDataTable;
 		if (Loader.Get()->Load(DataTablePath, PartyDataTable))
 		{
 			// 読み込んだテーブルからパーティを作成
-			TWeakObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
+			TObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
 			AllyParty = Converter.Get()->Convert(PartyDataTable, ESideType::Ally);
 			AllyParty->OutputLog();
 		}
@@ -156,13 +162,13 @@ void AProjectRpgGameMode::SetMainUI()
 	// 敵パーティをデータテーブルから読み込み
 	UE_LOG(LogTemp, Log, TEXT("--- DataTable Load Enemy Party ---"));
 	{
-		TWeakObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
+		TObjectPtr<UBattlePartyDataTableLoader> Loader = NewObject<UBattlePartyDataTableLoader>();
 		FString DataTablePath = "/Script/Engine.DataTable'/Game/Project/UI/DataTables/Rpg/DT_BattlePartyEnemy.DT_BattlePartyEnemy'";
 		TArray<FBattlePartyDataTable> PartyDataTable;
 		if (Loader.Get()->Load(DataTablePath, PartyDataTable))
 		{
 			// 読み込んだテーブルからパーティを作成
-			TWeakObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
+			TObjectPtr<UBattlePartyDataTableConverter> Converter = NewObject<UBattlePartyDataTableConverter>();
 			EnemyParty = Converter.Get()->Convert(PartyDataTable, ESideType::Enemy);
 			EnemyParty->OutputLog();
 		}
@@ -170,7 +176,57 @@ void AProjectRpgGameMode::SetMainUI()
 		{
 			UE_LOG(LogTemp, Log, TEXT("BattlePartyDataTable Load Failure"));
 		}
+	}
 
+	// ターンソートのテスト
+	/*
+	{
+		TObjectPtr<UTurnOrderCalculator> Calc = NewObject<UTurnOrderCalculator>();
+		TObjectPtr<UTurnOrderList> List = Calc.Get()->Calc(AllyParty, EnemyParty);
+
+		UE_LOG(LogTemp, Log, TEXT("--- SortTest Begin ---"));
+		{
+			const int32 Num = List.Get()->Size();
+			for (int32 i = 0; i < Num; ++i)
+			{
+				List.Get()->Get(i).Get()->OutputLog();
+			}
+		}
+		UE_LOG(LogTemp, Log, TEXT("--- SortTest End ---"));
+		List.Get()->PopFront();
+		{
+			const int32 Num = List.Get()->Size();
+			for (int32 i = 0; i < Num; ++i)
+			{
+				List.Get()->Get(i).Get()->OutputLog();
+			}
+		}
+		UE_LOG(LogTemp, Log, TEXT("--- SortTest End ---"));
+	}
+	*/
+
+	// BattleManager
+	{
+		BattleManager = NewObject<URpgBattleManager>();
+		check(BattleManager);
+		check(AllyParty);
+		check(EnemyParty);
+
+		TObjectPtr<UBattlePartyManager> BattleParty = NewObject<UBattlePartyManager>();
+		BattleParty->Initialize();
+		{
+			TObjectPtr<UBattlePartySide> AllyPartySide = NewObject<UBattlePartySide>();
+			AllyPartySide.Get()->SetParty(AllyParty);
+			AllyPartySide.Get()->SetType(ESideType::Ally);
+			BattleParty->SetParty(AllyPartySide);
+		}
+		{
+			TObjectPtr<UBattlePartySide> EnemyPartySide = NewObject<UBattlePartySide>();
+			EnemyPartySide.Get()->SetParty(EnemyParty);
+			EnemyPartySide.Get()->SetType(ESideType::Enemy);
+			BattleParty->SetParty(EnemyPartySide);
+		}
+		BattleManager.Get()->SetBattleParty(BattleParty);
 	}
 
 	if (MainProjectUserWidgets.Num() != 0)
@@ -218,7 +274,7 @@ void AProjectRpgGameMode::SetMainUI()
 			MainWidget->AddUserWidgetSubsytem();
 
 			MainWidget->Set();
-			if (BattleManager.IsValid())
+			if (BattleManager)
 			{
 				MainWidget->SetState(BattleManager.Get()->GetState());
 			}
@@ -242,12 +298,22 @@ void AProjectRpgGameMode::CleanupMainUI()
 void AProjectRpgGameMode::InitializeBattleManager()
 {
 	BattleManager = NewObject<URpgBattleManager>();
-	check(BattleManager.IsValid());
+	check(BattleManager);
+
+	// 強制GC
+	GEngine->ForceGarbageCollection(true);
 }
 
 void AProjectRpgGameMode::RpgMainOnClickNextButton()
 {
-	check(BattleManager.IsValid());
+	if (bTasking)
+	{
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainOnClickNextButton tasking"));
+		return;
+	}
+	bTasking = true;
+	//UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainOnClickNextButton start"));
+	check(BattleManager);
 
 	// ログ表示&次のステータスに進める
 	{
@@ -270,6 +336,6 @@ void AProjectRpgGameMode::RpgMainOnClickNextButton()
 		// Widget表示も更新
 		RpgMainWidget->SetState(BattleManager.Get()->GetState());
 	}
-	//MainProjectUserWidgets
-	
+	bTasking = false;
+	//UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainOnClickNextButton end"));
 }

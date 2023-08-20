@@ -55,15 +55,19 @@ private:
 	UPROPERTY()
 		TArray< TObjectPtr<UProjectUserWidget> > MainProjectUserWidgets;
 
-	TObjectPtr<URpgMainUserWidget> RpgMainWidget;
+	UPROPERTY()
+		TObjectPtr<URpgMainUserWidget> RpgMainWidget;
 
 	// パーティ
 	UPROPERTY()
-		TWeakObjectPtr<URpgBattleParty> AllyParty;
+		TObjectPtr<URpgBattleParty> AllyParty;
 
 	UPROPERTY()
-		TWeakObjectPtr<URpgBattleParty> EnemyParty;
+		TObjectPtr<URpgBattleParty> EnemyParty;
 	// バトルマネージャー
 	UPROPERTY()
-		TWeakObjectPtr<URpgBattleManager> BattleManager;
+		TObjectPtr<URpgBattleManager> BattleManager;
+
+	UPROPERTY()
+		bool bTasking;
 };

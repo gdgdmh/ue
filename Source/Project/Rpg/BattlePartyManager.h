@@ -18,13 +18,21 @@ class PROJECT_API UBattlePartyManager : public UObject
 	GENERATED_BODY()
 	
 public:
+	UBattlePartyManager(const FObjectInitializer& ObjectInitializer);
+
 	void Initialize();
 
-	void SetParty(TWeakObjectPtr<UBattlePartySide>&& Party);
+	void SetParty(TObjectPtr<UBattlePartySide> Party);
 
-	TWeakObjectPtr<UBattlePartySide> Get(ESideType Type);
+	TObjectPtr<UBattlePartySide> Get(ESideType Type);
 
-public:
-	TWeakObjectPtr<UBattlePartySide> AllyParty;
-	TWeakObjectPtr<UBattlePartySide> EnemyParty;
+	// ノンターゲットで攻撃する際に攻撃対象とするキャラクターを取得
+	TObjectPtr<URpgBattleCharacterBase> GetAttackTarget(ESideType Type);
+
+	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase> CharacterBase) const;
+protected:
+	UPROPERTY()
+		TObjectPtr<UBattlePartySide> AllyParty;
+	UPROPERTY()
+		TObjectPtr<UBattlePartySide> EnemyParty;
 };

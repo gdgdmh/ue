@@ -16,3 +16,20 @@ enum class ESideType : uint8
 	Num				UMETA(Hidden)
 };
 ENUM_RANGE_BY_COUNT(ESideType, ESideType::Num)
+
+// 敵の陣営の取得(陣営が3つ以上には対応してない)
+ESideType GetEnemySide(ESideType Type)
+{
+	if (Type == ESideType::Ally)
+	{
+		return ESideType::Enemy;
+	}
+	if (Type == ESideType::Enemy)
+	{
+		return ESideType::Ally;
+	}
+	// ハンドリングできてないパターンがあるかNumなどのパラメーターを指定した
+	UE_LOG(LogTemp, Log, TEXT("ESideType Invalid"));
+	check(false);
+	return ESideType::Ally;
+}

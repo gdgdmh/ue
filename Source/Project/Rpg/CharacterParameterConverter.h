@@ -18,5 +18,5 @@ class PROJECT_API UCharacterParameterConverter : public UObject
 	GENERATED_BODY()
 	
 public:
-	TWeakObjectPtr<URpgBattleCharacterBase> Convert(const URpgBattleCharacterParameter& Parameter, ESideType SideType);
+	TObjectPtr<URpgBattleCharacterBase> Convert(const URpgBattleCharacterParameter& Parameter, ESideType SideType);
 };
