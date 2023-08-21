@@ -10,7 +10,7 @@
 #include "RpgAttackParameter.generated.h"
 
 /**
- * 
+ * 行動の攻撃に関するパラメーター
  */
 UCLASS()
 class PROJECT_API URpgAttackParameter : public UObject
@@ -21,9 +21,10 @@ public:
 	URpgAttackParameter(const FObjectInitializer& ObjectInitializer);
 
 
-private:
+protected:
 	// 対象
-	CPPRpgTargetType TargetType;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		CPPRpgTargetType TargetType;
 
 	// 攻撃力
 	//int32 AttackPower;

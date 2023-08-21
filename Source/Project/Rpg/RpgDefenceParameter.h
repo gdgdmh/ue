@@ -20,7 +20,8 @@ class PROJECT_API URpgDefenceParameter : public UObject
 public:
 	URpgDefenceParameter(const FObjectInitializer& ObjectInitializer);
 
-private:
+public:
 	// 対象
-	CPPRpgTargetType TargetType;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		CPPRpgTargetType TargetType;
 };

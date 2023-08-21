@@ -9,7 +9,7 @@
 * 行動タイプ
 */
 UENUM(BlueprintType)
-enum class CPPRpgActionType : uint8
+enum class ERpgActionType : uint8
 {
 	None				UMETA(DisplayName = "なし",					ToolTip = "なし"),
 	Attack				UMETA(DisplayName = "攻撃系",				ToolTip = "攻撃系"),
@@ -19,4 +19,4 @@ enum class CPPRpgActionType : uint8
 
 	Num				UMETA(Hidden)
 };
-ENUM_RANGE_BY_COUNT(CPPRpgActionType, CPPRpgActionType::Num)
+ENUM_RANGE_BY_COUNT(ERpgActionType, ERpgActionType::Num)
