@@ -13,7 +13,7 @@
 #include "RpgActionParameter.generated.h"
 
 /**
- * 
+ * 行動パラメーター
  */
 UCLASS()
 class PROJECT_API URpgActionParameter : public UObject
@@ -23,14 +23,14 @@ class PROJECT_API URpgActionParameter : public UObject
 public:
 	URpgActionParameter(const FObjectInitializer& ObjectInitializer);
 
-
-private:
+protected:
 	// アクションタイプ
-	CPPRpgActionType ActionType;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		ERpgActionType ActionType;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TObjectPtr<URpgAttackParameter> AttackParameter;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TObjectPtr<URpgDefenceParameter> DefenceParameter; 
 };
