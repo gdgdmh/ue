@@ -7,6 +7,7 @@
 
 #include "ProjectUserWidget.h"
 #include "Rpg/RpgTitleUserWidget.h"
+#include "Rpg/RpgMainViewUserWidget.h"
 
 #include "Rpg/RpgBattleParty.h"
 #include "Rpg/RpgBattleManager.h"
@@ -40,10 +41,10 @@ private:
 	void SetMainUI();
 	void CleanupMainUI();
 	
-	void InitializeBattleManager();
+	//void InitializeBattleManager();
 
 private:
-	void RpgMainOnClickNextButton();
+	//void RpgMainOnClickNextButton();
 
 private:
 	// タイトルのUserWidgetまとめ
@@ -57,6 +58,9 @@ private:
 
 	UPROPERTY()
 		TObjectPtr<URpgMainUserWidget> RpgMainWidget;
+
+	UPROPERTY()
+		TObjectPtr<URpgMainViewUserWidget> RpgMainViewUserWidget;
 
 	// パーティ
 	UPROPERTY()

@@ -44,7 +44,7 @@ void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidget
 		CleanupTitleUI();
 
 		// 戦闘システム初期化
-		InitializeBattleManager();
+		//InitializeBattleManager();
 
 		// メインUIのセット
 		SetMainUI();
@@ -255,6 +255,7 @@ void AProjectRpgGameMode::SetMainUI()
 		}
 	}
 
+	/*
 	// Main WBP
 	{
 		FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMain.WBP_RpgMain_C");
@@ -286,6 +287,46 @@ void AProjectRpgGameMode::SetMainUI()
 			MainProjectUserWidgets.Add(MainWidget);
 		}
 	}
+	*/
+
+	// RpgMainViewUserWidget
+	{
+
+		// /Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMainView.WBP_RpgMainView'
+		//RpgMainViewUserWidget
+
+		FString AssetPath = TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Project/UI/Blueprints/Rpg/Main/WBP_RpgMainView.WBP_RpgMainView_C'");
+		TSubclassOf<class UUserWidget> WidgetClass;
+		WidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
+		if (!WidgetClass)
+		{
+			UE_LOG(LogTemp, Log, TEXT("widget load failure"));
+			return;
+		}
+
+		TObjectPtr<URpgMainViewUserWidget> MainWidget = CreateWidget<URpgMainViewUserWidget>(GetWorld(), WidgetClass);
+		if (MainWidget)
+		{
+			RpgMainViewUserWidget = MainWidget;
+			MainWidget->AddToViewport(20);
+			MainWidget->AddUserWidgetSubsytem();
+
+			/*
+			MainWidget->Set();
+			if (BattleManager)
+			{
+				MainWidget->SetState(BattleManager.Get()->GetState());
+			}
+			MainWidget->GetClickNextButtonDelegate().BindLambda([this]
+				{
+					RpgMainOnClickNextButton();
+				});
+			*/
+
+			MainProjectUserWidgets.Add(MainWidget);
+		}
+
+	}
 
 
 
@@ -295,6 +336,7 @@ void AProjectRpgGameMode::CleanupMainUI()
 {
 }
 
+#if 0
 void AProjectRpgGameMode::InitializeBattleManager()
 {
 	BattleManager = NewObject<URpgBattleManager>();
@@ -339,3 +381,4 @@ void AProjectRpgGameMode::RpgMainOnClickNextButton()
 	bTasking = false;
 	//UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainOnClickNextButton end"));
 }
+#endif
