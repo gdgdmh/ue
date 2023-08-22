@@ -72,6 +72,6 @@ private:
 	UPROPERTY()
 		TObjectPtr<URpgBattleManager> BattleManager;
 
-	UPROPERTY()
-		bool bTasking;
+	//UPROPERTY()
+	//	bool bTasking;
 };

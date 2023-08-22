@@ -23,7 +23,7 @@ AProjectRpgGameMode::AProjectRpgGameMode(const FObjectInitializer& ObjectInitial
 	PrimaryActorTick.bCanEverTick = true;
 	DefaultPawnClass = APawn::StaticClass();
 	//PlayerControllerClass = AMatch3PlayerController::StaticClass();
-	bTasking = false;
+	//bTasking = false;
 }
 
 void AProjectRpgGameMode::BeginPlay()
