@@ -32,7 +32,6 @@ public:
 
 public:
 	void OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type);
-
 private:
 	void SetTitleUI();
 	void CleanupTitleUI();
@@ -41,9 +40,12 @@ private:
 	void SetMainUI();
 	void CleanupMainUI();
 	
-	//void InitializeBattleManager();
+	void InitializeBattleManager();
 
 private:
+
+	void RpgMainViewOnClickNextButton();
+	void RpgMainViewOnClickTurnEndButton();
 	//void RpgMainOnClickNextButton();
 
 private:

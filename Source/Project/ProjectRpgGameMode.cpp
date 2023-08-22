@@ -311,17 +311,15 @@ void AProjectRpgGameMode::SetMainUI()
 			MainWidget->AddToViewport(20);
 			MainWidget->AddUserWidgetSubsytem();
 
-			/*
-			MainWidget->Set();
-			if (BattleManager)
-			{
-				MainWidget->SetState(BattleManager.Get()->GetState());
-			}
 			MainWidget->GetClickNextButtonDelegate().BindLambda([this]
-				{
-					RpgMainOnClickNextButton();
-				});
-			*/
+			{
+				RpgMainViewOnClickNextButton();
+			});
+
+			MainWidget->GetClickTurnEndButtonDelegate().BindLambda([this]
+			{
+				RpgMainViewOnClickTurnEndButton();
+			});
 
 			MainProjectUserWidgets.Add(MainWidget);
 		}
@@ -334,6 +332,73 @@ void AProjectRpgGameMode::SetMainUI()
 
 void AProjectRpgGameMode::CleanupMainUI()
 {
+}
+
+void AProjectRpgGameMode::InitializeBattleManager()
+{
+	BattleManager = NewObject<URpgBattleManager>();
+	check(BattleManager);
+
+	// 強制GC
+	GEngine->ForceGarbageCollection(true);
+}
+
+void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
+{
+	check(BattleManager);
+
+	{
+		FString LogText = TEXT("Next ");
+		LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		LogText += TEXT(" -> ");
+		bool bResult = BattleManager.Get()->NextState();
+		if (bResult)
+		{
+			// 次のステータスをログに設定
+			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		}
+		else
+		{
+			// 失敗したので現在のステータスを表示するように設定
+			LogText = TEXT("NextState Failure ");
+			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		}
+		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
+		// Widget表示も更新
+		//RpgMainViewUserWidget->SetState(BattleManager.Get()->GetState());
+	}
+
+	/*
+	check(BattleManager);
+
+	// ログ表示&次のステータスに進める
+	{
+		FString LogText = TEXT("Next ");
+		LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		LogText += TEXT(" -> ");
+		bool bResult = BattleManager.Get()->NextState();
+		if (bResult)
+		{
+			// 次のステータスをログに設定
+			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		}
+		else
+		{
+			// 失敗したので現在のステータスを表示するように設定
+			LogText = TEXT("NextState Failure ");
+			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		}
+		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
+		// Widget表示も更新
+		RpgMainWidget->SetState(BattleManager.Get()->GetState());
+	}
+
+	*/
+}
+
+void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
+{
+
 }
 
 #if 0

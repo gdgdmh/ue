@@ -152,6 +152,112 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::Start)
 	{
+		ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PrePlayerTurn)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerSelectAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerAction)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerActionAfter)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerTurnFinish)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfter)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnAfterFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfterFinish)
+	{
+		ProcessState = ERpgBattleProcessState::PreEnemyTurn;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreEnemyTurn)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyAction)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyActionAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyActionAfter)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyActionFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyActionFinish)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyTurnAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyTurnAfter)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyTurnAfterFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyTurnAfterFinish)
+	{
+		ProcessState = ERpgBattleProcessState::TurnPreFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::TurnPreFinish)
+	{
+		ProcessState = ERpgBattleProcessState::TurnFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::TurnFinish)
+	{
+		ProcessState = ERpgBattleProcessState::PreFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreFinish)
+	{
+		ProcessState = ERpgBattleProcessState::Finish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::Finish)
+	{
+		return true;
+	}
+	return true;
+#if 0
+	if (ProcessState == ERpgBattleProcessState::None)
+	{
+		ProcessState = ERpgBattleProcessState::Initialize;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::Initialize)
+	{
+		ProcessState = ERpgBattleProcessState::PreStart;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreStart)
+	{
+		ProcessState = ERpgBattleProcessState::Start;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::Start)
+	{
 		ProcessState = ERpgBattleProcessState::TurnPreCalc;
 		return true;
 	}
@@ -259,6 +365,7 @@ bool URpgBattleManager::NextState()
 		return true;
 	}
 	return true;
+#endif
 }
 
 void URpgBattleManager::ActionProc()
