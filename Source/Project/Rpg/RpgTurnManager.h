@@ -24,7 +24,7 @@ public:
 	URpgTurnManager(const FObjectInitializer& ObjectInitializer);
 	
 	void ResetTurnOrderList();
-	bool Set(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty);
+	bool Set(TObjectPtr<URpgBattleParty> EnemyParty);
 	void PopFront();
 	void Normalize();
 

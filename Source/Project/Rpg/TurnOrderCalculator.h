@@ -19,5 +19,5 @@ class PROJECT_API UTurnOrderCalculator : public UObject
 	GENERATED_BODY()
 	
 public:
-	TObjectPtr<UTurnOrderList> Calc(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty);
+	TObjectPtr<UTurnOrderList> Calc(TObjectPtr<URpgBattleParty> EnemyParty);
 };

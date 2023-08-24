@@ -23,7 +23,7 @@ void URpgBattleManager::NormalizeTurnList()
 void URpgBattleManager::SetTurn()
 {
 	check(TurnManager);
-	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Ally).Get()->Get(), BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
+	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
 }
 
 void URpgBattleManager::OutputTurn() const
@@ -192,6 +192,25 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PreEnemyTurn)
 	{
+		if (IsTurnListEmpty())
+		{
+			// ターンリスト初回設定 or 1順した
+			// 設定し直し
+			SetTurn();
+		}
+		else
+		{
+			// 次のメンバーにターンを切り替え
+			ChangeTurn();
+			if (IsTurnListEmpty())
+			{
+				SetTurn();
+			}
+		}
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+		OutputTurn();
+
 		ProcessState = ERpgBattleProcessState::EnemyAction;
 		return true;
 	}
@@ -395,9 +414,7 @@ void URpgBattleManager::OutputSelectCommandLog()
 	// コマンドの出力(EnumからFStringに変換)
 	{
 		FString EnumName = TEXT("/Script/Project.ERpgBattleCommandType");
-		//FString EnumName = TEXT("ERpgBattleCommandType");
 		UEnum* const Enum = FindObject<UEnum>(nullptr, *EnumName);
-		//UEnum* const Enum = FindObject<UEnum>(ANY_PACKAGE, *EnumName);
 		FString CommandEnumName = Enum->GetNameStringByIndex(static_cast<int32>(SelectCommand));
 		UE_LOG(LogTemp, Log, TEXT("Command:%s"), *CommandEnumName);
 	}
