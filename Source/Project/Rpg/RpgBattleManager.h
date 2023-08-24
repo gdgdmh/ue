@@ -34,7 +34,7 @@ public:
 
 	void NormalizeTurnList();
 	void SetTurn();
-	void OutputTurn() const;
+	void OutputTurnLog() const;
 	bool IsTurnListEmpty() const;
 	void ChangeTurn();
 
@@ -50,6 +50,9 @@ public:
 
 	// 次のステータスに進める
 	bool NextState();
+
+	// プレイヤーのターンを終了させる
+	void EndPlayerTurn();
 
 	// 選択したアクションを処理する
 	void ActionProc();

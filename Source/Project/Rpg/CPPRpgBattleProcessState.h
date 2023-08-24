@@ -45,7 +45,7 @@ enum class ERpgBattleProcessState : uint8
 ENUM_RANGE_BY_COUNT(ERpgBattleProcessState, ERpgBattleProcessState::Num)
 
 
-FText ToString(ERpgBattleProcessState State)
+FText ToText(ERpgBattleProcessState State)
 {
 	FString EnumName = TEXT("/Script/Project.ERpgBattleProcessState");
 	UEnum* const Enum = FindObject<UEnum>(nullptr, *EnumName);

@@ -49,6 +49,9 @@ private:
 	//void RpgMainOnClickNextButton();
 
 private:
+	void OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState);
+
+private:
 	// タイトルのUserWidgetまとめ
 	UPROPERTY()
 		TArray< TObjectPtr<UProjectUserWidget> > TitleProjectUserWidgets;

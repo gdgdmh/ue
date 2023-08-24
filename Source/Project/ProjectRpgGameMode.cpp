@@ -347,26 +347,31 @@ void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
 {
 	check(BattleManager);
 
+	ERpgBattleProcessState Before = BattleManager.Get()->GetState();
+	BattleManager.Get()->NextState();
+	ERpgBattleProcessState After = BattleManager.Get()->GetState();
+
+	OutputStateLog(Before, After);
+	/*
 	{
 		FString LogText = TEXT("Next ");
-		LogText += ToString(BattleManager.Get()->GetState()).ToString();
+		LogText += ToText(BattleManager.Get()->GetState()).ToString();
 		LogText += TEXT(" -> ");
 		bool bResult = BattleManager.Get()->NextState();
 		if (bResult)
 		{
 			// 次のステータスをログに設定
-			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+			LogText += ToText(BattleManager.Get()->GetState()).ToString();
 		}
 		else
 		{
 			// 失敗したので現在のステータスを表示するように設定
 			LogText = TEXT("NextState Failure ");
-			LogText += ToString(BattleManager.Get()->GetState()).ToString();
+			LogText += ToText(BattleManager.Get()->GetState()).ToString();
 		}
 		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
-		// Widget表示も更新
-		//RpgMainViewUserWidget->SetState(BattleManager.Get()->GetState());
 	}
+	*/
 
 	/*
 	check(BattleManager);
@@ -398,6 +403,25 @@ void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
 
 void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
 {
+	check(BattleManager);
+
+	ERpgBattleProcessState Before = BattleManager.Get()->GetState();
+	BattleManager.Get()->EndPlayerTurn();
+	ERpgBattleProcessState After = BattleManager.Get()->GetState();
+
+	OutputStateLog(Before, After);
+}
+
+void AProjectRpgGameMode::OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState)
+{
+	{
+		FString LogText = TEXT("");
+		LogText += ToText(BeforeState).ToString();
+		LogText += TEXT(" -> ");
+		// 次のステータスをログに設定
+		LogText += ToText(AfterState).ToString();
+		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
+	}
 
 }
 

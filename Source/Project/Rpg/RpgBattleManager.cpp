@@ -26,7 +26,7 @@ void URpgBattleManager::SetTurn()
 	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
 }
 
-void URpgBattleManager::OutputTurn() const
+void URpgBattleManager::OutputTurnLog() const
 {
 	check(TurnManager);
 	TurnManager.Get()->OutputLog();
@@ -162,7 +162,7 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
 	{
-		ProcessState = ERpgBattleProcessState::PlayerAction;
+		//ProcessState = ERpgBattleProcessState::PlayerAction;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerAction)
@@ -209,7 +209,7 @@ bool URpgBattleManager::NextState()
 		}
 		// 死亡キャラや不正な状態を修正
 		NormalizeTurnList();
-		OutputTurn();
+		OutputTurnLog();
 
 		ProcessState = ERpgBattleProcessState::EnemyAction;
 		return true;
@@ -385,6 +385,19 @@ bool URpgBattleManager::NextState()
 	}
 	return true;
 #endif
+}
+
+// プレイヤーのターンを終了させる
+void URpgBattleManager::EndPlayerTurn()
+{
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Not Player End Turn State"));
+	}
 }
 
 void URpgBattleManager::ActionProc()
