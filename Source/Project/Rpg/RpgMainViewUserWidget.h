@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -7,9 +7,9 @@
 #include "RpgMainViewUserWidget.generated.h"
 
 // Delegate
-// NextButton‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚ÌDelegate
+// NextButtonãŒæŠ¼ã•ã‚ŒãŸã¨ãã®Delegate
 DECLARE_DELEGATE(FRpgMainViewClickNextButtonDelegate)
-// TurnEndButton‚ª‰Ÿ‚³‚ê‚½‚Æ‚«‚ÌDelegate
+// TurnEndButtonãŒæŠ¼ã•ã‚ŒãŸã¨ãã®Delegate
 DECLARE_DELEGATE(FRpgMainViewClickTurnEndButtonDelegate)
 
 /**

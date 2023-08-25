@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "RpgCardUserWidget.generated.h"
 
 // Delegate
-// ‰Ÿ‚³‚ê‚½‚Æ‚«‚ÌDelegate
+// æŠ¼ã•ã‚ŒãŸã¨ãã®Delegate
 DECLARE_DELEGATE(FRpgCardUserWidgetOnClickDelegate)
 
 /**
@@ -36,7 +36,7 @@ public:
 
 	FRpgCardUserWidgetOnClickDelegate CardUserWidgetOnClickDelegate;
 
-	// ƒ†[ƒU[’è‹`‚ÌId
+	// ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®Id
 	UPROPERTY()
 		int32 Id;
 };
