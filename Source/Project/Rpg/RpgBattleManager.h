@@ -10,6 +10,7 @@
 #include "RpgTurnManager.h"
 #include "RpgBattleDamageCalculator.h"
 #include "CPPRpgBattleCommandType.h"
+#include "ActionCardList.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -31,6 +32,8 @@ public:
 		check(Party);
 		BattleParty = Party;
 	}
+
+	void SetCardList(TObjectPtr<UActionCardList> List);
 
 	void NormalizeTurnList();
 	void SetTurn();
@@ -68,6 +71,9 @@ protected:
 	UPROPERTY()
 		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
+
+	UPROPERTY()
+		TObjectPtr<UActionCardList> CardList;
 
 	// 行動選択
 	// 構造体にまとめるかも

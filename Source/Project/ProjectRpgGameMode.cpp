@@ -44,7 +44,7 @@ void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidget
 		CleanupTitleUI();
 
 		// 戦闘システム初期化
-		//InitializeBattleManager();
+		InitializeBattleManager();
 
 		// メインUIのセット
 		SetMainUI();
@@ -227,6 +227,9 @@ void AProjectRpgGameMode::SetMainUI()
 			BattleParty->SetParty(EnemyPartySide);
 		}
 		BattleManager.Get()->SetBattleParty(BattleParty);
+
+		check(CardList);
+		BattleManager.Get()->SetCardList(CardList);
 	}
 
 	if (MainProjectUserWidgets.Num() != 0)
@@ -339,6 +342,9 @@ void AProjectRpgGameMode::InitializeBattleManager()
 	BattleManager = NewObject<URpgBattleManager>();
 	check(BattleManager);
 
+	CardList = NewObject<UActionCardList>();
+	check(CardList);
+
 	// 強制GC
 	GEngine->ForceGarbageCollection(true);
 }
@@ -352,53 +358,6 @@ void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
 	ERpgBattleProcessState After = BattleManager.Get()->GetState();
 
 	OutputStateLog(Before, After);
-	/*
-	{
-		FString LogText = TEXT("Next ");
-		LogText += ToText(BattleManager.Get()->GetState()).ToString();
-		LogText += TEXT(" -> ");
-		bool bResult = BattleManager.Get()->NextState();
-		if (bResult)
-		{
-			// 次のステータスをログに設定
-			LogText += ToText(BattleManager.Get()->GetState()).ToString();
-		}
-		else
-		{
-			// 失敗したので現在のステータスを表示するように設定
-			LogText = TEXT("NextState Failure ");
-			LogText += ToText(BattleManager.Get()->GetState()).ToString();
-		}
-		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
-	}
-	*/
-
-	/*
-	check(BattleManager);
-
-	// ログ表示&次のステータスに進める
-	{
-		FString LogText = TEXT("Next ");
-		LogText += ToString(BattleManager.Get()->GetState()).ToString();
-		LogText += TEXT(" -> ");
-		bool bResult = BattleManager.Get()->NextState();
-		if (bResult)
-		{
-			// 次のステータスをログに設定
-			LogText += ToString(BattleManager.Get()->GetState()).ToString();
-		}
-		else
-		{
-			// 失敗したので現在のステータスを表示するように設定
-			LogText = TEXT("NextState Failure ");
-			LogText += ToString(BattleManager.Get()->GetState()).ToString();
-		}
-		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
-		// Widget表示も更新
-		RpgMainWidget->SetState(BattleManager.Get()->GetState());
-	}
-
-	*/
 }
 
 void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()

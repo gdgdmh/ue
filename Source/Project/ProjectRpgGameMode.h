@@ -11,6 +11,7 @@
 
 #include "Rpg/RpgBattleParty.h"
 #include "Rpg/RpgBattleManager.h"
+#include "Rpg/ActionCardList.h"
 
 #include "ProjectRpgGameMode.generated.h"
 
@@ -76,7 +77,11 @@ private:
 	// バトルマネージャー
 	UPROPERTY()
 		TObjectPtr<URpgBattleManager> BattleManager;
+	// カードリスト
+	UPROPERTY()
+		TObjectPtr<UActionCardList> CardList;
 
+	//TWeakObjectPtr<UActionCard> AAA;
 	//UPROPERTY()
 	//	bool bTasking;
 };

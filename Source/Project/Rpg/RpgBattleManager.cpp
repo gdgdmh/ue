@@ -9,9 +9,17 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	BattleParty = NewObject<UBattlePartyManager>();
 	TurnManager = NewObject<URpgTurnManager>();
 
+	CardList = nullptr;
+
 	SelectCommand = ERpgBattleCommandType::None;
 	AttackCharacter = nullptr;
 	AttackTargetCharacter = nullptr;
+}
+
+void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
+{
+	CardList = List;
+	check(CardList);
 }
 
 void URpgBattleManager::NormalizeTurnList()
