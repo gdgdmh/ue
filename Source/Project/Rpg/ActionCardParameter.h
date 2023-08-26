@@ -3,7 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+
 #include "CPPRpgActionCardType.h"
+#include "ActionCardAttackParameter.h"
+#include "ActionCardDefenceParameter.h"
 
 #include "ActionCardParameter.generated.h"
 
@@ -23,6 +27,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ERpgActionCardType Type;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TObjectPtr<UActionCardAttackParameter> AttackParameter;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TObjectPtr< UActionCardDefenceParameter> DefenceParameter;
 };
 
 /**
