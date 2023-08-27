@@ -15,7 +15,7 @@ void UActionCard::SetActionType(ERpgActionType Type)
 	ActionParameter.Get()->SetActionType(Type);
 }
 
-void UActionCard::SetAttackTarget(CPPRpgTargetType TargetType)
+void UActionCard::SetAttackTarget(ERpgTargetType TargetType)
 {
 	check(ActionParameter);
 	ActionParameter.Get()->SetAttackTarget(TargetType);
@@ -27,7 +27,7 @@ void UActionCard::SetAttackPower(int32 Power)
 	ActionParameter.Get()->SetAttackPower(Power);
 }
 
-void UActionCard::SetDefenceTarget(CPPRpgTargetType TargetType)
+void UActionCard::SetDefenceTarget(ERpgTargetType TargetType)
 {
 	check(ActionParameter);
 	ActionParameter.Get()->SetDefenceTarget(TargetType);
@@ -45,7 +45,7 @@ ERpgActionType UActionCard::GetActionType() const
 	return ActionParameter.Get()->GetActionType();
 }
 
-CPPRpgTargetType UActionCard::GetAttackTarget() const
+ERpgTargetType UActionCard::GetAttackTarget() const
 {
 	check(ActionParameter);
 	return ActionParameter.Get()->GetAttackTarget();
@@ -57,7 +57,7 @@ int32 UActionCard::GetAttackPower() const
 	return ActionParameter.Get()->GetAttackPower();
 }
 
-CPPRpgTargetType UActionCard::GetDefenceTarget() const
+ERpgTargetType UActionCard::GetDefenceTarget() const
 {
 	check(ActionParameter);
 	return ActionParameter.Get()->GetDefenceTarget();

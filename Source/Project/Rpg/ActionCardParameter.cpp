@@ -81,7 +81,7 @@ TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreatePara
 	if (Type == ERpgActionCardType::Defence)
 	{
 		Card.Get()->SetActionType(Data->GetActionType());
-		Card.Get()->SetDefenceTarget(CPPRpgTargetType::Single); // 必要なさそう
+		Card.Get()->SetDefenceTarget(ERpgTargetType::Single); // 必要なさそう
 		Card.Get()->SetDefencePower(Data->GetDfPrmDefencePower());
 		return Card;
 	}

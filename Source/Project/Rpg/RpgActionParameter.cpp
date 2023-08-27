@@ -16,7 +16,7 @@ void URpgActionParameter::SetActionType(ERpgActionType Type)
 	ActionType = Type;
 }
 
-void URpgActionParameter::SetAttackTarget(CPPRpgTargetType TargetType)
+void URpgActionParameter::SetAttackTarget(ERpgTargetType TargetType)
 {
 	check(AttackParameter);
 	AttackParameter.Get()->SetTargetType(TargetType);
@@ -28,7 +28,7 @@ void URpgActionParameter::SetAttackPower(int32 Power)
 	AttackParameter.Get()->SetAttackPower(Power);
 }
 
-void URpgActionParameter::SetDefenceTarget(CPPRpgTargetType TargetType)
+void URpgActionParameter::SetDefenceTarget(ERpgTargetType TargetType)
 {
 	check(DefenceParameter);
 	DefenceParameter.Get()->SetTargetType(TargetType);
@@ -45,7 +45,7 @@ ERpgActionType URpgActionParameter::GetActionType() const
 	return ActionType;
 }
 
-CPPRpgTargetType URpgActionParameter::GetAttackTarget() const
+ERpgTargetType URpgActionParameter::GetAttackTarget() const
 {
 	check(AttackParameter);
 	return AttackParameter.Get()->GetTargetType();
@@ -57,7 +57,7 @@ int32 URpgActionParameter::GetAttackPower() const
 	return AttackParameter.Get()->GetAttackPower();
 }
 
-CPPRpgTargetType URpgActionParameter::GetDefenceTarget() const
+ERpgTargetType URpgActionParameter::GetDefenceTarget() const
 {
 	check(DefenceParameter);
 	return DefenceParameter.Get()->GetTargetType();

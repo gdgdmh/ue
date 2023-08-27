@@ -30,14 +30,14 @@ public:
 		ActionType = ERpgActionType::None;
 		Type = ERpgActionCardType::None;
 		AtkPrmAttackPower = 0;
-		AtkPrmTargetType = CPPRpgTargetType::None;
+		AtkPrmTargetType = ERpgTargetType::None;
 		DfPrmDefencePower = 0;
 	}
 
 	ERpgActionType GetActionType() const { return ActionType; }
 	ERpgActionCardType GetCardType() const { return Type; }
 	int32 GetAtkPrmAttackPower() const { return AtkPrmAttackPower; }
-	CPPRpgTargetType GetAtkPrmTargetType() const { return AtkPrmTargetType; }
+	ERpgTargetType GetAtkPrmTargetType() const { return AtkPrmTargetType; }
 
 	int32 GetDfPrmDefencePower() const { return DfPrmDefencePower; }
 
@@ -55,7 +55,7 @@ public:
 		int32 AtkPrmAttackPower;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		CPPRpgTargetType AtkPrmTargetType;
+		ERpgTargetType AtkPrmTargetType;
 
 	// DefenceParameter
 public:

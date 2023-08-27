@@ -9,7 +9,7 @@
 * 対象タイプ
 */
 UENUM(BlueprintType)
-enum class CPPRpgTargetType : uint8
+enum class ERpgTargetType : uint8
 {
 	None			UMETA(DisplayName = "なし",		ToolTip = "なし"),
 	Single			UMETA(DisplayName = "単体", ToolTip = "単体"),
@@ -19,4 +19,4 @@ enum class CPPRpgTargetType : uint8
 	EnemyAll		UMETA(DisplayName = "敵全体", ToolTip = "敵全体"),
 	Num				UMETA(Hidden)
 };
-ENUM_RANGE_BY_COUNT(CPPRpgTargetType, CPPRpgTargetType::Num)
+ENUM_RANGE_BY_COUNT(ERpgTargetType, ERpgTargetType::Num)
