@@ -73,13 +73,13 @@ private:
 public:
 	FActionCardCreateParameter()
 	{
-		Type = ERpgActionCardType::None;
+		CardType = ERpgActionCardType::None;
 		EnhancementLevel = DEFAULT_ENHANCEMENT_LEVEL;
 	}
 
-	void SetType(ERpgActionCardType CardType)
+	void SetCardType(ERpgActionCardType Type)
 	{
-		Type = CardType;
+		CardType = Type;
 	}
 
 	void SetEnhancementLevel(int32 Level)
@@ -87,7 +87,7 @@ public:
 		EnhancementLevel = Level;
 	}
 
-	ERpgActionCardType GetType() const { return Type; }
+	ERpgActionCardType GetCardType() const { return CardType; }
 	int32 GetEnhancementLevel() const { return EnhancementLevel; }
 
 public:
@@ -98,7 +98,7 @@ protected:
 		ERpgActionType ActionType;
 
 	UPROPERTY()
-		ERpgActionCardType Type;
+		ERpgActionCardType CardType;
 	// 強化レベル(1～)
 	UPROPERTY()
 		int32 EnhancementLevel;
@@ -106,6 +106,33 @@ protected:
 	// 補正パラメーター
 
 };
+
+USTRUCT(BlueprintType)
+struct FActionCardDeckDataTable : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	FActionCardDeckDataTable()
+	{
+		ActionType = ERpgActionType::None;
+		CardType = ERpgActionCardType::None;
+		EnhancementLevel = 1;
+	}
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ERpgActionType ActionType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ERpgActionCardType CardType;
+
+		// 強化レベル(1～)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 EnhancementLevel;
+};
+
 
 /**
  * 

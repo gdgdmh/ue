@@ -37,7 +37,7 @@ bool URpgBattleManager::LoadCardParameter()
 	// テスト
 	{
 		FActionCardCreateParameter Param;
-		Param.SetType(ERpgActionCardType::Attack);
+		Param.SetCardType(ERpgActionCardType::Attack);
 		TObjectPtr<UActionCard> Card = ActionCardParameter.Get()->Create(Param);
 		if (Card.Get()->GetActionType() == ERpgActionType::Attack)
 		{

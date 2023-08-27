@@ -48,7 +48,7 @@ bool UActionCardParameter::LoadDataTable(const FString& DataTableReferencePath)
 
 TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreateParameter& Parameter)
 {
-	const ERpgActionCardType Type = Parameter.GetType();
+	const ERpgActionCardType Type = Parameter.GetCardType();
 	const int32 EnhancementLevel = Parameter.GetEnhancementLevel();
 	// パラメーター正常性チェック
 	if (Type == ERpgActionCardType::None)
@@ -62,7 +62,7 @@ TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreatePara
 		return nullptr;
 	}
 
-	const FActionCardDataTable* Data = GetCardDataTableData(Parameter.GetType());
+	const FActionCardDataTable* Data = GetCardDataTableData(Parameter.GetCardType());
 	if (!Data)
 	{
 		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create CardData Not Found"));
