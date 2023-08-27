@@ -117,6 +117,10 @@ public:
 		EnhancementLevel = 1;
 	}
 
+	ERpgActionType GetActionType() const { return ActionType; }
+	ERpgActionCardType GetCardType() const { return CardType; }
+	int32 GetEnhancementLevel() const { return EnhancementLevel; }
+
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -147,6 +151,7 @@ public:
 	bool LoadDeckDataTable(const FString& DataTableReferencePath);
 
 	TObjectPtr<UActionCard> Create(const FActionCardCreateParameter& Parameter);
+	TObjectPtr<UActionCardList> CreateDefaultDeck();
 
 	const FActionCardDataTable* GetCardDataTableData(ERpgActionCardType CardType) const;
 

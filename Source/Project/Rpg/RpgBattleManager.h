@@ -39,6 +39,8 @@ public:
 	bool LoadCardParameter();
 	bool LoadDeckParameter();
 
+	void SetDefaultCardList();
+
 	void NormalizeTurnList();
 	void SetTurn();
 	void OutputTurnLog() const;

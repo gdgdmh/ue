@@ -23,6 +23,9 @@ public:
 	void AddCard(TObjectPtr<UActionCard> Card);
 	void RemoveCard(TObjectPtr<UActionCard> Card);
 
+	// 指定されたListのカードをコピーする
+	void CopyCard(UActionCardList& Source);
+
 	TArray<TObjectPtr<UActionCard> > GetList() const;
 
 protected:

@@ -227,13 +227,15 @@ void AProjectRpgGameMode::SetMainUI()
 			BattleParty->SetParty(EnemyPartySide);
 		}
 
+		check(CardList);
+		BattleManager.Get()->SetCardList(CardList);
+
 		BattleManager.Get()->LoadCardParameter();
 		BattleManager.Get()->LoadDeckParameter();
+		BattleManager.Get()->SetDefaultCardList();
 
 		BattleManager.Get()->SetBattleParty(BattleParty);
 
-		check(CardList);
-		BattleManager.Get()->SetCardList(CardList);
 	}
 
 	if (MainProjectUserWidgets.Num() != 0)

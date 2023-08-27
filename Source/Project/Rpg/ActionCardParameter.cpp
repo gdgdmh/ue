@@ -2,6 +2,8 @@
 
 #include "ActionCardParameter.h"
 
+#include "ActionCardList.h"
+
 UActionCardParameter::UActionCardParameter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -142,6 +144,35 @@ TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreatePara
 	check(false);
 	UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create ActionCardType NotHit"));
 	return nullptr;
+}
+
+TObjectPtr<UActionCardList> UActionCardParameter::CreateDefaultDeck()
+{
+	if (DeckDataTables.IsEmpty())
+	{
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::CreateDefaultDeck empty"));
+		return nullptr;
+	}
+
+	TObjectPtr<UActionCardList> List = NewObject<UActionCardList>();
+	for (auto Data : DeckDataTables)
+	{
+		FActionCardCreateParameter Parameter;
+		Parameter.SetCardType(Data.GetCardType());
+		Parameter.SetEnhancementLevel(Data.GetEnhancementLevel());
+
+		TObjectPtr<UActionCard> Card = Create(Parameter);
+		if (Card)
+		{
+			List.Get()->AddCard(Card);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::CreateDefaultDeck create card failure"));
+			return nullptr;
+		}
+	}
+	return List;
 }
 
 const FActionCardDataTable* UActionCardParameter::GetCardDataTableData(ERpgActionCardType CardType) const

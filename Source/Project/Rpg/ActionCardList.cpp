@@ -19,6 +19,15 @@ void UActionCardList::RemoveCard(TObjectPtr<UActionCard> Card)
 	Cards.Remove(Card);
 }
 
+void UActionCardList::CopyCard(UActionCardList& Source)
+{
+	Cards.Empty();
+	for (auto Card : Source.Cards)
+	{
+		Cards.Add(Card);
+	}
+}
+
 TArray<TObjectPtr<UActionCard> > UActionCardList::GetList() const
 {
 	return Cards;

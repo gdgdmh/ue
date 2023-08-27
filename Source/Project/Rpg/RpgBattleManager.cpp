@@ -61,6 +61,18 @@ bool URpgBattleManager::LoadDeckParameter()
 	return true;
 }
 
+void URpgBattleManager::SetDefaultCardList()
+{
+	check(ActionCardParameter);
+	TObjectPtr<UActionCardList> List = ActionCardParameter.Get()->CreateDefaultDeck();
+	if (!List)
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::SetDefaultCardList create failure"));
+		return;
+	}
+	CardList.Get()->CopyCard(*List.Get());
+}
+
 void URpgBattleManager::NormalizeTurnList()
 {
 	check(TurnManager);
