@@ -33,6 +33,18 @@ bool URpgBattleManager::LoadCardParameter()
 		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter load failure"));
 		return false;
 	}
+
+	// テスト
+	{
+		FActionCardCreateParameter Param;
+		Param.SetType(ERpgActionCardType::Attack);
+		TObjectPtr<UActionCard> Card = ActionCardParameter.Get()->Create(Param);
+		if (Card.Get()->GetActionType() == ERpgActionType::Attack)
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter create ok"));
+		}
+	}
+
 	return true;
 }
 

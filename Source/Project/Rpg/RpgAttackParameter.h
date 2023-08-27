@@ -20,6 +20,17 @@ class PROJECT_API URpgAttackParameter : public UObject
 public:
 	URpgAttackParameter(const FObjectInitializer& ObjectInitializer);
 
+	void SetTargetType(CPPRpgTargetType Type)
+	{
+		TargetType = Type;
+	}
+	void SetAttackPower(int32 Power)
+	{
+		AttackPower = Power;
+	}
+
+	CPPRpgTargetType GetTargetType() const { return TargetType; }
+	int32 GetAttackPower() const { return AttackPower; }
 
 protected:
 	// 対象
@@ -27,5 +38,5 @@ protected:
 		CPPRpgTargetType TargetType;
 
 	// 攻撃力
-	//int32 AttackPower;
+	int32 AttackPower;
 };

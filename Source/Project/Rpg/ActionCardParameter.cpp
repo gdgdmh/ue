@@ -45,3 +45,76 @@ bool UActionCardParameter::LoadDataTable(const FString& DataTableReferencePath)
 	}
 	return true;
 }
+
+TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreateParameter& Parameter)
+{
+	const ERpgActionCardType Type = Parameter.GetType();
+	const int32 EnhancementLevel = Parameter.GetEnhancementLevel();
+	// パラメーター正常性チェック
+	if (Type == ERpgActionCardType::None)
+	{
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create Type Invalid"));
+		return nullptr;
+	}
+	if (EnhancementLevel <= 0)
+	{
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create EnhancementLevel Invalid"));
+		return nullptr;
+	}
+
+	const FActionCardDataTable* Data = GetCardDataTableData(Parameter.GetType());
+	if (!Data)
+	{
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create CardData Not Found"));
+		return nullptr;
+	}
+
+	TObjectPtr<UActionCard> Card = NewObject<UActionCard>();
+
+	if (Type == ERpgActionCardType::Attack)
+	{
+		Card.Get()->SetActionType(Data->GetActionType());
+		Card.Get()->SetAttackTarget(Data->GetAtkPrmTargetType());
+		Card.Get()->SetAttackPower(Data->GetAtkPrmAttackPower());
+		return Card;
+	}
+	if (Type == ERpgActionCardType::Defence)
+	{
+		Card.Get()->SetActionType(Data->GetActionType());
+		Card.Get()->SetDefenceTarget(CPPRpgTargetType::Single); // 必要なさそう
+		Card.Get()->SetDefencePower(Data->GetDfPrmDefencePower());
+		return Card;
+	}
+
+	// 不正なタイプ指定
+	if (Type == ERpgActionCardType::None)
+	{
+		check(false);
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create ActionCardType InvalidType(None)"));
+		return nullptr;
+	}
+	if (Type == ERpgActionCardType::Num)
+	{
+		check(false);
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create ActionCardType InvalidType(Num)"));
+		return nullptr;
+	}
+	// 定義漏れ
+	check(false);
+	UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::Create ActionCardType NotHit"));
+	return nullptr;
+}
+
+const FActionCardDataTable* UActionCardParameter::GetCardDataTableData(ERpgActionCardType CardType) const
+{
+	const int32 Size = DataTables.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		const FActionCardDataTable& Data = DataTables[i];
+		if (Data.Type == CardType)
+		{
+			return &Data;
+		}
+	}
+	return nullptr;
+}

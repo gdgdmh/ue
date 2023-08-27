@@ -8,8 +8,11 @@
 #include "Engine/DataTable.h"
 
 #include "CPPRpgActionCardType.h"
+#include "ActionCard.h"
 #include "ActionCardAttackParameter.h"
 #include "ActionCardDefenceParameter.h"
+
+#include "CPPRpgActionCardType.h"
 
 #include "ActionCardParameter.generated.h"
 
@@ -24,12 +27,25 @@ struct FActionCardDataTable : public FTableRowBase
 public:
 	FActionCardDataTable()
 	{
+		ActionType = ERpgActionType::None;
 		Type = ERpgActionCardType::None;
 		AtkPrmAttackPower = 0;
-		DfPrmDefenceParameter = 0;
+		AtkPrmTargetType = CPPRpgTargetType::None;
+		DfPrmDefencePower = 0;
 	}
 
+	ERpgActionType GetActionType() const { return ActionType; }
+	ERpgActionCardType GetCardType() const { return Type; }
+	int32 GetAtkPrmAttackPower() const { return AtkPrmAttackPower; }
+	CPPRpgTargetType GetAtkPrmTargetType() const { return AtkPrmTargetType; }
+
+	int32 GetDfPrmDefencePower() const { return DfPrmDefencePower; }
+
 public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ERpgActionType ActionType;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ERpgActionCardType Type;
 
@@ -37,10 +53,58 @@ public:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 AtkPrmAttackPower;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		CPPRpgTargetType AtkPrmTargetType;
+
 	// DefenceParameter
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int32 DfPrmDefenceParameter;
+		int32 DfPrmDefencePower;
+};
+
+USTRUCT()
+struct FActionCardCreateParameter
+{
+	GENERATED_BODY()
+
+private:
+	static const int32 DEFAULT_ENHANCEMENT_LEVEL = 1;
+public:
+	FActionCardCreateParameter()
+	{
+		Type = ERpgActionCardType::None;
+		EnhancementLevel = DEFAULT_ENHANCEMENT_LEVEL;
+	}
+
+	void SetType(ERpgActionCardType CardType)
+	{
+		Type = CardType;
+	}
+
+	void SetEnhancementLevel(int32 Level)
+	{
+		EnhancementLevel = Level;
+	}
+
+	ERpgActionCardType GetType() const { return Type; }
+	int32 GetEnhancementLevel() const { return EnhancementLevel; }
+
+public:
+	
+protected:
+
+	UPROPERTY()
+		ERpgActionType ActionType;
+
+	UPROPERTY()
+		ERpgActionCardType Type;
+	// 強化レベル(1～)
+	UPROPERTY()
+		int32 EnhancementLevel;
+
+	// 補正パラメーター
+
 };
 
 /**
@@ -55,6 +119,10 @@ public:
 	UActionCardParameter(const FObjectInitializer& ObjectInitializer);
 
 	bool LoadDataTable(const FString& DataTableReferencePath);
+
+	TObjectPtr<UActionCard> Create(const FActionCardCreateParameter& Parameter);
+
+	const FActionCardDataTable* GetCardDataTableData(ERpgActionCardType CardType) const;
 
 protected:
 	UPROPERTY()
