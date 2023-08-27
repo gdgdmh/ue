@@ -11,6 +11,7 @@
 #include "RpgBattleDamageCalculator.h"
 #include "CPPRpgBattleCommandType.h"
 #include "ActionCardList.h"
+#include "ActionCardParameter.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -34,6 +35,8 @@ public:
 	}
 
 	void SetCardList(TObjectPtr<UActionCardList> List);
+
+	bool LoadCardParameter();
 
 	void NormalizeTurnList();
 	void SetTurn();
@@ -82,5 +85,9 @@ protected:
 		TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
 	UPROPERTY()
 		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
+
+	// パラメーター
+	UPROPERTY()
+		TObjectPtr<UActionCardParameter> ActionCardParameter;
 
 };

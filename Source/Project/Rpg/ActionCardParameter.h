@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 
+#include "Engine/DataTable.h"
+
 #include "CPPRpgActionCardType.h"
 #include "ActionCardAttackParameter.h"
 #include "ActionCardDefenceParameter.h"
@@ -15,7 +17,7 @@
  *
  */
 USTRUCT(BlueprintType)
-struct FActionCardDataTable
+struct FActionCardDataTable : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -23,14 +25,22 @@ public:
 	FActionCardDataTable()
 	{
 		Type = ERpgActionCardType::None;
+		AtkPrmAttackPower = 0;
+		DfPrmDefenceParameter = 0;
 	}
 
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ERpgActionCardType Type;
+
+	// AttackParameter
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TObjectPtr<UActionCardAttackParameter> AttackParameter;
+		int32 AtkPrmAttackPower;
+	// DefenceParameter
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TObjectPtr< UActionCardDefenceParameter> DefenceParameter;
+		int32 DfPrmDefenceParameter;
 };
 
 /**
@@ -42,4 +52,11 @@ class PROJECT_API UActionCardParameter : public UObject
 	GENERATED_BODY()
 
 public:
+	UActionCardParameter(const FObjectInitializer& ObjectInitializer);
+
+	bool LoadDataTable(const FString& DataTableReferencePath);
+
+protected:
+	UPROPERTY()
+		TArray<FActionCardDataTable> DataTables;
 };

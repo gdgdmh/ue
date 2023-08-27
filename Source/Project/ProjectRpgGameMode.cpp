@@ -226,6 +226,9 @@ void AProjectRpgGameMode::SetMainUI()
 			EnemyPartySide.Get()->SetType(ESideType::Enemy);
 			BattleParty->SetParty(EnemyPartySide);
 		}
+
+		BattleManager.Get()->LoadCardParameter();
+
 		BattleManager.Get()->SetBattleParty(BattleParty);
 
 		check(CardList);

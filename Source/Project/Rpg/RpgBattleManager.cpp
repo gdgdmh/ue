@@ -14,12 +14,26 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	SelectCommand = ERpgBattleCommandType::None;
 	AttackCharacter = nullptr;
 	AttackTargetCharacter = nullptr;
+
+	ActionCardParameter = NewObject<UActionCardParameter>();
 }
 
 void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
 {
 	CardList = List;
 	check(CardList);
+}
+
+bool URpgBattleManager::LoadCardParameter()
+{
+	check(ActionCardParameter);
+	FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_CardBaseData.DT_CardBaseData");
+	if (!ActionCardParameter.Get()->LoadDataTable(Path))
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter load failure"));
+		return false;
+	}
+	return true;
 }
 
 void URpgBattleManager::NormalizeTurnList()
