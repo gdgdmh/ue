@@ -95,9 +95,6 @@ public:
 protected:
 
 	UPROPERTY()
-		ERpgActionType ActionType;
-
-	UPROPERTY()
 		ERpgActionCardType CardType;
 	// 強化レベル(1～)
 	UPROPERTY()
@@ -145,7 +142,9 @@ class PROJECT_API UActionCardParameter : public UObject
 public:
 	UActionCardParameter(const FObjectInitializer& ObjectInitializer);
 
-	bool LoadDataTable(const FString& DataTableReferencePath);
+	bool LoadCardDataTable(const FString& DataTableReferencePath);
+
+	bool LoadDeckDataTable(const FString& DataTableReferencePath);
 
 	TObjectPtr<UActionCard> Create(const FActionCardCreateParameter& Parameter);
 
@@ -153,5 +152,8 @@ public:
 
 protected:
 	UPROPERTY()
-		TArray<FActionCardDataTable> DataTables;
+		TArray<FActionCardDataTable> CardDataTables;
+
+	UPROPERTY()
+		TArray<FActionCardDeckDataTable> DeckDataTables;
 };

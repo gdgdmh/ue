@@ -37,6 +37,7 @@ public:
 	void SetCardList(TObjectPtr<UActionCardList> List);
 
 	bool LoadCardParameter();
+	bool LoadDeckParameter();
 
 	void NormalizeTurnList();
 	void SetTurn();

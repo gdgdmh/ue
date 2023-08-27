@@ -7,9 +7,9 @@ UActionCardParameter::UActionCardParameter(const FObjectInitializer& ObjectIniti
 {
 }
 
-bool UActionCardParameter::LoadDataTable(const FString& DataTableReferencePath)
+bool UActionCardParameter::LoadCardDataTable(const FString& DataTableReferencePath)
 {
-	DataTables.Empty();
+	CardDataTables.Empty();
 
 	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
 	if (!DataTable)
@@ -34,13 +34,52 @@ bool UActionCardParameter::LoadDataTable(const FString& DataTableReferencePath)
 			UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDataTable Row find failure(TableType?)"));
 			continue;
 		}
-		DataTables.Add(*TempTable);
+		CardDataTables.Add(*TempTable);
 	}
 
-	if (DataTables.IsEmpty())
+	if (CardDataTables.IsEmpty())
 	{
 		// 何もデータが入らなかった FindRowで失敗した?
 		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDataTable DataTable add failure(empty)"));
+		return false;
+	}
+	return true;
+}
+
+bool UActionCardParameter::LoadDeckDataTable(const FString& DataTableReferencePath)
+{
+	DeckDataTables.Empty();
+
+	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
+	if (!DataTable)
+	{
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable load failure"));
+		return false;
+	}
+
+	// データ取得
+	TArray<FName> RowArray = DataTable->GetRowNames();
+	if (RowArray.IsEmpty())
+	{
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable DataTable empty"));
+		return true;
+	}
+
+	for (const FName RowName : RowArray)
+	{
+		auto TempTable = DataTable->FindRow<FActionCardDeckDataTable>(RowName, FString());
+		if (!TempTable)
+		{
+			UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable Row find failure(TableType?)"));
+			continue;
+		}
+		DeckDataTables.Add(*TempTable);
+	}
+
+	if (DeckDataTables.IsEmpty())
+	{
+		// 何もデータが入らなかった FindRowで失敗した?
+		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable DataTable add failure(empty)"));
 		return false;
 	}
 	return true;
@@ -107,10 +146,10 @@ TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreatePara
 
 const FActionCardDataTable* UActionCardParameter::GetCardDataTableData(ERpgActionCardType CardType) const
 {
-	const int32 Size = DataTables.Num();
+	const int32 Size = CardDataTables.Num();
 	for (int32 i = 0; i < Size; ++i)
 	{
-		const FActionCardDataTable& Data = DataTables[i];
+		const FActionCardDataTable& Data = CardDataTables[i];
 		if (Data.Type == CardType)
 		{
 			return &Data;

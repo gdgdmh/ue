@@ -26,9 +26,10 @@ void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
 
 bool URpgBattleManager::LoadCardParameter()
 {
+	// カードパラメーターをデータテーブルから読み込み
 	check(ActionCardParameter);
 	FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_CardBaseData.DT_CardBaseData");
-	if (!ActionCardParameter.Get()->LoadDataTable(Path))
+	if (!ActionCardParameter.Get()->LoadCardDataTable(Path))
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter load failure"));
 		return false;
@@ -43,6 +44,18 @@ bool URpgBattleManager::LoadCardParameter()
 		{
 			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter create ok"));
 		}
+	}
+	return true;
+}
+
+bool URpgBattleManager::LoadDeckParameter()
+{
+	check(ActionCardParameter);
+	FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_DefaultDeckData.DT_DefaultDeckData");
+	if (!ActionCardParameter.Get()->LoadDeckDataTable(Path))
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadDeckParameter load failure"));
+		return false;
 	}
 
 	return true;

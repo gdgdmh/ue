@@ -228,6 +228,7 @@ void AProjectRpgGameMode::SetMainUI()
 		}
 
 		BattleManager.Get()->LoadCardParameter();
+		BattleManager.Get()->LoadDeckParameter();
 
 		BattleManager.Get()->SetBattleParty(BattleParty);
 
