@@ -172,27 +172,17 @@ void URpgBattleManager::ChangeTurn()
 bool URpgBattleManager::CheckSideAnnihilation()
 {
 	check(BattleParty);
-	TObjectPtr<UBattlePartySide> AllyParty = BattleParty.Get()->Get(ESideType::Ally);
 	TObjectPtr<UBattlePartySide> EnemyParty = BattleParty.Get()->Get(ESideType::Enemy);
-	check(AllyParty);
 	check(EnemyParty);
 
+	// プレイヤーサイドのチェック
 	{
-		bool bAllDead = true;
-		for (const auto Character : AllyParty.Get()->Get()->GetList())
-		{
-			check(Character);
-			if (!Character.Get()->GetParameter()->IsDead())
-			{
-				bAllDead = false;
-				break;
-			}
-		}
-		if (bAllDead)
+		if (Player.Get()->GetParameter()->IsDead())
 		{
 			return true;
 		}
 	}
+	// 敵サイドのチェック
 	{
 		bool bAllDead = true;
 		for (const auto Character : EnemyParty.Get()->Get()->GetList())
@@ -307,15 +297,36 @@ bool URpgBattleManager::NextState()
 				ProcessState = ERpgBattleProcessState::PlayerActionAfter;
 				return true;
 			}
+
+			TObjectPtr<UCdCharacterBase> TargetEnemy = nullptr;
+			for (auto Enemy : Enemies)
+			{
+				if (Enemy.Get()->GetParameter().Get()->IsDead())
+				{
+					continue;
+				}
+				TargetEnemy = Enemy;
+				break;
+			}
+			if (TargetEnemy == nullptr)
+			{
+				// ターゲット取得不可のときは進める
+				ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+				return true;
+			}
+
 			int32 Damage = Card.Get()->GetAttackPower();
 
-			int32 BeforeHp = Enemies[0].Get()->GetParameter().Get()->GetHp();
-			Enemies[0].Get()->Damage(Damage);
-			int32 AfterHp = Enemies[0].Get()->GetParameter().Get()->GetHp();
+			int32 BeforeHp = TargetEnemy.Get()->GetParameter().Get()->GetHp();
+			TargetEnemy.Get()->Damage(Damage);
+			int32 AfterHp = TargetEnemy.Get()->GetParameter().Get()->GetHp();
 
 			UE_LOG(LogTemp, Log, TEXT("%d Damage %d -> %d"),
 				Damage, BeforeHp, AfterHp);
 		}
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
 
 		ProcessState = ERpgBattleProcessState::PlayerActionAfter;
 		return true;
@@ -327,6 +338,16 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerTurnFinish)
 	{
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
+		// 全滅していたら終了
+		if (CheckSideAnnihilation())
+		{
+			ProcessState = ERpgBattleProcessState::PreFinish;
+			return true;
+		}
+
 		ProcessState = ERpgBattleProcessState::PlayerTurnAfter;
 		return true;
 	}
@@ -342,11 +363,23 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PreEnemyTurn)
 	{
+		// ターン設定
+		SetTurn();
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
+		OutputTurnLog();
+		ProcessState = ERpgBattleProcessState::EnemyAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreEnemyAction)
+	{
 		if (IsTurnListEmpty())
 		{
-			// ターンリスト初回設定 or 1順した
-			// 設定し直し
-			SetTurn();
+			// 敵ターン消化したのでプレイヤーターンへ
+			ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+			OutputTurnLog();
+			return true;
 		}
 		else
 		{
@@ -354,18 +387,27 @@ bool URpgBattleManager::NextState()
 			ChangeTurn();
 			if (IsTurnListEmpty())
 			{
-				SetTurn();
+				// 敵ターン消化したのでプレイヤーターンへ
+				ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+				return true;
 			}
+			OutputTurnLog();
 		}
-		// 死亡キャラや不正な状態を修正
-		NormalizeTurnList();
-		OutputTurnLog();
-
 		ProcessState = ERpgBattleProcessState::EnemyAction;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyAction)
 	{
+		TObjectPtr<UCdCharacterBase> TurnPlayer = TurnManager.Get()->GetCurrentTurnCharacter();
+		check(TurnPlayer);
+		int32 Damage = TurnPlayer.Get()->GetParameter().Get()->GetAttackPower();
+
+		int32 BeforeHp = Player.Get()->GetParameter().Get()->GetHp();
+		Player.Get()->Damage(Damage);
+		int32 AfterHp = Player.Get()->GetParameter().Get()->GetHp();
+		UE_LOG(LogTemp, Log, TEXT("%d Player Damage %d -> %d"),
+			Damage, BeforeHp, AfterHp);
+
 		ProcessState = ERpgBattleProcessState::EnemyActionAfter;
 		return true;
 	}
@@ -396,7 +438,17 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnFinish)
 	{
-		ProcessState = ERpgBattleProcessState::PreFinish;
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
+		// 全滅していたら終了
+		if (CheckSideAnnihilation())
+		{
+			ProcessState = ERpgBattleProcessState::PreFinish;
+			return true;
+		}
+
+		ProcessState = ERpgBattleProcessState::PreEnemyAction;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PreFinish)

@@ -27,6 +27,7 @@ enum class ERpgBattleProcessState : uint8
 	PlayerTurnAfterFinish		UMETA(DisplayName = "プレイヤーターン終了時処理後",	ToolTip = "プレイヤーターン終了時処理後"),
 
 	PreEnemyTurn				UMETA(DisplayName = "敵ターン前",					ToolTip = "敵ターン前"),
+	PreEnemyAction				UMETA(DisplayName = "敵アクション前",					ToolTip = "敵アクション前"),
 	EnemyAction					UMETA(DisplayName = "敵アクション",					ToolTip = "敵アクション"),
 	EnemyActionAfter			UMETA(DisplayName = "敵アクション後",				ToolTip = "敵アクション後"),
 	EnemyActionFinish			UMETA(DisplayName = "敵アクション終了",				ToolTip = "敵アクション終了"),

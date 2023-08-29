@@ -247,7 +247,6 @@ void AProjectRpgGameMode::SetMainUI()
 		EnemyParty = NewObject<URpgBattleParty>();
 		{
 			TObjectPtr<UBattlePartySide> EnemyPartySide = NewObject<UBattlePartySide>();
-			//TObjectPtr<URpgBattleParty> EnemyParty = NewObject<URpgBattleParty>();
 			TArray<TObjectPtr<UCdCharacterBase> > Enemies = BattleManager.Get()->GetEnemy();
 			for (TObjectPtr<UCdCharacterBase> Enemy : Enemies)
 			{
