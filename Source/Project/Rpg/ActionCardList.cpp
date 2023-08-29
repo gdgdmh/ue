@@ -28,6 +28,17 @@ void UActionCardList::CopyCard(UActionCardList& Source)
 	}
 }
 
+int32 UActionCardList::GetSize() const
+{
+	return Cards.Num();
+}
+
+TObjectPtr<UActionCard> UActionCardList::GetCard(int32 Index)
+{
+	check((0 <= Index) && (Index < Cards.Num()));
+	return Cards[Index];
+}
+
 TArray<TObjectPtr<UActionCard> > UActionCardList::GetList() const
 {
 	return Cards;

@@ -75,6 +75,11 @@ public:
 	// 選択したアクションを処理する
 	void ActionProc();
 
+	// 選択カードindexのリセット
+	void ResetSelectCardIndex();
+
+	bool IsSelectCard() const;
+
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
 
@@ -111,4 +116,8 @@ protected:
 
 	UPROPERTY()
 		TObjectPtr<UCdCharacterParameter> CharacterParameter;
+
+	// 行動選択
+	UPROPERTY()
+		int32 SelectCardIndex;
 };

@@ -18,6 +18,8 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	ActionCardParameter = NewObject<UActionCardParameter>();
 
 	CharacterParameter = NewObject<UCdCharacterParameter>();
+
+	ResetSelectCardIndex();
 }
 
 void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
@@ -277,11 +279,35 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
 	{
-		//ProcessState = ERpgBattleProcessState::PlayerAction;
+		// 暫定で選択したことにしてしまう
+		SelectCardIndex = 0;
+		ProcessState = ERpgBattleProcessState::PlayerAction;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerAction)
 	{
+		const int32 Size = CardList.Get()->GetSize();
+		check((0 <= SelectCardIndex) && (SelectCardIndex < Size));
+
+		TObjectPtr<UActionCard> Card = CardList.Get()->GetCard(SelectCardIndex);
+		check(Card);
+		if (Card.Get()->GetActionType() == ERpgActionType::Attack)
+		{
+			if (Enemies.IsEmpty())
+			{
+				ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+				return true;
+			}
+			int32 Damage = Card.Get()->GetAttackPower();
+
+			int32 BeforeHp = Enemies[0].Get()->GetParameter().Get()->GetHp();
+			Enemies[0].Get()->Damage(Damage);
+			int32 AfterHp = Enemies[0].Get()->GetParameter().Get()->GetHp();
+
+			UE_LOG(LogTemp, Log, TEXT("%d Damage %d -> %d"),
+				Damage, BeforeHp, AfterHp);
+		}
+
 		ProcessState = ERpgBattleProcessState::PlayerActionAfter;
 		return true;
 	}
@@ -533,7 +559,22 @@ void URpgBattleManager::ActionProc()
 			Damage, BeforeHp, AfterHp);
 		return;
 	}
+}
 
+// 選択カードindexのリセット
+void URpgBattleManager::ResetSelectCardIndex()
+{
+	SelectCardIndex = -1;
+}
+
+bool URpgBattleManager::IsSelectCard() const
+{
+	if (SelectCardIndex == -1)
+	{
+		// -1は選択してない
+		return false;
+	}
+	return true;
 }
 
 // 行動選択のログ出力
