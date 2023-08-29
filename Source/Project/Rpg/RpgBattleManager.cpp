@@ -16,6 +16,8 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	AttackTargetCharacter = nullptr;
 
 	ActionCardParameter = NewObject<UActionCardParameter>();
+
+	CharacterParameter = NewObject<UCdCharacterParameter>();
 }
 
 void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
@@ -59,6 +61,60 @@ bool URpgBattleManager::LoadDeckParameter()
 	}
 
 	return true;
+}
+
+bool URpgBattleManager::LoadCharacterParameter()
+{
+	check(CharacterParameter);
+	{
+		FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_PlayerData.DT_PlayerData");
+		if (!CharacterParameter.Get()->LoadPlayerDataTable(Path))
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCharacterParameter load failure(player)"));
+			return false;
+		}
+	}
+	{
+		FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_EnemyData.DT_EnemyData");
+		if (!CharacterParameter.Get()->LoadEnemyDataTable(Path))
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCharacterParameter load failure(enemy)"));
+			return false;
+		}
+	}
+	return true;
+}
+
+void URpgBattleManager::SetPlayer()
+{
+	TArray<TObjectPtr<UCdCharacterBase> > Players; 
+	CharacterParameter.Get()->GetPlayer(Players);
+
+	if (Players.IsEmpty())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::SetPlayer failure"));
+		check(false);
+		return;
+	}
+	Player = Players[0];
+}
+
+void URpgBattleManager::SetEnemies()
+{
+	TArray<TObjectPtr<UCdCharacterBase> > EnemyData;
+	CharacterParameter.Get()->GetEnemy(EnemyData);
+
+	if (EnemyData.IsEmpty())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::SetEnemies failure"));
+		check(false);
+		return;
+	}
+	Enemies.Empty();
+	for (auto Enemy : EnemyData)
+	{
+		Enemies.Add(Enemy);
+	}
 }
 
 void URpgBattleManager::SetDefaultCardList()

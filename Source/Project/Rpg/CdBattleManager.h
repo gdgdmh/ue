@@ -1,12 +1,12 @@
-ï»¿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 
-#include "CdCharacterBase.h"
 
+/*
 #include "BattlePartyManager.h"
 #include "CPPRpgBattleProcessState.h"
 #include "RpgTurnManager.h"
@@ -14,21 +14,23 @@
 #include "CPPRpgBattleCommandType.h"
 #include "ActionCardList.h"
 #include "ActionCardParameter.h"
-#include "CdCharacterParameter.h"
+*/
 
-#include "RpgBattleManager.generated.h"
+#include "CdBattleManager.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API URpgBattleManager : public UObject
+class PROJECT_API UCdBattleManager : public UObject
 {
 	GENERATED_BODY()
+	
+public:
+	
+	//UCdBattleManager(const FObjectInitializer& ObjectInitializer);
 
-public:
-		
-public:
+#if 0
 	URpgBattleManager(const FObjectInitializer& ObjectInitializer);
 
 	void SetBattleParty(TObjectPtr<UBattlePartyManager> Party)
@@ -42,12 +44,6 @@ public:
 	bool LoadCardParameter();
 	bool LoadDeckParameter();
 
-	bool LoadCharacterParameter();
-
-	// ä»Šã®æ‰€å›ºå®šã§ç”Ÿæˆã™ã‚‹
-	void SetPlayer();
-	void SetEnemies();
-
 	void SetDefaultCardList();
 
 	void NormalizeTurnList();
@@ -60,55 +56,47 @@ public:
 
 	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
 
-	// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¿”ã™
+	// Œ»İ‚ÌƒXƒe[ƒ^ƒX‚ğ•Ô‚·
 	ERpgBattleProcessState GetState() const
 	{
 		return ProcessState;
 	}
 
-	// æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã«é€²ã‚ã‚‹
+	// Ÿ‚ÌƒXƒe[ƒ^ƒX‚Éi‚ß‚é
 	bool NextState();
 
-	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¿ãƒ¼ãƒ³ã‚’çµ‚äº†ã•ã›ã‚‹
+	// ƒvƒŒƒCƒ„[‚Ìƒ^[ƒ“‚ğI—¹‚³‚¹‚é
 	void EndPlayerTurn();
 
-	// é¸æŠã—ãŸã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å‡¦ç†ã™ã‚‹
+	// ‘I‘ğ‚µ‚½ƒAƒNƒVƒ‡ƒ“‚ğˆ—‚·‚é
 	void ActionProc();
 
-	// è¡Œå‹•é¸æŠã®ãƒ­ã‚°å‡ºåŠ›
+	// s“®‘I‘ğ‚ÌƒƒOo—Í
 	void OutputSelectCommandLog();
 
 protected:
 	UPROPERTY()
-		TObjectPtr<UBattlePartyManager> BattleParty;
-
+	TObjectPtr<UBattlePartyManager> BattleParty;
 	UPROPERTY()
-		TObjectPtr<UCdCharacterBase> Player;
-
+	TObjectPtr<URpgTurnManager> TurnManager;
 	UPROPERTY()
-		TArray<TObjectPtr<UCdCharacterBase> > Enemies;
-
-	UPROPERTY()
-		TObjectPtr<URpgTurnManager> TurnManager;
-	UPROPERTY()
-		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
+	TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
 
 	UPROPERTY()
-		TObjectPtr<UActionCardList> CardList;
+	TObjectPtr<UActionCardList> CardList;
 
-	// è¡Œå‹•é¸æŠ
-	// æ§‹é€ ä½“ã«ã¾ã¨ã‚ã‚‹ã‹ã‚‚
+	// s“®‘I‘ğ
+	// \‘¢‘Ì‚É‚Ü‚Æ‚ß‚é‚©‚à
 	ERpgBattleCommandType SelectCommand;
 	UPROPERTY()
-		TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
+	TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
 	UPROPERTY()
-		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
+	TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
 
-	// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
+	// ƒpƒ‰ƒ[ƒ^[
 	UPROPERTY()
-		TObjectPtr<UActionCardParameter> ActionCardParameter;
+	TObjectPtr<UActionCardParameter> ActionCardParameter;
 
-	UPROPERTY()
-		TObjectPtr<UCdCharacterParameter> CharacterParameter;
+#endif
 };
