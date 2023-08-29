@@ -119,6 +119,11 @@ void URpgBattleManager::SetEnemies()
 	}
 }
 
+TArray<TObjectPtr<UCdCharacterBase> > URpgBattleManager::GetEnemy() const
+{
+	return Enemies;
+}
+
 void URpgBattleManager::SetDefaultCardList()
 {
 	check(ActionCardParameter);
@@ -209,6 +214,9 @@ bool URpgBattleManager::CheckSideAnnihilation()
 
 ESideType URpgBattleManager::GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const
 {
+	return ESideType::Ally;
+	// deplicated
+#if 0
 	if (!CharacterBase)
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType CharacterInvalid"));
@@ -247,6 +255,7 @@ ESideType URpgBattleManager::GetSideType(const TObjectPtr<URpgBattleCharacterBas
 	UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Character Not Found"));
 	check(false);
 	return ESideType::Ally;
+#endif
 }
 
 // 次のステータスに進める

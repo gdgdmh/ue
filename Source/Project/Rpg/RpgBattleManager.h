@@ -48,6 +48,8 @@ public:
 	void SetPlayer();
 	void SetEnemies();
 
+	TArray<TObjectPtr<UCdCharacterBase> > GetEnemy() const;
+
 	void SetDefaultCardList();
 
 	void NormalizeTurnList();

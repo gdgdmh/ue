@@ -50,7 +50,7 @@ TObjectPtr<UTurnOrderList> URpgTurnManager::GetTurnOrderList()
 	return List;
 }
 
-TObjectPtr<URpgBattleCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
+TObjectPtr<UCdCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
 {
 	check(List);
 	return List.Get()->GetTopCharacter();

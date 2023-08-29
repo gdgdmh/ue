@@ -12,7 +12,7 @@ TObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TObjectPtr<URpgBattleParty
 	}
 
 	// 今は愚直に並び順そのまま
-	for (TObjectPtr<URpgBattleCharacterBase> CharacterBase : EnemyParty.Get()->GetList())
+	for (TObjectPtr<UCdCharacterBase> CharacterBase : EnemyParty.Get()->GetList())
 	{
 		List.Get()->Add(CharacterBase);
 	}

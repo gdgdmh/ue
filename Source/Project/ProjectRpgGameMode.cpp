@@ -131,6 +131,7 @@ void AProjectRpgGameMode::CleanupTitleUI()
 
 void AProjectRpgGameMode::SetMainUI()
 {
+	/*
 	// パーティ作成のテスト
 	{
 		UE_LOG(LogTemp, Log, TEXT("--- Party Factory Test Begin ---"));
@@ -177,6 +178,7 @@ void AProjectRpgGameMode::SetMainUI()
 			UE_LOG(LogTemp, Log, TEXT("BattlePartyDataTable Load Failure"));
 		}
 	}
+	*/
 
 	// ターンソートのテスト
 	/*
@@ -209,11 +211,13 @@ void AProjectRpgGameMode::SetMainUI()
 	{
 		BattleManager = NewObject<URpgBattleManager>();
 		check(BattleManager);
-		check(AllyParty);
-		check(EnemyParty);
+		//check(AllyParty);
+		//check(EnemyParty);
+
 
 		TObjectPtr<UBattlePartyManager> BattleParty = NewObject<UBattlePartyManager>();
 		BattleParty->Initialize();
+		/*
 		{
 			TObjectPtr<UBattlePartySide> AllyPartySide = NewObject<UBattlePartySide>();
 			AllyPartySide.Get()->SetParty(AllyParty);
@@ -226,6 +230,7 @@ void AProjectRpgGameMode::SetMainUI()
 			EnemyPartySide.Get()->SetType(ESideType::Enemy);
 			BattleParty->SetParty(EnemyPartySide);
 		}
+		*/
 
 		check(CardList);
 		BattleManager.Get()->SetCardList(CardList);
@@ -237,6 +242,22 @@ void AProjectRpgGameMode::SetMainUI()
 		BattleManager.Get()->LoadCharacterParameter();
 		BattleManager.Get()->SetPlayer();
 		BattleManager.Get()->SetEnemies();
+
+		AllyParty = NewObject<URpgBattleParty>();
+		EnemyParty = NewObject<URpgBattleParty>();
+		{
+			TObjectPtr<UBattlePartySide> EnemyPartySide = NewObject<UBattlePartySide>();
+			//TObjectPtr<URpgBattleParty> EnemyParty = NewObject<URpgBattleParty>();
+			TArray<TObjectPtr<UCdCharacterBase> > Enemies = BattleManager.Get()->GetEnemy();
+			for (TObjectPtr<UCdCharacterBase> Enemy : Enemies)
+			{
+				EnemyParty->Add(Enemy);
+			}
+			EnemyPartySide.Get()->SetParty(EnemyParty);
+			EnemyPartySide.Get()->SetType(ESideType::Enemy);
+			BattleParty->SetParty(EnemyPartySide);
+		}
+
 
 		BattleManager.Get()->SetBattleParty(BattleParty);
 

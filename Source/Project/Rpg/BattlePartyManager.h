@@ -6,6 +6,7 @@
 #include "UObject/NoExportTypes.h"
 
 #include "BattlePartySide.h"
+#include "RpgBattleCharacterBase.h"
 
 #include "BattlePartyManager.generated.h"
 

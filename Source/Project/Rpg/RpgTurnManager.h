@@ -24,12 +24,14 @@ public:
 	URpgTurnManager(const FObjectInitializer& ObjectInitializer);
 	
 	void ResetTurnOrderList();
+
+	
 	bool Set(TObjectPtr<URpgBattleParty> EnemyParty);
 	void PopFront();
 	void Normalize();
 
 	TObjectPtr<UTurnOrderList> GetTurnOrderList();
-	TObjectPtr<URpgBattleCharacterBase> GetCurrentTurnCharacter() const;
+	TObjectPtr<UCdCharacterBase> GetCurrentTurnCharacter() const;
 
 	bool IsTurnListEmpty() const;
 

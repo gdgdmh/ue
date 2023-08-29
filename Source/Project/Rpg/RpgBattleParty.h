@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "RpgBattleCharacterBase.h"
+
+#include "CdCharacterBase.h"
+
 #include "RpgBattleParty.generated.h"
 
 /**
@@ -19,13 +21,13 @@ public:
 	URpgBattleParty();
 	URpgBattleParty(const FObjectInitializer& ObjectInitializer);
 
-	void Add(const TObjectPtr<URpgBattleCharacterBase>& Target);
+	void Add(const TObjectPtr<UCdCharacterBase>& Target);
 
-	void Remove(const TObjectPtr<URpgBattleCharacterBase>& Target);
+	void Remove(const TObjectPtr<UCdCharacterBase>& Target);
 
 	void Clear();
 
-	const TArray<TObjectPtr<URpgBattleCharacterBase> > GetList() const
+	const TArray<TObjectPtr<UCdCharacterBase> > GetList() const
 	{
 		return Characters;
 	}
@@ -36,5 +38,5 @@ public:
 public:
 
 	UPROPERTY()
-		TArray<TObjectPtr<URpgBattleCharacterBase> > Characters; // 複数のキャラクター
+		TArray<TObjectPtr<UCdCharacterBase> > Characters; // 複数のキャラクター
 };

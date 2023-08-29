@@ -12,6 +12,9 @@ URpgBattlePartyFactory::URpgBattlePartyFactory(const FObjectInitializer& ObjectI
 
 TObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFactoryType Type)
 {
+	return nullptr;
+	// deplicated
+#if 0
 	TObjectPtr<URpgBattleParty> Party = NewObject<URpgBattleParty>();
 	TObjectPtr<UCharacterParameterConverter> Converter = NewObject<UCharacterParameterConverter>();
 	if (Type == ERpgBattlePartyFactoryType::Normal)
@@ -56,6 +59,7 @@ TObjectPtr<URpgBattleParty> URpgBattlePartyFactory::Create(ERpgBattlePartyFactor
 	}
 
 	return Party;
+#endif
 }
 
 
