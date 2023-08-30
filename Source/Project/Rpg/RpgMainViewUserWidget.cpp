@@ -5,7 +5,10 @@
 
 
 
-
+URpgMainViewUserWidget::URpgMainViewUserWidget(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+}
 
 FRpgMainViewClickNextButtonDelegate& URpgMainViewUserWidget::GetClickNextButtonDelegate()
 {
@@ -15,6 +18,15 @@ FRpgMainViewClickNextButtonDelegate& URpgMainViewUserWidget::GetClickNextButtonD
 FRpgMainViewClickTurnEndButtonDelegate& URpgMainViewUserWidget::GetClickTurnEndButtonDelegate()
 {
 	return ClickTurnEndButtonDelegate;
+}
+
+void URpgMainViewUserWidget::NativeConstruct()
+{
+}
+
+void URpgMainViewUserWidget::SetHpText(FText Text)
+{
+	PlayerInfo.Get()->SetHpText(Text);
 }
 
 void URpgMainViewUserWidget::OnClickTurnEndButton()

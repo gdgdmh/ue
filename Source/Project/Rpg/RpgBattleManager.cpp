@@ -202,6 +202,18 @@ bool URpgBattleManager::CheckSideAnnihilation()
 	return false;
 }
 
+int32 URpgBattleManager::GetPlayerHp() const
+{
+	check(Player);
+	return Player.Get()->GetParameter().Get()->GetHp();
+}
+
+int32 URpgBattleManager::GetPlayerMaxHp() const
+{
+	check(Player);
+	return Player.Get()->GetParameter().Get()->GetMaxHp();
+}
+
 // 次のステータスに進める
 bool URpgBattleManager::NextState()
 {
@@ -321,6 +333,7 @@ bool URpgBattleManager::NextState()
 			ProcessState = ERpgBattleProcessState::EnemyActionAfter;
 			return true;
 		}
+		ChangePlayerInfoDelegate.ExecuteIfBound(); // プレイヤー情報更新Delegate
 		ProcessState = ERpgBattleProcessState::EnemyActionAfter;
 		return true;
 	}
@@ -625,6 +638,11 @@ bool URpgBattleManager::ProcessEnemyAction()
 		Damage, BeforeHp, AfterHp);
 
 	return true;
+}
+
+FRpgBattleManagerChangePlayerInfoDelegate& URpgBattleManager::GetChangePlayerInfoDelegate()
+{
+	return ChangePlayerInfoDelegate;
 }
 
 // 行動選択のログ出力

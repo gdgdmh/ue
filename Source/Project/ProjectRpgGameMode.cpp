@@ -209,7 +209,7 @@ void AProjectRpgGameMode::SetMainUI()
 
 	// BattleManager
 	{
-		BattleManager = NewObject<URpgBattleManager>();
+		//BattleManager = NewObject<URpgBattleManager>();
 		check(BattleManager);
 		//check(AllyParty);
 		//check(EnemyParty);
@@ -354,6 +354,9 @@ void AProjectRpgGameMode::SetMainUI()
 				RpgMainViewOnClickTurnEndButton();
 			});
 
+			// プレイヤー情報更新
+			UpdatePlayerInfo();
+
 			MainProjectUserWidgets.Add(MainWidget);
 		}
 
@@ -371,6 +374,11 @@ void AProjectRpgGameMode::InitializeBattleManager()
 {
 	BattleManager = NewObject<URpgBattleManager>();
 	check(BattleManager);
+
+	BattleManager.Get()->GetChangePlayerInfoDelegate().BindLambda([this]
+	{
+		BattleManagerOnChangePlayerInfo();
+	});
 
 	CardList = NewObject<UActionCardList>();
 	check(CardList);
@@ -399,6 +407,22 @@ void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
 	ERpgBattleProcessState After = BattleManager.Get()->GetState();
 
 	OutputStateLog(Before, After);
+}
+
+void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()
+{
+	UpdatePlayerInfo();
+}
+
+void AProjectRpgGameMode::UpdatePlayerInfo()
+{
+	check(BattleManager);
+	check(RpgMainViewUserWidget);
+
+	FString Str = FString::Printf(TEXT("%d/%d"),
+		BattleManager.Get()->GetPlayerHp(), BattleManager.Get()->GetPlayerMaxHp());
+	FText HpText = FText::FromString(Str);
+	RpgMainViewUserWidget.Get()->SetHpText(HpText);
 }
 
 void AProjectRpgGameMode::OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState)

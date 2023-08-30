@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "../ProjectUserWidget.h"
+
+#include "Cd/Widget/RpgCardPlayerInfoUserWidget.h"
+
 #include "RpgMainViewUserWidget.generated.h"
 
 // Delegate
@@ -22,10 +25,18 @@ class PROJECT_API URpgMainViewUserWidget : public UProjectUserWidget
 	
 public:
 
+	URpgMainViewUserWidget(const FObjectInitializer& ObjectInitializer);
+
 
 
 	FRpgMainViewClickNextButtonDelegate& GetClickNextButtonDelegate();
 	FRpgMainViewClickTurnEndButtonDelegate& GetClickTurnEndButtonDelegate();
+
+protected:
+	virtual void NativeConstruct() override;
+
+public:
+	void SetHpText(FText Text);
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -34,6 +45,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void OnClickNextButton();
 
+	// UI bind
+public:
+	UPROPERTY(Transient, meta = (BindWidget))
+		TObjectPtr<URpgCardPlayerInfoUserWidget> PlayerInfo;
+
+	// delegate
 protected:
 	FRpgMainViewClickNextButtonDelegate ClickNextButtonDelegate;
 	FRpgMainViewClickTurnEndButtonDelegate ClickTurnEndButtonDelegate;

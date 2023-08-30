@@ -18,6 +18,10 @@
 
 #include "RpgBattleManager.generated.h"
 
+// Delegate
+// プレイヤーの情報が変化したときのDelegate
+DECLARE_DELEGATE(FRpgBattleManagerChangePlayerInfoDelegate)
+
 /**
  * 
  */
@@ -66,6 +70,9 @@ public:
 		return ProcessState;
 	}
 
+	int32 GetPlayerHp() const;
+	int32 GetPlayerMaxHp() const;
+
 	// 次のステータスに進める
 	bool NextState();
 
@@ -87,6 +94,8 @@ public:
 	bool ProcessPlayerAction();
 	// 敵のアクション処理
 	bool ProcessEnemyAction();
+
+	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
@@ -128,4 +137,6 @@ protected:
 	// 行動選択
 	UPROPERTY()
 		int32 SelectCardIndex;
+
+		FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
 };

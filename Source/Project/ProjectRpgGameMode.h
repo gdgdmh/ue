@@ -47,9 +47,12 @@ private:
 
 	void RpgMainViewOnClickNextButton();
 	void RpgMainViewOnClickTurnEndButton();
+
+	void BattleManagerOnChangePlayerInfo();
 	//void RpgMainOnClickNextButton();
 
 private:
+	void UpdatePlayerInfo();
 	void OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState);
 
 private:
