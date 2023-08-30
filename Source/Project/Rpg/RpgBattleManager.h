@@ -60,8 +60,6 @@ public:
 
 	bool CheckSideAnnihilation();
 
-	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
-
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
 	{
@@ -81,6 +79,14 @@ public:
 	void ResetSelectCardIndex();
 
 	bool IsSelectCard() const;
+
+	// 敵の中で攻撃対象を取得する
+	TObjectPtr<UCdCharacterBase> GetEnemyAttackTarget();
+
+	// プレイヤーのアクション処理
+	bool ProcessPlayerAction();
+	// 敵のアクション処理
+	bool ProcessEnemyAction();
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
