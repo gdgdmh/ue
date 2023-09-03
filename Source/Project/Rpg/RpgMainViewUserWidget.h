@@ -6,6 +6,9 @@
 #include "../ProjectUserWidget.h"
 
 #include "Cd/Widget/RpgCardPlayerInfoUserWidget.h"
+#include "CdCharacterBase.h"
+
+#include "Components/HorizontalBox.h"
 
 #include "RpgMainViewUserWidget.generated.h"
 
@@ -14,6 +17,27 @@
 DECLARE_DELEGATE(FRpgMainViewClickNextButtonDelegate)
 // TurnEndButtonが押されたときのDelegate
 DECLARE_DELEGATE(FRpgMainViewClickTurnEndButtonDelegate)
+
+/**
+ * 敵表示情報
+ */
+USTRUCT()
+struct FEnemyDisplayInfo
+{
+	GENERATED_BODY()
+
+public:
+	FEnemyDisplayInfo()
+	{
+	}
+
+protected:
+	// data ptr
+	TObjectPtr<UCdCharacterBase> Enemy;
+	// widget
+	//TObjectPtr<
+
+};
 
 /**
  * 
@@ -49,6 +73,9 @@ public:
 public:
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<URpgCardPlayerInfoUserWidget> PlayerInfo;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+		TObjectPtr<UHorizontalBox> EnemyArea;
 
 	// delegate
 protected:
