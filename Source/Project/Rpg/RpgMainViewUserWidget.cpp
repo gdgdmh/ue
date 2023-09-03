@@ -5,6 +5,34 @@
 
 
 
+void FEnemyDisplayInfo::SetCharacter(TObjectPtr<UCdCharacterBase> EnemyData)
+{
+	Enemy = EnemyData;
+}
+
+void FEnemyDisplayInfo::SetUserWidget(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	UserWidget = Widget;
+}
+
+bool FEnemyDisplayInfo::IsSameCharacter(const TObjectPtr<UCdCharacterBase>& EnemyData) const
+{
+	if (Enemy == EnemyData)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool FEnemyDisplayInfo::IsSameUserWidget(const TObjectPtr<URpgCardEnemyInfoUserWidget>& Widget) const
+{
+	if (UserWidget == Widget)
+	{
+		return true;
+	}
+	return false;
+}
+
 URpgMainViewUserWidget::URpgMainViewUserWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {

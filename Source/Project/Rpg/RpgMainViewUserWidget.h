@@ -6,6 +6,7 @@
 #include "../ProjectUserWidget.h"
 
 #include "Cd/Widget/RpgCardPlayerInfoUserWidget.h"
+#include "Cd/Widget/RpgCardEnemyInfoUserWidget.h"
 #include "CdCharacterBase.h"
 
 #include "Components/HorizontalBox.h"
@@ -29,13 +30,22 @@ struct FEnemyDisplayInfo
 public:
 	FEnemyDisplayInfo()
 	{
+		Enemy = nullptr;
+		UserWidget = nullptr;
 	}
+	void SetCharacter(TObjectPtr<UCdCharacterBase> EnemyData);
+	void SetUserWidget(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget);
+	// 同一オブジェクトかチェック
+	bool IsSameCharacter(const TObjectPtr<UCdCharacterBase>& EnemyData) const;
+	bool IsSameUserWidget(const TObjectPtr<URpgCardEnemyInfoUserWidget>& Widget) const;
 
 protected:
 	// data ptr
-	TObjectPtr<UCdCharacterBase> Enemy;
+	UPROPERTY()
+		TObjectPtr<UCdCharacterBase> Enemy;
 	// widget
-	//TObjectPtr<
+	UPROPERTY()
+		TObjectPtr<URpgCardEnemyInfoUserWidget> UserWidget;
 
 };
 
