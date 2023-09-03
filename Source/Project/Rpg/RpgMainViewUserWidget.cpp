@@ -33,6 +33,64 @@ bool FEnemyDisplayInfo::IsSameUserWidget(const TObjectPtr<URpgCardEnemyInfoUserW
 	return false;
 }
 
+void FEnemyDisplayInfos::Add(const FEnemyDisplayInfo& Info)
+{
+	Infos.Add(Info);
+}
+
+void FEnemyDisplayInfos::Remove(int32 Index)
+{
+	const int32 Size = Infos.Num();
+	if (Index <= Size)
+	{
+		// Indexの範囲外指定された
+		UE_LOG(LogTemp, Log, TEXT("FEnemyDisplayInfos::Remove Index Range error Index:%d Range:%d"), Index, Size);
+		check(false);
+		return;
+	}
+
+	Infos.RemoveAt(Index);
+}
+
+bool FEnemyDisplayInfos::Find(const TObjectPtr<UCdCharacterBase>& Target)
+{
+	for (const auto& Info : Infos)
+	{
+		if (Info.IsSameCharacter(Target))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+int32 FEnemyDisplayInfos::FindAt(const TObjectPtr<UCdCharacterBase>& Target)
+{
+	// 一致してるオブジェクトのindexを返す(見つからないときは-1)
+	const int32 Size = Infos.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		if (Infos[i].IsSameCharacter(Target))
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+const FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index)
+{
+	const int32 Size = Infos.Num();
+	if (Index <= Size)
+	{
+		// Indexの範囲外指定された
+		UE_LOG(LogTemp, Log, TEXT("FEnemyDisplayInfos::At Index Range error Index:%d Range:%d"), Index, Size);
+		check(false);
+		return Infos[0];
+	}
+	return Infos[Index];
+}
+
 URpgMainViewUserWidget::URpgMainViewUserWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {

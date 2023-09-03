@@ -46,7 +46,30 @@ protected:
 	// widget
 	UPROPERTY()
 		TObjectPtr<URpgCardEnemyInfoUserWidget> UserWidget;
+};
 
+/**
+ * 敵表示情報まとめ
+ */
+USTRUCT()
+struct FEnemyDisplayInfos
+{
+	GENERATED_BODY()
+
+public:
+	FEnemyDisplayInfos()
+	{
+	}
+
+	void Add(const FEnemyDisplayInfo& Info);
+	void Remove(int32 Index);
+
+	bool Find(const TObjectPtr<UCdCharacterBase>& Target);
+	int32 FindAt(const TObjectPtr<UCdCharacterBase>& Target);
+	const FEnemyDisplayInfo& At(int32 Index);
+
+protected:
+	TArray<FEnemyDisplayInfo> Infos;
 };
 
 /**
