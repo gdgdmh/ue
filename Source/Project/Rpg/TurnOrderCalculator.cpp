@@ -3,7 +3,7 @@
 
 #include "TurnOrderCalculator.h"
 
-TObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty)
+TObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TObjectPtr<URpgBattleParty> EnemyParty)
 {
 	TObjectPtr<UTurnOrderList> List = NewObject<UTurnOrderList>();
 	if (!List)
@@ -11,16 +11,17 @@ TObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TObjectPtr<URpgBattleParty
 		return nullptr;
 	}
 
+	// 今は愚直に並び順そのまま
+	for (TObjectPtr<UCdCharacterBase> CharacterBase : EnemyParty.Get()->GetList())
+	{
+		List.Get()->Add(CharacterBase);
+	}
+
+	// 前はAgilityでのソートをしてたが今は敵の並び順で順番を確定
+#if 0
 	TArray< TObjectPtr<URpgBattleCharacterBase> > SortTargetAll;
 
-	// ソート対象配列に味方と敵のリストを追加
-	{
-		const TArray<TObjectPtr<URpgBattleCharacterBase> > TargetList = AllyParty.Get()->GetList();
-		for (const TObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
-		{
-			SortTargetAll.Add(CharacterBase);
-		}
-	}
+	// ソート対象配列に敵のリストを追加
 	{
 		const TArray<TObjectPtr<URpgBattleCharacterBase> > TargetList = EnemyParty.Get()->GetList();
 		for (const TObjectPtr<URpgBattleCharacterBase> CharacterBase : TargetList)
@@ -28,21 +29,15 @@ TObjectPtr<UTurnOrderList> UTurnOrderCalculator::Calc(TObjectPtr<URpgBattleParty
 			SortTargetAll.Add(CharacterBase);
 		}
 	}
-
 	// Agilityの大きさでソート
 	SortTargetAll.Sort([](const URpgBattleCharacterBase& A, const URpgBattleCharacterBase& B) {
 		return A.GetParameter().Get()->GetAgility() > B.GetParameter().Get()->GetAgility();
 	});
-	/*
-	SortTargetAll.Sort([](const TObjectPtr<URpgBattleCharacterBase>& A, const TObjectPtr<URpgBattleCharacterBase>& B) {
-		return A.Get()->GetParameter().Get()->GetAgility() > B.Get()->GetParameter().Get()->GetAgility();
-	});
-	*/
-
 	for (TObjectPtr<URpgBattleCharacterBase> CharacterBase : SortTargetAll)
 	{
 		List.Get()->Add(CharacterBase);
 	}
+#endif
 
 	return List;
 }

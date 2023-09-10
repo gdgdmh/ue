@@ -5,7 +5,7 @@
 
 URpgAttackParameter::URpgAttackParameter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, TargetType(CPPRpgTargetType::None)
+	, TargetType(ERpgTargetType::None)
 {
 }
 

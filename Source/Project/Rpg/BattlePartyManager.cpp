@@ -42,15 +42,15 @@ void UBattlePartyManager::SetParty(TObjectPtr<UBattlePartySide> Party)
 
 TObjectPtr<UBattlePartySide> UBattlePartyManager::Get(ESideType Type)
 {
-	check(AllyParty);
-	check(EnemyParty);
 	if (Type == ESideType::Ally)
 	{
+		check(AllyParty);
 		check(AllyParty.Get()->GetType() == ESideType::Ally); // 念のためにTypeがおかしくないかチェック
 		return AllyParty;
 	}
 	if (Type == ESideType::Enemy)
 	{
+		check(EnemyParty);
 		check(EnemyParty.Get()->GetType() == ESideType::Enemy);  // 念のためにTypeがおかしくないかチェック
 		return EnemyParty;
 	}
@@ -62,6 +62,9 @@ TObjectPtr<UBattlePartySide> UBattlePartyManager::Get(ESideType Type)
 // ノンターゲットで攻撃する際に攻撃対象とするキャラクターを取得
 TObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESideType Type)
 {
+	// deplicated
+	return nullptr;
+#if 0
 	// 対象のパーティ
 	TObjectPtr<UBattlePartySide> Party = nullptr;
 	if (Type == ESideType::Ally)
@@ -107,10 +110,14 @@ TObjectPtr<URpgBattleCharacterBase> UBattlePartyManager::GetAttackTarget(ESideTy
 	UE_LOG(LogTemp, Log, TEXT("Type Invalid"));
 	check(false);
 	return nullptr;
+#endif
 }
 
 ESideType UBattlePartyManager::GetSideType(const TObjectPtr<URpgBattleCharacterBase> CharacterBase) const
 {
+	// deplicated
+	return ESideType::Ally;
+#if 0
 	check(CharacterBase);
 
 	for (const TObjectPtr<URpgBattleCharacterBase> Character : AllyParty.Get()->Get().Get()->GetList())
@@ -131,4 +138,5 @@ ESideType UBattlePartyManager::GetSideType(const TObjectPtr<URpgBattleCharacterB
 	UE_LOG(LogTemp, Log, TEXT("UBattlePartyManager::GetSideType Not Found"));
 	check(false);
 	return ESideType::Ally;
+#endif
 }

@@ -11,6 +11,7 @@
 
 #include "Rpg/RpgBattleParty.h"
 #include "Rpg/RpgBattleManager.h"
+#include "Rpg/ActionCardList.h"
 
 #include "ProjectRpgGameMode.generated.h"
 
@@ -32,7 +33,6 @@ public:
 
 public:
 	void OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidgetSelectType Type);
-
 private:
 	void SetTitleUI();
 	void CleanupTitleUI();
@@ -41,10 +41,22 @@ private:
 	void SetMainUI();
 	void CleanupMainUI();
 	
-	//void InitializeBattleManager();
+	void InitializeBattleManager();
 
 private:
+
+	void RpgMainViewOnClickNextButton();
+	void RpgMainViewOnClickTurnEndButton();
+
+	void BattleManagerOnChangePlayerInfo();
+	void BattleManagerOnChangeEnemyInfo();
+
 	//void RpgMainOnClickNextButton();
+
+private:
+	void UpdatePlayerInfo();
+	void UpdateEnemyInfo();
+	void OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState);
 
 private:
 	// タイトルのUserWidgetまとめ
@@ -71,7 +83,11 @@ private:
 	// バトルマネージャー
 	UPROPERTY()
 		TObjectPtr<URpgBattleManager> BattleManager;
+	// カードリスト
+	UPROPERTY()
+		TObjectPtr<UActionCardList> CardList;
 
+	//TWeakObjectPtr<UActionCard> AAA;
 	//UPROPERTY()
 	//	bool bTasking;
 };

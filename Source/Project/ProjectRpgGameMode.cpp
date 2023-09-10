@@ -44,7 +44,7 @@ void AProjectRpgGameMode::OnDelegateRpgTitleUserWidgetSelect(ERpgTitleUserWidget
 		CleanupTitleUI();
 
 		// 戦闘システム初期化
-		//InitializeBattleManager();
+		InitializeBattleManager();
 
 		// メインUIのセット
 		SetMainUI();
@@ -131,6 +131,7 @@ void AProjectRpgGameMode::CleanupTitleUI()
 
 void AProjectRpgGameMode::SetMainUI()
 {
+	/*
 	// パーティ作成のテスト
 	{
 		UE_LOG(LogTemp, Log, TEXT("--- Party Factory Test Begin ---"));
@@ -177,6 +178,7 @@ void AProjectRpgGameMode::SetMainUI()
 			UE_LOG(LogTemp, Log, TEXT("BattlePartyDataTable Load Failure"));
 		}
 	}
+	*/
 
 	// ターンソートのテスト
 	/*
@@ -207,13 +209,15 @@ void AProjectRpgGameMode::SetMainUI()
 
 	// BattleManager
 	{
-		BattleManager = NewObject<URpgBattleManager>();
+		//BattleManager = NewObject<URpgBattleManager>();
 		check(BattleManager);
-		check(AllyParty);
-		check(EnemyParty);
+		//check(AllyParty);
+		//check(EnemyParty);
+
 
 		TObjectPtr<UBattlePartyManager> BattleParty = NewObject<UBattlePartyManager>();
 		BattleParty->Initialize();
+		/*
 		{
 			TObjectPtr<UBattlePartySide> AllyPartySide = NewObject<UBattlePartySide>();
 			AllyPartySide.Get()->SetParty(AllyParty);
@@ -226,7 +230,36 @@ void AProjectRpgGameMode::SetMainUI()
 			EnemyPartySide.Get()->SetType(ESideType::Enemy);
 			BattleParty->SetParty(EnemyPartySide);
 		}
+		*/
+
+		check(CardList);
+		BattleManager.Get()->SetCardList(CardList);
+
+		BattleManager.Get()->LoadCardParameter();
+		BattleManager.Get()->LoadDeckParameter();
+		BattleManager.Get()->SetDefaultCardList();
+
+		BattleManager.Get()->LoadCharacterParameter();
+		BattleManager.Get()->SetPlayer();
+		BattleManager.Get()->SetEnemies();
+
+		AllyParty = NewObject<URpgBattleParty>();
+		EnemyParty = NewObject<URpgBattleParty>();
+		{
+			TObjectPtr<UBattlePartySide> EnemyPartySide = NewObject<UBattlePartySide>();
+			TArray<TObjectPtr<UCdCharacterBase> > Enemies = BattleManager.Get()->GetEnemy();
+			for (TObjectPtr<UCdCharacterBase> Enemy : Enemies)
+			{
+				EnemyParty->Add(Enemy);
+			}
+			EnemyPartySide.Get()->SetParty(EnemyParty);
+			EnemyPartySide.Get()->SetType(ESideType::Enemy);
+			BattleParty->SetParty(EnemyPartySide);
+		}
+
+
 		BattleManager.Get()->SetBattleParty(BattleParty);
+
 	}
 
 	if (MainProjectUserWidgets.Num() != 0)
@@ -311,17 +344,20 @@ void AProjectRpgGameMode::SetMainUI()
 			MainWidget->AddToViewport(20);
 			MainWidget->AddUserWidgetSubsytem();
 
-			/*
-			MainWidget->Set();
-			if (BattleManager)
-			{
-				MainWidget->SetState(BattleManager.Get()->GetState());
-			}
 			MainWidget->GetClickNextButtonDelegate().BindLambda([this]
-				{
-					RpgMainOnClickNextButton();
-				});
-			*/
+			{
+				RpgMainViewOnClickNextButton();
+			});
+
+			MainWidget->GetClickTurnEndButtonDelegate().BindLambda([this]
+			{
+				RpgMainViewOnClickTurnEndButton();
+			});
+
+			// プレイヤー情報更新
+			UpdatePlayerInfo();
+			// 敵情報更新
+			UpdateEnemyInfo();
 
 			MainProjectUserWidgets.Add(MainWidget);
 		}
@@ -334,6 +370,92 @@ void AProjectRpgGameMode::SetMainUI()
 
 void AProjectRpgGameMode::CleanupMainUI()
 {
+}
+
+void AProjectRpgGameMode::InitializeBattleManager()
+{
+	BattleManager = NewObject<URpgBattleManager>();
+	check(BattleManager);
+
+	BattleManager.Get()->GetChangePlayerInfoDelegate().BindLambda([this]
+	{
+		BattleManagerOnChangePlayerInfo();
+	});
+
+	BattleManager.Get()->GetChangeEnemyInfoDelegate().BindLambda([this]
+	{
+		BattleManagerOnChangeEnemyInfo();
+	});
+
+
+	CardList = NewObject<UActionCardList>();
+	check(CardList);
+
+	// 強制GC
+	GEngine->ForceGarbageCollection(true);
+}
+
+void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
+{
+	check(BattleManager);
+
+	ERpgBattleProcessState Before = BattleManager.Get()->GetState();
+	BattleManager.Get()->NextState();
+	ERpgBattleProcessState After = BattleManager.Get()->GetState();
+
+	OutputStateLog(Before, After);
+}
+
+void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
+{
+	check(BattleManager);
+
+	ERpgBattleProcessState Before = BattleManager.Get()->GetState();
+	BattleManager.Get()->EndPlayerTurn();
+	ERpgBattleProcessState After = BattleManager.Get()->GetState();
+
+	OutputStateLog(Before, After);
+}
+
+void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()
+{
+	UpdatePlayerInfo();
+}
+
+void AProjectRpgGameMode::BattleManagerOnChangeEnemyInfo()
+{
+	UpdateEnemyInfo();
+}
+
+void AProjectRpgGameMode::UpdatePlayerInfo()
+{
+	check(BattleManager);
+	check(RpgMainViewUserWidget);
+
+	FString Str = FString::Printf(TEXT("%d/%d"),
+		BattleManager.Get()->GetPlayerHp(), BattleManager.Get()->GetPlayerMaxHp());
+	FText HpText = FText::FromString(Str);
+	RpgMainViewUserWidget.Get()->SetHpText(HpText);
+}
+
+void AProjectRpgGameMode::UpdateEnemyInfo()
+{
+	check(BattleManager);
+	check(RpgMainViewUserWidget);
+	RpgMainViewUserWidget.Get()->SetEnemyView(BattleManager->GetEnemy());
+}
+
+void AProjectRpgGameMode::OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState)
+{
+	{
+		FString LogText = TEXT("");
+		LogText += ToText(BeforeState).ToString();
+		LogText += TEXT(" -> ");
+		// 次のステータスをログに設定
+		LogText += ToText(AfterState).ToString();
+		UE_LOG(LogTemp, Log, TEXT("%s"), *LogText);
+	}
+
 }
 
 #if 0

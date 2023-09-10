@@ -9,9 +9,131 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	BattleParty = NewObject<UBattlePartyManager>();
 	TurnManager = NewObject<URpgTurnManager>();
 
+	CardList = nullptr;
+
 	SelectCommand = ERpgBattleCommandType::None;
 	AttackCharacter = nullptr;
 	AttackTargetCharacter = nullptr;
+
+	ActionCardParameter = NewObject<UActionCardParameter>();
+
+	CharacterParameter = NewObject<UCdCharacterParameter>();
+
+	ResetSelectCardIndex();
+}
+
+void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
+{
+	CardList = List;
+	check(CardList);
+}
+
+bool URpgBattleManager::LoadCardParameter()
+{
+	// カードパラメーターをデータテーブルから読み込み
+	check(ActionCardParameter);
+	FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_CardBaseData.DT_CardBaseData");
+	if (!ActionCardParameter.Get()->LoadCardDataTable(Path))
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter load failure"));
+		return false;
+	}
+
+	// テスト
+	{
+		FActionCardCreateParameter Param;
+		Param.SetCardType(ERpgActionCardType::Attack);
+		TObjectPtr<UActionCard> Card = ActionCardParameter.Get()->Create(Param);
+		if (Card.Get()->GetActionType() == ERpgActionType::Attack)
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCardParameter create ok"));
+		}
+	}
+	return true;
+}
+
+bool URpgBattleManager::LoadDeckParameter()
+{
+	check(ActionCardParameter);
+	FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_DefaultDeckData.DT_DefaultDeckData");
+	if (!ActionCardParameter.Get()->LoadDeckDataTable(Path))
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadDeckParameter load failure"));
+		return false;
+	}
+
+	return true;
+}
+
+bool URpgBattleManager::LoadCharacterParameter()
+{
+	check(CharacterParameter);
+	{
+		FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_PlayerData.DT_PlayerData");
+		if (!CharacterParameter.Get()->LoadPlayerDataTable(Path))
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCharacterParameter load failure(player)"));
+			return false;
+		}
+	}
+	{
+		FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/DT_EnemyData.DT_EnemyData");
+		if (!CharacterParameter.Get()->LoadEnemyDataTable(Path))
+		{
+			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCharacterParameter load failure(enemy)"));
+			return false;
+		}
+	}
+	return true;
+}
+
+void URpgBattleManager::SetPlayer()
+{
+	TArray<TObjectPtr<UCdCharacterBase> > Players; 
+	CharacterParameter.Get()->GetPlayer(Players);
+
+	if (Players.IsEmpty())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::SetPlayer failure"));
+		check(false);
+		return;
+	}
+	Player = Players[0];
+}
+
+void URpgBattleManager::SetEnemies()
+{
+	TArray<TObjectPtr<UCdCharacterBase> > EnemyData;
+	CharacterParameter.Get()->GetEnemy(EnemyData);
+
+	if (EnemyData.IsEmpty())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::SetEnemies failure"));
+		check(false);
+		return;
+	}
+	Enemies.Empty();
+	for (auto Enemy : EnemyData)
+	{
+		Enemies.Add(Enemy);
+	}
+}
+
+TArray<TObjectPtr<UCdCharacterBase> > URpgBattleManager::GetEnemy() const
+{
+	return Enemies;
+}
+
+void URpgBattleManager::SetDefaultCardList()
+{
+	check(ActionCardParameter);
+	TObjectPtr<UActionCardList> List = ActionCardParameter.Get()->CreateDefaultDeck();
+	if (!List)
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::SetDefaultCardList create failure"));
+		return;
+	}
+	CardList.Get()->CopyCard(*List.Get());
 }
 
 void URpgBattleManager::NormalizeTurnList()
@@ -23,10 +145,10 @@ void URpgBattleManager::NormalizeTurnList()
 void URpgBattleManager::SetTurn()
 {
 	check(TurnManager);
-	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Ally).Get()->Get(), BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
+	TurnManager.Get()->Set(BattleParty.Get()->Get(ESideType::Enemy).Get()->Get());
 }
 
-void URpgBattleManager::OutputTurn() const
+void URpgBattleManager::OutputTurnLog() const
 {
 	check(TurnManager);
 	TurnManager.Get()->OutputLog();
@@ -50,27 +172,17 @@ void URpgBattleManager::ChangeTurn()
 bool URpgBattleManager::CheckSideAnnihilation()
 {
 	check(BattleParty);
-	TObjectPtr<UBattlePartySide> AllyParty = BattleParty.Get()->Get(ESideType::Ally);
 	TObjectPtr<UBattlePartySide> EnemyParty = BattleParty.Get()->Get(ESideType::Enemy);
-	check(AllyParty);
 	check(EnemyParty);
 
+	// プレイヤーサイドのチェック
 	{
-		bool bAllDead = true;
-		for (const auto Character : AllyParty.Get()->Get()->GetList())
-		{
-			check(Character);
-			if (!Character.Get()->GetParameter()->IsDead())
-			{
-				bAllDead = false;
-				break;
-			}
-		}
-		if (bAllDead)
+		if (Player.Get()->GetParameter()->IsDead())
 		{
 			return true;
 		}
 	}
+	// 敵サイドのチェック
 	{
 		bool bAllDead = true;
 		for (const auto Character : EnemyParty.Get()->Get()->GetList())
@@ -90,51 +202,193 @@ bool URpgBattleManager::CheckSideAnnihilation()
 	return false;
 }
 
-ESideType URpgBattleManager::GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const
+int32 URpgBattleManager::GetPlayerHp() const
 {
-	if (!CharacterBase)
-	{
-		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType CharacterInvalid"));
-		check(false);
-		return ESideType::Ally;
-	}
+	check(Player);
+	return Player.Get()->GetParameter().Get()->GetHp();
+}
 
-	for (const auto Character : BattleParty.Get()->Get(ESideType::Ally).Get()->Get()->GetList())
-	{
-		if (!Character)
-		{
-			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Party(Ally) CharacterInvalid"));
-			continue;
-		}
-
-		if (Character == CharacterBase)
-		{
-			return ESideType::Ally;
-		}
-	}
-
-	for (const auto Character : BattleParty.Get()->Get(ESideType::Enemy).Get()->Get()->GetList())
-	{
-		if (!Character)
-		{
-			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Party(Enemy) CharacterInvalid"));
-			continue;
-		}
-
-		if (Character == CharacterBase)
-		{
-			return ESideType::Enemy;
-		}
-	}
-
-	UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::GetSideType Character Not Found"));
-	check(false);
-	return ESideType::Ally;
+int32 URpgBattleManager::GetPlayerMaxHp() const
+{
+	check(Player);
+	return Player.Get()->GetParameter().Get()->GetMaxHp();
 }
 
 // 次のステータスに進める
 bool URpgBattleManager::NextState()
 {
+	if (ProcessState == ERpgBattleProcessState::None)
+	{
+		ProcessState = ERpgBattleProcessState::Initialize;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::Initialize)
+	{
+		ProcessState = ERpgBattleProcessState::PreStart;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreStart)
+	{
+		ProcessState = ERpgBattleProcessState::Start;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::Start)
+	{
+		ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PrePlayerTurn)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerSelectAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
+	{
+		// 暫定で選択したことにしてしまう
+		SelectCardIndex = 0;
+		ProcessState = ERpgBattleProcessState::PlayerAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerAction)
+	{
+		if (!ProcessPlayerAction())
+		{
+			// 何もしなかった
+			ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+			return true;
+		}
+		ChangeEnemyInfoDelegate.ExecuteIfBound();
+		ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerActionAfter)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerTurnFinish)
+	{
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
+		// 全滅していたら終了
+		if (CheckSideAnnihilation())
+		{
+			ProcessState = ERpgBattleProcessState::PreFinish;
+			return true;
+		}
+
+		ProcessState = ERpgBattleProcessState::PlayerTurnAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfter)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnAfterFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfterFinish)
+	{
+		ProcessState = ERpgBattleProcessState::PreEnemyTurn;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreEnemyTurn)
+	{
+		// ターン設定
+		SetTurn();
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
+		OutputTurnLog();
+		ProcessState = ERpgBattleProcessState::EnemyAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreEnemyAction)
+	{
+		if (IsTurnListEmpty())
+		{
+			// 敵ターン消化したのでプレイヤーターンへ
+			ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+			OutputTurnLog();
+			return true;
+		}
+		else
+		{
+			// 次のメンバーにターンを切り替え
+			ChangeTurn();
+			if (IsTurnListEmpty())
+			{
+				// 敵ターン消化したのでプレイヤーターンへ
+				ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+				return true;
+			}
+			OutputTurnLog();
+		}
+		ProcessState = ERpgBattleProcessState::EnemyAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyAction)
+	{
+		if (!ProcessEnemyAction())
+		{
+			// 何もしなかった
+			ProcessState = ERpgBattleProcessState::EnemyActionAfter;
+			return true;
+		}
+		ChangePlayerInfoDelegate.ExecuteIfBound(); // プレイヤー情報更新Delegate
+		ProcessState = ERpgBattleProcessState::EnemyActionAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyActionAfter)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyActionFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyActionFinish)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyTurnAfter;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyTurnAfter)
+	{
+		ProcessState = ERpgBattleProcessState::EnemyTurnAfterFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::EnemyTurnAfterFinish)
+	{
+		ProcessState = ERpgBattleProcessState::TurnPreFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::TurnPreFinish)
+	{
+		ProcessState = ERpgBattleProcessState::TurnFinish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::TurnFinish)
+	{
+		// 死亡キャラや不正な状態を修正
+		NormalizeTurnList();
+
+		// 全滅していたら終了
+		if (CheckSideAnnihilation())
+		{
+			ProcessState = ERpgBattleProcessState::PreFinish;
+			return true;
+		}
+
+		ProcessState = ERpgBattleProcessState::PreEnemyAction;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PreFinish)
+	{
+		ProcessState = ERpgBattleProcessState::Finish;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::Finish)
+	{
+		return true;
+	}
+	return true;
+#if 0
 	if (ProcessState == ERpgBattleProcessState::None)
 	{
 		ProcessState = ERpgBattleProcessState::Initialize;
@@ -259,6 +513,20 @@ bool URpgBattleManager::NextState()
 		return true;
 	}
 	return true;
+#endif
+}
+
+// プレイヤーのターンを終了させる
+void URpgBattleManager::EndPlayerTurn()
+{
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
+	{
+		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Not Player End Turn State"));
+	}
 }
 
 void URpgBattleManager::ActionProc()
@@ -279,7 +547,108 @@ void URpgBattleManager::ActionProc()
 			Damage, BeforeHp, AfterHp);
 		return;
 	}
+}
 
+// 選択カードindexのリセット
+void URpgBattleManager::ResetSelectCardIndex()
+{
+	SelectCardIndex = -1;
+}
+
+bool URpgBattleManager::IsSelectCard() const
+{
+	if (SelectCardIndex == -1)
+	{
+		// -1は選択してない
+		return false;
+	}
+	return true;
+}
+
+// 敵の中で攻撃対象を取得する
+TObjectPtr<UCdCharacterBase> URpgBattleManager::GetEnemyAttackTarget()
+{
+	if (Enemies.IsEmpty())
+	{
+		return nullptr;
+	}
+
+	TObjectPtr<UCdCharacterBase> TargetEnemy = nullptr;
+	for (auto Enemy : Enemies)
+	{
+		if (Enemy.Get()->GetParameter().Get()->IsDead())
+		{
+			continue;
+		}
+		return Enemy;
+	}
+	return nullptr;
+}
+
+// プレイヤーのアクション処理
+bool URpgBattleManager::ProcessPlayerAction()
+{
+	const int32 Size = CardList.Get()->GetSize();
+	check((0 <= SelectCardIndex) && (SelectCardIndex < Size));
+
+	TObjectPtr<UActionCard> Card = CardList.Get()->GetCard(SelectCardIndex);
+	check(Card);
+	if (Card.Get()->GetActionType() == ERpgActionType::Attack)
+	{
+		TObjectPtr<UCdCharacterBase> TargetEnemy = GetEnemyAttackTarget();
+		if (TargetEnemy == nullptr)
+		{
+			// ターゲット取得不可のときは何もしない
+			return false;
+		}
+
+		int32 Damage = Card.Get()->GetAttackPower();
+
+		int32 BeforeHp = TargetEnemy.Get()->GetParameter().Get()->GetHp();
+		TargetEnemy.Get()->Damage(Damage);
+		int32 AfterHp = TargetEnemy.Get()->GetParameter().Get()->GetHp();
+
+		UE_LOG(LogTemp, Log, TEXT("%d Damage %d -> %d"),
+			Damage, BeforeHp, AfterHp);
+	}
+	// 死亡キャラや不正な状態を修正
+	NormalizeTurnList();
+
+	return true;
+}
+
+// 敵のアクション処理
+bool URpgBattleManager::ProcessEnemyAction()
+{
+	TObjectPtr<UCdCharacterBase> TargetCharacter = Player;
+	check(TargetCharacter);
+	if (TargetCharacter.Get()->GetParameter().Get()->IsDead())
+	{
+		return false;
+	}
+
+	TObjectPtr<UCdCharacterBase> TurnCharacter = TurnManager.Get()->GetCurrentTurnCharacter();
+	check(TurnCharacter);
+
+	int32 Damage = TurnCharacter.Get()->GetParameter().Get()->GetAttackPower();
+
+	int32 BeforeHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
+	TargetCharacter.Get()->Damage(Damage);
+	int32 AfterHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
+	UE_LOG(LogTemp, Log, TEXT("%d Player Damage %d -> %d"),
+		Damage, BeforeHp, AfterHp);
+
+	return true;
+}
+
+FRpgBattleManagerChangePlayerInfoDelegate& URpgBattleManager::GetChangePlayerInfoDelegate()
+{
+	return ChangePlayerInfoDelegate;
+}
+
+FRpgBattleManagerChangeEnemyInfoDelegate& URpgBattleManager::GetChangeEnemyInfoDelegate()
+{
+	return ChangeEnemyInfoDelegate;
 }
 
 // 行動選択のログ出力
@@ -288,9 +657,7 @@ void URpgBattleManager::OutputSelectCommandLog()
 	// コマンドの出力(EnumからFStringに変換)
 	{
 		FString EnumName = TEXT("/Script/Project.ERpgBattleCommandType");
-		//FString EnumName = TEXT("ERpgBattleCommandType");
 		UEnum* const Enum = FindObject<UEnum>(nullptr, *EnumName);
-		//UEnum* const Enum = FindObject<UEnum>(ANY_PACKAGE, *EnumName);
 		FString CommandEnumName = Enum->GetNameStringByIndex(static_cast<int32>(SelectCommand));
 		UE_LOG(LogTemp, Log, TEXT("Command:%s"), *CommandEnumName);
 	}

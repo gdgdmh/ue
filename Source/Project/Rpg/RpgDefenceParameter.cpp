@@ -5,7 +5,8 @@
 
 URpgDefenceParameter::URpgDefenceParameter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, TargetType(CPPRpgTargetType::None)
+	, TargetType(ERpgTargetType::None)
+	, DefencePower(0)
 {
 }
 

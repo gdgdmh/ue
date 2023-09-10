@@ -39,7 +39,7 @@ void URpgMainUserWidget::Set()
 void URpgMainUserWidget::SetState(ERpgBattleProcessState State)
 {
 	// ERpgBattleProcessStateを文字列に変換して設定
-	StateText = ToString(State);
+	StateText = ToText(State);
 }
 
 void URpgMainUserWidget::CreateCharaInfoWidget()

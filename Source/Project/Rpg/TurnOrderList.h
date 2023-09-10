@@ -5,7 +5,8 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 
-#include "RpgBattleCharacterBase.h"
+#include "CdCharacterBase.h"
+//#include "RpgBattleCharacterBase.h"
 #include "BattlePartySide.h"
 
 #include "TurnOrderList.generated.h"
@@ -21,20 +22,20 @@ class PROJECT_API UTurnOrderList : public UObject
 public:
 	UTurnOrderList(const FObjectInitializer& ObjectInitializer);
 
-	void Add(TObjectPtr<URpgBattleCharacterBase> Character);
-	void Remove(TObjectPtr<URpgBattleCharacterBase> Character);
+	void Add(TObjectPtr<UCdCharacterBase> Character);
+	void Remove(TObjectPtr<UCdCharacterBase> Character);
 	void Clear();
 	int32 Size() const;
-	TObjectPtr<URpgBattleCharacterBase> Get(int32 Index) const;
-	int32 GetIndex(TObjectPtr<URpgBattleCharacterBase> Character) const;
+	TObjectPtr<UCdCharacterBase> Get(int32 Index) const;
+	int32 GetIndex(TObjectPtr<UCdCharacterBase> Character) const;
 
 	void PopFront();
 	void Normalize();
-	TObjectPtr<URpgBattleCharacterBase> GetTopCharacter() const;
+	TObjectPtr<UCdCharacterBase> GetTopCharacter() const;
 
 	void OutputLog() const;
 
 protected:
 	UPROPERTY()
-		TArray<TObjectPtr<URpgBattleCharacterBase> > OrderList;
+		TArray<TObjectPtr<UCdCharacterBase> > OrderList;
 };

@@ -23,6 +23,21 @@ class PROJECT_API URpgActionParameter : public UObject
 public:
 	URpgActionParameter(const FObjectInitializer& ObjectInitializer);
 
+	void SetActionType(ERpgActionType Type);
+	void SetAttackTarget(ERpgTargetType TargetType);
+	void SetAttackPower(int32 Power);
+
+	void SetDefenceTarget(ERpgTargetType TargetType);
+	void SetDefencePower(int32 Power);
+
+	ERpgActionType GetActionType() const;
+	ERpgTargetType GetAttackTarget() const;
+	int32 GetAttackPower() const;
+
+	ERpgTargetType GetDefenceTarget() const;
+	int32 GetDefencePower() const;
+
+
 protected:
 	// アクションタイプ
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

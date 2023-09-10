@@ -5,13 +5,24 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 
+#include "CdCharacterBase.h"
+
 #include "BattlePartyManager.h"
 #include "CPPRpgBattleProcessState.h"
 #include "RpgTurnManager.h"
 #include "RpgBattleDamageCalculator.h"
 #include "CPPRpgBattleCommandType.h"
+#include "ActionCardList.h"
+#include "ActionCardParameter.h"
+#include "CdCharacterParameter.h"
 
 #include "RpgBattleManager.generated.h"
+
+// Delegate
+// プレイヤーの情報が変化したときのDelegate
+DECLARE_DELEGATE(FRpgBattleManagerChangePlayerInfoDelegate)
+// 敵の情報が変化したときのDelegate
+DECLARE_DELEGATE(FRpgBattleManagerChangeEnemyInfoDelegate)
 
 /**
  * 
@@ -32,15 +43,28 @@ public:
 		BattleParty = Party;
 	}
 
+	void SetCardList(TObjectPtr<UActionCardList> List);
+
+	bool LoadCardParameter();
+	bool LoadDeckParameter();
+
+	bool LoadCharacterParameter();
+
+	// 今の所固定で生成する
+	void SetPlayer();
+	void SetEnemies();
+
+	TArray<TObjectPtr<UCdCharacterBase> > GetEnemy() const;
+
+	void SetDefaultCardList();
+
 	void NormalizeTurnList();
 	void SetTurn();
-	void OutputTurn() const;
+	void OutputTurnLog() const;
 	bool IsTurnListEmpty() const;
 	void ChangeTurn();
 
 	bool CheckSideAnnihilation();
-
-	ESideType GetSideType(const TObjectPtr<URpgBattleCharacterBase>& CharacterBase) const;
 
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
@@ -48,11 +72,33 @@ public:
 		return ProcessState;
 	}
 
+	int32 GetPlayerHp() const;
+	int32 GetPlayerMaxHp() const;
+
 	// 次のステータスに進める
 	bool NextState();
 
+	// プレイヤーのターンを終了させる
+	void EndPlayerTurn();
+
 	// 選択したアクションを処理する
 	void ActionProc();
+
+	// 選択カードindexのリセット
+	void ResetSelectCardIndex();
+
+	bool IsSelectCard() const;
+
+	// 敵の中で攻撃対象を取得する
+	TObjectPtr<UCdCharacterBase> GetEnemyAttackTarget();
+
+	// プレイヤーのアクション処理
+	bool ProcessPlayerAction();
+	// 敵のアクション処理
+	bool ProcessEnemyAction();
+
+	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
+	FRpgBattleManagerChangeEnemyInfoDelegate& GetChangeEnemyInfoDelegate();
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
@@ -60,11 +106,21 @@ public:
 protected:
 	UPROPERTY()
 		TObjectPtr<UBattlePartyManager> BattleParty;
+
+	UPROPERTY()
+		TObjectPtr<UCdCharacterBase> Player;
+
+	UPROPERTY()
+		TArray<TObjectPtr<UCdCharacterBase> > Enemies;
+
 	UPROPERTY()
 		TObjectPtr<URpgTurnManager> TurnManager;
 	UPROPERTY()
 		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
 	ERpgBattleProcessState ProcessState;
+
+	UPROPERTY()
+		TObjectPtr<UActionCardList> CardList;
 
 	// 行動選択
 	// 構造体にまとめるかも
@@ -74,4 +130,18 @@ protected:
 	UPROPERTY()
 		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
 
+	// パラメーター
+	UPROPERTY()
+		TObjectPtr<UActionCardParameter> ActionCardParameter;
+
+	UPROPERTY()
+		TObjectPtr<UCdCharacterParameter> CharacterParameter;
+
+	// 行動選択
+	UPROPERTY()
+		int32 SelectCardIndex;
+
+	FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
+
+	FRpgBattleManagerChangeEnemyInfoDelegate ChangeEnemyInfoDelegate;
 };

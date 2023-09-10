@@ -7,6 +7,8 @@
 
 TObjectPtr<URpgBattleParty> UBattlePartyDataTableConverter::Convert(const TArray<FBattlePartyDataTable>& BattlePartyDataTable, ESideType Type)
 {
+	// deplicated
+#if 0
 	TObjectPtr<UCharacterParameterConverter> Converter = NewObject<UCharacterParameterConverter>();
 	check(Converter != nullptr);
 
@@ -29,4 +31,6 @@ TObjectPtr<URpgBattleParty> UBattlePartyDataTableConverter::Convert(const TArray
 	}
 
 	return Party;
+#endif
+	return nullptr;
 }

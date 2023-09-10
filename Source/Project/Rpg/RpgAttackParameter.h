@@ -20,12 +20,23 @@ class PROJECT_API URpgAttackParameter : public UObject
 public:
 	URpgAttackParameter(const FObjectInitializer& ObjectInitializer);
 
+	void SetTargetType(ERpgTargetType Type)
+	{
+		TargetType = Type;
+	}
+	void SetAttackPower(int32 Power)
+	{
+		AttackPower = Power;
+	}
+
+	ERpgTargetType GetTargetType() const { return TargetType; }
+	int32 GetAttackPower() const { return AttackPower; }
 
 protected:
 	// 対象
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		CPPRpgTargetType TargetType;
+		ERpgTargetType TargetType;
 
 	// 攻撃力
-	//int32 AttackPower;
+	int32 AttackPower;
 };

@@ -16,11 +16,11 @@ void URpgTurnManager::ResetTurnOrderList()
 	List = NewObject<UTurnOrderList>();
 }
 
-bool URpgTurnManager::Set(TObjectPtr<URpgBattleParty> AllyParty, TObjectPtr<URpgBattleParty> EnemyParty)
+bool URpgTurnManager::Set(TObjectPtr<URpgBattleParty> EnemyParty)
 {
 	check(List);
 	check(Calculator);
-	List = Calculator.Get()->Calc(AllyParty, EnemyParty);
+	List = Calculator.Get()->Calc(EnemyParty);
 	if (!List)
 	{
 		UE_LOG(LogTemp, Log, TEXT("URpgTurnManager::Set Failure"));
@@ -50,7 +50,7 @@ TObjectPtr<UTurnOrderList> URpgTurnManager::GetTurnOrderList()
 	return List;
 }
 
-TObjectPtr<URpgBattleCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
+TObjectPtr<UCdCharacterBase> URpgTurnManager::GetCurrentTurnCharacter() const
 {
 	check(List);
 	return List.Get()->GetTopCharacter();
