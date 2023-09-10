@@ -645,6 +645,11 @@ FRpgBattleManagerChangePlayerInfoDelegate& URpgBattleManager::GetChangePlayerInf
 	return ChangePlayerInfoDelegate;
 }
 
+FRpgBattleManagerChangeEnemyInfoDelegate& URpgBattleManager::GetChangeEnemyInfoDelegate()
+{
+	return ChangeEnemyInfoDelegate;
+}
+
 // 行動選択のログ出力
 void URpgBattleManager::OutputSelectCommandLog()
 {

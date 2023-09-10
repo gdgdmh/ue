@@ -49,10 +49,13 @@ private:
 	void RpgMainViewOnClickTurnEndButton();
 
 	void BattleManagerOnChangePlayerInfo();
+	void BattleManagerOnChangeEnemyInfo();
+
 	//void RpgMainOnClickNextButton();
 
 private:
 	void UpdatePlayerInfo();
+	void UpdateEnemyInfo();
 	void OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState);
 
 private:

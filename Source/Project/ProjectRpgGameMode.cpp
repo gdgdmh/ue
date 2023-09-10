@@ -356,6 +356,8 @@ void AProjectRpgGameMode::SetMainUI()
 
 			// プレイヤー情報更新
 			UpdatePlayerInfo();
+			// 敵情報更新
+			UpdateEnemyInfo();
 
 			MainProjectUserWidgets.Add(MainWidget);
 		}
@@ -379,6 +381,12 @@ void AProjectRpgGameMode::InitializeBattleManager()
 	{
 		BattleManagerOnChangePlayerInfo();
 	});
+
+	BattleManager.Get()->GetChangeEnemyInfoDelegate().BindLambda([this]
+	{
+		BattleManagerOnChangeEnemyInfo();
+	});
+
 
 	CardList = NewObject<UActionCardList>();
 	check(CardList);
@@ -414,6 +422,11 @@ void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()
 	UpdatePlayerInfo();
 }
 
+void AProjectRpgGameMode::BattleManagerOnChangeEnemyInfo()
+{
+	UpdateEnemyInfo();
+}
+
 void AProjectRpgGameMode::UpdatePlayerInfo()
 {
 	check(BattleManager);
@@ -423,6 +436,13 @@ void AProjectRpgGameMode::UpdatePlayerInfo()
 		BattleManager.Get()->GetPlayerHp(), BattleManager.Get()->GetPlayerMaxHp());
 	FText HpText = FText::FromString(Str);
 	RpgMainViewUserWidget.Get()->SetHpText(HpText);
+}
+
+void AProjectRpgGameMode::UpdateEnemyInfo()
+{
+	check(BattleManager);
+	check(RpgMainViewUserWidget);
+	RpgMainViewUserWidget.Get()->SetEnemyView(BattleManager->GetEnemy());
 }
 
 void AProjectRpgGameMode::OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState)

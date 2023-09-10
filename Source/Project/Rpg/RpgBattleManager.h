@@ -21,6 +21,8 @@
 // Delegate
 // プレイヤーの情報が変化したときのDelegate
 DECLARE_DELEGATE(FRpgBattleManagerChangePlayerInfoDelegate)
+// 敵の情報が変化したときのDelegate
+DECLARE_DELEGATE(FRpgBattleManagerChangeEnemyInfoDelegate)
 
 /**
  * 
@@ -96,6 +98,7 @@ public:
 	bool ProcessEnemyAction();
 
 	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
+	FRpgBattleManagerChangeEnemyInfoDelegate& GetChangeEnemyInfoDelegate();
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
@@ -138,5 +141,7 @@ protected:
 	UPROPERTY()
 		int32 SelectCardIndex;
 
-		FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
+	FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
+
+	FRpgBattleManagerChangeEnemyInfoDelegate ChangeEnemyInfoDelegate;
 };
