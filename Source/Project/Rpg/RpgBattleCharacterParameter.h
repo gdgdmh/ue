@@ -6,6 +6,7 @@
 #include "UObject/NoExportTypes.h"
 #include "RpgBattleStatus.h"
 #include "BattlePartyDataTable.h"
+#include "CPPCdEnemyType.h"
 #include "RpgBattleCharacterParameter.generated.h"
 
 /**
@@ -31,6 +32,7 @@ public:
 	void SetAttackPower(int32 Power);
 	void SetDefencePower(int32 Power);
 	void SetAgility(int32 AgilityValue);
+	void SetEnemyType(ECdEnemyType Type);
 
 	void Damage(int32 AttackDamage);
 
@@ -43,6 +45,7 @@ public:
 	int32 GetAgility() const { return Agility; }
 	URpgBattleStatus& GetStatus() const { return *Status; }
 	FText GetName() const { return Name; }
+	ECdEnemyType GetType() const { return EnemyType; }
 
 	bool IsDead() const;
 
@@ -78,4 +81,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		FText Name;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		ECdEnemyType EnemyType;
 };

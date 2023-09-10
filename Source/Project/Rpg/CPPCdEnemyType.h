@@ -16,3 +16,17 @@ enum class ECdEnemyType : uint8
 	Num				UMETA(Hidden)
 };
 ENUM_RANGE_BY_COUNT(ECdEnemyType, ECdEnemyType::Num)
+
+FText ToText(ECdEnemyType Type)
+{
+	FString EnumName = TEXT("/Script/Project.ECdEnemyType");
+	UEnum* const Enum = FindObject<UEnum>(nullptr, *EnumName);
+	FString EnumNameString = Enum->GetNameStringByIndex(static_cast<int32>(Type));
+	return FText::FromString(EnumNameString);
+}
+
+FString ToString(ECdEnemyType Type)
+{
+	FText Text = ToText(Type);
+	return Text.ToString();
+}

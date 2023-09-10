@@ -98,6 +98,7 @@ void UCdCharacterParameter::GetPlayer(TArray<TObjectPtr<UCdCharacterBase> >& Pla
 		CharacterBase.Get()->GetParameter().Get()->SetHp(Character.GetHp(), Character.GetMaxHp());
 		CharacterBase.Get()->GetParameter().Get()->SetAttackPower(Character.GetAttackPower());
 		CharacterBase.Get()->GetParameter().Get()->SetDefencePower(Character.GetDefencePower());
+		CharacterBase.Get()->GetParameter().Get()->SetEnemyType(ECdEnemyType::None);
 		Player.Add(CharacterBase);
 	}
 }
@@ -113,6 +114,7 @@ void UCdCharacterParameter::GetEnemy(TArray<TObjectPtr<UCdCharacterBase> >& Enem
 		CharacterBase.Get()->GetParameter().Get()->SetHp(Character.GetHp(), Character.GetMaxHp());
 		CharacterBase.Get()->GetParameter().Get()->SetAttackPower(Character.GetAttackPower());
 		CharacterBase.Get()->GetParameter().Get()->SetDefencePower(Character.GetDefencePower());
+		CharacterBase.Get()->GetParameter().Get()->SetEnemyType(Character.GetEnemyType());
 		Enemies.Add(CharacterBase);
 	}
 }

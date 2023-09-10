@@ -11,6 +11,8 @@
 
 #include "Components/HorizontalBox.h"
 
+#include "../CPPEnemyType.h"
+
 #include "RpgMainViewUserWidget.generated.h"
 
 // Delegate
@@ -84,8 +86,6 @@ public:
 
 	URpgMainViewUserWidget(const FObjectInitializer& ObjectInitializer);
 
-
-
 	FRpgMainViewClickNextButtonDelegate& GetClickNextButtonDelegate();
 	FRpgMainViewClickTurnEndButtonDelegate& GetClickTurnEndButtonDelegate();
 
@@ -95,12 +95,18 @@ protected:
 public:
 	void SetHpText(FText Text);
 
+	void SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies);
+
 public:
 	UFUNCTION(BlueprintCallable)
 		void OnClickTurnEndButton();
 
 	UFUNCTION(BlueprintCallable)
 		void OnClickNextButton();
+
+protected:
+
+	FEnemyDisplayInfos EnemyDisplayInfos;
 
 	// UI bind
 public:

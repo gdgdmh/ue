@@ -115,6 +115,48 @@ void URpgMainViewUserWidget::SetHpText(FText Text)
 	PlayerInfo.Get()->SetHpText(Text);
 }
 
+void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies)
+{
+	// オブジェクト自体追加されているか
+	{
+		for (const auto& Enemy : Enemies)
+		{
+			if (EnemyDisplayInfos.Find(Enemy))
+			{
+				continue;
+			}
+
+			// viewに追加
+			{
+				FString AssetPath = TEXT("/Game/Project/UI/Blueprints/Rpg/Main/Card/WBP_RpgCardEnemyInfo.WBP_RpgCardEnemyInfo_C");
+				TSubclassOf<class UUserWidget> TempWidgetClass = TSoftClassPtr<UUserWidget>(FSoftObjectPath(*AssetPath)).LoadSynchronous();
+				if (!TempWidgetClass)
+				{
+					UE_LOG(LogTemp, Log, TEXT("URpgMainViewUserWidget::SetEnemyView widget load failure"));
+					return;
+				}
+				TObjectPtr<URpgCardEnemyInfoUserWidget> Widget = CreateWidget<URpgCardEnemyInfoUserWidget>(GetWorld(), TempWidgetClass);
+				if (!Widget)
+				{
+					continue;
+				}
+				Widget->AddToViewport();
+				Widget->AddUserWidgetSubsytem();
+
+				EnemyArea->AddChild(Widget);
+
+				// Widgetの初期化
+
+				// displayinfoに追加
+				FEnemyDisplayInfo Info;
+				Info.SetCharacter(Enemy);
+				Info.SetUserWidget(Widget);
+				EnemyDisplayInfos.Add(Info);
+			}
+		}
+	}
+}
+
 void URpgMainViewUserWidget::OnClickTurnEndButton()
 {
 	// Delegate呼び出し
