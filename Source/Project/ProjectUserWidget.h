@@ -28,6 +28,9 @@ public:
 	void SetWidgetType(EVsUserWidgetType Type) { VsUserWidgetType = Type; }
 	EVsUserWidgetType GetWidgetType() const { return VsUserWidgetType; }
 
+	void ShowObject();
+	void HideObject();
+
 private:
 	EVsUserWidgetType VsUserWidgetType = EVsUserWidgetType::None;
 };

@@ -30,3 +30,13 @@ void UProjectUserWidget::RemoveUserWidgetSubsystem()
 		}
 	}
 }
+
+void UProjectUserWidget::ShowObject()
+{
+	SetVisibility(ESlateVisibility::Visible);
+}
+
+void UProjectUserWidget::HideObject()
+{
+	SetVisibility(ESlateVisibility::Hidden);
+}

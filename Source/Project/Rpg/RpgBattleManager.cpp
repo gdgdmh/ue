@@ -257,6 +257,7 @@ bool URpgBattleManager::NextState()
 			ProcessState = ERpgBattleProcessState::PlayerActionAfter;
 			return true;
 		}
+		ChangeEnemyInfoDelegate.ExecuteIfBound();
 		ProcessState = ERpgBattleProcessState::PlayerActionAfter;
 		return true;
 	}

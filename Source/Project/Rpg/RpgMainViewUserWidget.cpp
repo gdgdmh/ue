@@ -33,6 +33,21 @@ bool FEnemyDisplayInfo::IsSameUserWidget(const TObjectPtr<URpgCardEnemyInfoUserW
 	return false;
 }
 
+bool FEnemyDisplayInfo::IsDead() const
+{
+	return Enemy->GetParameter()->IsDead();
+}
+
+void FEnemyDisplayInfo::SetWidgetHp()
+{
+	UserWidget->SetHp(Enemy->GetParameter()->GetHp(), Enemy->GetParameter()->GetMaxHp());
+}
+
+void FEnemyDisplayInfo::DeadWidget()
+{
+	UserWidget->Hide();
+}
+
 void FEnemyDisplayInfos::Add(const FEnemyDisplayInfo& Info)
 {
 	Infos.Add(Info);
@@ -78,10 +93,10 @@ int32 FEnemyDisplayInfos::FindAt(const TObjectPtr<UCdCharacterBase>& Target)
 	return -1;
 }
 
-const FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index)
+FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index)
 {
 	const int32 Size = Infos.Num();
-	if (Index <= Size)
+	if ((Index < 0) || (Index >= Size))
 	{
 		// Indexの範囲外指定された
 		UE_LOG(LogTemp, Log, TEXT("FEnemyDisplayInfos::At Index Range error Index:%d Range:%d"), Index, Size);
@@ -117,12 +132,18 @@ void URpgMainViewUserWidget::SetHpText(FText Text)
 
 void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies)
 {
-	// オブジェクト自体追加されているか
+	// オブジェクト自体追加されているか なかったら追加
 	{
 		for (const auto& Enemy : Enemies)
 		{
 			if (EnemyDisplayInfos.Find(Enemy))
 			{
+				// すでにある
+				continue;
+			}
+			if (Enemy->GetParameter()->IsDead())
+			{
+				// 死亡している
 				continue;
 			}
 
@@ -146,6 +167,7 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 				EnemyArea->AddChild(Widget);
 
 				// Widgetの初期化
+				Widget->SetHp(Enemy->GetParameter()->GetHp(), Enemy->GetParameter()->GetMaxHp());
 
 				// displayinfoに追加
 				FEnemyDisplayInfo Info;
@@ -154,6 +176,21 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 				EnemyDisplayInfos.Add(Info);
 			}
 		}
+	}
+
+	// 既存の敵の更新
+	for (int32 i = 0; i < EnemyDisplayInfos.Size(); ++i)
+	{
+		FEnemyDisplayInfo& Info = EnemyDisplayInfos.At(i);
+		// 死んでいるなら更新しない
+		if (Info.IsDead())
+		{
+			// 非表示
+			Info.DeadWidget();
+			continue;
+		}
+		// HP反映
+		Info.SetWidgetHp();
 	}
 }
 

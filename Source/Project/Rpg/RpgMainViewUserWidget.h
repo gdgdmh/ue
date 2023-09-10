@@ -40,6 +40,13 @@ public:
 	// 同一オブジェクトかチェック
 	bool IsSameCharacter(const TObjectPtr<UCdCharacterBase>& EnemyData) const;
 	bool IsSameUserWidget(const TObjectPtr<URpgCardEnemyInfoUserWidget>& Widget) const;
+	// キャラが死んでいるか
+	bool IsDead() const;
+
+	void SetWidgetHp();
+
+	void DeadWidget();
+
 
 protected:
 	// data ptr
@@ -68,7 +75,8 @@ public:
 
 	bool Find(const TObjectPtr<UCdCharacterBase>& Target);
 	int32 FindAt(const TObjectPtr<UCdCharacterBase>& Target);
-	const FEnemyDisplayInfo& At(int32 Index);
+	FEnemyDisplayInfo& At(int32 Index);
+	int32 Size() const { return Infos.Num(); }
 
 protected:
 	TArray<FEnemyDisplayInfo> Infos;
