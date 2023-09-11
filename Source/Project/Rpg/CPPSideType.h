@@ -18,7 +18,7 @@ enum class ESideType : uint8
 ENUM_RANGE_BY_COUNT(ESideType, ESideType::Num)
 
 // 敵の陣営の取得(陣営が3つ以上には対応してない)
-ESideType GetEnemySide(ESideType Type)
+static ESideType GetEnemySide(ESideType Type)
 {
 	if (Type == ESideType::Ally)
 	{
