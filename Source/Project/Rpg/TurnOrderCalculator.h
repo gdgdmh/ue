@@ -11,7 +11,7 @@
 #include "TurnOrderCalculator.generated.h"
 
 /**
- * 
+ * ターン順序計算
  */
 UCLASS()
 class PROJECT_API UTurnOrderCalculator : public UObject
