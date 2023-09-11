@@ -11,7 +11,7 @@
 DECLARE_DELEGATE(FRpgCardUserWidgetOnClickDelegate)
 
 /**
- * 
+ * カードWidget
  */
 UCLASS()
 class PROJECT_API URpgCardUserWidget : public UProjectUserWidget

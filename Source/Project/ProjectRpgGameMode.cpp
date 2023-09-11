@@ -9,8 +9,6 @@
 #include "Rpg/BattlePartyDataTableLoader.h"
 #include "Rpg/BattlePartyDataTableConverter.h"
 
-#include "Rpg/RpgBattlePartyFactory.h"
-
 // --- test ---
 #include "Rpg/TurnOrderList.h"
 #include "Rpg/TurnOrderCalculator.h"
