@@ -6,6 +6,7 @@
 #include "../../../ProjectUserWidget.h"
 
 #include "RpgCardHpGaugeUserWidget.h"
+#include "SelectFrameUserWidget.h"
 
 #include "RpgCardEnemyInfoUserWidget.generated.h"
 
@@ -23,8 +24,15 @@ public:
 
 	void Hide();
 
+	void HideSelectFrame();
+	void ShowSelectFrame();
+	bool IsShowingSelectFrame() const;
+
 public:
 	UPROPERTY(Transient, meta = (BindWidget))
 	TObjectPtr<URpgCardHpGaugeUserWidget> HpGauge;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+		TObjectPtr<USelectFrameUserWidget> SelectFrame;
 
 };

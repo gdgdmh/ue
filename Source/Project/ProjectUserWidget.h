@@ -28,8 +28,21 @@ public:
 	void SetWidgetType(EVsUserWidgetType Type) { VsUserWidgetType = Type; }
 	EVsUserWidgetType GetWidgetType() const { return VsUserWidgetType; }
 
+	/// <summary>
+	/// オブジェクトの表示
+	/// </summary>
 	void ShowObject();
+
+	/// <summary>
+	/// オブジェクトの非表示
+	/// </summary>
 	void HideObject();
+
+	/// <summary>
+	/// オブジェクトが表示されているか
+	/// </summary>
+	/// <returns>trueなら表示されている</returns>
+	bool IsShowing() const;
 
 private:
 	EVsUserWidgetType VsUserWidgetType = EVsUserWidgetType::None;

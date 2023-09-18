@@ -20,3 +20,21 @@ void URpgCardEnemyInfoUserWidget::Hide()
 {
 	HideObject();
 }
+
+void URpgCardEnemyInfoUserWidget::HideSelectFrame()
+{
+	check(SelectFrame);
+	SelectFrame->Hide();
+}
+
+void URpgCardEnemyInfoUserWidget::ShowSelectFrame()
+{
+	check(SelectFrame);
+	SelectFrame->Show();
+}
+
+bool URpgCardEnemyInfoUserWidget::IsShowingSelectFrame() const
+{
+	check(SelectFrame);
+	return SelectFrame->IsShowing();
+}

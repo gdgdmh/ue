@@ -40,3 +40,8 @@ void UProjectUserWidget::HideObject()
 {
 	SetVisibility(ESlateVisibility::Hidden);
 }
+
+bool UProjectUserWidget::IsShowing() const
+{
+	return IsInViewport();
+}
