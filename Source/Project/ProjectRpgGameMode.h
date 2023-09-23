@@ -47,6 +47,7 @@ private:
 
 	void RpgMainViewOnClickNextButton();
 	void RpgMainViewOnClickTurnEndButton();
+	void RpgMainViewOnClickCardEnemyInfoDelegate(const TObjectPtr<UCdCharacterBase> Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget);
 
 	void BattleManagerOnChangePlayerInfo();
 	void BattleManagerOnChangeEnemyInfo();

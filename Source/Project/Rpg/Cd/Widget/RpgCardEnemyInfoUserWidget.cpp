@@ -3,6 +3,11 @@
 
 #include "RpgCardEnemyInfoUserWidget.h"
 
+void URpgCardEnemyInfoUserWidget::OnClick()
+{
+	EnemyInfoUserWidgetOnClickDelegate.ExecuteIfBound(this);
+}
+
 void URpgCardEnemyInfoUserWidget::SetHpText(FText Text)
 {
 	check(HpGauge);
@@ -37,4 +42,10 @@ bool URpgCardEnemyInfoUserWidget::IsShowingSelectFrame() const
 {
 	check(SelectFrame);
 	return SelectFrame->IsShowing();
+}
+
+
+FRpgCardEnemyInfoUserWidgetOnClickDelegate& URpgCardEnemyInfoUserWidget::GetOnClickDelegate()
+{
+	return EnemyInfoUserWidgetOnClickDelegate;
 }

@@ -15,6 +15,16 @@ void FEnemyDisplayInfo::SetUserWidget(TObjectPtr<URpgCardEnemyInfoUserWidget> Wi
 	UserWidget = Widget;
 }
 
+TObjectPtr<UCdCharacterBase> FEnemyDisplayInfo::GetEnemy()
+{
+	return Enemy;
+}
+
+TObjectPtr<URpgCardEnemyInfoUserWidget> FEnemyDisplayInfo::GetUserWidget()
+{
+	return UserWidget;
+}
+
 bool FEnemyDisplayInfo::IsSameCharacter(const TObjectPtr<UCdCharacterBase>& EnemyData) const
 {
 	if (Enemy == EnemyData)
@@ -45,6 +55,7 @@ void FEnemyDisplayInfo::SetWidgetHp()
 
 void FEnemyDisplayInfo::DeadWidget()
 {
+	UserWidget->GetOnClickDelegate().Unbind();
 	UserWidget->Hide();
 }
 
@@ -93,6 +104,21 @@ int32 FEnemyDisplayInfos::FindAt(const TObjectPtr<UCdCharacterBase>& Target)
 	return -1;
 }
 
+void FEnemyDisplayInfos::FindEnemy(TObjectPtr<UCdCharacterBase>& Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	Enemy = nullptr;
+	const int32 Size = Infos.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		if (Infos[i].IsSameUserWidget(Widget))
+		{
+			Enemy = Infos[i].GetEnemy();
+			return;
+		}
+	}
+
+}
+
 FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index)
 {
 	const int32 Size = Infos.Num();
@@ -119,6 +145,11 @@ FRpgMainViewClickNextButtonDelegate& URpgMainViewUserWidget::GetClickNextButtonD
 FRpgMainViewClickTurnEndButtonDelegate& URpgMainViewUserWidget::GetClickTurnEndButtonDelegate()
 {
 	return ClickTurnEndButtonDelegate;
+}
+
+FRpgCardEnemyInfoUserWidgetClickDelegate& URpgMainViewUserWidget::GetClickCardEnemyInfoDelegate()
+{
+	return ClickCardEnemyInfoDelegate;
 }
 
 void URpgMainViewUserWidget::NativeConstruct()
@@ -163,6 +194,14 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 				}
 				Widget->AddToViewport();
 				Widget->AddUserWidgetSubsytem();
+				Widget->GetOnClickDelegate().BindLambda([this](TObjectPtr<URpgCardEnemyInfoUserWidget> UserWidget)
+				{
+					TObjectPtr<UCdCharacterBase> Enemy = nullptr;
+					EnemyDisplayInfos.FindEnemy(Enemy, UserWidget);
+					check(Enemy);
+
+					GetClickCardEnemyInfoDelegate().ExecuteIfBound(Enemy, UserWidget);
+				});
 
 				EnemyArea->AddChild(Widget);
 

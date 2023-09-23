@@ -352,6 +352,11 @@ void AProjectRpgGameMode::SetMainUI()
 				RpgMainViewOnClickTurnEndButton();
 			});
 
+			MainWidget->GetClickCardEnemyInfoDelegate().BindLambda([this](const TObjectPtr<UCdCharacterBase> Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+			{
+				RpgMainViewOnClickCardEnemyInfoDelegate(Enemy, Widget);
+			});
+
 			// プレイヤー情報更新
 			UpdatePlayerInfo();
 			// 敵情報更新
@@ -413,6 +418,11 @@ void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
 	ERpgBattleProcessState After = BattleManager.Get()->GetState();
 
 	OutputStateLog(Before, After);
+}
+
+void AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate(const TObjectPtr<UCdCharacterBase> Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate"));
 }
 
 void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()

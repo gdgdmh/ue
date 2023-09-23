@@ -20,6 +20,8 @@
 DECLARE_DELEGATE(FRpgMainViewClickNextButtonDelegate)
 // TurnEndButtonが押されたときのDelegate
 DECLARE_DELEGATE(FRpgMainViewClickTurnEndButtonDelegate)
+// 押されたときのDelegate
+DECLARE_DELEGATE_TwoParams(FRpgCardEnemyInfoUserWidgetClickDelegate, const TObjectPtr<UCdCharacterBase>, const TObjectPtr<URpgCardEnemyInfoUserWidget>)
 
 /**
  * 敵表示情報
@@ -37,6 +39,9 @@ public:
 	}
 	void SetCharacter(TObjectPtr<UCdCharacterBase> EnemyData);
 	void SetUserWidget(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget);
+
+	TObjectPtr<UCdCharacterBase> GetEnemy();
+	TObjectPtr<URpgCardEnemyInfoUserWidget> GetUserWidget();
 	// 同一オブジェクトかチェック
 	bool IsSameCharacter(const TObjectPtr<UCdCharacterBase>& EnemyData) const;
 	bool IsSameUserWidget(const TObjectPtr<URpgCardEnemyInfoUserWidget>& Widget) const;
@@ -75,12 +80,17 @@ public:
 
 	bool Find(const TObjectPtr<UCdCharacterBase>& Target);
 	int32 FindAt(const TObjectPtr<UCdCharacterBase>& Target);
+
+	void FindEnemy(TObjectPtr<UCdCharacterBase>& Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget);
+
 	FEnemyDisplayInfo& At(int32 Index);
 	int32 Size() const { return Infos.Num(); }
 
 protected:
 	TArray<FEnemyDisplayInfo> Infos;
 };
+
+
 
 /**
  * 
@@ -96,6 +106,7 @@ public:
 
 	FRpgMainViewClickNextButtonDelegate& GetClickNextButtonDelegate();
 	FRpgMainViewClickTurnEndButtonDelegate& GetClickTurnEndButtonDelegate();
+	FRpgCardEnemyInfoUserWidgetClickDelegate& GetClickCardEnemyInfoDelegate();
 
 protected:
 	virtual void NativeConstruct() override;
@@ -111,6 +122,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void OnClickNextButton();
+
+	//UFUNCTION(BlueprintCallable)
+	//	void OnClickNextButton();
 
 protected:
 
@@ -128,4 +142,5 @@ public:
 protected:
 	FRpgMainViewClickNextButtonDelegate ClickNextButtonDelegate;
 	FRpgMainViewClickTurnEndButtonDelegate ClickTurnEndButtonDelegate;
+	FRpgCardEnemyInfoUserWidgetClickDelegate ClickCardEnemyInfoDelegate;
 };
