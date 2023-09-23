@@ -168,6 +168,8 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 
 				// Widgetの初期化
 				Widget->SetHp(Enemy->GetParameter()->GetHp(), Enemy->GetParameter()->GetMaxHp());
+				// 選択状態はoff
+				Widget->HideSelectFrame();
 
 				// displayinfoに追加
 				FEnemyDisplayInfo Info;
