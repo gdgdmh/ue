@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -41,21 +41,21 @@ public:
 	//void SetParameter(UCdCharacterBase& Characater);
 
 public:
-	// Œ»İ‚ÌHP
+	// ç¾åœ¨ã®HP
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 Hp;
-	// Å‘åHP
+	// æœ€å¤§HP
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 MaxHp;
-	// UŒ‚
+	// æ”»æ’ƒ
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 AttackPower;
 
-	// –hŒä
+	// é˜²å¾¡
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		int32 DefencePower;
 
-	// “G‚Ìƒ^ƒCƒv(ƒvƒŒƒCƒ„[‚ğİ’è‚·‚é‚Æ‚«‚ÍNone)
+	// æ•µã®ã‚¿ã‚¤ãƒ—(ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨­å®šã™ã‚‹ã¨ãã¯None)
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		ECdEnemyType EnemyType;
 };

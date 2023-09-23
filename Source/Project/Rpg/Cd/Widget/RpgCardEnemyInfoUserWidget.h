@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+Ôªø// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -11,7 +11,7 @@
 #include "RpgCardEnemyInfoUserWidget.generated.h"
 
 // Delegate
-// âüÇ≥ÇÍÇΩÇ∆Ç´ÇÃDelegate
+// Êäº„Åï„Çå„Åü„Å®„Åç„ÅÆDelegate
 DECLARE_DELEGATE_OneParam(FRpgCardEnemyInfoUserWidgetOnClickDelegate, TObjectPtr<URpgCardEnemyInfoUserWidget>)
 
 /**

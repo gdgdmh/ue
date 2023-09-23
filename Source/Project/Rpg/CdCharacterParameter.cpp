@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "CdCharacterParameter.h"
@@ -20,7 +20,7 @@ bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferenc
 		return false;
 }
 
-	// ƒf[ƒ^æ“¾
+	// ãƒ‡ãƒ¼ã‚¿å–å¾—
 	TArray<FName> RowArray = DataTable->GetRowNames();
 	if (RowArray.IsEmpty())
 	{
@@ -41,7 +41,7 @@ bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferenc
 
 	if (PlayerData.IsEmpty())
 	{
-		// ‰½‚àƒf[ƒ^‚ª“ü‚ç‚È‚©‚Á‚½ FindRow‚Å¸”s‚µ‚½?
+		// ä½•ã‚‚ãƒ‡ãƒ¼ã‚¿ãŒå…¥ã‚‰ãªã‹ã£ãŸ FindRowã§å¤±æ•—ã—ãŸ?
 		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable DataTable add failure(empty)"));
 		return false;
 	}
@@ -59,7 +59,7 @@ bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReference
 		return false;
 	}
 
-	// ƒf[ƒ^æ“¾
+	// ãƒ‡ãƒ¼ã‚¿å–å¾—
 	TArray<FName> RowArray = DataTable->GetRowNames();
 	if (RowArray.IsEmpty())
 	{
@@ -80,7 +80,7 @@ bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReference
 
 	if (EnemyData.IsEmpty())
 	{
-		// ‰½‚àƒf[ƒ^‚ª“ü‚ç‚È‚©‚Á‚½ FindRow‚Å¸”s‚µ‚½?
+		// ä½•ã‚‚ãƒ‡ãƒ¼ã‚¿ãŒå…¥ã‚‰ãªã‹ã£ãŸ FindRowã§å¤±æ•—ã—ãŸ?
 		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable DataTable add failure(empty)"));
 		return false;
 	}
