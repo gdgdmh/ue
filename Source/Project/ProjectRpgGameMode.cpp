@@ -352,7 +352,7 @@ void AProjectRpgGameMode::SetMainUI()
 				RpgMainViewOnClickTurnEndButton();
 			});
 
-			MainWidget->GetClickCardEnemyInfoDelegate().BindLambda([this](const TObjectPtr<UCdCharacterBase> Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+			MainWidget->GetClickCardEnemyInfoDelegate().BindLambda([this](TObjectPtr<UCdCharacterBase> Enemy, TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
 			{
 				RpgMainViewOnClickCardEnemyInfoDelegate(Enemy, Widget);
 			});
@@ -420,9 +420,34 @@ void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
 	OutputStateLog(Before, After);
 }
 
-void AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate(const TObjectPtr<UCdCharacterBase> Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+void AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate(TObjectPtr<UCdCharacterBase> Enemy, TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
 {
+	check(BattleManager);
+	if (!BattleManager.Get()->IsEnableSelectEnemy())
+	{
+		// 選択できるタイミングではないので何もしない
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate Not Select Timing"));
+		return;
+	}
 	UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate"));
+
+	// 選択可能な敵の数
+	int32 SelectableNum = BattleManager.Get()->GetSelectableEnemyNum();
+
+	// 対象のウィジェットは選択状態か
+	if (RpgMainViewUserWidget.Get()->IsEnemySelected(Widget))
+	{
+		// 選択解除はほぼ無条件
+		RpgMainViewUserWidget.Get()->SetEnemyUnselected(Widget);
+	}
+	else
+	{
+		// 選択状態にする
+		RpgMainViewUserWidget.Get()->SetEnemySelected(Widget);
+	}
+
+
+	BattleManager.Get()->OnClickEnemyInfo(Enemy);
 }
 
 void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()

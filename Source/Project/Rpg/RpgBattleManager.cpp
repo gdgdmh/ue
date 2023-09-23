@@ -14,12 +14,15 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	SelectCommand = ERpgBattleCommandType::None;
 	AttackCharacter = nullptr;
 	AttackTargetCharacter = nullptr;
+	AttackTargetEnemy = nullptr;
 
 	ActionCardParameter = NewObject<UActionCardParameter>();
 
 	CharacterParameter = NewObject<UCdCharacterParameter>();
 
 	ResetSelectCardIndex();
+
+	SelectableEnemyNum = 0;
 }
 
 void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
@@ -639,6 +642,36 @@ bool URpgBattleManager::ProcessEnemyAction()
 		Damage, BeforeHp, AfterHp);
 
 	return true;
+}
+
+// 敵ウィジェットが選択されたとき
+void URpgBattleManager::OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy)
+{
+	if (!IsEnableSelectEnemy())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::OnClickEnemyInfo Not Select Timing"));
+		return;
+	}
+
+	AttackTargetEnemy = Enemy;
+}
+
+// 敵の選択が可能なタイミングか
+bool URpgBattleManager::IsEnableSelectEnemy() const
+{
+	// 今はStateで判断する
+	// 細かい判定が必要になった場合はフラグなどで判定すること
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
+	{
+		return true;
+	}
+	return false;
+}
+
+// 選択可能な敵の数を取得
+int32 URpgBattleManager::GetSelectableEnemyNum() const
+{
+	return SelectableEnemyNum;
 }
 
 FRpgBattleManagerChangePlayerInfoDelegate& URpgBattleManager::GetChangePlayerInfoDelegate()

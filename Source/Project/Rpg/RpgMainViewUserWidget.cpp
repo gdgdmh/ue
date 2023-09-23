@@ -20,7 +20,17 @@ TObjectPtr<UCdCharacterBase> FEnemyDisplayInfo::GetEnemy()
 	return Enemy;
 }
 
+const TObjectPtr<UCdCharacterBase> FEnemyDisplayInfo::GetEnemy() const
+{
+	return Enemy;
+}
+
 TObjectPtr<URpgCardEnemyInfoUserWidget> FEnemyDisplayInfo::GetUserWidget()
+{
+	return UserWidget;
+}
+
+const TObjectPtr<URpgCardEnemyInfoUserWidget> FEnemyDisplayInfo::GetUserWidget() const
 {
 	return UserWidget;
 }
@@ -120,6 +130,19 @@ void FEnemyDisplayInfos::FindEnemy(TObjectPtr<UCdCharacterBase>& Enemy, const TO
 }
 
 FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index)
+{
+	const int32 Size = Infos.Num();
+	if ((Index < 0) || (Index >= Size))
+	{
+		// Indexの範囲外指定された
+		UE_LOG(LogTemp, Log, TEXT("FEnemyDisplayInfos::At Index Range error Index:%d Range:%d"), Index, Size);
+		check(false);
+		return Infos[0];
+	}
+	return Infos[Index];
+}
+
+const FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index) const
 {
 	const int32 Size = Infos.Num();
 	if ((Index < 0) || (Index >= Size))
@@ -233,6 +256,46 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 		// HP反映
 		Info.SetWidgetHp();
 	}
+}
+
+// 敵が選択されたとき
+void URpgMainViewUserWidget::OnSelectEnemyInfo(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	// 選択可能数と現在選択されている敵に合わせて選択を調整
+}
+
+// 選択状態か
+bool URpgMainViewUserWidget::IsEnemySelected(const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget) const
+{
+	check(Widget);
+	return Widget->IsShowingSelectFrame();
+}
+
+// 選択状態にする
+void URpgMainViewUserWidget::SetEnemySelected(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	Widget->ShowSelectFrame();
+}
+// 非選択状態にする
+void URpgMainViewUserWidget::SetEnemyUnselected(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	Widget->HideSelectFrame();
+}
+
+// いくつ選択状態になっているか
+int32 URpgMainViewUserWidget::GetEnemySelecatedNum() const
+{
+	int32 num = 0;
+	for (int32 i = 0; i < EnemyDisplayInfos.Size(); ++i)
+	{
+		const auto& Info = EnemyDisplayInfos.At(i);
+		check(Info.GetUserWidget());
+		if (Info.GetUserWidget().Get()->IsShowingSelectFrame())
+		{
+			++num;
+		}
+	}
+	return num;
 }
 
 void URpgMainViewUserWidget::OnClickTurnEndButton()

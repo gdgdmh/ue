@@ -41,7 +41,7 @@ void URpgCardEnemyInfoUserWidget::ShowSelectFrame()
 bool URpgCardEnemyInfoUserWidget::IsShowingSelectFrame() const
 {
 	check(SelectFrame);
-	return SelectFrame->IsShowing();
+	return SelectFrame->IsVisible();
 }
 
 
