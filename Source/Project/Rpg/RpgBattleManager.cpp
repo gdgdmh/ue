@@ -242,6 +242,9 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PrePlayerTurn)
 	{
+		// 暫定で対象を1つ選択できることにしてしまう
+		SelectableEnemyNum = 1;
+
 		ProcessState = ERpgBattleProcessState::PlayerSelectAction;
 		return true;
 	}
@@ -249,11 +252,15 @@ bool URpgBattleManager::NextState()
 	{
 		// 暫定で選択したことにしてしまう
 		SelectCardIndex = 0;
+
 		ProcessState = ERpgBattleProcessState::PlayerAction;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerAction)
 	{
+		// リセット
+		SelectableEnemyNum = 0;
+
 		if (!ProcessPlayerAction())
 		{
 			// 何もしなかった
@@ -645,7 +652,7 @@ bool URpgBattleManager::ProcessEnemyAction()
 }
 
 // 敵ウィジェットが選択されたとき
-void URpgBattleManager::OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy)
+void URpgBattleManager::OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy, bool isSelect)
 {
 	if (!IsEnableSelectEnemy())
 	{
@@ -653,7 +660,16 @@ void URpgBattleManager::OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy)
 		return;
 	}
 
-	AttackTargetEnemy = Enemy;
+	if (!isSelect)
+	{
+		// 非選択状態
+		AttackTargetEnemy = nullptr;
+	}
+	else
+	{
+		// 選択状態
+		AttackTargetEnemy = Enemy;
+	}
 }
 
 // 敵の選択が可能なタイミングか

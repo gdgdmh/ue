@@ -437,17 +437,23 @@ void AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate(TObjectPtr<UCd
 	// 対象のウィジェットは選択状態か
 	if (RpgMainViewUserWidget.Get()->IsEnemySelected(Widget))
 	{
-		// 選択解除はほぼ無条件
+		// 選択解除はほぼ無条件でOK
 		RpgMainViewUserWidget.Get()->SetEnemyUnselected(Widget);
+		BattleManager.Get()->OnClickEnemyInfo(Enemy, false);
+		return;
 	}
-	else
+
+	// 選択可能数 > 今選択されている数
+	if (SelectableNum > RpgMainViewUserWidget.Get()->GetEnemySelecatedNum())
 	{
 		// 選択状態にする
 		RpgMainViewUserWidget.Get()->SetEnemySelected(Widget);
+		BattleManager.Get()->OnClickEnemyInfo(Enemy, true);
 	}
-
-
-	BattleManager.Get()->OnClickEnemyInfo(Enemy);
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Unselectable Enable:%d Selected:%d"), SelectableNum, RpgMainViewUserWidget.Get()->GetEnemySelecatedNum());
+	}
 }
 
 void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()

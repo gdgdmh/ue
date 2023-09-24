@@ -98,7 +98,7 @@ public:
 	bool ProcessEnemyAction();
 
 	// 敵ウィジェットが選択されたとき
-	void OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy);
+	void OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy, bool isSelect);
 
 	// 敵の選択が可能なタイミングか
 	bool IsEnableSelectEnemy() const;
