@@ -407,6 +407,13 @@ void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
 	ERpgBattleProcessState After = BattleManager.Get()->GetState();
 
 	OutputStateLog(Before, After);
+
+	if (After == ERpgBattleProcessState::PlayerActionAfter)
+	{
+		// ウィジェットの選択状態の解除
+		check(RpgMainViewUserWidget);
+		RpgMainViewUserWidget.Get()->SetAllEnemyUnselected();
+	}
 }
 
 void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()

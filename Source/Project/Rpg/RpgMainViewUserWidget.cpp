@@ -282,6 +282,18 @@ void URpgMainViewUserWidget::SetEnemyUnselected(TObjectPtr<URpgCardEnemyInfoUser
 	Widget->HideSelectFrame();
 }
 
+void URpgMainViewUserWidget::SetAllEnemyUnselected()
+{
+	int32 Size = EnemyDisplayInfos.Size();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		TObjectPtr<URpgCardEnemyInfoUserWidget> EnemyWidget = EnemyDisplayInfos.At(i).GetUserWidget();
+		check(EnemyWidget);
+		EnemyWidget->HideSelectFrame();
+	}
+
+}
+
 // いくつ選択状態になっているか
 int32 URpgMainViewUserWidget::GetEnemySelecatedNum() const
 {

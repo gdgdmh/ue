@@ -154,6 +154,9 @@ protected:
 		int32 SelectCardIndex;
 
 	UPROPERTY()
+		bool bSelectTarget;
+
+	UPROPERTY()
 		int32 SelectableEnemyNum;
 
 	FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;

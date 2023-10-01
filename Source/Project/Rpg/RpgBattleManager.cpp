@@ -22,6 +22,8 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 
 	ResetSelectCardIndex();
 
+	bSelectTarget = false;
+
 	SelectableEnemyNum = 0;
 }
 
@@ -243,7 +245,7 @@ bool URpgBattleManager::NextState()
 	if (ProcessState == ERpgBattleProcessState::PrePlayerTurn)
 	{
 		// 暫定で対象を1つ選択できることにしてしまう
-		SelectableEnemyNum = 1;
+		//SelectableEnemyNum = 1;
 
 		ProcessState = ERpgBattleProcessState::PlayerSelectAction;
 		return true;
@@ -252,6 +254,20 @@ bool URpgBattleManager::NextState()
 	{
 		// 暫定で選択したことにしてしまう
 		SelectCardIndex = 0;
+
+
+		TObjectPtr<UActionCard> Card = CardList.Get()->GetCard(SelectCardIndex);
+		check(Card);
+		if (Card.Get()->GetActionType() == ERpgActionType::Attack)
+		{
+			if (Card.Get()->GetAttackTarget() == ERpgTargetType::Single)
+			{
+				SelectableEnemyNum = 1;
+			}
+		}
+
+		// クリア
+		AttackTargetEnemy = nullptr;
 
 		ProcessState = ERpgBattleProcessState::PlayerSelectTarget;
 		return true;
@@ -263,6 +279,7 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerAction)
 	{
+
 		// リセット
 		SelectableEnemyNum = 0;
 
@@ -278,6 +295,8 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerActionAfter)
 	{
+		AttackTargetEnemy = nullptr;
+
 		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
 		return true;
 	}
@@ -610,7 +629,17 @@ bool URpgBattleManager::ProcessPlayerAction()
 	check(Card);
 	if (Card.Get()->GetActionType() == ERpgActionType::Attack)
 	{
-		TObjectPtr<UCdCharacterBase> TargetEnemy = GetEnemyAttackTarget();
+		TObjectPtr<UCdCharacterBase> TargetEnemy = nullptr;
+		if (AttackTargetEnemy != nullptr)
+		{
+			// 手動選択
+			TargetEnemy = AttackTargetEnemy;
+		}
+		else
+		{
+			TargetEnemy = GetEnemyAttackTarget();
+		}
+
 		if (TargetEnemy == nullptr)
 		{
 			// ターゲット取得不可のときは何もしない
@@ -669,11 +698,13 @@ void URpgBattleManager::OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy, boo
 	{
 		// 非選択状態
 		AttackTargetEnemy = nullptr;
+		bSelectTarget = false;
 	}
 	else
 	{
 		// 選択状態
 		AttackTargetEnemy = Enemy;
+		bSelectTarget = true;
 	}
 }
 
@@ -682,7 +713,7 @@ bool URpgBattleManager::IsEnableSelectEnemy() const
 {
 	// 今はStateで判断する
 	// 細かい判定が必要になった場合はフラグなどで判定すること
-	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectTarget)
 	{
 		return true;
 	}

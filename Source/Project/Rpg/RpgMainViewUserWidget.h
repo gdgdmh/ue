@@ -130,6 +130,8 @@ public:
 	// 非選択状態にする
 	void SetEnemyUnselected(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget);
 
+	void SetAllEnemyUnselected();
+
 	// いくつ選択状態になっているか
 	int32 GetEnemySelecatedNum() const;
 
