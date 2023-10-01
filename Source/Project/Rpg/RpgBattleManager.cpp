@@ -253,6 +253,11 @@ bool URpgBattleManager::NextState()
 		// 暫定で選択したことにしてしまう
 		SelectCardIndex = 0;
 
+		ProcessState = ERpgBattleProcessState::PlayerSelectTarget;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectTarget)
+	{
 		ProcessState = ERpgBattleProcessState::PlayerAction;
 		return true;
 	}
