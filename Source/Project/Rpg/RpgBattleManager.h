@@ -97,6 +97,14 @@ public:
 	// 敵のアクション処理
 	bool ProcessEnemyAction();
 
+	// 敵ウィジェットが選択されたとき
+	void OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy, bool isSelect);
+
+	// 敵の選択が可能なタイミングか
+	bool IsEnableSelectEnemy() const;
+	// 選択可能な敵の数を取得
+	int32 GetSelectableEnemyNum() const;
+
 	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
 	FRpgBattleManagerChangeEnemyInfoDelegate& GetChangeEnemyInfoDelegate();
 
@@ -130,6 +138,10 @@ protected:
 	UPROPERTY()
 		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
 
+	// 選択された敵
+	UPROPERTY()
+		TObjectPtr<UCdCharacterBase> AttackTargetEnemy;
+
 	// パラメーター
 	UPROPERTY()
 		TObjectPtr<UActionCardParameter> ActionCardParameter;
@@ -140,6 +152,12 @@ protected:
 	// 行動選択
 	UPROPERTY()
 		int32 SelectCardIndex;
+
+	UPROPERTY()
+		bool bSelectTarget;
+
+	UPROPERTY()
+		int32 SelectableEnemyNum;
 
 	FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
 

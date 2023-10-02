@@ -14,12 +14,17 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	SelectCommand = ERpgBattleCommandType::None;
 	AttackCharacter = nullptr;
 	AttackTargetCharacter = nullptr;
+	AttackTargetEnemy = nullptr;
 
 	ActionCardParameter = NewObject<UActionCardParameter>();
 
 	CharacterParameter = NewObject<UCdCharacterParameter>();
 
 	ResetSelectCardIndex();
+
+	bSelectTarget = false;
+
+	SelectableEnemyNum = 0;
 }
 
 void URpgBattleManager::SetCardList(TObjectPtr<UActionCardList> List)
@@ -239,6 +244,9 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PrePlayerTurn)
 	{
+		// 暫定で対象を1つ選択できることにしてしまう
+		//SelectableEnemyNum = 1;
+
 		ProcessState = ERpgBattleProcessState::PlayerSelectAction;
 		return true;
 	}
@@ -246,11 +254,35 @@ bool URpgBattleManager::NextState()
 	{
 		// 暫定で選択したことにしてしまう
 		SelectCardIndex = 0;
+
+
+		TObjectPtr<UActionCard> Card = CardList.Get()->GetCard(SelectCardIndex);
+		check(Card);
+		if (Card.Get()->GetActionType() == ERpgActionType::Attack)
+		{
+			if (Card.Get()->GetAttackTarget() == ERpgTargetType::Single)
+			{
+				SelectableEnemyNum = 1;
+			}
+		}
+
+		// クリア
+		AttackTargetEnemy = nullptr;
+
+		ProcessState = ERpgBattleProcessState::PlayerSelectTarget;
+		return true;
+	}
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectTarget)
+	{
 		ProcessState = ERpgBattleProcessState::PlayerAction;
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerAction)
 	{
+
+		// リセット
+		SelectableEnemyNum = 0;
+
 		if (!ProcessPlayerAction())
 		{
 			// 何もしなかった
@@ -263,6 +295,8 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerActionAfter)
 	{
+		AttackTargetEnemy = nullptr;
+
 		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
 		return true;
 	}
@@ -595,7 +629,17 @@ bool URpgBattleManager::ProcessPlayerAction()
 	check(Card);
 	if (Card.Get()->GetActionType() == ERpgActionType::Attack)
 	{
-		TObjectPtr<UCdCharacterBase> TargetEnemy = GetEnemyAttackTarget();
+		TObjectPtr<UCdCharacterBase> TargetEnemy = nullptr;
+		if (AttackTargetEnemy != nullptr)
+		{
+			// 手動選択
+			TargetEnemy = AttackTargetEnemy;
+		}
+		else
+		{
+			TargetEnemy = GetEnemyAttackTarget();
+		}
+
 		if (TargetEnemy == nullptr)
 		{
 			// ターゲット取得不可のときは何もしない
@@ -639,6 +683,47 @@ bool URpgBattleManager::ProcessEnemyAction()
 		Damage, BeforeHp, AfterHp);
 
 	return true;
+}
+
+// 敵ウィジェットが選択されたとき
+void URpgBattleManager::OnClickEnemyInfo(TObjectPtr<UCdCharacterBase> Enemy, bool isSelect)
+{
+	if (!IsEnableSelectEnemy())
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::OnClickEnemyInfo Not Select Timing"));
+		return;
+	}
+
+	if (!isSelect)
+	{
+		// 非選択状態
+		AttackTargetEnemy = nullptr;
+		bSelectTarget = false;
+	}
+	else
+	{
+		// 選択状態
+		AttackTargetEnemy = Enemy;
+		bSelectTarget = true;
+	}
+}
+
+// 敵の選択が可能なタイミングか
+bool URpgBattleManager::IsEnableSelectEnemy() const
+{
+	// 今はStateで判断する
+	// 細かい判定が必要になった場合はフラグなどで判定すること
+	if (ProcessState == ERpgBattleProcessState::PlayerSelectTarget)
+	{
+		return true;
+	}
+	return false;
+}
+
+// 選択可能な敵の数を取得
+int32 URpgBattleManager::GetSelectableEnemyNum() const
+{
+	return SelectableEnemyNum;
 }
 
 FRpgBattleManagerChangePlayerInfoDelegate& URpgBattleManager::GetChangePlayerInfoDelegate()

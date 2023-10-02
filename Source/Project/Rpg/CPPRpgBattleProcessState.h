@@ -19,6 +19,7 @@ enum class ERpgBattleProcessState : uint8
 
 	PrePlayerTurn				UMETA(DisplayName = "プレイヤーターン前",			ToolTip = "プレイヤーターン前"),
 	PlayerSelectAction			UMETA(DisplayName = "プレイヤーアクション選択",		ToolTip = "プレイヤーアクション選択"),
+	PlayerSelectTarget			UMETA(DisplayName = "プレイヤーアクション対象選択",	ToolTip = "プレイヤーアクション対象選択"),
 	PlayerAction				UMETA(DisplayName = "プレイヤーアクション",			ToolTip = "プレイヤーアクション"),
 	PlayerActionAfter			UMETA(DisplayName = "プレイヤーアクション後",		ToolTip = "プレイヤーアクション後"),
 	PlayerTurnFinish			UMETA(DisplayName = "プレイヤーターン終了",			ToolTip = "プレイヤーターン終了"),

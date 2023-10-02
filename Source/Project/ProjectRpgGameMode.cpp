@@ -352,6 +352,11 @@ void AProjectRpgGameMode::SetMainUI()
 				RpgMainViewOnClickTurnEndButton();
 			});
 
+			MainWidget->GetClickCardEnemyInfoDelegate().BindLambda([this](TObjectPtr<UCdCharacterBase> Enemy, TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+			{
+				RpgMainViewOnClickCardEnemyInfoDelegate(Enemy, Widget);
+			});
+
 			// プレイヤー情報更新
 			UpdatePlayerInfo();
 			// 敵情報更新
@@ -402,6 +407,13 @@ void AProjectRpgGameMode::RpgMainViewOnClickNextButton()
 	ERpgBattleProcessState After = BattleManager.Get()->GetState();
 
 	OutputStateLog(Before, After);
+
+	if (After == ERpgBattleProcessState::PlayerActionAfter)
+	{
+		// ウィジェットの選択状態の解除
+		check(RpgMainViewUserWidget);
+		RpgMainViewUserWidget.Get()->SetAllEnemyUnselected();
+	}
 }
 
 void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
@@ -413,6 +425,42 @@ void AProjectRpgGameMode::RpgMainViewOnClickTurnEndButton()
 	ERpgBattleProcessState After = BattleManager.Get()->GetState();
 
 	OutputStateLog(Before, After);
+}
+
+void AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate(TObjectPtr<UCdCharacterBase> Enemy, TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	check(BattleManager);
+	if (!BattleManager.Get()->IsEnableSelectEnemy())
+	{
+		// 選択できるタイミングではないので何もしない
+		UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate Not Select Timing"));
+		return;
+	}
+	UE_LOG(LogTemp, Log, TEXT("AProjectRpgGameMode::RpgMainViewOnClickCardEnemyInfoDelegate"));
+
+	// 選択可能な敵の数
+	int32 SelectableNum = BattleManager.Get()->GetSelectableEnemyNum();
+
+	// 対象のウィジェットは選択状態か
+	if (RpgMainViewUserWidget.Get()->IsEnemySelected(Widget))
+	{
+		// 選択解除はほぼ無条件でOK
+		RpgMainViewUserWidget.Get()->SetEnemyUnselected(Widget);
+		BattleManager.Get()->OnClickEnemyInfo(Enemy, false);
+		return;
+	}
+
+	// 選択可能数 > 今選択されている数
+	if (SelectableNum > RpgMainViewUserWidget.Get()->GetEnemySelecatedNum())
+	{
+		// 選択状態にする
+		RpgMainViewUserWidget.Get()->SetEnemySelected(Widget);
+		BattleManager.Get()->OnClickEnemyInfo(Enemy, true);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Unselectable Enable:%d Selected:%d"), SelectableNum, RpgMainViewUserWidget.Get()->GetEnemySelecatedNum());
+	}
 }
 
 void AProjectRpgGameMode::BattleManagerOnChangePlayerInfo()

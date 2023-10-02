@@ -15,6 +15,26 @@ void FEnemyDisplayInfo::SetUserWidget(TObjectPtr<URpgCardEnemyInfoUserWidget> Wi
 	UserWidget = Widget;
 }
 
+TObjectPtr<UCdCharacterBase> FEnemyDisplayInfo::GetEnemy()
+{
+	return Enemy;
+}
+
+const TObjectPtr<UCdCharacterBase> FEnemyDisplayInfo::GetEnemy() const
+{
+	return Enemy;
+}
+
+TObjectPtr<URpgCardEnemyInfoUserWidget> FEnemyDisplayInfo::GetUserWidget()
+{
+	return UserWidget;
+}
+
+const TObjectPtr<URpgCardEnemyInfoUserWidget> FEnemyDisplayInfo::GetUserWidget() const
+{
+	return UserWidget;
+}
+
 bool FEnemyDisplayInfo::IsSameCharacter(const TObjectPtr<UCdCharacterBase>& EnemyData) const
 {
 	if (Enemy == EnemyData)
@@ -45,6 +65,7 @@ void FEnemyDisplayInfo::SetWidgetHp()
 
 void FEnemyDisplayInfo::DeadWidget()
 {
+	UserWidget->GetOnClickDelegate().Unbind();
 	UserWidget->Hide();
 }
 
@@ -93,7 +114,35 @@ int32 FEnemyDisplayInfos::FindAt(const TObjectPtr<UCdCharacterBase>& Target)
 	return -1;
 }
 
+void FEnemyDisplayInfos::FindEnemy(TObjectPtr<UCdCharacterBase>& Enemy, const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	Enemy = nullptr;
+	const int32 Size = Infos.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		if (Infos[i].IsSameUserWidget(Widget))
+		{
+			Enemy = Infos[i].GetEnemy();
+			return;
+		}
+	}
+
+}
+
 FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index)
+{
+	const int32 Size = Infos.Num();
+	if ((Index < 0) || (Index >= Size))
+	{
+		// Indexの範囲外指定された
+		UE_LOG(LogTemp, Log, TEXT("FEnemyDisplayInfos::At Index Range error Index:%d Range:%d"), Index, Size);
+		check(false);
+		return Infos[0];
+	}
+	return Infos[Index];
+}
+
+const FEnemyDisplayInfo& FEnemyDisplayInfos::At(int32 Index) const
 {
 	const int32 Size = Infos.Num();
 	if ((Index < 0) || (Index >= Size))
@@ -119,6 +168,11 @@ FRpgMainViewClickNextButtonDelegate& URpgMainViewUserWidget::GetClickNextButtonD
 FRpgMainViewClickTurnEndButtonDelegate& URpgMainViewUserWidget::GetClickTurnEndButtonDelegate()
 {
 	return ClickTurnEndButtonDelegate;
+}
+
+FRpgCardEnemyInfoUserWidgetClickDelegate& URpgMainViewUserWidget::GetClickCardEnemyInfoDelegate()
+{
+	return ClickCardEnemyInfoDelegate;
 }
 
 void URpgMainViewUserWidget::NativeConstruct()
@@ -163,11 +217,21 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 				}
 				Widget->AddToViewport();
 				Widget->AddUserWidgetSubsytem();
+				Widget->GetOnClickDelegate().BindLambda([this](TObjectPtr<URpgCardEnemyInfoUserWidget> UserWidget)
+				{
+					TObjectPtr<UCdCharacterBase> Enemy = nullptr;
+					EnemyDisplayInfos.FindEnemy(Enemy, UserWidget);
+					check(Enemy);
+
+					GetClickCardEnemyInfoDelegate().ExecuteIfBound(Enemy, UserWidget);
+				});
 
 				EnemyArea->AddChild(Widget);
 
 				// Widgetの初期化
 				Widget->SetHp(Enemy->GetParameter()->GetHp(), Enemy->GetParameter()->GetMaxHp());
+				// 選択状態はoff
+				Widget->HideSelectFrame();
 
 				// displayinfoに追加
 				FEnemyDisplayInfo Info;
@@ -192,6 +256,58 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 		// HP反映
 		Info.SetWidgetHp();
 	}
+}
+
+// 敵が選択されたとき
+void URpgMainViewUserWidget::OnSelectEnemyInfo(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	// 選択可能数と現在選択されている敵に合わせて選択を調整
+}
+
+// 選択状態か
+bool URpgMainViewUserWidget::IsEnemySelected(const TObjectPtr<URpgCardEnemyInfoUserWidget> Widget) const
+{
+	check(Widget);
+	return Widget->IsShowingSelectFrame();
+}
+
+// 選択状態にする
+void URpgMainViewUserWidget::SetEnemySelected(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	Widget->ShowSelectFrame();
+}
+// 非選択状態にする
+void URpgMainViewUserWidget::SetEnemyUnselected(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget)
+{
+	Widget->HideSelectFrame();
+}
+
+void URpgMainViewUserWidget::SetAllEnemyUnselected()
+{
+	int32 Size = EnemyDisplayInfos.Size();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		TObjectPtr<URpgCardEnemyInfoUserWidget> EnemyWidget = EnemyDisplayInfos.At(i).GetUserWidget();
+		check(EnemyWidget);
+		EnemyWidget->HideSelectFrame();
+	}
+
+}
+
+// いくつ選択状態になっているか
+int32 URpgMainViewUserWidget::GetEnemySelecatedNum() const
+{
+	int32 num = 0;
+	for (int32 i = 0; i < EnemyDisplayInfos.Size(); ++i)
+	{
+		const auto& Info = EnemyDisplayInfos.At(i);
+		check(Info.GetUserWidget());
+		if (Info.GetUserWidget().Get()->IsShowingSelectFrame())
+		{
+			++num;
+		}
+	}
+	return num;
 }
 
 void URpgMainViewUserWidget::OnClickTurnEndButton()

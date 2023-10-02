@@ -1,7 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "RpgCardEnemyInfoUserWidget.h"
+
+void URpgCardEnemyInfoUserWidget::OnClick()
+{
+	EnemyInfoUserWidgetOnClickDelegate.ExecuteIfBound(this);
+}
 
 void URpgCardEnemyInfoUserWidget::SetHpText(FText Text)
 {
@@ -19,4 +24,28 @@ void URpgCardEnemyInfoUserWidget::SetHp(int32 Hp, int32 MaxHp)
 void URpgCardEnemyInfoUserWidget::Hide()
 {
 	HideObject();
+}
+
+void URpgCardEnemyInfoUserWidget::HideSelectFrame()
+{
+	check(SelectFrame);
+	SelectFrame->Hide();
+}
+
+void URpgCardEnemyInfoUserWidget::ShowSelectFrame()
+{
+	check(SelectFrame);
+	SelectFrame->Show();
+}
+
+bool URpgCardEnemyInfoUserWidget::IsShowingSelectFrame() const
+{
+	check(SelectFrame);
+	return SelectFrame->IsVisible();
+}
+
+
+FRpgCardEnemyInfoUserWidgetOnClickDelegate& URpgCardEnemyInfoUserWidget::GetOnClickDelegate()
+{
+	return EnemyInfoUserWidgetOnClickDelegate;
 }

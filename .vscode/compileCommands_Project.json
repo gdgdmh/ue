@@ -1,0 +1,1178 @@
+[
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\BalloonUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\BalloonUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\CPPEnemyType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\CPPVsUserWidgetType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Common\\ProjectPlayerController.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Common\\ProjectPlayerController.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\DamageText.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\DamageText.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\GetRandomAngle.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\GetRandomAngle.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\LoopShootKnife.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\LoopShootKnife.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\LoopShootTimer.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\LoopShootTimer.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\LoopShootWeaponBase.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\LoopShootWeaponBase.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\PlayerBase.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\PlayerBase.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Project.Build.cs",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Project.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Project.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectCharacter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectGameMode.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectGameMode.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectGameModeBase.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectGameModeBase.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectRpgGameMode.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectRpgGameMode.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectWorldSettings.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ProjectWorldSettings.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Projectile.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Projectile.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCard.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCard.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardAttackParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardAttackParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardDefenceParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardDefenceParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardList.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardList.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\ActionCardParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyDataTable.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyDataTableConverter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyDataTableConverter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyDataTableLoader.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyDataTableLoader.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyManager.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartyManager.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartySide.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\BattlePartySide.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPCdEnemyType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgActionCardType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgActionType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgBattleCommandType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgBattlePartyFactoryType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgBattleProcessState.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgBattleStatusType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPRpgTargetType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CPPSideType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CdCharacterBase.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CdCharacterBase.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CdCharacterParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CdCharacterParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardEnemyInfoUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardEnemyInfoUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardHpGaugeUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardHpGaugeUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardPlayerInfoUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardPlayerInfoUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\SelectFrameUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\SelectFrameUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CharacterParameterConverter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\CharacterParameterConverter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgActionParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgActionParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgAttackParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgAttackParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacterBase.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacterBase.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacterEnemy.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacterEnemy.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacterParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleCharacterParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleDamageCalculator.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleDamageCalculator.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleManager.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleManager.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleParty.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleParty.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleStatus.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleStatus.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleStatusParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgBattleStatusParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgCardUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgCardUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgCharaInfo.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgCharaInfo.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgDefenceParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgDefenceParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgMainUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgMainUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgMainViewUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgMainViewUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgTitleUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgTitleUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgTurnManager.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\RpgTurnManager.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\TurnOrderCalculator.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\TurnOrderCalculator.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\TurnOrderList.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\TurnOrderList.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ScrollTestUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ScrollTestUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ShootBeforeEventDispacher.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ShootBeforeEventDispacher.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ShootTimer.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ShootTimer.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ShootTimerInterface.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\ShootTimerInterface.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\SpawnEnemyManager.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\SpawnEnemyManager.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\SpawnEnemyManagerInterface.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\SpawnEnemyManagerInterface.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\SpawnVsEnemy.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\SpawnVsEnemy.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\TitleUserWidget.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\TitleUserWidget.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsEnemyCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsEnemyCharacter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsEnemySpawnManagementSubsytem.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsEnemySpawnManagementSubsytem.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsPlayerCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsPlayerCharacter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsShootParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsShootParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsUserWidgetSubsystem.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsUserWidgetSubsystem.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsWorldSettings.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\VsWorldSettings.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\WeaponKnife.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\WeaponKnife.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	}
+]

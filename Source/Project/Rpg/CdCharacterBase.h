@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -33,7 +33,7 @@ public:
 	void OutputLog();
 
 public:
-	// ¡‚ÍÌ‚ÌƒVƒXƒeƒ€‚ğg‚Á‚Ä‚¨‚­
+	// ä»Šã¯æ˜”ã®ã‚·ã‚¹ãƒ†ãƒ ã‚’ä½¿ã£ã¦ãŠã
 	UPROPERTY(EditAnywhere)
 		TObjectPtr<URpgBattleCharacterParameter> BattleCharactaerParameter;
 
