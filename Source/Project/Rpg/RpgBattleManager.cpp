@@ -20,6 +20,8 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 
 	CharacterParameter = NewObject<UCdCharacterParameter>();
 
+	EnemyActionParameter = NewObject<UEnemyActionParameter>();
+
 	ResetSelectCardIndex();
 
 	bSelectTarget = false;
@@ -88,6 +90,19 @@ bool URpgBattleManager::LoadCharacterParameter()
 			UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadCharacterParameter load failure(enemy)"));
 			return false;
 		}
+	}
+	return true;
+}
+
+bool URpgBattleManager::LoadEnemyActionParameter()
+{
+	check(EnemyActionParameter);
+
+	FString Path = TEXT("/Game/Project/Enemy/Cd/DataTables/DT_EnemyActionData.DT_EnemyActionData");
+	if (!EnemyActionParameter.Get()->LoadDataTable(Path))
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadEnemyActionParameter load failure(enemy action)"));
+		return false;
 	}
 	return true;
 }
@@ -422,132 +437,6 @@ bool URpgBattleManager::NextState()
 		return true;
 	}
 	return true;
-#if 0
-	if (ProcessState == ERpgBattleProcessState::None)
-	{
-		ProcessState = ERpgBattleProcessState::Initialize;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::Initialize)
-	{
-		ProcessState = ERpgBattleProcessState::PreStart;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::PreStart)
-	{
-		ProcessState = ERpgBattleProcessState::Start;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::Start)
-	{
-		ProcessState = ERpgBattleProcessState::TurnPreCalc;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnPreCalc)
-	{
-		if (IsTurnListEmpty())
-		{
-			// ターンリスト初回設定 or 1順した
-			// 設定し直し
-			SetTurn();
-		}
-		else
-		{
-			// 次のメンバーにターンを切り替え
-			ChangeTurn();
-			if (IsTurnListEmpty())
-			{
-				SetTurn();
-			}
-		}
-		// 死亡キャラや不正な状態を修正
-		NormalizeTurnList();
-		OutputTurn();
-
-		ProcessState = ERpgBattleProcessState::TurnCalc;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnCalc)
-	{
-		ProcessState = ERpgBattleProcessState::TurnCalcFinish;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnCalcFinish)
-	{
-		ProcessState = ERpgBattleProcessState::TurnPreStart;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnPreStart)
-	{
-		// ターン開始時の処理
-
-		ProcessState = ERpgBattleProcessState::TurnStart;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnStart)
-	{
-		ProcessState = ERpgBattleProcessState::ActionSelectWait;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::ActionSelectWait)
-	{
-		// 本当は自分で選ばせる
-		// 今は固定
-		SelectCommand = ERpgBattleCommandType::Attack;
-		AttackCharacter = TurnManager.Get()->GetCurrentTurnCharacter();
-		{
-			ESideType Type = GetSideType(AttackCharacter);
-			ESideType EnemyType = GetEnemySide(Type);
-			AttackTargetCharacter = BattleParty.Get()->GetAttackTarget(EnemyType);
-		}
-
-		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::NextState ActionProcess"));
-		OutputSelectCommandLog();
-
-		ProcessState = ERpgBattleProcessState::ActionProcess;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::ActionProcess)
-	{
-		// アクション処理
-		ActionProc();
-
-		// 全滅していたら終了
-		if (CheckSideAnnihilation())
-		{
-			ProcessState = ERpgBattleProcessState::PreFinish;
-			return true;
-		}
-
-		ProcessState = ERpgBattleProcessState::ActionProcessFinish;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::ActionProcessFinish)
-	{
-		ProcessState = ERpgBattleProcessState::TurnPreFinish;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnPreFinish)
-	{
-		ProcessState = ERpgBattleProcessState::TurnFinish;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::TurnFinish)
-	{	
-		ProcessState = ERpgBattleProcessState::TurnPreCalc;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::PreFinish)
-	{
-		ProcessState = ERpgBattleProcessState::Finish;
-		return true;
-	}
-	if (ProcessState == ERpgBattleProcessState::Finish)
-	{
-		return true;
-	}
-	return true;
-#endif
 }
 
 // プレイヤーのターンを終了させる
@@ -674,7 +563,8 @@ bool URpgBattleManager::ProcessEnemyAction()
 	TObjectPtr<UCdCharacterBase> TurnCharacter = TurnManager.Get()->GetCurrentTurnCharacter();
 	check(TurnCharacter);
 
-	int32 Damage = TurnCharacter.Get()->GetParameter().Get()->GetAttackPower();
+	check(EnemyActionParameter);
+	int32 Damage = TurnCharacter.Get()->GetParameter().Get()->GetAttackPower() + EnemyActionParameter.Get()->GetSimpleAttack().GetAttackPower();
 
 	int32 BeforeHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
 	TargetCharacter.Get()->Damage(Damage);

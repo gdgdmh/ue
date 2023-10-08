@@ -15,6 +15,7 @@
 #include "ActionCardList.h"
 #include "ActionCardParameter.h"
 #include "CdCharacterParameter.h"
+#include "Cd/EnemyActionParameter.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -49,6 +50,8 @@ public:
 	bool LoadDeckParameter();
 
 	bool LoadCharacterParameter();
+
+	bool LoadEnemyActionParameter();
 
 	// 今の所固定で生成する
 	void SetPlayer();
@@ -105,6 +108,8 @@ public:
 	// 選択可能な敵の数を取得
 	int32 GetSelectableEnemyNum() const;
 
+
+
 	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
 	FRpgBattleManagerChangeEnemyInfoDelegate& GetChangeEnemyInfoDelegate();
 
@@ -148,6 +153,9 @@ protected:
 
 	UPROPERTY()
 		TObjectPtr<UCdCharacterParameter> CharacterParameter;
+
+	UPROPERTY()
+		TObjectPtr<UEnemyActionParameter> EnemyActionParameter;
 
 	// 行動選択
 	UPROPERTY()

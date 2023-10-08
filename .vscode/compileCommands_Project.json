@@ -536,6 +536,30 @@
 		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
 	},
 	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\CPPCdEnemyActionType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\EnemyActionParameter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\EnemyActionParameter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\data\\git\\ue\\.vscode\\compileCommands_Project\\Project.262.rsp"
+		],
+		"directory": "D:\\pg\\Epic Games\\UE_5.2\\Engine\\Source"
+	},
+	{
 		"file": "D:\\data\\git\\ue\\Source\\Project\\Rpg\\Cd\\Widget\\RpgCardEnemyInfoUserWidget.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",

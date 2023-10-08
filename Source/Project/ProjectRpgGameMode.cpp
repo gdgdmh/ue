@@ -238,6 +238,7 @@ void AProjectRpgGameMode::SetMainUI()
 		BattleManager.Get()->SetDefaultCardList();
 
 		BattleManager.Get()->LoadCharacterParameter();
+		BattleManager.Get()->LoadEnemyActionParameter();
 		BattleManager.Get()->SetPlayer();
 		BattleManager.Get()->SetEnemies();
 
