@@ -118,6 +118,8 @@ protected:
 public:
 	void SetHpText(FText Text);
 
+	void SetStatusText(FText Text);
+
 	void SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies);
 
 	// 敵が選択されたとき
@@ -156,6 +158,13 @@ public:
 
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<UHorizontalBox> EnemyArea;
+
+	// bind 
+public:
+	// Statusテキスト
+	UPROPERTY(BlueprintReadWrite)
+		FText StatusText;
+
 
 	// delegate
 protected:

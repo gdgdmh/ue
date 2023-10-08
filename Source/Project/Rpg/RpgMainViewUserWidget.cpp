@@ -184,6 +184,11 @@ void URpgMainViewUserWidget::SetHpText(FText Text)
 	PlayerInfo.Get()->SetHpText(Text);
 }
 
+void URpgMainViewUserWidget::SetStatusText(FText Text)
+{
+	StatusText = Text;
+}
+
 void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies)
 {
 	// オブジェクト自体追加されているか なかったら追加

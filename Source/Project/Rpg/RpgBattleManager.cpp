@@ -239,22 +239,22 @@ bool URpgBattleManager::NextState()
 {
 	if (ProcessState == ERpgBattleProcessState::None)
 	{
-		ProcessState = ERpgBattleProcessState::Initialize;
+		SetProcessState(ERpgBattleProcessState::Initialize);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::Initialize)
 	{
-		ProcessState = ERpgBattleProcessState::PreStart;
+		SetProcessState(ERpgBattleProcessState::PreStart);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PreStart)
 	{
-		ProcessState = ERpgBattleProcessState::Start;
+		SetProcessState(ERpgBattleProcessState::Start);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::Start)
 	{
-		ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+		SetProcessState(ERpgBattleProcessState::PrePlayerTurn);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PrePlayerTurn)
@@ -262,7 +262,7 @@ bool URpgBattleManager::NextState()
 		// 暫定で対象を1つ選択できることにしてしまう
 		//SelectableEnemyNum = 1;
 
-		ProcessState = ERpgBattleProcessState::PlayerSelectAction;
+		SetProcessState(ERpgBattleProcessState::PlayerSelectAction);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
@@ -284,12 +284,12 @@ bool URpgBattleManager::NextState()
 		// クリア
 		AttackTargetEnemy = nullptr;
 
-		ProcessState = ERpgBattleProcessState::PlayerSelectTarget;
+		SetProcessState(ERpgBattleProcessState::PlayerSelectTarget);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerSelectTarget)
 	{
-		ProcessState = ERpgBattleProcessState::PlayerAction;
+		SetProcessState(ERpgBattleProcessState::PlayerAction);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerAction)
@@ -301,18 +301,18 @@ bool URpgBattleManager::NextState()
 		if (!ProcessPlayerAction())
 		{
 			// 何もしなかった
-			ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+			SetProcessState(ERpgBattleProcessState::PlayerActionAfter);
 			return true;
 		}
 		ChangeEnemyInfoDelegate.ExecuteIfBound();
-		ProcessState = ERpgBattleProcessState::PlayerActionAfter;
+		SetProcessState(ERpgBattleProcessState::PlayerActionAfter);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerActionAfter)
 	{
 		AttackTargetEnemy = nullptr;
 
-		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
+		SetProcessState(ERpgBattleProcessState::PlayerTurnFinish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerTurnFinish)
@@ -323,21 +323,21 @@ bool URpgBattleManager::NextState()
 		// 全滅していたら終了
 		if (CheckSideAnnihilation())
 		{
-			ProcessState = ERpgBattleProcessState::PreFinish;
+			SetProcessState(ERpgBattleProcessState::PreFinish);
 			return true;
 		}
 
-		ProcessState = ERpgBattleProcessState::PlayerTurnAfter;
+		SetProcessState(ERpgBattleProcessState::PlayerTurnAfter);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfter)
 	{
-		ProcessState = ERpgBattleProcessState::PlayerTurnAfterFinish;
+		SetProcessState(ERpgBattleProcessState::PlayerTurnAfterFinish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfterFinish)
 	{
-		ProcessState = ERpgBattleProcessState::PreEnemyTurn;
+		SetProcessState(ERpgBattleProcessState::PreEnemyTurn);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PreEnemyTurn)
@@ -348,7 +348,7 @@ bool URpgBattleManager::NextState()
 		NormalizeTurnList();
 
 		OutputTurnLog();
-		ProcessState = ERpgBattleProcessState::EnemyAction;
+		SetProcessState(ERpgBattleProcessState::EnemyAction);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PreEnemyAction)
@@ -356,7 +356,7 @@ bool URpgBattleManager::NextState()
 		if (IsTurnListEmpty())
 		{
 			// 敵ターン消化したのでプレイヤーターンへ
-			ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+			SetProcessState(ERpgBattleProcessState::PrePlayerTurn);
 			OutputTurnLog();
 			return true;
 		}
@@ -367,12 +367,12 @@ bool URpgBattleManager::NextState()
 			if (IsTurnListEmpty())
 			{
 				// 敵ターン消化したのでプレイヤーターンへ
-				ProcessState = ERpgBattleProcessState::PrePlayerTurn;
+				SetProcessState(ERpgBattleProcessState::PrePlayerTurn);
 				return true;
 			}
 			OutputTurnLog();
 		}
-		ProcessState = ERpgBattleProcessState::EnemyAction;
+		SetProcessState(ERpgBattleProcessState::EnemyAction);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyAction)
@@ -380,36 +380,37 @@ bool URpgBattleManager::NextState()
 		if (!ProcessEnemyAction())
 		{
 			// 何もしなかった
-			ProcessState = ERpgBattleProcessState::EnemyActionAfter;
+			SetProcessState(ERpgBattleProcessState::EnemyActionAfter);
 			return true;
 		}
 		ChangePlayerInfoDelegate.ExecuteIfBound(); // プレイヤー情報更新Delegate
-		ProcessState = ERpgBattleProcessState::EnemyActionAfter;
+		SetProcessState(ERpgBattleProcessState::EnemyActionAfter);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyActionAfter)
 	{
-		ProcessState = ERpgBattleProcessState::EnemyActionFinish;
+		SetProcessState(ERpgBattleProcessState::EnemyActionFinish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyActionFinish)
 	{
-		ProcessState = ERpgBattleProcessState::EnemyTurnAfter;
+
+		SetProcessState(ERpgBattleProcessState::EnemyTurnAfter);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyTurnAfter)
 	{
-		ProcessState = ERpgBattleProcessState::EnemyTurnAfterFinish;
+		SetProcessState(ERpgBattleProcessState::EnemyTurnAfterFinish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyTurnAfterFinish)
 	{
-		ProcessState = ERpgBattleProcessState::TurnPreFinish;
+		SetProcessState(ERpgBattleProcessState::TurnPreFinish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnPreFinish)
 	{
-		ProcessState = ERpgBattleProcessState::TurnFinish;
+		SetProcessState(ERpgBattleProcessState::TurnFinish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::TurnFinish)
@@ -420,16 +421,16 @@ bool URpgBattleManager::NextState()
 		// 全滅していたら終了
 		if (CheckSideAnnihilation())
 		{
-			ProcessState = ERpgBattleProcessState::PreFinish;
+			SetProcessState(ERpgBattleProcessState::PreFinish);
 			return true;
 		}
 
-		ProcessState = ERpgBattleProcessState::PreEnemyAction;
+		SetProcessState(ERpgBattleProcessState::PreEnemyAction);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::PreFinish)
 	{
-		ProcessState = ERpgBattleProcessState::Finish;
+		SetProcessState(ERpgBattleProcessState::Finish);
 		return true;
 	}
 	if (ProcessState == ERpgBattleProcessState::Finish)
@@ -439,12 +440,19 @@ bool URpgBattleManager::NextState()
 	return true;
 }
 
+void URpgBattleManager::SetProcessState(ERpgBattleProcessState State)
+{
+	ProcessState = State;
+	ChangeProcessStateDelegate.ExecuteIfBound(ProcessState);
+}
+
 // プレイヤーのターンを終了させる
 void URpgBattleManager::EndPlayerTurn()
 {
 	if (ProcessState == ERpgBattleProcessState::PlayerSelectAction)
 	{
-		ProcessState = ERpgBattleProcessState::PlayerTurnFinish;
+		
+		SetProcessState(ERpgBattleProcessState::PlayerTurnFinish);
 	}
 	else
 	{
@@ -624,6 +632,11 @@ FRpgBattleManagerChangePlayerInfoDelegate& URpgBattleManager::GetChangePlayerInf
 FRpgBattleManagerChangeEnemyInfoDelegate& URpgBattleManager::GetChangeEnemyInfoDelegate()
 {
 	return ChangeEnemyInfoDelegate;
+}
+
+FRpgBattleMangerChangeProcessStateDelegate& URpgBattleManager::GetChangeProcessStateDelegate()
+{
+	return ChangeProcessStateDelegate;
 }
 
 // 行動選択のログ出力
