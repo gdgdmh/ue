@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "EnemyActionParameter.h"
 
@@ -23,7 +23,7 @@ bool UEnemyActionParameter::LoadDataTable(const FString& DataTableReferencePath)
 		return false;
 	}
 
-	// ƒf[ƒ^æ“¾
+	// ãƒ‡ãƒ¼ã‚¿å–å¾—
 	TArray<FName> RowArray = DataTable->GetRowNames();
 	if (RowArray.IsEmpty())
 	{
@@ -43,7 +43,7 @@ bool UEnemyActionParameter::LoadDataTable(const FString& DataTableReferencePath)
 
 		if (LightAttackName == RowName)
 		{
-			// –¼‘O‚ªˆê’v‚µ‚½‚çindex‚ğ‚Æ‚Á‚Ä‚¨‚­
+			// åå‰ãŒä¸€è‡´ã—ãŸã‚‰indexã‚’ã¨ã£ã¦ãŠã
 			LightAttackIndex = index;
 		}
 		else if (LightDefenceName == RowName)
@@ -57,7 +57,7 @@ bool UEnemyActionParameter::LoadDataTable(const FString& DataTableReferencePath)
 
 	if (ActionDataTables.IsEmpty())
 	{
-		// ‰½‚àƒf[ƒ^‚ª“ü‚ç‚È‚©‚Á‚½ FindRow‚Å¸”s‚µ‚½?
+		// ä½•ã‚‚ãƒ‡ãƒ¼ã‚¿ãŒå…¥ã‚‰ãªã‹ã£ãŸ FindRowã§å¤±æ•—ã—ãŸ?
 		UE_LOG(LogTemp, Log, TEXT("UEnemyActionParameter::LoadDataTable DataTable add failure(empty)"));
 		return false;
 	}

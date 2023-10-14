@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -35,18 +35,18 @@ public:
 
 public:
 
-	// ƒAƒNƒVƒ‡ƒ“‚Ìƒ^ƒCƒv(UŒ‚A–hŒäAƒfƒoƒt‚È‚Ç)
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®ã‚¿ã‚¤ãƒ—(æ”»æ’ƒã€é˜²å¾¡ã€ãƒ‡ãƒãƒ•ãªã©)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ECdEnemyActionType EnemyActionType;
-	// ƒ^[ƒQƒbƒgƒ^ƒCƒv(’PˆêAƒ‰ƒ“ƒ_ƒ€A•¡”‚È‚Ç)
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚¿ã‚¤ãƒ—(å˜ä¸€ã€ãƒ©ãƒ³ãƒ€ãƒ ã€è¤‡æ•°ãªã©)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ERpgTargetType AtkPrmTargetType;
 
-	// UŒ‚ƒpƒ‰ƒ[ƒ^[‚Ìƒpƒ[
+	// æ”»æ’ƒãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®ãƒ‘ãƒ¯ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 AtkPrmAttackPower;
 
-	// –hŒäƒpƒ‰ƒ[ƒ^[‚Ìƒpƒ[
+	// é˜²å¾¡ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®ãƒ‘ãƒ¯ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 DfPrmDefencePower;
 
