@@ -13,21 +13,18 @@ UCdCharacterParameter::UCdCharacterParameter(const FObjectInitializer& ObjectIni
 
 bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferencePath)
 {
-#if 0
+#if 1
 	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
 
-	util.AA();
-	#if 0
 	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FCdCharacterDataTable>(PlayerData, DataTableReferencePath);
 	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
 	{
 		return true;
 	}
-	#endif
 	return false;
 #endif
 
-#if 1
+#if 0
 	PlayerData.Empty();
 
 	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
@@ -68,6 +65,18 @@ bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferenc
 
 bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReferencePath)
 {
+#if 1
+	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
+
+	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FCdCharacterDataTable>(EnemyData, DataTableReferencePath);
+	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
+	{
+		return true;
+	}
+	return false;
+#endif
+
+#if 0
 	EnemyData.Empty();
 
 	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
@@ -103,6 +112,7 @@ bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReference
 		return false;
 	}
 	return true;
+#endif
 }
 
 void UCdCharacterParameter::GetPlayer(TArray<TObjectPtr<UCdCharacterBase> >& Player) const

@@ -28,8 +28,6 @@ public:
 	};
 public:
 
-	void AA();
-
 	/// <summary>
 	/// テーブル読み込み
 	/// </summary>
@@ -38,6 +36,37 @@ public:
 	/// <param name="DataTableReferencePath">対象データテーブルのリファレンスパス</param>
 	/// <returns>読み込み結果</returns>
 	template<typename T>
-	LoadStatus LoadDataTable(TArray<T>& Datas, const FString& DataTableReferencePath);
+	LoadStatus LoadDataTable(TArray<T>& Datas, const FString& DataTableReferencePath)
+	{
+		Datas.Empty();
+		TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
+		if (!DataTable)
+		{
+			// パスが間違っている？
+			return LoadStatus::FailureLoadObject;
+		}
+
+		// データ取得
+		TArray<FName> RowArray = DataTable->GetRowNames();
+		if (RowArray.IsEmpty())
+		{
+			// データテーブルにそもそもデータがない
+			return LoadStatus::FailureEmptyData;
+		}
+
+		for (const FName RowName : RowArray)
+		{
+			auto TempTable = DataTable->FindRow<T>(RowName, FString());
+			if (!TempTable)
+			{
+				// 型が異なっている？
+				return LoadStatus::FailureTableType;
+			}
+			// データに追加
+			Datas.Add(*TempTable);
+		}
+		// 1件以上データ追加できているので成功
+		return LoadStatus::Success;
+	}
 
 };
