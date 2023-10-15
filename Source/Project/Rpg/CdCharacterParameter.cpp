@@ -3,6 +3,8 @@
 
 #include "CdCharacterParameter.h"
 
+#include "../Common/DataTableUtility.h"
+
 
 UCdCharacterParameter::UCdCharacterParameter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -11,6 +13,21 @@ UCdCharacterParameter::UCdCharacterParameter(const FObjectInitializer& ObjectIni
 
 bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferencePath)
 {
+#if 0
+	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
+
+	util.AA();
+	#if 0
+	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FCdCharacterDataTable>(PlayerData, DataTableReferencePath);
+	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
+	{
+		return true;
+	}
+	#endif
+	return false;
+#endif
+
+#if 1
 	PlayerData.Empty();
 
 	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
@@ -46,6 +63,7 @@ bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferenc
 		return false;
 	}
 	return true;
+#endif
 }
 
 bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReferencePath)

@@ -1,24 +1,28 @@
-ï»¿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "DataTableUtility.h"
 
+void UDataTableUtility::AA()
+{
+}
+
 template<typename T>
-DataTableUtility::LoadStatus DataTableUtility::LoadDataTable(TArray<T>& Datas, const FString& DataTableReferencePath)
+UDataTableUtility::LoadStatus UDataTableUtility::LoadDataTable(TArray<T>& Datas, const FString& DataTableReferencePath)
 {
 	Datas.Empty();
-	TObjectPtr<T> DataTable = LoadObject<T>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
+	TObjectPtr<UDataTableT> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
 	if (!DataTable)
 	{
-		// ãƒ‘ã‚¹ãŒé–“é•ã£ã¦ã„ã‚‹ï¼Ÿ
+		// ƒpƒX‚ªŠÔˆá‚Á‚Ä‚¢‚éH
 		return LoadStatus::FailureLoadObject;
 	}
 
-	// ãƒ‡ãƒ¼ã‚¿å–å¾—
+	// ƒf[ƒ^æ“¾
 	TArray<FName> RowArray = DataTable->GetRowNames();
 	if (RowArray.IsEmpty())
 	{
-		// ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã«ãã‚‚ãã‚‚ãƒ‡ãƒ¼ã‚¿ãŒãªã„
+		// ƒf[ƒ^ƒe[ƒuƒ‹‚É‚»‚à‚»‚àƒf[ƒ^‚ª‚È‚¢
 		return LoadStatus::FailureEmptyData;
 	}
 
@@ -27,13 +31,12 @@ DataTableUtility::LoadStatus DataTableUtility::LoadDataTable(TArray<T>& Datas, c
 		auto TempTable = DataTable->FindRow<T>(RowName, FString());
 		if (!TempTable)
 		{
-			// å‹ãŒç•°ãªã£ã¦ã„ã‚‹ï¼Ÿ
+			// Œ^‚ªˆÙ‚È‚Á‚Ä‚¢‚éH
 			return LoadStatus::FailureTableType;
 		}
-		// ãƒ‡ãƒ¼ã‚¿ã«è¿½åŠ 
+		// ƒf[ƒ^‚É’Ç‰Á
 		Datas.Add(*TempTable);
 	}
-	// 1ä»¶ä»¥ä¸Šãƒ‡ãƒ¼ã‚¿è¿½åŠ ã§ãã¦ã„ã‚‹ã®ã§æˆåŠŸ
+	// 1ŒˆÈãƒf[ƒ^’Ç‰Á‚Å‚«‚Ä‚¢‚é‚Ì‚Å¬Œ÷
 	return LoadStatus::Success;
 }
-

@@ -1,37 +1,43 @@
-ï»¿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "DataTableUtility.generated.h"
 
 /**
  * 
  */
-class PROJECT_API DataTableUtility
+UCLASS()
+class PROJECT_API UDataTableUtility : public UObject
 {
+	GENERATED_BODY()
+	
 public:
 	/// <summary>
-	/// èª­ã¿è¾¼ã¿ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
+	/// “Ç‚İ‚İƒXƒe[ƒ^ƒX
 	/// </summary>
 	enum class LoadStatus : int32
 	{
 		Success,
-		FailureLoadObject,		// LoadObjectã«å¤±æ•—(ãŠãã‚‰ããƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹ãƒ‘ã‚¹ãŒé–“é•ã£ã¦ã„ã‚‹)
-		FailureEmptyData,		// DataTableãŒç©º
-		FailureTableType,		// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã«æŒ‡å®šã•ã‚ŒãŸå‹ã¨å®Ÿéš›ã®ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®æ–¹ãŒç•°ãªã£ã¦ã„ã‚‹ï¼Ÿ
+		FailureLoadObject,		// LoadObject‚É¸”s(‚¨‚»‚ç‚­ƒŠƒtƒ@ƒŒƒ“ƒXƒpƒX‚ªŠÔˆá‚Á‚Ä‚¢‚é)
+		FailureEmptyData,		// DataTable‚ª‹ó(¸”sˆµ‚¢‚É‚µ‚Ä‚¢‚é‚ªAÀ‘•Ÿ‘æ‚Å‚Í¬Œ÷‚Æ‚µ‚Ä‚à‰Â)
+		FailureTableType,		// ƒeƒ“ƒvƒŒ[ƒg‚Éw’è‚³‚ê‚½Œ^‚ÆÀÛ‚Ìƒf[ƒ^ƒe[ƒuƒ‹‚Ì•û‚ªˆÙ‚È‚Á‚Ä‚¢‚éH
 		Failure
 	};
 public:
 
-	/// <summary>
-	/// ãƒ†ãƒ¼ãƒ–ãƒ«èª­ã¿è¾¼ã¿
-	/// </summary>
-	/// <typeparam name="T">ãƒ‡ãƒ¼ã‚¿å®šç¾©ã—ãŸæ§‹é€ ä½“</typeparam>
-	/// <param name="Datas">ãƒ‡ãƒ¼ã‚¿ã‚’æ ¼ç´ã™ã‚‹é…åˆ—</param>
-	/// <param name="DataTableReferencePath">å¯¾è±¡ãƒ‡ãƒ¼ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹ãƒ‘ã‚¹</param>
-	/// <returns>èª­ã¿è¾¼ã¿çµæœ</returns>
-	template<typename T>
-	static LoadStatus LoadDataTable(TArray<T>& Datas, const FString& DataTableReferencePath);
+	void AA();
 
+	/// <summary>
+	/// ƒe[ƒuƒ‹“Ç‚İ‚İ
+	/// </summary>
+	/// <typeparam name="T">ƒf[ƒ^’è‹`‚µ‚½\‘¢‘Ì</typeparam>
+	/// <param name="Datas">ƒf[ƒ^‚ğŠi”[‚·‚é”z—ñ</param>
+	/// <param name="DataTableReferencePath">‘ÎÛƒf[ƒ^ƒe[ƒuƒ‹‚ÌƒŠƒtƒ@ƒŒƒ“ƒXƒpƒX</param>
+	/// <returns>“Ç‚İ‚İŒ‹‰Ê</returns>
+	template<typename T>
+	LoadStatus LoadDataTable(TArray<T>& Datas, const FString& DataTableReferencePath);
 
 };
