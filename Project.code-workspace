@@ -1,0 +1,1153 @@
+{
+	"folders": [
+		{
+			"name": "Project",
+			"path": "."
+		},
+		{
+			"name": "UE5",
+			"path": "D:\\pg\\Epic Games\\UE_5.3"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off",
+		"npm.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Project Win64 Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project Win64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project Win64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project Win64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Test Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Test Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project Win64 Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Test Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Shipping Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Shipping Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project Win64 Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project Win64 Shipping Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"Win64",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project IOS Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project IOS DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project IOS Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Test Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Test Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project IOS Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Test Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Shipping Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Shipping Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project IOS Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project IOS Shipping Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"IOS",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project TVOS Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project TVOS DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project TVOS Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Test Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Test Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project TVOS Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Test Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Test",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Shipping Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Shipping Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Project TVOS Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "Project TVOS Shipping Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"Project",
+					"TVOS",
+					"Shipping",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ProjectEditor Win64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"Debug",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ProjectEditor Win64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"DebugGame",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ProjectEditor Win64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"label": "ProjectEditor Win64 Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ProjectEditor",
+					"Win64",
+					"Development",
+					"D:\\data\\git\\ue\\Project.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch Project (Debug)",
+				"request": "launch",
+				"program": "D:\\data\\git\\ue\\Binaries\\Win64\\UnrealGame-Win64-Debug.exe",
+				"preLaunchTask": "Project Win64 Debug Build",
+				"args": [
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch Project (DebugGame)",
+				"request": "launch",
+				"program": "D:\\data\\git\\ue\\Binaries\\Win64\\UnrealGame-Win64-DebugGame.exe",
+				"preLaunchTask": "Project Win64 DebugGame Build",
+				"args": [
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch Project (Development)",
+				"request": "launch",
+				"program": "D:\\data\\git\\ue\\Binaries\\Win64\\UnrealGame.exe",
+				"preLaunchTask": "Project Win64 Development Build",
+				"args": [
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch Project (Test)",
+				"request": "launch",
+				"program": "D:\\data\\git\\ue\\Binaries\\Win64\\UnrealGame-Win64-Test.exe",
+				"preLaunchTask": "Project Win64 Test Build",
+				"args": [
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch Project (Shipping)",
+				"request": "launch",
+				"program": "D:\\data\\git\\ue\\Binaries\\Win64\\UnrealGame-Win64-Shipping.exe",
+				"preLaunchTask": "Project Win64 Shipping Build",
+				"args": [
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch ProjectEditor (Debug)",
+				"request": "launch",
+				"program": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-Debug.exe",
+				"preLaunchTask": "ProjectEditor Win64 Debug Build",
+				"args": [
+					"D:\\data\\git\\ue\\Project.uproject"
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch ProjectEditor (DebugGame)",
+				"request": "launch",
+				"program": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-DebugGame.exe",
+				"preLaunchTask": "ProjectEditor Win64 DebugGame Build",
+				"args": [
+					"D:\\data\\git\\ue\\Project.uproject"
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Launch ProjectEditor (Development)",
+				"request": "launch",
+				"program": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor.exe",
+				"preLaunchTask": "ProjectEditor Win64 Development Build",
+				"args": [
+					"D:\\data\\git\\ue\\Project.uproject"
+				],
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3",
+				"stopAtEntry": false,
+				"console": "externalTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "D:\\pg\\Epic Games\\UE_5.3"
+				}
+			},
+			{
+				"name": "Generate Project Files",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "UnrealBuildTool Win64 Development Build",
+				"program": "D:\\pg\\Epic Games\\UE_5.3\\Engine\\Build\\BatchFiles\\RunUBT.bat",
+				"args": [
+					"-projectfiles",
+					"-vscode",
+					"-project=D:\\data\\git\\ue\\Project.uproject",
+					"-game",
+					"-engine",
+					"-dotnet"
+				],
+				"console": "externalTerminal",
+				"stopAtEntry": false,
+				"cwd": "D:\\pg\\Epic Games\\UE_5.3"
+			}
+		]
+	}
+}
