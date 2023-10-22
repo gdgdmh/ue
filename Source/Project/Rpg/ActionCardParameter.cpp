@@ -2,7 +2,7 @@
 
 #include "ActionCardParameter.h"
 
-#include "ActionCardList.h"
+#include "../Common/DataTableUtility.h"
 
 UActionCardParameter::UActionCardParameter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -11,6 +11,22 @@ UActionCardParameter::UActionCardParameter(const FObjectInitializer& ObjectIniti
 
 bool UActionCardParameter::LoadCardDataTable(const FString& DataTableReferencePath)
 {
+#if 1
+	TObjectPtr<UDataTableUtility> TableUtil = NewObject<UDataTableUtility>();
+
+	UDataTableUtility::LoadStatus Status = TableUtil->LoadDataTable<FActionCardDataTable>(CardDataTables, DataTableReferencePath);
+	switch (Status)
+	{
+	case UDataTableUtility::LoadStatus::Success:
+		return true;
+	case UDataTableUtility::LoadStatus::FailureEmptyData:
+		return true;
+	default:
+		return false;
+	}
+#endif
+
+#if 0
 	CardDataTables.Empty();
 
 	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
@@ -46,6 +62,7 @@ bool UActionCardParameter::LoadCardDataTable(const FString& DataTableReferencePa
 		return false;
 	}
 	return true;
+#endif
 }
 
 bool UActionCardParameter::LoadDeckDataTable(const FString& DataTableReferencePath)
