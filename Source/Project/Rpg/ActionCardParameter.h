@@ -9,6 +9,7 @@
 
 #include "CPPRpgActionCardType.h"
 #include "ActionCard.h"
+#include "ActionCardList.h"
 #include "ActionCardAttackParameter.h"
 #include "ActionCardDefenceParameter.h"
 
