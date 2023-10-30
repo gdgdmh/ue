@@ -26,82 +26,18 @@ bool UActionCardParameter::LoadCardDataTable(const FString& DataTableReferencePa
 	}
 #endif
 
-#if 0
-	CardDataTables.Empty();
-
-	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
-	if (!DataTable)
-	{
-		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDataTable load failure"));
-		return false;
-	}
-
-	// データ取得
-	TArray<FName> RowArray = DataTable->GetRowNames();
-	if (RowArray.IsEmpty())
-	{
-		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDataTable DataTable empty"));
-		return true;
-	}
-
-	for (const FName RowName : RowArray)
-	{
-		auto TempTable = DataTable->FindRow<FActionCardDataTable>(RowName, FString());
-		if (!TempTable)
-		{
-			UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDataTable Row find failure(TableType?)"));
-			continue;
-		}
-		CardDataTables.Add(*TempTable);
-	}
-
-	if (CardDataTables.IsEmpty())
-	{
-		// 何もデータが入らなかった FindRowで失敗した?
-		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDataTable DataTable add failure(empty)"));
-		return false;
-	}
-	return true;
-#endif
 }
 
 bool UActionCardParameter::LoadDeckDataTable(const FString& DataTableReferencePath)
 {
-	DeckDataTables.Empty();
+	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
 
-	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
-	if (!DataTable)
+	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FActionCardDeckDataTable>(DeckDataTables, DataTableReferencePath);
+	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
 	{
-		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable load failure"));
-		return false;
-	}
-
-	// データ取得
-	TArray<FName> RowArray = DataTable->GetRowNames();
-	if (RowArray.IsEmpty())
-	{
-		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable DataTable empty"));
 		return true;
 	}
-
-	for (const FName RowName : RowArray)
-	{
-		auto TempTable = DataTable->FindRow<FActionCardDeckDataTable>(RowName, FString());
-		if (!TempTable)
-		{
-			UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable Row find failure(TableType?)"));
-			continue;
-		}
-		DeckDataTables.Add(*TempTable);
-	}
-
-	if (DeckDataTables.IsEmpty())
-	{
-		// 何もデータが入らなかった FindRowで失敗した?
-		UE_LOG(LogTemp, Log, TEXT("UActionCardParameter::LoadDeckDataTable DataTable add failure(empty)"));
-		return false;
-	}
-	return true;
+	return false;
 }
 
 TObjectPtr<UActionCard> UActionCardParameter::Create(const FActionCardCreateParameter& Parameter)

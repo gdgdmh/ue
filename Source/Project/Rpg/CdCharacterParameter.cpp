@@ -24,43 +24,6 @@ bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferenc
 	return false;
 #endif
 
-#if 0
-	PlayerData.Empty();
-
-	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
-	if (!DataTable)
-	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable load failure"));
-		return false;
-}
-
-	// データ取得
-	TArray<FName> RowArray = DataTable->GetRowNames();
-	if (RowArray.IsEmpty())
-	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable DataTable empty"));
-		return true;
-	}
-
-	for (const FName RowName : RowArray)
-	{
-		auto TempTable = DataTable->FindRow<FCdCharacterDataTable>(RowName, FString());
-		if (!TempTable)
-		{
-			UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable Row find failure(TableType?)"));
-			continue;
-		}
-		PlayerData.Add(*TempTable);
-	}
-
-	if (PlayerData.IsEmpty())
-	{
-		// 何もデータが入らなかった FindRowで失敗した?
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable DataTable add failure(empty)"));
-		return false;
-	}
-	return true;
-#endif
 }
 
 bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReferencePath)
@@ -74,44 +37,6 @@ bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReference
 		return true;
 	}
 	return false;
-#endif
-
-#if 0
-	EnemyData.Empty();
-
-	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
-	if (!DataTable)
-	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable load failure"));
-		return false;
-	}
-
-	// データ取得
-	TArray<FName> RowArray = DataTable->GetRowNames();
-	if (RowArray.IsEmpty())
-	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable DataTable empty"));
-		return true;
-	}
-
-	for (const FName RowName : RowArray)
-	{
-		auto TempTable = DataTable->FindRow<FCdCharacterDataTable>(RowName, FString());
-		if (!TempTable)
-		{
-			UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable Row find failure(TableType?)"));
-			continue;
-		}
-		EnemyData.Add(*TempTable);
-	}
-
-	if (EnemyData.IsEmpty())
-	{
-		// 何もデータが入らなかった FindRowで失敗した?
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable DataTable add failure(empty)"));
-		return false;
-	}
-	return true;
 #endif
 }
 

@@ -15,6 +15,7 @@ UEnemyActionParameter::UEnemyActionParameter(const FObjectInitializer& ObjectIni
 
 bool UEnemyActionParameter::LoadDataTable(const FString& DataTableReferencePath)
 {
+
 	ActionDataTables.Empty();
 	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
 	if (!DataTable)
