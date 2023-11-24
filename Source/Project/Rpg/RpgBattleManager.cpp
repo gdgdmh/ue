@@ -20,7 +20,11 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 
 	CharacterParameter = NewObject<UCdCharacterParameter>();
 
+	// 敵行動パラメーター
 	EnemyActionParameter = NewObject<UEnemyActionParameter>();
+	EnemyActionParameter->Test();
+	// 敵行動パラメーター(集合体)
+	EnemyAndEnemyActionParameter = NewObject<UEnemyAndEnemyActionDataParameter>();
 
 	ResetSelectCardIndex();
 
@@ -104,6 +108,21 @@ bool URpgBattleManager::LoadEnemyActionParameter()
 		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadEnemyActionParameter load failure(enemy action)"));
 		return false;
 	}
+
+	EnemyActionParameter.Get()->Test();
+	return true;
+}
+
+bool URpgBattleManager::LoadEnemyAndEnemyActionParameter()
+{
+	check(EnemyAndEnemyActionParameter);
+	FString Path = TEXT("/Game/Project/UI/DataTables/Rpg/Main/Enemy/DT_EnemyActionDatas.DT_EnemyActionDatas");
+	if (!EnemyAndEnemyActionParameter.Get()->LoadDataTable(Path))
+	{
+		UE_LOG(LogTemp, Log, TEXT("URpgBattleManager::LoadEnemyActionParameter load failure(enemy action)"));
+		return false;
+	}
+	EnemyAndEnemyActionParameter.Get()->Test();
 	return true;
 }
 

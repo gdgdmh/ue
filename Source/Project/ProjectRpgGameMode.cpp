@@ -239,6 +239,7 @@ void AProjectRpgGameMode::SetMainUI()
 
 		BattleManager.Get()->LoadCharacterParameter();
 		BattleManager.Get()->LoadEnemyActionParameter();
+		BattleManager.Get()->LoadEnemyAndEnemyActionParameter();
 		BattleManager.Get()->SetPlayer();
 		BattleManager.Get()->SetEnemies();
 

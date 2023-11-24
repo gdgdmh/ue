@@ -54,6 +54,8 @@ public:
 	bool LoadCharacterParameter();
 
 	bool LoadEnemyActionParameter();
+	bool LoadEnemyAndEnemyActionParameter();
+	//EnemyAndEnemyActionParameter
 
 	// 今の所固定で生成する
 	void SetPlayer();
@@ -165,6 +167,9 @@ protected:
 
 	UPROPERTY()
 		TObjectPtr<UEnemyActionParameter> EnemyActionParameter;
+
+	UPROPERTY()
+		TObjectPtr<UEnemyAndEnemyActionDataParameter> EnemyAndEnemyActionParameter;
 
 	// 行動選択
 	UPROPERTY()

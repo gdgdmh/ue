@@ -2,6 +2,10 @@
 
 #include "EnemyActionParameter.h"
 
+//#include "Math\RandomStream.h"
+
+#include "../../Common/DataTableUtility.h"
+
 const FName UEnemyActionParameter::LightAttackName = TEXT("LightAttack");
 const FName UEnemyActionParameter::LightDefenceName = TEXT("LightDefence");
 
@@ -73,6 +77,44 @@ bool UEnemyActionParameter::LoadDataTable(const FString& DataTableReferencePath)
 	return true;
 }
 
+void UEnemyActionParameter::Test()
+{
+
+// 間違い
+#if 0
+	const int32 Size = 5;
+	for (int32 i = 0; i < Size; ++i)
+	{
+		FEnemyAndEnemyActionDataTable Table;
+		GetRandomEnemyActionData(Table, ECdEnemyType::Slime);
+
+		if (Table.EnemyType == ECdEnemyType::Slime)
+		{
+
+		}
+
+	}
+#endif // if 0
+
+#if 0
+	FRandomStream r(0);
+	r.GenerateNewSeed();
+
+	{
+		int32 result = r.RandRange(0, 100);
+		int32 result2 = r.RandRange(0, 100);
+		float result3 = r.GetFraction();
+
+		int32 a = 0;
+		a = 10;
+		int32 seed = r.GetInitialSeed();
+		seed = 10;
+
+	}
+#endif
+
+}
+
 const FEnemyActionDataTable& UEnemyActionParameter::Get(int32 index) const
 {
 	return ActionDataTables[index];
@@ -94,4 +136,112 @@ const FEnemyActionDataTable& UEnemyActionParameter::GetSimpleDefence() const
 int32 UEnemyActionParameter::Size() const
 {
 	return ActionDataTables.Num();
+}
+
+UEnemyAndEnemyActionDataParameter::UEnemyAndEnemyActionDataParameter(const FObjectInitializer& ObjectInitializer)
+	: EnemyAndEnemyActionDataTables()
+{
+
+}
+
+bool UEnemyAndEnemyActionDataParameter::LoadDataTable(const FString& DataTableReferencePath)
+{
+	TObjectPtr<UDataTableUtility> TableUtil = NewObject<UDataTableUtility>();
+
+	EnemyAndEnemyActionDataTables.Empty();
+	UDataTableUtility::LoadStatus Status = TableUtil->LoadDataTable<FEnemyAndEnemyActionDataTables>(EnemyAndEnemyActionDataTables, DataTableReferencePath);
+	switch (Status)
+	{
+	case UDataTableUtility::LoadStatus::Success:
+		return true;
+	case UDataTableUtility::LoadStatus::FailureEmptyData:
+		return true;
+	default:
+		return false;
+	}
+	return false;
+}
+
+int32 UEnemyAndEnemyActionDataParameter::Size() const
+{
+	return EnemyAndEnemyActionDataTables.Num();
+}
+
+// 特定の敵の行動データを取得する
+bool UEnemyAndEnemyActionDataParameter::GetEnemyActionData(TArray<FEnemyAndEnemyActionDataTable>& Tables, ECdEnemyType Type) const
+{
+	Tables.Empty();
+	for (const auto& Table : EnemyAndEnemyActionDataTables)
+	{
+		for (const FEnemyAndEnemyActionDataTable& Data : Table.EnemyAndEnemyActionDatas)
+		{
+			if (Type == Data.EnemyType)
+			{
+				Tables.Add(Data);
+			}
+		}
+	}
+
+	if (Tables.IsEmpty())
+	{
+		return false;
+	}
+	return true;
+}
+
+bool UEnemyAndEnemyActionDataParameter::GetRandomEnemyActionData(FEnemyAndEnemyActionDataTable& Table, ECdEnemyType Type)
+{
+	// 念のためにクリアしておく
+	Table.EnemyActionDatas.Empty();
+
+	TArray<FEnemyAndEnemyActionDataTable> EnemyTables;
+	GetEnemyActionData(EnemyTables, Type);
+	if (EnemyTables.IsEmpty())
+	{
+		// データがない
+		return false;
+	}
+
+	int32 num = EnemyTables.Num();
+	if (num == 1)
+	{
+		int32 tableIndex = 0;
+		// 1つの場合
+		for (const auto& ActionData : EnemyTables[tableIndex].EnemyActionDatas)
+		{
+			Table.EnemyActionDatas.Add(ActionData);
+		}
+		return true;
+	}
+
+	int32 tableIndex = GetRandomInt(0, num - 1);
+
+	auto& RandomEnemyTable = EnemyTables[tableIndex];
+	for (const auto& ActionData : RandomEnemyTable.EnemyActionDatas)
+	{
+		Table.EnemyActionDatas.Add(ActionData);
+	}
+	return true;
+}
+
+int32 UEnemyAndEnemyActionDataParameter::GetRandomInt(int32 Min, int32 Max)
+{
+	FRandomStream r(0);
+	r.GenerateNewSeed();
+	return r.RandRange(Min, Max);
+}
+
+void UEnemyAndEnemyActionDataParameter::Test()
+{
+	const int32 Size = 3;
+	for (int32 i = 0; i < Size; ++i)
+	{
+		FEnemyAndEnemyActionDataTable Table;
+		GetRandomEnemyActionData(Table, ECdEnemyType::Slime);
+		if (Table.EnemyType == ECdEnemyType::Slime)
+		{
+			Table.EnemyType = ECdEnemyType::None;
+		}
+	}
+
 }
