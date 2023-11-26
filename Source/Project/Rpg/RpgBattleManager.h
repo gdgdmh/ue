@@ -16,6 +16,7 @@
 #include "ActionCardParameter.h"
 #include "CdCharacterParameter.h"
 #include "Cd/EnemyActionParameter.h"
+#include "Cd/CdEnemyAndEnemyActionAssociator.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -55,7 +56,7 @@ public:
 
 	bool LoadEnemyActionParameter();
 	bool LoadEnemyAndEnemyActionParameter();
-	//EnemyAndEnemyActionParameter
+	bool SetupEnemyAndEnemyActionAssociator();
 
 	// 今の所固定で生成する
 	void SetPlayer();
@@ -170,6 +171,10 @@ protected:
 
 	UPROPERTY()
 		TObjectPtr<UEnemyAndEnemyActionDataParameter> EnemyAndEnemyActionParameter;
+
+		// 敵と敵のアクションの関連付け
+	UPROPERTY()
+		TObjectPtr<UCdEnemyAndEnemyActionAssociator> EnemyAndEnemyActionAssociator;
 
 	// 行動選択
 	UPROPERTY()

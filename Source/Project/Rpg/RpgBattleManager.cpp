@@ -26,6 +26,9 @@ URpgBattleManager::URpgBattleManager(const FObjectInitializer& ObjectInitializer
 	// 敵行動パラメーター(集合体)
 	EnemyAndEnemyActionParameter = NewObject<UEnemyAndEnemyActionDataParameter>();
 
+	// 敵と敵アクションの関連付け
+	EnemyAndEnemyActionAssociator = NewObject<UCdEnemyAndEnemyActionAssociator>();
+
 	ResetSelectCardIndex();
 
 	bSelectTarget = false;
@@ -123,6 +126,25 @@ bool URpgBattleManager::LoadEnemyAndEnemyActionParameter()
 		return false;
 	}
 	EnemyAndEnemyActionParameter.Get()->Test();
+	return true;
+}
+
+bool URpgBattleManager::SetupEnemyAndEnemyActionAssociator()
+{
+	check(EnemyAndEnemyActionAssociator);
+	check(EnemyAndEnemyActionParameter);
+
+	EnemyAndEnemyActionAssociator.Get()->SetEnemyTables(EnemyAndEnemyActionParameter);
+
+	// 敵との紐づけ
+	check(!Enemies.IsEmpty()); // 敵の初期化してない?
+	const int32 Size = Enemies.Num();
+	for (int32 i = 0; i < Size; ++i)
+	{
+		EnemyAndEnemyActionAssociator.Get()->Set(Enemies[i]);
+	}
+	
+
 	return true;
 }
 
@@ -281,6 +303,21 @@ bool URpgBattleManager::NextState()
 		// 暫定で対象を1つ選択できることにしてしまう
 		//SelectableEnemyNum = 1;
 
+
+		// この時点ですでに敵の行動が決まる
+		const int32 Size = Enemies.Num();
+		for (int32 i = 0; i < Size; ++i)
+		{
+			if (Enemies[i].Get()->GetParameter().Get()->IsDead())
+			{
+				continue;
+			}
+			FEnemyActionDataTable ActionTable;
+			EnemyAndEnemyActionAssociator.Get()->GetAction(ActionTable, Enemies[i]);
+			FString ActionName = ToText(ActionTable.EnemyActionType).ToString();
+			UE_LOG(LogTemp, Log, TEXT("Enemies[%d] %s"), i, *ActionName);
+		}
+
 		SetProcessState(ERpgBattleProcessState::PlayerSelectAction);
 		return true;
 	}
@@ -374,6 +411,8 @@ bool URpgBattleManager::NextState()
 	{
 		if (IsTurnListEmpty())
 		{
+			// 敵の行動テーブル進める
+			EnemyAndEnemyActionAssociator.Get()->ForwardIndices();
 			// 敵ターン消化したのでプレイヤーターンへ
 			SetProcessState(ERpgBattleProcessState::PrePlayerTurn);
 			OutputTurnLog();
@@ -385,6 +424,8 @@ bool URpgBattleManager::NextState()
 			ChangeTurn();
 			if (IsTurnListEmpty())
 			{
+				// 敵の行動テーブル進める
+				EnemyAndEnemyActionAssociator.Get()->ForwardIndices();
 				// 敵ターン消化したのでプレイヤーターンへ
 				SetProcessState(ERpgBattleProcessState::PrePlayerTurn);
 				return true;

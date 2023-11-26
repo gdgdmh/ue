@@ -189,7 +189,7 @@ bool UEnemyAndEnemyActionDataParameter::GetEnemyActionData(TArray<FEnemyAndEnemy
 	return true;
 }
 
-bool UEnemyAndEnemyActionDataParameter::GetRandomEnemyActionData(FEnemyAndEnemyActionDataTable& Table, ECdEnemyType Type)
+bool UEnemyAndEnemyActionDataParameter::GetRandomEnemyActionData(FEnemyAndEnemyActionDataTable& Table, ECdEnemyType Type) const
 {
 	// 念のためにクリアしておく
 	Table.EnemyActionDatas.Empty();
@@ -201,6 +201,8 @@ bool UEnemyAndEnemyActionDataParameter::GetRandomEnemyActionData(FEnemyAndEnemyA
 		// データがない
 		return false;
 	}
+	// Typeの設定
+	Table.EnemyType = Type;
 
 	int32 num = EnemyTables.Num();
 	if (num == 1)
@@ -224,7 +226,7 @@ bool UEnemyAndEnemyActionDataParameter::GetRandomEnemyActionData(FEnemyAndEnemyA
 	return true;
 }
 
-int32 UEnemyAndEnemyActionDataParameter::GetRandomInt(int32 Min, int32 Max)
+int32 UEnemyAndEnemyActionDataParameter::GetRandomInt(int32 Min, int32 Max) const
 {
 	FRandomStream r(0);
 	r.GenerateNewSeed();
@@ -233,7 +235,7 @@ int32 UEnemyAndEnemyActionDataParameter::GetRandomInt(int32 Min, int32 Max)
 
 void UEnemyAndEnemyActionDataParameter::Test()
 {
-	const int32 Size = 3;
+	const int32 Size = 5;
 	for (int32 i = 0; i < Size; ++i)
 	{
 		FEnemyAndEnemyActionDataTable Table;

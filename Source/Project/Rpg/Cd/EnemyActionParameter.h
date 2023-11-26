@@ -155,9 +155,9 @@ public:
 	bool GetEnemyActionData(TArray<FEnemyAndEnemyActionDataTable>& Tables, ECdEnemyType Type) const;
 
 	// 指定した敵のランダムな行動テーブルを取得する
-	bool GetRandomEnemyActionData(FEnemyAndEnemyActionDataTable& Tables, ECdEnemyType Type);
+	bool GetRandomEnemyActionData(FEnemyAndEnemyActionDataTable& Tables, ECdEnemyType Type) const;
 
-	int32 GetRandomInt(int32 Min, int32 Max);
+	int32 GetRandomInt(int32 Min, int32 Max) const;
 
 public:
 	void Test();

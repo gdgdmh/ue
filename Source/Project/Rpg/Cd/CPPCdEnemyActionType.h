@@ -21,3 +21,11 @@ enum class ECdEnemyActionType : uint8
 	Num					UMETA(Hidden)
 };
 ENUM_RANGE_BY_COUNT(ECdEnemyActionType, ECdEnemyActionType::Num)
+
+static FText ToText(ECdEnemyActionType Type)
+{
+	FString EnumName = TEXT("/Script/Project.ECdEnemyActionType");
+	UEnum* const Enum = FindObject<UEnum>(nullptr, *EnumName);
+	FString EnumNameString = Enum->GetNameStringByIndex(static_cast<int32>(Type));
+	return FText::FromString(EnumNameString);
+}
