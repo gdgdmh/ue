@@ -11,6 +11,7 @@ URpgBattleCharacterParameter::URpgBattleCharacterParameter(const FObjectInitiali
 	, MaxSp(0)
 	, AttackPower(0)
 	, DefencePower(0)
+	, DefencePoint(0)
 	, Agility(0)
 	, EnemyType(ECdEnemyType::None)
 {
@@ -88,6 +89,11 @@ void URpgBattleCharacterParameter::SetDefencePower(int32 Power)
 	this->DefencePower = Power;
 }
 
+void URpgBattleCharacterParameter::SetDefencePoint(int32 Defence)
+{
+	this->DefencePoint = Defence;
+}
+
 void URpgBattleCharacterParameter::SetAgility(int32 AgilityValue)
 {
 	this->Agility = AgilityValue;
@@ -105,8 +111,23 @@ void URpgBattleCharacterParameter::Damage(int32 AttackDamage)
 	{
 		return;
 	}
+	// 攻撃 - 防御の差分
+	int32 AttackDiff = AttackDamage - DefencePoint;
 
-	Hp = Hp - AttackDamage;
+	if (AttackDiff <= 0)
+	{
+		// マイナスにならないようにする
+		AttackDiff = 0;
+		// AttackDamageの分 DefencePointを削る
+		DefencePoint -= AttackDamage;
+	}
+	else
+	{
+		// 防御が小さい場合
+		DefencePoint = 0;
+	}
+
+	Hp = Hp - AttackDiff;
 
 	if (IsDead())
 	{

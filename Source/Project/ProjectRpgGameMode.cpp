@@ -238,8 +238,14 @@ void AProjectRpgGameMode::SetMainUI()
 		BattleManager.Get()->SetDefaultCardList();
 
 		BattleManager.Get()->LoadCharacterParameter();
+		BattleManager.Get()->LoadEnemyActionParameter();
+		BattleManager.Get()->LoadEnemyAndEnemyActionParameter();
+
 		BattleManager.Get()->SetPlayer();
 		BattleManager.Get()->SetEnemies();
+
+		BattleManager.Get()->SetupEnemyAndEnemyActionAssociator();
+
 
 		AllyParty = NewObject<URpgBattleParty>();
 		EnemyParty = NewObject<URpgBattleParty>();
@@ -361,6 +367,8 @@ void AProjectRpgGameMode::SetMainUI()
 			UpdatePlayerInfo();
 			// 敵情報更新
 			UpdateEnemyInfo();
+			// ProcessState更新
+			UpdateProcessState(BattleManager.Get()->GetState());
 
 			MainProjectUserWidgets.Add(MainWidget);
 		}
@@ -388,6 +396,11 @@ void AProjectRpgGameMode::InitializeBattleManager()
 	BattleManager.Get()->GetChangeEnemyInfoDelegate().BindLambda([this]
 	{
 		BattleManagerOnChangeEnemyInfo();
+	});
+
+	BattleManager.Get()->GetChangeProcessStateDelegate().BindLambda([this](ERpgBattleProcessState State)
+	{
+		BattleManagerOnChangeProcessState(State);
 	});
 
 
@@ -473,6 +486,11 @@ void AProjectRpgGameMode::BattleManagerOnChangeEnemyInfo()
 	UpdateEnemyInfo();
 }
 
+void AProjectRpgGameMode::BattleManagerOnChangeProcessState(ERpgBattleProcessState State)
+{
+	UpdateProcessState(State);
+}
+
 void AProjectRpgGameMode::UpdatePlayerInfo()
 {
 	check(BattleManager);
@@ -488,7 +506,17 @@ void AProjectRpgGameMode::UpdateEnemyInfo()
 {
 	check(BattleManager);
 	check(RpgMainViewUserWidget);
-	RpgMainViewUserWidget.Get()->SetEnemyView(BattleManager->GetEnemy());
+	RpgMainViewUserWidget.Get()->SetEnemyView(BattleManager->GetEnemy(), BattleManager->GetEnemyActionAssociator());
+}
+
+void AProjectRpgGameMode::UpdateProcessState(ERpgBattleProcessState State)
+{
+	check(BattleManager);
+	check(RpgMainViewUserWidget);
+
+	FString Str = FString::Printf(TEXT("%s"), *ToText(State).ToString());
+	FText Text = FText::FromString(Str);
+	RpgMainViewUserWidget.Get()->SetStatusText(Text);
 }
 
 void AProjectRpgGameMode::OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState)

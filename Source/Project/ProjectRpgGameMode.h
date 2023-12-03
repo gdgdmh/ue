@@ -51,12 +51,14 @@ private:
 
 	void BattleManagerOnChangePlayerInfo();
 	void BattleManagerOnChangeEnemyInfo();
+	void BattleManagerOnChangeProcessState(ERpgBattleProcessState State);
 
 	//void RpgMainOnClickNextButton();
 
 private:
 	void UpdatePlayerInfo();
 	void UpdateEnemyInfo();
+	void UpdateProcessState(ERpgBattleProcessState State);
 	void OutputStateLog(ERpgBattleProcessState BeforeState, ERpgBattleProcessState AfterState);
 
 private:

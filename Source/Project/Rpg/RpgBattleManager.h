@@ -15,6 +15,8 @@
 #include "ActionCardList.h"
 #include "ActionCardParameter.h"
 #include "CdCharacterParameter.h"
+#include "Cd/EnemyActionParameter.h"
+#include "Cd/CdEnemyAndEnemyActionAssociator.h"
 
 #include "RpgBattleManager.generated.h"
 
@@ -23,6 +25,8 @@
 DECLARE_DELEGATE(FRpgBattleManagerChangePlayerInfoDelegate)
 // 敵の情報が変化したときのDelegate
 DECLARE_DELEGATE(FRpgBattleManagerChangeEnemyInfoDelegate)
+// ProcessStateが変化したときのDelegate
+DECLARE_DELEGATE_OneParam(FRpgBattleMangerChangeProcessStateDelegate, ERpgBattleProcessState)
 
 /**
  * 
@@ -50,11 +54,16 @@ public:
 
 	bool LoadCharacterParameter();
 
+	bool LoadEnemyActionParameter();
+	bool LoadEnemyAndEnemyActionParameter();
+	bool SetupEnemyAndEnemyActionAssociator();
+
 	// 今の所固定で生成する
 	void SetPlayer();
 	void SetEnemies();
 
 	TArray<TObjectPtr<UCdCharacterBase> > GetEnemy() const;
+	TObjectPtr<UCdEnemyAndEnemyActionAssociator> GetEnemyActionAssociator() const;
 
 	void SetDefaultCardList();
 
@@ -65,6 +74,9 @@ public:
 	void ChangeTurn();
 
 	bool CheckSideAnnihilation();
+	// 防御値のリセット処理
+	void ResetDefencePointPlayer();
+	void ResetDefencePointEnemy();
 
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const
@@ -77,6 +89,9 @@ public:
 
 	// 次のステータスに進める
 	bool NextState();
+
+	// ProcessState設定()
+	void SetProcessState(ERpgBattleProcessState State);
 
 	// プレイヤーのターンを終了させる
 	void EndPlayerTurn();
@@ -105,8 +120,13 @@ public:
 	// 選択可能な敵の数を取得
 	int32 GetSelectableEnemyNum() const;
 
+
+
 	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
 	FRpgBattleManagerChangeEnemyInfoDelegate& GetChangeEnemyInfoDelegate();
+	FRpgBattleMangerChangeProcessStateDelegate& GetChangeProcessStateDelegate();
+
+	//ChangeProcessStateDelegate
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
@@ -125,7 +145,8 @@ protected:
 		TObjectPtr<URpgTurnManager> TurnManager;
 	UPROPERTY()
 		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
-	ERpgBattleProcessState ProcessState;
+	UPROPERTY()
+		ERpgBattleProcessState ProcessState;
 
 	UPROPERTY()
 		TObjectPtr<UActionCardList> CardList;
@@ -149,6 +170,16 @@ protected:
 	UPROPERTY()
 		TObjectPtr<UCdCharacterParameter> CharacterParameter;
 
+	UPROPERTY()
+		TObjectPtr<UEnemyActionParameter> EnemyActionParameter;
+
+	UPROPERTY()
+		TObjectPtr<UEnemyAndEnemyActionDataParameter> EnemyAndEnemyActionParameter;
+
+		// 敵と敵のアクションの関連付け
+	UPROPERTY()
+		TObjectPtr<UCdEnemyAndEnemyActionAssociator> EnemyAndEnemyActionAssociator;
+
 	// 行動選択
 	UPROPERTY()
 		int32 SelectCardIndex;
@@ -162,4 +193,6 @@ protected:
 	FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
 
 	FRpgBattleManagerChangeEnemyInfoDelegate ChangeEnemyInfoDelegate;
+
+	FRpgBattleMangerChangeProcessStateDelegate ChangeProcessStateDelegate;
 };

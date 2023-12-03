@@ -4,6 +4,8 @@
 #include "ScrollTestUserWidget.h"
 #include "BalloonUserWidget.h"
 
+#include "Common/DataTableUtility.h"
+
 void UScrollTestUserWidget::NativeConstruct()
 {
 	UE_LOG(LogTemp, Log, TEXT("UScrollTestUserWidget::NativeConstruct"));
@@ -14,6 +16,20 @@ void UScrollTestUserWidget::NativeConstruct()
 void UScrollTestUserWidget::Set()
 {
 	Clear();
+
+	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
+
+	FString DataTableReferencePath = TEXT("/Script/Engine.DataTable'/Game/Project/UI/DataTables/DT_UITestData.DT_UITestData'");
+	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FScrollTestDataTable>(TestDataTables, DataTableReferencePath);
+	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
+	{
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("UScrollTestUserWidget load failure"));
+	}
+
+#if 0
 	{
 		TestDataTables.Empty();
 		// DataTable読み込み
@@ -41,6 +57,7 @@ void UScrollTestUserWidget::Set()
 			TestDataTables.Add(*TempTable);
 		}
 	}
+#endif
 
 	// 動的にボタンを追加
 	FString AssetPath = TEXT("/Game/Project/UI/Blueprints/WBP_Balloon.WBP_Balloon_C");

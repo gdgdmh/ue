@@ -31,6 +31,7 @@ public:
 	void SetSp(int32 CurrentSp, int32 Max);
 	void SetAttackPower(int32 Power);
 	void SetDefencePower(int32 Power);
+	void SetDefencePoint(int32 Defence);
 	void SetAgility(int32 AgilityValue);
 	void SetEnemyType(ECdEnemyType Type);
 
@@ -42,6 +43,7 @@ public:
 	int32 GetMaxSp() const { return MaxSp; }
 	int32 GetAttackPower() const { return AttackPower; }
 	int32 GetDefencePower() const { return DefencePower; }
+	int32 GetDefencePoint() const { return DefencePoint; }
 	int32 GetAgility() const { return Agility; }
 	URpgBattleStatus& GetStatus() const { return *Status; }
 	FText GetName() const { return Name; }
@@ -71,6 +73,10 @@ public:
 	// 防御
 	UPROPERTY(BlueprintReadWrite)
 		int32 DefencePower;
+
+	// 防御値
+	UPROPERTY(BlueprintReadWrite)
+		int32 DefencePoint;
 
 	UPROPERTY(BlueprintReadWrite)
 		int32 Agility;

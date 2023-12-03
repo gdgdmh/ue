@@ -8,6 +8,9 @@
 #include "Cd/Widget/RpgCardPlayerInfoUserWidget.h"
 #include "Cd/Widget/RpgCardEnemyInfoUserWidget.h"
 #include "CdCharacterBase.h"
+// action
+#include "Cd/CdEnemyAndEnemyActionAssociator.h"
+
 
 #include "Components/HorizontalBox.h"
 
@@ -53,6 +56,7 @@ public:
 	void SetWidgetHp();
 
 	void DeadWidget();
+	void SetAction(ECdEnemyActionType Type);
 
 
 protected:
@@ -118,7 +122,9 @@ protected:
 public:
 	void SetHpText(FText Text);
 
-	void SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies);
+	void SetStatusText(FText Text);
+
+	void SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies, const TObjectPtr<UCdEnemyAndEnemyActionAssociator>& Associator);
 
 	// 敵が選択されたとき
 	void OnSelectEnemyInfo(TObjectPtr<URpgCardEnemyInfoUserWidget> Widget);
@@ -156,6 +162,13 @@ public:
 
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<UHorizontalBox> EnemyArea;
+
+	// bind 
+public:
+	// Statusテキスト
+	UPROPERTY(BlueprintReadWrite)
+		FText StatusText;
+
 
 	// delegate
 protected:

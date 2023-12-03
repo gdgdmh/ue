@@ -7,6 +7,7 @@
 
 #include "RpgCardHpGaugeUserWidget.h"
 #include "SelectFrameUserWidget.h"
+#include "NextActionUserWidget.h"
 
 #include "RpgCardEnemyInfoUserWidget.generated.h"
 
@@ -31,8 +32,12 @@ public:
 	void SetHpText(FText Text);
 	void SetHp(int32 Hp, int32 MaxHp);
 
+	void SetAction(ECdEnemyActionType Type);
+
+	// 全体の非表示
 	void Hide();
 
+	// 選択フレームの表示非表示
 	void HideSelectFrame();
 	void ShowSelectFrame();
 	bool IsShowingSelectFrame() const;
@@ -45,6 +50,10 @@ public:
 
 	UPROPERTY(Transient, meta = (BindWidget))
 		TObjectPtr<USelectFrameUserWidget> SelectFrame;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+		TObjectPtr<UNextActionUserWidget> NextAction;
+
 
 	FRpgCardEnemyInfoUserWidgetOnClickDelegate EnemyInfoUserWidgetOnClickDelegate;
 };

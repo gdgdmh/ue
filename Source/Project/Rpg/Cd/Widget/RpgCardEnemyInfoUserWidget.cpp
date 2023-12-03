@@ -21,6 +21,12 @@ void URpgCardEnemyInfoUserWidget::SetHp(int32 Hp, int32 MaxHp)
 	SetHpText(HpText);
 }
 
+void URpgCardEnemyInfoUserWidget::SetAction(ECdEnemyActionType Type)
+{
+	check(NextAction);
+	NextAction.Get()->Set(Type);
+}
+
 void URpgCardEnemyInfoUserWidget::Hide()
 {
 	HideObject();

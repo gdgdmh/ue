@@ -3,6 +3,8 @@
 
 #include "CdCharacterParameter.h"
 
+#include "../Common/DataTableUtility.h"
+
 
 UCdCharacterParameter::UCdCharacterParameter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -11,80 +13,31 @@ UCdCharacterParameter::UCdCharacterParameter(const FObjectInitializer& ObjectIni
 
 bool UCdCharacterParameter::LoadPlayerDataTable(const FString& DataTableReferencePath)
 {
-	PlayerData.Empty();
+#if 1
+	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
 
-	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
-	if (!DataTable)
+	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FCdCharacterDataTable>(PlayerData, DataTableReferencePath);
+	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
 	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable load failure"));
-		return false;
-}
-
-	// データ取得
-	TArray<FName> RowArray = DataTable->GetRowNames();
-	if (RowArray.IsEmpty())
-	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable DataTable empty"));
 		return true;
 	}
+	return false;
+#endif
 
-	for (const FName RowName : RowArray)
-	{
-		auto TempTable = DataTable->FindRow<FCdCharacterDataTable>(RowName, FString());
-		if (!TempTable)
-		{
-			UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable Row find failure(TableType?)"));
-			continue;
-		}
-		PlayerData.Add(*TempTable);
-	}
-
-	if (PlayerData.IsEmpty())
-	{
-		// 何もデータが入らなかった FindRowで失敗した?
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadPlayerDataTable DataTable add failure(empty)"));
-		return false;
-	}
-	return true;
 }
 
 bool UCdCharacterParameter::LoadEnemyDataTable(const FString& DataTableReferencePath)
 {
-	EnemyData.Empty();
+#if 1
+	TObjectPtr<UDataTableUtility> util = NewObject<UDataTableUtility>();
 
-	TObjectPtr<UDataTable> DataTable = LoadObject<UDataTable>(nullptr, *DataTableReferencePath, nullptr, LOAD_None, nullptr);
-	if (!DataTable)
+	UDataTableUtility::LoadStatus Status = util->LoadDataTable<FCdCharacterDataTable>(EnemyData, DataTableReferencePath);
+	if ((Status == UDataTableUtility::LoadStatus::Success) || (Status == UDataTableUtility::LoadStatus::FailureEmptyData))
 	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable load failure"));
-		return false;
-	}
-
-	// データ取得
-	TArray<FName> RowArray = DataTable->GetRowNames();
-	if (RowArray.IsEmpty())
-	{
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable DataTable empty"));
 		return true;
 	}
-
-	for (const FName RowName : RowArray)
-	{
-		auto TempTable = DataTable->FindRow<FCdCharacterDataTable>(RowName, FString());
-		if (!TempTable)
-		{
-			UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable Row find failure(TableType?)"));
-			continue;
-		}
-		EnemyData.Add(*TempTable);
-	}
-
-	if (EnemyData.IsEmpty())
-	{
-		// 何もデータが入らなかった FindRowで失敗した?
-		UE_LOG(LogTemp, Log, TEXT("UCdCharacterParameter::LoadEnemyDataTable DataTable add failure(empty)"));
-		return false;
-	}
-	return true;
+	return false;
+#endif
 }
 
 void UCdCharacterParameter::GetPlayer(TArray<TObjectPtr<UCdCharacterBase> >& Player) const

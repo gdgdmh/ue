@@ -69,6 +69,11 @@ void FEnemyDisplayInfo::DeadWidget()
 	UserWidget->Hide();
 }
 
+void FEnemyDisplayInfo::SetAction(ECdEnemyActionType Type)
+{
+	UserWidget->SetAction(Type);
+}
+
 void FEnemyDisplayInfos::Add(const FEnemyDisplayInfo& Info)
 {
 	Infos.Add(Info);
@@ -184,7 +189,12 @@ void URpgMainViewUserWidget::SetHpText(FText Text)
 	PlayerInfo.Get()->SetHpText(Text);
 }
 
-void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies)
+void URpgMainViewUserWidget::SetStatusText(FText Text)
+{
+	StatusText = Text;
+}
+
+void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBase> >& Enemies, const TObjectPtr<UCdEnemyAndEnemyActionAssociator>& Associator)
 {
 	// オブジェクト自体追加されているか なかったら追加
 	{
@@ -232,6 +242,8 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 				Widget->SetHp(Enemy->GetParameter()->GetHp(), Enemy->GetParameter()->GetMaxHp());
 				// 選択状態はoff
 				Widget->HideSelectFrame();
+				// 行動表示はいったん非表示
+				Widget->SetAction(ECdEnemyActionType::None);
 
 				// displayinfoに追加
 				FEnemyDisplayInfo Info;
@@ -242,6 +254,7 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 		}
 	}
 
+	check(Associator);
 	// 既存の敵の更新
 	for (int32 i = 0; i < EnemyDisplayInfos.Size(); ++i)
 	{
@@ -255,6 +268,18 @@ void URpgMainViewUserWidget::SetEnemyView(const TArray<TObjectPtr<UCdCharacterBa
 		}
 		// HP反映
 		Info.SetWidgetHp();
+		// 行動反映
+		FEnemyActionDataTable ActionTable;
+		if (Associator.Get()->GetAction(ActionTable, Info.GetEnemy()))
+		{
+			Info.SetAction(ActionTable.GetActionType());
+		}
+		else
+		{
+			check(false);
+		}
+
+
 	}
 }
 
