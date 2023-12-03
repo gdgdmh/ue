@@ -185,6 +185,11 @@ TArray<TObjectPtr<UCdCharacterBase> > URpgBattleManager::GetEnemy() const
 	return Enemies;
 }
 
+TObjectPtr<UCdEnemyAndEnemyActionAssociator> URpgBattleManager::GetEnemyActionAssociator() const
+{
+	return EnemyAndEnemyActionAssociator;
+}
+
 void URpgBattleManager::SetDefaultCardList()
 {
 	check(ActionCardParameter);
@@ -261,6 +266,37 @@ bool URpgBattleManager::CheckSideAnnihilation()
 		}
 	}
 	return false;
+}
+
+void URpgBattleManager::ResetDefencePointPlayer()
+{
+	check(Player);
+	// プレイヤーサイドのチェック
+	{
+		if (!Player.Get()->GetParameter()->IsDead())
+		{
+			Player.Get()->GetParameter()->SetDefencePoint(0);
+		}
+	}
+}
+
+void URpgBattleManager::ResetDefencePointEnemy()
+{
+	check(BattleParty);
+	TObjectPtr<UBattlePartySide> EnemyParty = BattleParty.Get()->Get(ESideType::Enemy);
+	check(EnemyParty);
+	// 敵サイドのチェック
+	{
+		for (const auto Character : EnemyParty.Get()->Get()->GetList())
+		{
+			check(Character);
+			if (!Character.Get()->GetParameter()->IsDead())
+			{
+				Character.Get()->GetParameter()->SetDefencePoint(0);
+			}
+		}
+	}
+
 }
 
 int32 URpgBattleManager::GetPlayerHp() const
@@ -393,6 +429,9 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::PlayerTurnAfterFinish)
 	{
+		// 敵の防御値のリセット
+		ResetDefencePointEnemy();
+
 		SetProcessState(ERpgBattleProcessState::PreEnemyTurn);
 		return true;
 	}
@@ -437,6 +476,7 @@ bool URpgBattleManager::NextState()
 	}
 	if (ProcessState == ERpgBattleProcessState::EnemyAction)
 	{
+		// 敵の行動
 		if (!ProcessEnemyAction())
 		{
 			// 何もしなかった
@@ -477,6 +517,9 @@ bool URpgBattleManager::NextState()
 	{
 		// 死亡キャラや不正な状態を修正
 		NormalizeTurnList();
+
+		// プレイヤーの防御値のリセット
+		ResetDefencePointPlayer();
 
 		// 全滅していたら終了
 		if (CheckSideAnnihilation())
@@ -625,20 +668,46 @@ bool URpgBattleManager::ProcessEnemyAction()
 	check(TargetCharacter);
 	if (TargetCharacter.Get()->GetParameter().Get()->IsDead())
 	{
+		// 死亡しているので行動しない
 		return false;
 	}
 
 	TObjectPtr<UCdCharacterBase> TurnCharacter = TurnManager.Get()->GetCurrentTurnCharacter();
 	check(TurnCharacter);
 
-	check(EnemyActionParameter);
-	int32 Damage = TurnCharacter.Get()->GetParameter().Get()->GetAttackPower() + EnemyActionParameter.Get()->GetSimpleAttack().GetAttackPower();
+	// アクションの取得
+	FEnemyActionDataTable ActionTable;
+	if (EnemyAndEnemyActionAssociator.Get()->GetAction(ActionTable, TurnCharacter))
+	{
+		if (ActionTable.GetActionType() == ECdEnemyActionType::Attack)
+		{
+			check(EnemyActionParameter);
+			int32 Damage = TurnCharacter.Get()->GetParameter().Get()->GetAttackPower() + EnemyActionParameter.Get()->GetSimpleAttack().GetAttackPower();
 
-	int32 BeforeHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
-	TargetCharacter.Get()->Damage(Damage);
-	int32 AfterHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
-	UE_LOG(LogTemp, Log, TEXT("%d Player Damage %d -> %d"),
-		Damage, BeforeHp, AfterHp);
+			int32 BeforeHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
+			TargetCharacter.Get()->Damage(Damage);
+			int32 AfterHp = TargetCharacter.Get()->GetParameter().Get()->GetHp();
+			UE_LOG(LogTemp, Log, TEXT("%d Player Damage %d -> %d"),
+				Damage, BeforeHp, AfterHp);
+		}
+		else if (ActionTable.GetActionType() == ECdEnemyActionType::Defence)
+		{
+			// 防御を付与
+			int32 DefencePoint = ActionTable.GetDefencePower();
+			TurnCharacter.Get()->GetParameter()->SetDefencePoint(DefencePoint);
+		}
+		else
+		{
+			// まだ作ってない
+			check(false);
+		}
+	}
+	else
+	{
+		// アクション取得できなかった
+		check(false);
+	}
+
 
 	return true;
 }

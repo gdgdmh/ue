@@ -32,6 +32,7 @@ public:
 public:
 	int32 GetAttackPower() const { return AtkPrmAttackPower; }
 	int32 GetDefencePower() const { return DfPrmDefencePower; }
+	ECdEnemyActionType GetActionType() const { return EnemyActionType; }
 
 public:
 

@@ -63,6 +63,7 @@ public:
 	void SetEnemies();
 
 	TArray<TObjectPtr<UCdCharacterBase> > GetEnemy() const;
+	TObjectPtr<UCdEnemyAndEnemyActionAssociator> GetEnemyActionAssociator() const;
 
 	void SetDefaultCardList();
 
@@ -73,6 +74,9 @@ public:
 	void ChangeTurn();
 
 	bool CheckSideAnnihilation();
+	// 防御値のリセット処理
+	void ResetDefencePointPlayer();
+	void ResetDefencePointEnemy();
 
 	// 現在のステータスを返す
 	ERpgBattleProcessState GetState() const

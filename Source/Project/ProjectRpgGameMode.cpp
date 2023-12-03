@@ -506,7 +506,7 @@ void AProjectRpgGameMode::UpdateEnemyInfo()
 {
 	check(BattleManager);
 	check(RpgMainViewUserWidget);
-	RpgMainViewUserWidget.Get()->SetEnemyView(BattleManager->GetEnemy());
+	RpgMainViewUserWidget.Get()->SetEnemyView(BattleManager->GetEnemy(), BattleManager->GetEnemyActionAssociator());
 }
 
 void AProjectRpgGameMode::UpdateProcessState(ERpgBattleProcessState State)
