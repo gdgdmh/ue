@@ -37,8 +37,6 @@ class PROJECT_API URpgBattleManager : public UObject
 	GENERATED_BODY()
 
 public:
-		
-public:
 	URpgBattleManager(const FObjectInitializer& ObjectInitializer);
 
 	// 戦闘パーティ設定(敵、味方)
@@ -48,21 +46,27 @@ public:
 		BattleParty = Party;
 	}
 
+	// 行動カードリストの設定
 	void SetCardList(TObjectPtr<UActionCardList> List);
-
+	// カードパラメーターの読み込み
 	bool LoadCardParameter();
+	// デッキデータの読み込み
 	bool LoadDeckParameter();
-
+	// キャラパラメーターの読み込み
 	bool LoadCharacterParameter();
 
+	// 敵行動パラメーターの読み込み
 	bool LoadEnemyActionParameter();
+	// 敵と敵行動パラメーターの読み込み
 	bool LoadEnemyAndEnemyActionParameter();
+	// 敵と敵行動パラメーター関連付け設定
 	bool SetupEnemyAndEnemyActionAssociator();
 
 	// 今の所固定で生成する
 	void SetPlayer();
 	void SetEnemies();
 
+	// 敵の一覧の取得
 	TArray<TObjectPtr<UCdCharacterBase> > GetEnemy() const;
 	TObjectPtr<UCdEnemyAndEnemyActionAssociator> GetEnemyActionAssociator() const;
 
