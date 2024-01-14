@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ProjectCharacter.h"
+#include "../ProjectCharacter.h"
 #include "VsEnemyCharacter.generated.h"
 
 /**
