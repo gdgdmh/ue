@@ -37,31 +37,36 @@ class PROJECT_API URpgBattleManager : public UObject
 	GENERATED_BODY()
 
 public:
-		
-public:
 	URpgBattleManager(const FObjectInitializer& ObjectInitializer);
 
+	// 戦闘パーティ設定(敵、味方)
 	void SetBattleParty(TObjectPtr<UBattlePartyManager> Party)
 	{
 		check(Party);
 		BattleParty = Party;
 	}
 
+	// 行動カードリストの設定
 	void SetCardList(TObjectPtr<UActionCardList> List);
-
+	// カードパラメーターの読み込み
 	bool LoadCardParameter();
+	// デッキデータの読み込み
 	bool LoadDeckParameter();
-
+	// キャラパラメーターの読み込み
 	bool LoadCharacterParameter();
 
+	// 敵行動パラメーターの読み込み
 	bool LoadEnemyActionParameter();
+	// 敵と敵行動パラメーターの読み込み
 	bool LoadEnemyAndEnemyActionParameter();
+	// 敵と敵行動パラメーター関連付け設定
 	bool SetupEnemyAndEnemyActionAssociator();
 
 	// 今の所固定で生成する
 	void SetPlayer();
 	void SetEnemies();
 
+	// 敵の一覧の取得
 	TArray<TObjectPtr<UCdCharacterBase> > GetEnemy() const;
 	TObjectPtr<UCdEnemyAndEnemyActionAssociator> GetEnemyActionAssociator() const;
 
@@ -121,41 +126,53 @@ public:
 	int32 GetSelectableEnemyNum() const;
 
 
-
+	// delegate
 	FRpgBattleManagerChangePlayerInfoDelegate& GetChangePlayerInfoDelegate();
 	FRpgBattleManagerChangeEnemyInfoDelegate& GetChangeEnemyInfoDelegate();
 	FRpgBattleMangerChangeProcessStateDelegate& GetChangeProcessStateDelegate();
-
-	//ChangeProcessStateDelegate
 
 	// 行動選択のログ出力
 	void OutputSelectCommandLog();
 
 protected:
+	// 戦闘パーティ(敵、味方含み)
 	UPROPERTY()
 		TObjectPtr<UBattlePartyManager> BattleParty;
 
+	// プレイヤー(このクラス内で生成)
 	UPROPERTY()
 		TObjectPtr<UCdCharacterBase> Player;
 
+	// 敵全体
 	UPROPERTY()
 		TArray<TObjectPtr<UCdCharacterBase> > Enemies;
 
+	// ターン管理
 	UPROPERTY()
 		TObjectPtr<URpgTurnManager> TurnManager;
+
+	// ダメージ計算
 	UPROPERTY()
 		TObjectPtr<URpgBattleDamageCalculator> DamageCalc;
+
+	// ステート管理
 	UPROPERTY()
 		ERpgBattleProcessState ProcessState;
 
+	// カード一覧
 	UPROPERTY()
 		TObjectPtr<UActionCardList> CardList;
 
 	// 行動選択
 	// 構造体にまとめるかも
-	ERpgBattleCommandType SelectCommand;
+	UPROPERTY()
+		ERpgBattleCommandType SelectCommand;
+
+	// 攻撃するキャラ
 	UPROPERTY()
 		TObjectPtr<URpgBattleCharacterBase> AttackCharacter;
+
+	// 攻撃対象のキャラ
 	UPROPERTY()
 		TObjectPtr<URpgBattleCharacterBase> AttackTargetCharacter;
 
@@ -163,20 +180,23 @@ protected:
 	UPROPERTY()
 		TObjectPtr<UCdCharacterBase> AttackTargetEnemy;
 
-	// パラメーター
+	// カードパラメーター
 	UPROPERTY()
 		TObjectPtr<UActionCardParameter> ActionCardParameter;
 
+	// キャラクターパラメーター
 	UPROPERTY()
 		TObjectPtr<UCdCharacterParameter> CharacterParameter;
 
+	// 敵の行動パラメーター
 	UPROPERTY()
 		TObjectPtr<UEnemyActionParameter> EnemyActionParameter;
 
+	// 敵と敵のアクション紐づけ
 	UPROPERTY()
 		TObjectPtr<UEnemyAndEnemyActionDataParameter> EnemyAndEnemyActionParameter;
 
-		// 敵と敵のアクションの関連付け
+	// 敵と敵のアクションの関連付け
 	UPROPERTY()
 		TObjectPtr<UCdEnemyAndEnemyActionAssociator> EnemyAndEnemyActionAssociator;
 
@@ -184,12 +204,15 @@ protected:
 	UPROPERTY()
 		int32 SelectCardIndex;
 
+	// 対象を選択したか
 	UPROPERTY()
 		bool bSelectTarget;
 
+	// 選択できる敵の数
 	UPROPERTY()
 		int32 SelectableEnemyNum;
 
+	// delegate
 	FRpgBattleManagerChangePlayerInfoDelegate ChangePlayerInfoDelegate;
 
 	FRpgBattleManagerChangeEnemyInfoDelegate ChangeEnemyInfoDelegate;

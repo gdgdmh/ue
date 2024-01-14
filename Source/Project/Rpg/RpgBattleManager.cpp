@@ -789,4 +789,3 @@ void URpgBattleManager::OutputSelectCommandLog()
 		UE_LOG(LogTemp, Log, TEXT("AttackTargetCharacter:%s"), *AttackTargetCharacter.Get()->GetParameter().Get()->GetName().ToString());
 	}
 }
-
