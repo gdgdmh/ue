@@ -14,7 +14,7 @@
 
 #include "InputMappingContext.h" // 追加
 
-#include "../WeaponKnife.h"
+#include "WeaponKnife.h"
 
 AVsPlayerCharacter::AVsPlayerCharacter()
 {

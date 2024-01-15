@@ -3,7 +3,7 @@
 
 #include "VsEnemyCharacter.h"
 #include "Blueprint/UserWidget.h"
-#include "../DamageText.h"
+#include "DamageText.h"
 #include "Engine/DamageEvents.h"
 #include "Kismet/GameplayStatics.h"
 
