@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
-#include "SpawnVsEnemy.h"
-#include "SpawnEnemyManager.h"
+#include "Vs/SpawnVsEnemy.h"
+#include "Vs/SpawnEnemyManager.h"
 #include "VsEnemySpawnManagementSubsytem.generated.h"
 
 /**

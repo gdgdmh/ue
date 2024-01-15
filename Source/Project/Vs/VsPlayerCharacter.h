@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "../ProjectCharacter.h"
-#include "../SpawnVsEnemy.h"
+#include "SpawnVsEnemy.h"
 #include "VsPlayerCharacter.generated.h"
 
 /**

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "CPPEnemyType.h"
+#include "../CPPEnemyType.h"
 #include "SpawnVsEnemy.generated.h"
 
 UCLASS()
