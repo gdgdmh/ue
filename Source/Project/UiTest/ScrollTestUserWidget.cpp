@@ -4,7 +4,7 @@
 #include "ScrollTestUserWidget.h"
 #include "BalloonUserWidget.h"
 
-#include "Common/DataTableUtility.h"
+#include "../Common/DataTableUtility.h"
 
 void UScrollTestUserWidget::NativeConstruct()
 {
