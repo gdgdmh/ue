@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../../../Vs/ProjectUserWidget.h"
+#include "../../../Common/ProjectUserWidget.h"
 
 #include "RpgCardHpGaugeUserWidget.h"
 

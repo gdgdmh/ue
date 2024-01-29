@@ -3,10 +3,13 @@
 
 #include "DamageText.h"
 
+#include "CPPVsUserWidgetType.h"
+
 UDamageText::UDamageText(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	SetWidgetType(EVsUserWidgetType::DamageText);
+	SetId(static_cast<int32>(EVsUserWidgetType::DamageText));
+	//SetWidgetType(EVsUserWidgetType::DamageText);
 }
 
 

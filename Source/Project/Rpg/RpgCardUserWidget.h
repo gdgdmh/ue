@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../Vs/ProjectUserWidget.h"
+#include "../Common/ProjectUserWidget.h"
 #include "RpgCardUserWidget.generated.h"
 
 // Delegate
@@ -22,8 +22,8 @@ public:
 	
 	URpgCardUserWidget(const FObjectInitializer& ObjectInitializer);
 
-	void SetId(int32 UserId);
-	int32 GetId() const;
+	//void SetId(int32 UserId);
+	//int32 GetId() const;
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -37,6 +37,6 @@ public:
 	FRpgCardUserWidgetOnClickDelegate CardUserWidgetOnClickDelegate;
 
 	// ユーザー定義のId
-	UPROPERTY()
-		int32 Id;
+	//UPROPERTY()
+	//	int32 Id;
 };

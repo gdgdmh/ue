@@ -5,19 +5,19 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "ProjectUserWidget.h"
-#include "VsUserWidgetSubsystem.generated.h"
+#include "UserWidgetSubsystem.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJECT_API UVsUserWidgetSubsystem : public UGameInstanceSubsystem
+class PROJECT_API UUserWidgetSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 	
 public:
 
-	UVsUserWidgetSubsystem();
+	UUserWidgetSubsystem();
 
 	virtual bool ShouldCreateSubsystem(UObject* Outer) const override;
 

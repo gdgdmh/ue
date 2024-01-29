@@ -2,7 +2,7 @@
 
 
 #include "ProjectUserWidget.h"
-#include "VsUserWidgetSubsystem.h"
+#include "UserWidgetSubsystem.h"
 
 UProjectUserWidget::UProjectUserWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -13,7 +13,7 @@ void UProjectUserWidget::AddUserWidgetSubsytem()
 {
 	if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
 	{
-		if (TObjectPtr<UVsUserWidgetSubsystem> VsUserWidgetSubsystem = GameInstance->GetSubsystem<UVsUserWidgetSubsystem>())
+		if (TObjectPtr<UUserWidgetSubsystem> VsUserWidgetSubsystem = GameInstance->GetSubsystem<UUserWidgetSubsystem>())
 		{
 			VsUserWidgetSubsystem->Add(this);
 		}
@@ -24,7 +24,7 @@ void UProjectUserWidget::RemoveUserWidgetSubsystem()
 {
 	if (UGameInstance* GameInstance = GetWorld()->GetGameInstance())
 	{
-		if (TObjectPtr<UVsUserWidgetSubsystem> VsUserWidgetSubsystem = GameInstance->GetSubsystem<UVsUserWidgetSubsystem>())
+		if (TObjectPtr<UUserWidgetSubsystem> VsUserWidgetSubsystem = GameInstance->GetSubsystem<UUserWidgetSubsystem>())
 		{
 			VsUserWidgetSubsystem->Remove(this);
 		}
