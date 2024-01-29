@@ -2,7 +2,7 @@
 
 
 #include "VsEnemySpawnManagementSubsytem.h"
-#include "ProjectWorldSettings.h"
+#include "../ProjectWorldSettings.h"
 
 UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 {

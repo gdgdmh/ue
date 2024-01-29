@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "ProjectGameModeBase.h"
 
-#include "ProjectUserWidget.h"
+#include "Vs/ProjectUserWidget.h"
 #include "Rpg/RpgTitleUserWidget.h"
 #include "Rpg/RpgMainViewUserWidget.h"
 

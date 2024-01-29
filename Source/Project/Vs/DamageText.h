@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "../ProjectUserWidget.h"
+#include "ProjectUserWidget.h"
 #include "DamageText.generated.h"
 
 DECLARE_DELEGATE(FDamageTextAnimationFinishDelegate)
