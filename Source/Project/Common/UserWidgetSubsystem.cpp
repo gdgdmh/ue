@@ -1,14 +1,14 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "VsUserWidgetSubsystem.h"
+#include "UserWidgetSubsystem.h"
 #include "ProjectWorldSettings.h"
 
-UVsUserWidgetSubsystem::UVsUserWidgetSubsystem()
+UUserWidgetSubsystem::UUserWidgetSubsystem()
 {
 }
 
-bool UVsUserWidgetSubsystem::ShouldCreateSubsystem(UObject* Outer) const
+bool UUserWidgetSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 {
 	if (!Super::ShouldCreateSubsystem(Outer))
 	{
@@ -25,32 +25,32 @@ bool UVsUserWidgetSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 	return false;
 }
 
-void UVsUserWidgetSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+void UUserWidgetSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
-	UE_LOG(LogTemp, Log, TEXT("UVsUserWidgetSubsystem::Initialize"));
+	UE_LOG(LogTemp, Log, TEXT("UUserWidgetSubsystem::Initialize"));
 
 }
 
-void UVsUserWidgetSubsystem::Deinitialize()
+void UUserWidgetSubsystem::Deinitialize()
 {
 	Clear();
 
 	Super::Deinitialize();
-	UE_LOG(LogTemp, Log, TEXT("UVsUserWidgetSubsystem::Deinitialize"));
+	UE_LOG(LogTemp, Log, TEXT("UUserWidgetSubsystem::Deinitialize"));
 }
 
-void UVsUserWidgetSubsystem::Add(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
+void UUserWidgetSubsystem::Add(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
 {
 	VsUserWidgets.Add(ProjectUserWidget);
 }
 
-void UVsUserWidgetSubsystem::Remove(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
+void UUserWidgetSubsystem::Remove(TObjectPtr<UProjectUserWidget> ProjectUserWidget)
 {
 	VsUserWidgets.Remove(ProjectUserWidget);
 }
 
-void UVsUserWidgetSubsystem::Clear()
+void UUserWidgetSubsystem::Clear()
 {
 	VsUserWidgets.Empty();
 }

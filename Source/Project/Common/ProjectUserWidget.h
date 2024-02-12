@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "CPPVsUserWidgetType.h"
+//#include "CPPVsUserWidgetType.h"
 #include "ProjectUserWidget.generated.h"
 
 /**
@@ -25,8 +25,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveUserWidgetSubsystem();
 
-	void SetWidgetType(EVsUserWidgetType Type) { VsUserWidgetType = Type; }
-	EVsUserWidgetType GetWidgetType() const { return VsUserWidgetType; }
+	void SetId(int32 id) { Id = id; }
+	int32 GetId() const { return Id; }
+
+	//void SetWidgetType(EVsUserWidgetType Type) { VsUserWidgetType = Type; }
+	//EVsUserWidgetType GetWidgetType() const { return VsUserWidgetType; }
 
 	/// <summary>
 	/// オブジェクトの表示
@@ -45,5 +48,6 @@ public:
 	bool IsShowing() const;
 
 private:
-	EVsUserWidgetType VsUserWidgetType = EVsUserWidgetType::None;
+	UPROPERTY()
+	int32 Id = 0;
 };

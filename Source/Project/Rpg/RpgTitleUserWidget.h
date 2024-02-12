@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../ProjectUserWidget.h"
+#include "../Common/ProjectUserWidget.h"
 #include "Components/Button.h"
 #include "RpgTitleUserWidget.generated.h"
 

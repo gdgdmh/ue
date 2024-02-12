@@ -3,10 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../ProjectUserWidget.h"
+#include "../Common/ProjectUserWidget.h"
 
 #include "Components/HorizontalBox.h"
 #include "CPPRpgBattleProcessState.h"
+#include "RpgCharaInfo.h"
 
 #include "RpgMainUserWidget.generated.h"
 

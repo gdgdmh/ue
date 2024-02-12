@@ -5,7 +5,6 @@
 
 URpgCardUserWidget::URpgCardUserWidget(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, Id(0)
 {
 }
 
@@ -20,14 +19,14 @@ FRpgCardUserWidgetOnClickDelegate& URpgCardUserWidget::GetOnClickDelegate()
 	return CardUserWidgetOnClickDelegate;
 }
 
-void URpgCardUserWidget::SetId(int32 UserId)
-{
-	Id = UserId;
-}
+//void URpgCardUserWidget::SetId(int32 UserId)
+//{
+//	Id = UserId;
+//}
 
-int32 URpgCardUserWidget::GetId() const
-{
-	return Id;
-}
+//int32 URpgCardUserWidget::GetId() const
+//{
+//	return Id;
+//}
 
 

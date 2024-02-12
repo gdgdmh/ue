@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../ProjectUserWidget.h"
+#include "../Common/ProjectUserWidget.h"
 
 #include "Cd/Widget/RpgCardPlayerInfoUserWidget.h"
 #include "Cd/Widget/RpgCardEnemyInfoUserWidget.h"
@@ -14,7 +14,7 @@
 
 #include "Components/HorizontalBox.h"
 
-#include "../CPPEnemyType.h"
+#include "../Vs/CPPEnemyType.h"
 
 #include "RpgMainViewUserWidget.generated.h"
 
