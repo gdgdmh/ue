@@ -2,7 +2,7 @@
 
 
 #include "UserWidgetSubsystem.h"
-#include "../ProjectWorldSettings.h"
+#include "ProjectWorldSettings.h"
 
 UUserWidgetSubsystem::UUserWidgetSubsystem()
 {
