@@ -2,16 +2,16 @@
 
 
 #include "ProjectRpgGameMode.h"
-#include "Rpg/RpgCharaInfo.h"
-#include "Rpg/RpgTitleUserWidget.h"
-#include "Rpg/RpgMainUserWidget.h"
+#include "RpgCharaInfo.h"
+#include "RpgTitleUserWidget.h"
+#include "RpgMainUserWidget.h"
 
-#include "Rpg/BattlePartyDataTableLoader.h"
-#include "Rpg/BattlePartyDataTableConverter.h"
+#include "BattlePartyDataTableLoader.h"
+#include "BattlePartyDataTableConverter.h"
 
 // --- test ---
-#include "Rpg/TurnOrderList.h"
-#include "Rpg/TurnOrderCalculator.h"
+#include "TurnOrderList.h"
+#include "TurnOrderCalculator.h"
 // ---
 
 

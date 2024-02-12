@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "ProjectGameModeBase.h"
 
-#include "Common/ProjectUserWidget.h"
-#include "Rpg/RpgTitleUserWidget.h"
-#include "Rpg/RpgMainViewUserWidget.h"
+#include "../Common/ProjectUserWidget.h"
+#include "RpgTitleUserWidget.h"
+#include "RpgMainViewUserWidget.h"
 
-#include "Rpg/RpgBattleParty.h"
-#include "Rpg/RpgBattleManager.h"
-#include "Rpg/ActionCardList.h"
+#include "RpgBattleParty.h"
+#include "RpgBattleManager.h"
+#include "ActionCardList.h"
 
 #include "ProjectRpgGameMode.generated.h"
 
