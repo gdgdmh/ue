@@ -3,6 +3,7 @@
 
 #include "VsEnemySpawnManagementSubsytem.h"
 #include "../Common/ProjectWorldSettings.h"
+#include "../Common/CPPWorldSettingsFlagType.h" // FlagType
 
 UVsEnemySpawnManagementSubsytem::UVsEnemySpawnManagementSubsytem()
 {
@@ -20,7 +21,7 @@ bool UVsEnemySpawnManagementSubsytem::ShouldCreateSubsystem(UObject* Outer) cons
 	{
 		if (AProjectWorldSettings* ProjectWorldSettings = Cast<AProjectWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
 		{
-			return ProjectWorldSettings->bUseEnemySpawnSubsystem;
+			return ProjectWorldSettings->IsEnabled(EWorldSettingsFlagType::UseEnemySpawnSubsystem);
 		}
 	}
 	return false;

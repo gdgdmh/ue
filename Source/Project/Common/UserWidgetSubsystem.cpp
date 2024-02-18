@@ -3,6 +3,7 @@
 
 #include "UserWidgetSubsystem.h"
 #include "ProjectWorldSettings.h"
+#include "CPPWorldSettingsFlagType.h"
 
 UUserWidgetSubsystem::UUserWidgetSubsystem()
 {
@@ -19,7 +20,7 @@ bool UUserWidgetSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 	{
 		if (AProjectWorldSettings* ProjectWorldSettings = Cast<AProjectWorldSettings>(GameInstance->GetWorldContext()->World()->GetWorldSettings()))
 		{
-			return ProjectWorldSettings->bUseUserWidgetSubsystem;
+			return ProjectWorldSettings->IsEnabled(EWorldSettingsFlagType::UseUserWidgetSubsystem);
 		}
 	}
 	return false;

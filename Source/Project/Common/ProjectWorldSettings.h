@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/WorldSettings.h"
+
+#include "CPPWorldSettingsFlagType.h"
 #include "ProjectWorldSettings.generated.h"
 
 /**
@@ -18,13 +20,12 @@ public:
 	AProjectWorldSettings();
 
 public:
-	UPROPERTY(EditAnywhere)
-		bool bUseEnemySpawnSubsystem;
+	// フラグ配列の指定のタイプが有効(true)になっているか
+	bool IsEnabled(EWorldSettingsFlagType Type) const;
 
-	UPROPERTY(EditAnyWhere)
-		bool bUseUserWidgetSubsystem;
+public:
 
-
-	UPROPERTY(EditAnyWhere)
-		bool bDummy;
+	// フラグ配列(配列サイズは変更禁止)
+	UPROPERTY(EditAnywhere, EditFixedSize)
+		TMap<EWorldSettingsFlagType, bool> Flags;
 };
